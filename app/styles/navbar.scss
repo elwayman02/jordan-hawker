@@ -1,0 +1,12 @@
+.navbar-main {
+    height: 100%;
+
+    .list-group {
+        height: 100%;
+        border-right: 1px solid gray;
+
+        .list-group-item {
+            border: none;
+        }
+    }
+}
