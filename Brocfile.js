@@ -1,8 +1,19 @@
 /* global require, module */
 
+var pickFiles = require('broccoli-static-compiler');
+var mergeTrees = require('broccoli-merge-trees');
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
-var app = new EmberApp();
+var app = new EmberApp({
+  name: require('./package.json').name,
+  getEnvJSON: require('./config/environment')
+});
+
+var fontTree = pickFiles('bower_components/fontawesome/fonts', {
+  srcDir: '/',
+  files: ['*'],
+  destDir: '/assets/fonts'
+});
 
 // Use `app.import` to add additional libraries to the generated
 // output files.
@@ -17,4 +28,4 @@ var app = new EmberApp();
 // please specify an object with the list of modules as keys
 // along with the exports of each module as its value.
 
-module.exports = app.toTree();
+module.exports = mergeTrees([app.toTree(), fontTree]);
