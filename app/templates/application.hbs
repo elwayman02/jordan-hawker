@@ -1,10 +1,10 @@
 <div class="fluid-container">
-    <div id="title-container" class="col-md-12">
-        {{view 'title'}}
-    </div>
-    <div id="main-container">
-        {{view 'navbar'}}
+    {{view 'title'}}
 
+    <div id="main-container" class="row">
+        <div id="navbar" class="col-sm-2">
+            {{view 'navbar'}}
+        </div>
         <div id="main" role="main">
             {{outlet}}
         </div>

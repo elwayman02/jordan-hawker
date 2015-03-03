@@ -7,7 +7,10 @@ $fa-font-path: '/assets/fonts' !default;
 @import 'title';
 @import 'navbar';
 
+#main-container {
+  margin-top: $title-height;
+}
+
 #main {
-  margin-left: $navbar-main-width + 10px;
-  margin-top: $title-height + 10px;
+  margin-top: 10px;
 }

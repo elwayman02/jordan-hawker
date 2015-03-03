@@ -1,17 +1,21 @@
-.navbar-main {
-    position: fixed;
-    top: $title-height;
-    left: 0;
-    width: $navbar-main-width;
-    height: 100%;
-    z-index: 20;
-
-    .list-group {
-        height: 100%;
-        border-right: 1px solid gray;
-
-        .list-group-item {
-            border: none;
-        }
-    }
+/* make sidebar nav vertical */
+@media (min-width: 768px) {
+  .sidebar-nav .navbar .navbar-collapse {
+    padding: 0;
+    max-height: none;
+  }
+  .sidebar-nav .navbar ul {
+    float: none;
+  }
+  .sidebar-nav .navbar ul:not {
+    display: block;
+  }
+  .sidebar-nav .navbar li {
+    float: none;
+    display: block;
+  }
+  .sidebar-nav .navbar li a {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
 }

@@ -1,7 +1,21 @@
-#title-container {
+.title {
     position: fixed;
     top: 0;
     left: 0;
+    width: 100%;
     height: $title-height;
     border-bottom: 1px solid gray;
+    text-align: center;
+
+    .img-container {
+      float: left;
+      text-align: center;
+      padding: 0 26px 0 0;
+    }
+
+    h1 {
+        display: inline;
+        position: relative;
+        top: 20px;
+    }
 }
