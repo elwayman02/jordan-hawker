@@ -1,3 +1,12 @@
-<div class="container-fluid">
-  {{outlet}}
+<div class="fluid-container">
+    <div id="title-container" class="col-md-12">
+        {{view 'title'}}
+    </div>
+    <div id="main-container">
+        {{view 'navbar'}}
+
+        <div id="main" role="main">
+            {{outlet}}
+        </div>
+    </div>
 </div>

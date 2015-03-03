@@ -7,6 +7,9 @@ var Router = Ember.Router.extend({
 
 Router.map(function() {
   this.route('contact');
+  this.route('music');
+  this.route('dance');
+  this.route('code');
 });
 
 export default Router;
