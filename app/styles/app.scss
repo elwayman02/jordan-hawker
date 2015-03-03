@@ -6,16 +6,13 @@ $fa-font-path: '/assets/fonts' !default;
 
 @import 'title';
 @import 'navbar';
-
-#main-container {
-  margin-top: $title-height;
-}
+@import 'event-list';
 
 #main {
   margin-top: 10px;
   margin-left: 10px;
 }
 
-.tech-list {
+.item-list {
   padding-left: 15px;
 }
