@@ -2,9 +2,12 @@
 $fa-font-path: '/assets/fonts' !default;
 @import 'bower_components/fontawesome/scss/font-awesome.scss';
 
+@import 'variables';
+
+@import 'title';
 @import 'navbar';
 
 #main {
-  display: inline-block;
-  margin-left: 10px;
+  margin-left: $navbar-main-width + 10px;
+  margin-top: $title-height + 10px;
 }

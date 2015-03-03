@@ -1,5 +1,10 @@
 .navbar-main {
+    position: fixed;
+    top: $title-height;
+    left: 0;
+    width: $navbar-main-width;
     height: 100%;
+    z-index: 20;
 
     .list-group {
         height: 100%;
