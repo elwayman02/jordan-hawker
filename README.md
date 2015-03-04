@@ -1,4 +1,7 @@
-# Jordan-hawker
+# Jordan Hawker's Personal Website
+
+[![Build Status](https://travis-ci.org/elwayman02/jordan-hawker.svg?branch=master)](https://travis-ci.org/elwayman02/jordan-hawker)
+![devDependency Status](https://david-dm.org/elwayman02/jordan-hawker.svg)
 
 This README outlines the details of collaborating on this Ember application.
 A short introduction of this app could easily go here.
