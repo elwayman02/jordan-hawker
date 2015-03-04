@@ -3,10 +3,13 @@
 [![Build Status](https://travis-ci.org/elwayman02/jordan-hawker.svg?branch=master)](https://travis-ci.org/elwayman02/jordan-hawker)
 ![devDependency Status](https://david-dm.org/elwayman02/jordan-hawker.svg)
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+This is the public repository for www.JordanHawker.com
 
-## Prerequisites
+## Collaboration
+
+This section outlines the details of collaborating on this Ember application.  Contributions are encouraged; please fork the repository and submit a pull request with your changes.
+
+### Prerequisites
 
 You will need the following things properly installed on your computer.
 
@@ -16,41 +19,24 @@ You will need the following things properly installed on your computer.
 * [Ember CLI](http://www.ember-cli.com/)
 * [PhantomJS](http://phantomjs.org/)
 
-## Installation
+### Installation
 
-* `git clone <repository-url>` this repository
-* change into the new directory
-* `npm install`
-* `bower install`
+* `git clone git@github.com:elwayman02/jordan-hawker.git`
+* `cd jordan-hawker`
+* `npm install` (will run `bower install` automatically as a postinstall script)
 
-## Running / Development
+### Running / Development
 
 * `ember server`
 * Visit your app at [http://localhost:4200](http://localhost:4200).
 
-### Code Generators
-
-Make use of the many generators for code, try `ember help generate` for more details
-
-### Running Tests
+#### Running Tests
 
 * `ember test`
 * `ember test --server`
 
-### Building
+#### Deploying
 
-* `ember build` (development)
-* `ember build --environment production` (production)
-
-### Deploying
-
-Specify what it takes to deploy your app.
-
-## Further Reading / Useful Links
-
-* [ember.js](http://emberjs.com/)
-* [ember-cli](http://www.ember-cli.com/)
-* Development Browser Extensions
-  * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
-  * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
+Deployment to Heroku triggers automatically after a passing Travis-CI build completes on a tagged release commit.  
+Re-deploying the app is as simple as tagging a new release in GitHub.
 
