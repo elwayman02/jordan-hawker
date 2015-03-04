@@ -1,20 +1,21 @@
----
 language: node_js
-
 sudo: false
-
 cache:
   directories:
-    - node_modules
-
+  - node_modules
 before_install:
-  - "npm config set spin false"
-  - "npm install -g npm@^2"
-
+- npm config set spin false
+- npm install -g npm@^2
 install:
-  - npm install -g bower
-  - npm install
-  - bower install
-
+- npm install -g bower
+- npm install
+- bower install
 script:
-  - npm test
+- npm test
+deploy:
+  provider: heroku
+  api_key:
+    secure: HXgCcatanWBqaBMDCsu1BC/BawX6googs9NWCx7i6EuhMc6Do/WVkbmkdNj/7R4V7TPDfuttWsuURpw+BPSDUI6nijWEQOyXJcd+ROsWRGxyttiUYrS3xVJzTNrTYoY/GalaJKaIidlpc3MpAYq8tHPz9FuTJz04XjIrCMbYs+Q=
+  app: warm-badlands-5115
+  on:
+    repo: elwayman02/jordan-hawker
