@@ -3,6 +3,7 @@ $fa-font-path: '/assets/fonts' !default;
 @import 'bower_components/fontawesome/scss/font-awesome.scss';
 
 @import 'variables';
+@import 'colors';
 
 @import 'header';
 @import 'navbar';
@@ -15,4 +16,14 @@ $fa-font-path: '/assets/fonts' !default;
 
 .item-list {
   padding-left: 15px;
+}
+
+.contact {
+  div {
+    margin-bottom: 10px;
+
+    i {
+      font-size: 50px;
+    }
+  }
 }

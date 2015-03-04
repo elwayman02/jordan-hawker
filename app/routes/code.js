@@ -6,112 +6,114 @@ export default Ember.Route.extend({
       title: 'Tech Sites',
       list: [{
         name: 'GitHub',
-        url: ''
+        url: 'http://bit.ly/JordanHawkerGH',
+        icon: 'github'
       }, {
         name: 'StackOverflow',
-        url: ''
+        url: 'http://bit.ly/JordanHawkerSO',
+        icon: 'stack-overflow'
       }]
     }, {
       title: 'Frameworks',
       list: [{
         name: 'Ember',
-        url: ''
+        url: 'http://emberjs.com/'
       }, {
         name: 'Backbone',
-        url: ''
+        url: 'http://backbonejs.org/'
       }]
     }, {
       title: 'Utility Libraries',
       list: [{
         name: 'jQuery',
-        url: ''
+        url: 'http://jquery.com/'
       }, {
         name: 'underscore',
-        url: ''
+        url: 'http://underscorejs.org/'
       }, {
         name: 'RequireJS',
-        url: ''
+        url: 'http://requirejs.org/'
       }, {
         name: 'moment',
-        url: ''
+        url: 'http://momentjs.com/'
       }, {
         name: 'Ember-Data',
-        url: ''
+        url: 'http://emberjs.com/api/data/'
       }, {
         name: 'Handlebars',
-        url: ''
+        url: 'http://handlebarsjs.com/'
       }, {
         name: 'HTMLbars',
-        url: ''
+        url: 'https://github.com/tildeio/htmlbars'
       }, {
         name: 'Mustache',
-        url: ''
+        url: 'https://mustache.github.io/'
       }]
     }, {
       title: 'Graphic Libraries',
       list: [{
         name: 'Bootstrap',
-        url: ''
+        url: 'http://getbootstrap.com/'
       }, {
         name: 'Chosen',
-        url: ''
+        url: 'http://harvesthq.github.io/chosen/'
       }, {
         name: 'Select2',
-        url: ''
+        url: 'https://select2.github.io/'
       }]
     }, {
       title: 'Package Managers',
       list: [{
         name: 'npm',
-        url: ''
+        url: 'https://www.npmjs.com/'
       }, {
         name: 'Bower',
-        url: ''
+        url: 'http://bower.io/'
       }]
     }, {
       title: 'Testing',
       list: [{
         name: 'Jasmine',
-        url: ''
+        url: 'http://jasmine.github.io/'
       }, {
         name: 'Karma',
-        url: ''
+        url: 'http://karma-runner.github.io/0.12/index.html'
       }, {
         name: 'testem',
-        url: ''
+        url: 'https://github.com/airportyh/testem'
       }, {
         name: 'QUnit',
-        url: ''
+        url: 'http://qunitjs.com/'
       }, {
         name: 'fakehr',
-        url: ''
+        url: 'https://github.com/trek/fakehr'
       }, {
         name: 'Js.Edgar',
-        url: ''
+        url: 'http://bit.ly/JsEdgar'
       }]
     }, {
       title: 'Build Tools',
       list: [{
         name: 'Grunt',
-        url: ''
+        url: 'http://gruntjs.com/'
       }, {
         name: 'Ember-CLI',
-        url: ''
+        url: 'http://www.ember-cli.com/'
       }, {
         name: 'Broccoli',
-        url: ''
+        url: 'http://broccolijs.com/'
       }]
     }, {
       title: 'Linting',
       list: [{
         name: 'ESLint',
-        url: ''
+        url: 'http://eslint.org/'
       }, {
         name: 'JSHint',
-        url: ''
+        url: 'http://jshint.com/'
       }, {
         name: 'JSLint',
-        url: ''
+        url: 'http://www.jslint.com/'
       }]
     }];
   }
