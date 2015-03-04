@@ -1,8 +1,23 @@
+#navbar {
+    padding-right: 0;
+}
+
+.sidebar-nav {
+    .navbar {
+        border-top: none;
+      
+        li {
+            &:hover {
+                background-color: #e7e7e7;
+            }
+        }
+    }
+}
+
 /* make sidebar nav vertical */
 @media (min-width: 768px) {
     .sidebar-nav {
         .navbar {
-            border-top: none;
             border-top-left-radius: 0;
             border-top-right-radius: 0;
 
