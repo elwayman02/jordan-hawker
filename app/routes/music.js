@@ -43,7 +43,7 @@ export default Ember.Route.extend({
         name: 'Illinois State Lindy Exchange',
         location: 'Bloomington, IL',
         styles: ['Blues', 'Lindy'],
-        dates: ['2013']
+        dates: ['2012', '2013']
       }, {
         name: 'ISU Blues Workshop',
         location: 'Bloomington, IL',
