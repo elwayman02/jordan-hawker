@@ -16,6 +16,6 @@ deploy:
   provider: heroku
   api_key:
     secure: HXgCcatanWBqaBMDCsu1BC/BawX6googs9NWCx7i6EuhMc6Do/WVkbmkdNj/7R4V7TPDfuttWsuURpw+BPSDUI6nijWEQOyXJcd+ROsWRGxyttiUYrS3xVJzTNrTYoY/GalaJKaIidlpc3MpAYq8tHPz9FuTJz04XjIrCMbYs+Q=
-  app: warm-badlands-5115
+  app: jordan-hawker
   on:
     repo: elwayman02/jordan-hawker
