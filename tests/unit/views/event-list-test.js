@@ -6,7 +6,7 @@ import {
 moduleFor('view:event-list');
 
 // Replace this with your real tests.
-test('it exists', function(assert) {
-  var view = this.subject();
-  assert.ok(view);
-});
+//test('it exists', function(assert) {
+//  var view = this.subject();
+//  assert.ok(view);
+//});
