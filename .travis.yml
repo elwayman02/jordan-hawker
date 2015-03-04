@@ -19,3 +19,4 @@ deploy:
   app: jordan-hawker
   on:
     repo: elwayman02/jordan-hawker
+    tags: true
