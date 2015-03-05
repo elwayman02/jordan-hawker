@@ -13,6 +13,7 @@ $fa-font-path: '/assets/fonts' !default;
 
 #main-container {
   margin-right: 0;
+  margin-bottom: 10px;
 }
 
 #main {
@@ -32,4 +33,12 @@ $fa-font-path: '/assets/fonts' !default;
       font-size: 50px;
     }
   }
+}
+
+.biography {
+  font-style: italic;
+  margin-top: 10px;
+  border: 1px dashed $border;
+  border-radius: 4px;
+  padding: 5px;
 }

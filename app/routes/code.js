@@ -3,6 +3,21 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   model: function () {
     return [{
+      title: 'Public Projects',
+      list: [{
+        name: 'Js.Edgar',
+        url: 'http://bit.ly/JsEdgar'
+      }, {
+        name: 'Ember Bug Widget',
+        url: 'https://github.com/elwayman02/ember-bug-widget'
+      }, {
+        name: 'ChilloutMusic.fm v2.0',
+        url: 'https://github.com/ChilloutMusic/website'
+      }, {
+        name: 'JordanHawker.com',
+        url: 'https://github.com/elwayman02/jordan-hawker'
+      }]
+    }, {
       title: 'Tech Sites',
       list: [{
         name: 'GitHub',
