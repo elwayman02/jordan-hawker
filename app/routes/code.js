@@ -17,43 +17,52 @@ export default Ember.Route.extend({
       title: 'Frameworks',
       list: [{
         name: 'Ember',
-        url: 'http://emberjs.com/'
+        url: 'http://emberjs.com/',
+        image: 'ember.png'
       }, {
         name: 'Backbone',
-        url: 'http://backbonejs.org/'
+        url: 'http://backbonejs.org/',
+        image: 'backbone.png'
       }]
     }, {
       title: 'Utility Libraries',
       list: [{
         name: 'jQuery',
-        url: 'http://jquery.com/'
+        url: 'http://jquery.com/',
+        image: 'jquery.png'
       }, {
         name: 'underscore',
         url: 'http://underscorejs.org/'
       }, {
         name: 'RequireJS',
-        url: 'http://requirejs.org/'
+        url: 'http://requirejs.org/',
+        image: 'requirejs.svg'
       }, {
         name: 'moment',
-        url: 'http://momentjs.com/'
+        url: 'http://momentjs.com/',
+        image: 'momentjs.png'
       }, {
         name: 'Ember-Data',
-        url: 'http://emberjs.com/api/data/'
+        url: 'http://emberjs.com/api/data/',
+        image: 'ember.png'
       }, {
         name: 'Handlebars',
-        url: 'http://handlebarsjs.com/'
+        url: 'http://handlebarsjs.com/',
+        image: 'handlebars.png'
       }, {
         name: 'HTMLbars',
         url: 'https://github.com/tildeio/htmlbars'
       }, {
         name: 'Mustache',
-        url: 'https://mustache.github.io/'
+        url: 'https://mustache.github.io/',
+        image: 'mustache.png'
       }]
     }, {
       title: 'Graphic Libraries',
       list: [{
         name: 'Bootstrap',
-        url: 'http://getbootstrap.com/'
+        url: 'http://getbootstrap.com/',
+        image: 'bootstrap.png'
       }, {
         name: 'Chosen',
         url: 'http://harvesthq.github.io/chosen/'
@@ -65,25 +74,30 @@ export default Ember.Route.extend({
       title: 'Package Managers',
       list: [{
         name: 'npm',
-        url: 'https://www.npmjs.com/'
+        url: 'https://www.npmjs.com/',
+        image: 'npm.png'
       }, {
         name: 'Bower',
-        url: 'http://bower.io/'
+        url: 'http://bower.io/',
+        image: 'bower.png'
       }]
     }, {
       title: 'Testing',
       list: [{
         name: 'Jasmine',
-        url: 'http://jasmine.github.io/'
+        url: 'http://jasmine.github.io/',
+        image: 'jasmine.png'
       }, {
         name: 'Karma',
-        url: 'http://karma-runner.github.io/0.12/index.html'
+        url: 'http://karma-runner.github.io/0.12/index.html',
+        image: 'karma.png'
       }, {
         name: 'testem',
         url: 'https://github.com/airportyh/testem'
       }, {
         name: 'QUnit',
-        url: 'http://qunitjs.com/'
+        url: 'http://qunitjs.com/',
+        image: 'qunit.png'
       }, {
         name: 'fakehr',
         url: 'https://github.com/trek/fakehr'
@@ -95,19 +109,23 @@ export default Ember.Route.extend({
       title: 'Build Tools',
       list: [{
         name: 'Grunt',
-        url: 'http://gruntjs.com/'
+        url: 'http://gruntjs.com/',
+        image: 'grunt.png'
       }, {
         name: 'Ember-CLI',
-        url: 'http://www.ember-cli.com/'
+        url: 'http://www.ember-cli.com/',
+        image: 'ember-cli.png'
       }, {
         name: 'Broccoli',
-        url: 'http://broccolijs.com/'
+        url: 'http://broccolijs.com/',
+        image: 'broccoli.png'
       }]
     }, {
       title: 'Linting',
       list: [{
         name: 'ESLint',
-        url: 'http://eslint.org/'
+        url: 'http://eslint.org/',
+        image: 'eslint.svg'
       }, {
         name: 'JSHint',
         url: 'http://jshint.com/'

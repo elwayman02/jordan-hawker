@@ -39,3 +39,10 @@ i {
       color: $youtube;
   }
 }
+
+img {
+  &.tech-icon {
+    width: 14px;
+    height: 14px;
+  }
+}

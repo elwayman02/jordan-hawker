@@ -10,13 +10,14 @@ $fa-font-path: '/assets/fonts' !default;
 @import 'navbar';
 @import 'event-list';
 
+#main-container {
+  margin-right: 0;
+  margin-bottom: 50px;
+}
+
 #main {
   margin-top: 10px;
   margin-left: 10px;
-}
-
-#main-container {
-  margin-right: 0;
 }
 
 .item-list {
