@@ -7,12 +7,12 @@ $fa-font-path: '/assets/fonts' !default;
 @import 'icons';
 
 @import 'header';
+@import 'footer';
 @import 'navbar';
 @import 'event-list';
 
 #main-container {
   margin-right: 0;
-  margin-bottom: 50px;
 }
 
 #main {
