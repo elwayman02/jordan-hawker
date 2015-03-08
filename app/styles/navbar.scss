@@ -3,20 +3,47 @@
 }
 
 .sidebar-nav {
+    &.affix {
+      top: 0;
+    }
+
     .navbar {
         border-top: none;
 
         li {
             &:hover {
-                background-color: $border;
+                a {
+                    background-color: $hover;
+                }
+            }
+
+            a {
+                &.active {
+                    background-color: $active;
+                    cursor: default;
+                }
             }
         }
     }
 }
 
-/* make sidebar nav vertical */
-@media (min-width: 768px) {
+@media (max-width: $mobileWidth) {
     .sidebar-nav {
+        &.affix {
+            width: 100%;
+            z-index: 1;
+        }
+    }
+}
+
+/* make sidebar nav vertical */
+@media (min-width: $minWidth) {
+    .sidebar-nav {
+        &.affix {
+          width: 16.6667%;
+          padding-right: 15px;
+        }
+
         .navbar {
             border-top-left-radius: 0;
             border-top-right-radius: 0;

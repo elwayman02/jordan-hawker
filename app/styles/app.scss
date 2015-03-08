@@ -21,6 +21,13 @@ $fa-font-path: '/assets/fonts' !default;
   margin-left: 10px;
 }
 
+@media (max-width: $mobileWidth) {
+    #main {
+        margin-left: 25px;
+        margin-top: -25px;
+    }
+}
+
 .item-list {
   padding-left: 15px;
 }
@@ -33,6 +40,12 @@ $fa-font-path: '/assets/fonts' !default;
       font-size: 50px;
     }
   }
+}
+
+@media (max-width: $mobileWidth) {
+    .contact {
+        margin-top: 15px;
+    }
 }
 
 .biography {
