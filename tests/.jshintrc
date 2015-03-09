@@ -22,7 +22,8 @@
     "currentURL",
     "currentPath",
     "currentRouteName",
-    "equal"
+    "equal",
+    "ok"
   ],
   "node": false,
   "browser": false,
