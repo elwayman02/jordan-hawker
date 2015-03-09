@@ -19,9 +19,9 @@ module.exports = function(environment) {
     },
 
     sassOptions: {
-      includePaths: [
-        'bower_components/bootstrap-sass-official/assets/stylesheets'
-      ]
+        includePaths: [
+            'bower_components/bootstrap-sass-official/assets/stylesheets'
+        ]
     }
   };
 

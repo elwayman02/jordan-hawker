@@ -39,4 +39,3 @@ You will need the following things properly installed on your computer.
 
 Deployment to Heroku triggers automatically after a passing Travis-CI build completes on a tagged release commit.  
 Re-deploying the app is as simple as tagging a new release in GitHub.
-
