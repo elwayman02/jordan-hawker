@@ -1,13 +1,27 @@
-<div class="col-xs-6 col-sm-4 col-md-3">
-    <a href="{{url}}" target="_blank">
-        {{#if icon}}
-            <i class="fa fa-{{icon}}"></i>
-        {{/if}}
-
-        {{#if image}}
-            <img src="/assets/{{image}}" class="brand-icon">
-        {{/if}}
-
-        {{name}}
-    </a>
+<div class="tech-description {{view.rowClasses}}">
+    {{#if view.hasDescription}}
+        <div {{action 'toggleDescription' target=view}} class="tech-description-header">
+            <a href="#">
+                {{partial 'partials/brand-header'}}
+                <i class="fa fa-minus {{if view.showDescription '' 'hide'}}"></i>
+            </a>
+        </div>
+        <div class="tech-description-body {{if view.showDescription '' 'hide'}}">
+            <div>
+                <label>Site:</label>
+                <a href="{{url}}" target="_blank">
+                    {{url}}
+                    <i class='fa fa-external-link'></i>
+                </a>
+            </div>
+            <div>
+                <label>Description:</label>
+                <p>{{description}}</p>
+            </div>
+        </div>
+    {{else}}
+        <a href="{{url}}" target="_blank">
+            {{partial 'partials/brand-header'}}
+        </a>
+    {{/if}}
 </div>
