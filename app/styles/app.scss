@@ -22,7 +22,7 @@ $fa-font-path: '/assets/fonts' !default;
   margin-left: 10px;
 }
 
-@media (max-width: $mobileWidth) {
+@media all and (max-width: $mobileWidth) {
     #main {
         margin-left: 25px;
         margin-top: -25px;
@@ -43,7 +43,7 @@ $fa-font-path: '/assets/fonts' !default;
   }
 }
 
-@media (max-width: $mobileWidth) {
+@media all and (max-width: $mobileWidth) {
     .contact {
         margin-top: 15px;
     }

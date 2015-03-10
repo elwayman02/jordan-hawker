@@ -27,7 +27,7 @@
     }
 }
 
-@media (max-width: $mobileWidth) {
+@media all and (max-width: $mobileWidth) {
     .sidebar-nav {
         &.affix {
             width: 100%;
@@ -37,7 +37,7 @@
 }
 
 /* make sidebar nav vertical */
-@media (min-width: $minWidth) {
+@media all and (min-width: $minWidth) {
     .sidebar-nav {
         &.affix {
           width: 16.6667%;
