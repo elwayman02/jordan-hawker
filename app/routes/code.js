@@ -22,7 +22,7 @@ export default Ember.Route.extend({
         description: 'My personal and professional website'
       }]
     }, {
-      title: 'Tech Site Profiles',
+      title: 'Tech Profiles',
       list: [{
         name: 'GitHub',
         url: 'http://bit.ly/JordanHawkerGH',
