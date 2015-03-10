@@ -1,3 +1,4 @@
+@import 'bootstrap-variables';
 @import 'bootstrap';
 $fa-font-path: '/assets/fonts' !default;
 @import 'bower_components/fontawesome/scss/font-awesome.scss';
@@ -22,7 +23,7 @@ $fa-font-path: '/assets/fonts' !default;
   margin-left: 10px;
 }
 
-@media all and (max-width: $mobileWidth) {
+@media all and (max-width: $screen-xs-max) {
     #main {
         margin-left: 25px;
         margin-top: -25px;
@@ -43,7 +44,7 @@ $fa-font-path: '/assets/fonts' !default;
   }
 }
 
-@media all and (max-width: $mobileWidth) {
+@media all and (max-width: $screen-xs-max) {
     .contact {
         margin-top: 15px;
     }
