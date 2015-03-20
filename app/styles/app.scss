@@ -12,6 +12,11 @@ $fa-font-path: '/assets/fonts' !default;
 @import 'event-list';
 @import 'tech-list';
 
+body {
+    min-height: 99vh;
+    position: relative;
+}
+
 #main-container {
   margin-right: 0;
   margin-bottom: 10px;
