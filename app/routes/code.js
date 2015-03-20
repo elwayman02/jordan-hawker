@@ -22,6 +22,17 @@ export default Ember.Route.extend({
         description: 'My personal and professional website'
       }]
     }, {
+      title: 'Publications',
+      list: [{
+        name: 'Using SQlite (Reviewer)',
+        url: 'http://bit.ly/JordanHawkerSQLite',
+        description: 'Written by Jay A. Kreibich and published by O\'Reilly Media Inc, Using SQlite is an introduction to the SQlite database product.  I had the distinct pleasure of being a technical reviewer for the book.'
+      }, {
+        name: 'queryCategorizr (Co-Author)',
+        url: 'http://bit.ly/queryCategorizr',
+        description: 'The full title is "queryCategorizr: A Large-Scale Semi-Supervised System for Categorization of Web Search Queries". This paper was co-written with several talented colleagues at Yahoo: Mihajlo Grbovic, Nemanja Djuric, Vladan Radosavljevic, Narayan Bhamidipati, and Caleb Johnson. We submitted and were accepted to present the paper at the 24th International World Wide Web Conference in 2015.'
+      }]
+    }, {
       title: 'Tech Profiles',
       list: [{
         name: 'GitHub',
