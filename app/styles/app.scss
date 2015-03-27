@@ -6,11 +6,14 @@ $fa-font-path: '/assets/fonts' !default;
 @import 'variables';
 @import 'icons';
 
+@import 'components/ember-carousel';
+
 @import 'header';
 @import 'footer';
 @import 'navbar';
 @import 'event-list';
 @import 'tech-list';
+@import 'recommendation';
 
 #main-container {
   margin-right: 0;
