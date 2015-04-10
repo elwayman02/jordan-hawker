@@ -32,7 +32,7 @@ export default Ember.Route.extend({
               }, {
                 name: 'queryCategorizr (Co-Author)',
                 url: 'http://bit.ly/queryCategorizr',
-                description: 'The full title is "queryCategorizr: A Large-Scale Semi-Supervised System for Categorization of Web Search Queries". This paper was co-written with several talented colleagues at Yahoo: Mihajlo Grbovic, Nemanja Djuric, Vladan Radosavljevic, Narayan Bhamidipati, and Caleb Johnson. We submitted and were accepted to present the paper at the 24th International World Wide Web Conference in 2015.'
+                description: 'The full title is "queryCategorizr: A Large-Scale Semi-Supervised System for Categorization of Web Search Queries". This paper was co-written with several talented colleagues at Yahoo: Mihajlo Grbovic, Nemanja Djuric, Vladan Radosavljevic, Narayan Bhamidipati, and Caleb Johnson. We submitted and were accepted to present the paper at the 24th International World Wide Web Conference in 2015.  A demo video is available here: http://youtu.be/RSQ7mK-xpH8'
               }]
             }, {
               title: 'Tech Profiles',

@@ -18,7 +18,7 @@ export default Ember.Component.extend({
         this.scheduleChange();
     },
 
-    leftIndex: function () {
+    leftIndex: Ember.computed('index', 'content.[]', function () {
         var index = this.get('index');
 
         if (index > 0) {
@@ -26,9 +26,9 @@ export default Ember.Component.extend({
         }
 
         return this.get('content.length') - 1;
-    }.property('index', 'content.[]'),
+    }),
 
-    rightIndex: function () {
+    rightIndex: Ember.computed('index', 'content.[]', function () {
         var index = this.get('index');
         var length = this.get('content.length');
 
@@ -37,19 +37,19 @@ export default Ember.Component.extend({
         }
 
         return 0;
-    }.property('index', 'content.[]'),
+    }),
 
-    leftItem: function () {
+    leftItem: Ember.computed('content.[]', 'leftIndex', function () {
         return this.get('content')[this.get('leftIndex')];
-    }.property('content.[]', 'leftIndex'),
+    }),
 
-    mainItem: function () {
+    mainItem: Ember.computed('content.[]', 'index', function () {
         return this.get('content')[this.get('index')];
-    }.property('content.[]', 'index'),
+    }),
 
-    rightItem: function () {
+    rightItem: Ember.computed('content.[]', 'rightIndex', function () {
         return this.get('content')[this.get('rightIndex')];
-    }.property('content.[]', 'rightIndex'),
+    }),
 
     moveLeft: function () {
         this.set('index', this.get('leftIndex'));
