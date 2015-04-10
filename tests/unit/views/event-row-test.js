@@ -23,13 +23,13 @@ test('it exists', function(assert) {
   assert.ok(view);
 });
 
-test('styleList', function () {
-  equal(view.get('styleList'), 'Blues, Fusion, Swing', 'sorted and concatenated by default');
+test('styleList', function(assert) {
+  assert.equal(view.get('styleList'), 'Blues, Fusion, Swing', 'sorted and concatenated by default');
 
   var sList = view.get('content.styles').pushObject('Lindy');
-  equal(view.get('styleList'), 'Blues, Fusion, Lindy, Swing', 're-sorts when the array changes');
+  assert.equal(view.get('styleList'), 'Blues, Fusion, Lindy, Swing', 're-sorts when the array changes');
 });
 
-test('dateList', function () {
-  equal(view.get('dateList'), '2012, 2013, 2014', 'concatenates dates');
+test('dateList', function(assert) {
+  assert.equal(view.get('dateList'), '2012, 2013, 2014', 'concatenates dates');
 });

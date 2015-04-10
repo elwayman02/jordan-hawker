@@ -10,26 +10,26 @@ moduleFor('view:tech-row', {
 });
 
 test('it exists', function(assert) {
-    ok(view);
+    assert.ok(view);
 });
 
-test('hasDescription', function () {
-    ok(!view.get('hasDescription'), 'is false when there is no description');
+test('hasDescription', function(assert) {
+    assert.ok(!view.get('hasDescription'), 'is false when there is no description');
 
     view.set('content.description', 'Foo Bar');
-    ok(view.get('hasDescription'), 'is true when there is a description');
+    assert.ok(view.get('hasDescription'), 'is true when there is a description');
 });
 
-test('showDescription', function () {
-    ok(!view.get('showDescription'), 'is false when there is no description or expand');
+test('showDescription', function(assert) {
+    assert.ok(!view.get('showDescription'), 'is false when there is no description or expand');
 
     view.toggleProperty('expandDescription');
-    ok(!view.get('showDescription'), 'is false when there is no description but expand is true');
+    assert.ok(!view.get('showDescription'), 'is false when there is no description but expand is true');
 
     view.toggleProperty('expandDescription');
     view.set('content.description', 'Foo Bar');
-    ok(!view.get('showDescription'), 'is false when there is a description but expand is false');
+    assert.ok(!view.get('showDescription'), 'is false when there is a description but expand is false');
 
     view.toggleProperty('expandDescription');
-    ok(view.get('showDescription'), 'is true when there is a description and expand is true');
+    assert.ok(view.get('showDescription'), 'is true when there is a description and expand is true');
 });
