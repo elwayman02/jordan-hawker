@@ -1,7 +1,7 @@
 import ApplicationAdapter from './application';
 
 export default ApplicationAdapter.extend({
-    host: 'http://api.tumblr.com',
+    host: 'https://api.tumblr.com',
     namespace: 'v2/blog/jordanhawker.tumblr.com',
     ajaxOptions: function() {
         var hash = this._super.apply(this, arguments);
