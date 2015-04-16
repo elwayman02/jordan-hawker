@@ -19,13 +19,13 @@ $fa-font-path: '/assets/fonts' !default;
 @import 'blog';
 
 #main-container {
-  margin-right: 0;
-  margin-bottom: 10px;
+    margin-right: 0;
+    margin-bottom: 10px;
 }
 
 #main {
-  margin-top: 10px;
-  margin-left: 10px;
+    margin-top: 10px;
+    margin-left: 10px;
 }
 
 @media all and (max-width: $screen-xs-max) {
@@ -36,17 +36,17 @@ $fa-font-path: '/assets/fonts' !default;
 }
 
 .item-list {
-  padding-left: 15px;
+    padding-left: 15px;
 }
 
 .contact {
-  div {
-    margin-bottom: 10px;
+    div {
+        margin-bottom: 10px;
 
-    i {
-      font-size: 50px;
+        i {
+            font-size: 50px;
+        }
     }
-  }
 }
 
 @media all and (max-width: $screen-xs-max) {
@@ -56,9 +56,9 @@ $fa-font-path: '/assets/fonts' !default;
 }
 
 .biography {
-  font-style: italic;
-  margin-top: 10px;
-  border: 1px dashed $border;
-  border-radius: 4px;
-  padding: 5px;
+    font-style: italic;
+    margin-top: 10px;
+    border: 1px dashed $border;
+    border-radius: 4px;
+    padding: 5px;
 }
