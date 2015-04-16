@@ -3,8 +3,10 @@ $fa-font-path: '/assets/fonts' !default;
 @import 'bower_components/fontawesome/scss/font-awesome.scss';
 //@import 'bug-widget';
 
-@import 'variables';
+@import 'colors';
 @import 'icons';
+@import 'variables';
+@import 'general';
 
 @import 'components/ember-carousel';
 
@@ -14,6 +16,7 @@ $fa-font-path: '/assets/fonts' !default;
 @import 'event-list';
 @import 'tech-list';
 @import 'recommendation';
+@import 'blog';
 
 #main-container {
   margin-right: 0;

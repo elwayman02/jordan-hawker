@@ -1,7 +1,7 @@
 .ember-carousel {
     position: relative;
     border-radius: $borderRadius;
-    border: 1px dashed $border;
+    border: $borderStyle;
     min-height: 300px;
     padding: 5% 0;
 
