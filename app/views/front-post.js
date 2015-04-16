@@ -1,4 +1,4 @@
-import Post from 'jordan-hawker/views/post';
+import Post from 'jordan-hawker/views/post-view';
 
 export default Post.extend({
     actions: {

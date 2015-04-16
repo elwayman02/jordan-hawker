@@ -10,5 +10,6 @@ export default Router.map(function() {
   this.route('music');
   this.route('dance');
   this.route('code');
-  this.route('blog');
+  this.route('blog', { path: '/posts' });
+  this.route('post', { path: '/posts/:post_id' });
 });

@@ -1,11 +1,16 @@
 .post {
     border: $borderStyle;
-    padding: 5px 10px 40px 10px;
+    padding: 15px 10px 40px 10px;
     margin-top: 20px;
 
     .title {
         text-align: center;
         margin-bottom: 15px;
+
+        h4 {
+            display: inline-block;
+            margin-top: 0;
+        }
     }
 
     .date {

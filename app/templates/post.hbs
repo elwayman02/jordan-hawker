@@ -1,8 +1,1 @@
-<div class="post">
-    <a href={{short_url}} target="_blank">
-        <h4 class="title">{{title}}</h4>
-    </a>
-    <div class="date">{{format-date date day="numeric" month="long" year="numeric"}}</div>
-    <div class="body {{if view.expanded '' 'collapsed'}}">{{{body}}}</div>
-    <button {{action 'expand' target=view}} class="btn btn-sm btn-secondary right">{{view.expandText}}</button>
-</div>
+{{view 'post-view' content=model alwaysExpanded=true}}

@@ -1,0 +1,15 @@
+<div class="post">
+    <div class="title">
+        <a href={{short_url}} target="_blank">
+            <h4>{{title}}</h4>
+        </a>
+        {{#link-to 'post' id class="right"}}
+            <i class='fa fa-link'></i>
+        {{/link-to}}
+    </div>
+    <div class="date">{{format-date date day="numeric" month="long" year="numeric"}}</div>
+    <div class="body {{if view.isExpanded '' 'collapsed'}}">{{{body}}}</div>
+    {{#unless view.alwaysExpanded}}
+        <button {{action 'expand' target=view}} class="btn btn-sm btn-secondary right">{{view.expandText}}</button>
+    {{/unless}}
+</div>
