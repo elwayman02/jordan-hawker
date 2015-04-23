@@ -1,6 +1,6 @@
 {
   "name": "jordan-hawker",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "description": "Professional Website for Jordan Hawker",
   "author": "Jordan Hawker <hawker.jordan@gmail.com>",
   "private": true,
@@ -39,6 +39,7 @@
     "ember-data-model-fragments": "0.3.1",
     "ember-export-application-global": "^1.0.2",
     "ember-intl": "1.2.2",
+    "ember-moment": "1.1.1",
     "ember-try": "0.0.4",
     "ember-watson": "^0.3.1"
   }

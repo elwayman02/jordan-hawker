@@ -7,7 +7,7 @@ export default DS.Model.extend({
     post_url: attr('string'),
     slug: attr('string'),
     type: attr('string'),
-    date: attr('string'), // TODO: Serialize into ISO format and update to 'date'
+    date: attr('date'),
     timestamp: attr('number'),
     state: attr('string'),
     format: attr('string'),

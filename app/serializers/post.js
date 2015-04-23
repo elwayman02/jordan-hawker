@@ -1,4 +1,5 @@
 import DS from 'ember-data';
+import moment from 'moment';
 
 export default DS.RESTSerializer.extend({
     normalizePayload: function (payload) {
@@ -7,6 +8,7 @@ export default DS.RESTSerializer.extend({
                 // TODO: Remove this and update model to handle the arrays
                 delete post.tags;
                 delete post.highlighted;
+                post.date = moment(post.date, 'YYYY-MM-DD HH:mm:ss GMT').toISOString();
                 return post;
             });
             return { posts: posts };
