@@ -8,6 +8,7 @@ export default DS.RESTSerializer.extend({
                 // TODO: Remove this and update model to handle the arrays
                 delete post.tags;
                 delete post.highlighted;
+                // Serialize the dates for cross-browser support
                 post.date = moment(post.date, 'YYYY-MM-DD HH:mm:ss GMT').toISOString();
                 return post;
             });
