@@ -4,8 +4,7 @@ import {
 } from 'ember-qunit';
 
 moduleForComponent('ember-carousel-item', {
-  // specify the other units that are required for this test
-  // needs: ['component:foo', 'helper:bar']
+    integration: true
 });
 
 test('it renders', function(assert) {
