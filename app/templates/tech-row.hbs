@@ -1,27 +1,25 @@
-<div class="tech-description {{view.rowClasses}}">
-    {{#if view.hasDescription}}
-        <div {{action 'toggleDescription' target=view}} class="tech-description-header">
-            <a href="#">
-                {{partial 'partials/brand-header'}}
-                <i class="fa fa-minus {{if view.showDescription '' 'hide'}}"></i>
+{{#liquid-if view.showDescription class=view.rowClasses}}
+    <div {{action 'toggleDescription' target=view}} class="tech-description-header">
+        <a href="#">
+            {{partial 'partials/brand-header'}}
+            <i class="fa fa-minus"></i>
+        </a>
+    </div>
+    <div class="tech-description-body">
+        <div>
+            <label>Site:</label>
+            <a href="{{url}}" target="_blank">
+                {{url}}
+                <i class='fa fa-external-link'></i>
             </a>
         </div>
-        <div class="tech-description-body {{if view.showDescription '' 'hide'}}">
-            <div>
-                <label>Site:</label>
-                <a href="{{url}}" target="_blank">
-                    {{url}}
-                    <i class='fa fa-external-link'></i>
-                </a>
-            </div>
-            <div>
-                <label>Description:</label>
-                <p>{{description}}</p>
-            </div>
+        <div>
+            <label>Description:</label>
+            <p>{{description}}</p>
         </div>
-    {{else}}
-        <a href="{{url}}" target="_blank">
-            {{partial 'partials/brand-header'}}
-        </a>
-    {{/if}}
-</div>
+    </div>
+{{else}}
+    <div {{action 'toggleDescription' target=view}} class="tech-description-header">
+        <a href="#">{{partial 'partials/brand-header'}}</a>
+    </div>
+{{/liquid-if}}
