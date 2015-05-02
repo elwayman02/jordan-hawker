@@ -1,6 +1,6 @@
-import Ember from 'ember';
+import BaseRoute from 'jordan-hawker/routes/base';
 
-export default Ember.Route.extend({
+export default BaseRoute.extend({
     model: function (params/*, transition*/) {
         return this.store.find('post', {
             id: params.post_id

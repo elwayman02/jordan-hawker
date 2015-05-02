@@ -15,9 +15,9 @@ export default Ember.View.extend({
 
     rowClasses: Ember.computed('showDescription', function () {
         if (this.get('showDescription')) {
-            return 'col-xs-12 col-sm-10 toggled';
+            return 'tech-description col-xs-12 col-sm-10 toggled';
         }
-        return 'col-xs-6 col-sm-4 col-md-3';
+        return 'tech-description col-xs-6 col-sm-4 col-md-3';
     }),
 
     actions: {

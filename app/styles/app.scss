@@ -28,6 +28,14 @@ $fa-font-path: '/assets/fonts' !default;
     margin-left: 10px;
 }
 
+.liquid-container {
+    .liquid-child {
+        > .row {
+            margin-left: 0;
+        }
+    }
+}
+
 @media all and (max-width: $screen-xs-max) {
     #main {
         margin-left: 25px;
