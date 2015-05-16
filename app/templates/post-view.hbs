@@ -8,7 +8,6 @@
                 <i class='fa fa-link'></i>
             {{/link-to}}
         </div>
-        {{debugger}}
         <div class="date">{{format-date date day="numeric" month="long" year="numeric"}}</div>
         <div class="body {{if view.isExpanded '' 'collapsed'}}">{{{body}}}</div>
         {{#unless view.alwaysExpanded}}
