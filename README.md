@@ -1,6 +1,7 @@
 # Jordan Hawker's Personal Website
 
 [![Build Status](https://travis-ci.org/elwayman02/jordan-hawker.svg?branch=master)](https://travis-ci.org/elwayman02/jordan-hawker)
+[![Code Climate](https://codeclimate.com/github/elwayman02/jordan-hawker/badges/gpa.svg)](https://codeclimate.com/github/elwayman02/jordan-hawker)
 ![devDependency Status](https://david-dm.org/elwayman02/jordan-hawker.svg)
 
 This is the public repository for www.JordanHawker.com
