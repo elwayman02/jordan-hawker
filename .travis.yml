@@ -1,31 +1,30 @@
----
 language: node_js
 node_js:
-  - "0.12"
+- "0.12"
 
 sudo: false
 
 cache:
   directories:
-    - node_modules
+  - node_modules
 
 before_install:
-  - export PATH=/usr/local/phantomjs-2.0.0/bin:$PATH
-  - "npm config set spin false"
-  - "npm install -g npm@^2"
+- export PATH=/usr/local/phantomjs-2.0.0/bin:$PATH
+- "npm config set spin false"
+- "npm install -g npm@^2"
 
 install:
-  - npm install -g bower
-  - npm install
-  - bower install
+- npm install -g bower
+- npm install
+- bower install
 
 script:
-  - npm test
-    deploy:
-      provider: heroku
-      api_key:
-        secure: HXgCcatanWBqaBMDCsu1BC/BawX6googs9NWCx7i6EuhMc6Do/WVkbmkdNj/7R4V7TPDfuttWsuURpw+BPSDUI6nijWEQOyXJcd+ROsWRGxyttiUYrS3xVJzTNrTYoY/GalaJKaIidlpc3MpAYq8tHPz9FuTJz04XjIrCMbYs+Q=
-      app: jordan-hawker
-      on:
-        repo: elwayman02/jordan-hawker
-        tags: true
+- npm test
+deploy:
+  provider: heroku
+  api_key:
+    secure: HXgCcatanWBqaBMDCsu1BC/BawX6googs9NWCx7i6EuhMc6Do/WVkbmkdNj/7R4V7TPDfuttWsuURpw+BPSDUI6nijWEQOyXJcd+ROsWRGxyttiUYrS3xVJzTNrTYoY/GalaJKaIidlpc3MpAYq8tHPz9FuTJz04XjIrCMbYs+Q=
+  app: jordan-hawker
+  on:
+    repo: elwayman02/jordan-hawker
+    tags: true
