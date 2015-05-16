@@ -21,11 +21,11 @@ install:
 
 script:
   - npm test
-  deploy:
-    provider: heroku
-    api_key:
-      secure: HXgCcatanWBqaBMDCsu1BC/BawX6googs9NWCx7i6EuhMc6Do/WVkbmkdNj/7R4V7TPDfuttWsuURpw+BPSDUI6nijWEQOyXJcd+ROsWRGxyttiUYrS3xVJzTNrTYoY/GalaJKaIidlpc3MpAYq8tHPz9FuTJz04XjIrCMbYs+Q=
-    app: jordan-hawker
-    on:
-      repo: elwayman02/jordan-hawker
-      tags: true
+    deploy:
+      provider: heroku
+      api_key:
+        secure: HXgCcatanWBqaBMDCsu1BC/BawX6googs9NWCx7i6EuhMc6Do/WVkbmkdNj/7R4V7TPDfuttWsuURpw+BPSDUI6nijWEQOyXJcd+ROsWRGxyttiUYrS3xVJzTNrTYoY/GalaJKaIidlpc3MpAYq8tHPz9FuTJz04XjIrCMbYs+Q=
+      app: jordan-hawker
+      on:
+        repo: elwayman02/jordan-hawker
+        tags: true
