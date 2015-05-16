@@ -11,7 +11,7 @@
   "scripts": {
     "start": "ember server",
     "build": "ember build",
-    "test": "ember try default test",
+    "test": "ember test",
     "postinstall": "bower cache clean && bower install",
     "clean": "npm cache clean && bower cache clean && rm -rf node_modules bower_components dist tmp"
   },
@@ -29,6 +29,7 @@
     "ember-cli": "0.2.5",
     "ember-cli-app-version": "0.3.3",
     "ember-cli-babel": "^5.0.0",
+    "ember-cli-blanket": "0.5.1",
     "ember-cli-content-security-policy": "0.4.0",
     "ember-cli-dependency-checker": "^1.0.0",
     "ember-cli-htmlbars": "0.7.6",
