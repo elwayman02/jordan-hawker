@@ -57,6 +57,10 @@ $fa-font-path: '/assets/fonts' !default;
         i {
             font-size: 50px;
         }
+
+        img {
+            @include border-radius($borderRadius);
+        }
     }
 }
 
