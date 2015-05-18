@@ -12,7 +12,7 @@ $buttonBorder: #3399AA;
 
 #splash {
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     color: white;
     background-color: $splashColor;
     background-image: -webkit-gradient(linear, left top, left bottom, from($darkSplashColor), to($splashColor));
@@ -22,7 +22,7 @@ $buttonBorder: #3399AA;
     background-image: linear-gradient(to bottom, $darkSplashColor, $splashColor);
 
     .content {
-        width: 75%;
+        width: 90%;
         margin-left: auto;
         margin-right: auto;
         padding-top: 10%;
@@ -38,7 +38,7 @@ $buttonBorder: #3399AA;
 
         code {
             @include border-radius($borderRadius);
-            width: 360px;
+            width: 330px;
             text-align: center;
             display: block;
             margin: 1em auto;
