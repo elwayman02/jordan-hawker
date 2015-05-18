@@ -23,6 +23,8 @@
     }
 
     .body {
+        margin-bottom: 5px;
+
         &.collapsed {
             max-height: 300px;
             overflow: hidden;
