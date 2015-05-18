@@ -1,16 +1,16 @@
 .tech-description.toggled {
+    @include border-radius($borderRadius);
     border: $borderStyle;
-    border-radius: $borderRadius;
     padding-left: 0;
     padding-right: 0;
     margin-top: 5px;
     margin-bottom: 5px;
 
     .tech-description-header {
+        @include border-radius($borderRadius);
         width: 100%;
         background-color: $header;
         padding: 10px 30px 5px 30px;
-        border-radius: $borderRadius;
         cursor: pointer;
 
         &:hover {
@@ -23,8 +23,8 @@
     }
 
     .tech-description-body {
+        @include border-radius($borderRadius);
         padding: 5px 30px 10px 30px;
-        border-radius: $borderRadius;
 
         p {
             display: inline-block;

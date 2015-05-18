@@ -6,6 +6,8 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.route('splash', { path: '/' });
+  this.route('index');
   this.route('contact');
   this.route('music');
   this.route('dance');

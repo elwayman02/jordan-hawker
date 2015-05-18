@@ -1,6 +1,6 @@
 {
   "name": "jordan-hawker",
-  "version": "0.0.23",
+  "version": "0.0.24",
   "description": "Professional Website for Jordan Hawker",
   "author": "Jordan Hawker <hawker.jordan@gmail.com>",
   "private": true,
@@ -11,7 +11,7 @@
   "scripts": {
     "start": "ember server",
     "build": "ember build",
-    "test": "ember try default test",
+    "test": "ember test",
     "postinstall": "bower cache clean && bower install",
     "clean": "npm cache clean && bower cache clean && rm -rf node_modules bower_components dist tmp"
   },
@@ -44,6 +44,6 @@
     "ember-moment": "1.1.1",
     "ember-try": "0.0.5",
     "ember-watson": "^0.5.0",
-    "liquid-fire": "0.19.3"
+    "liquid-fire": "^0.19.3"
   }
 }

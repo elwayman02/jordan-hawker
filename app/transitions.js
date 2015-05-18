@@ -14,11 +14,25 @@ export default function () {
     };
 
     // Route Transitions
-    createRouteTransition('index');
-    createRouteTransition('code', ['index']);
-    createRouteTransition('music', ['index', 'code']);
-    createRouteTransition('dance', ['index', 'code', 'music']);
-    createRouteTransition('blog', ['index', 'code', 'music', 'dance']);
+    createRouteTransition('index', ['splash']);
+    createRouteTransition('code', ['splash', 'index']);
+    createRouteTransition('music', ['splash', 'index', 'code']);
+    createRouteTransition('dance', ['splash', 'index', 'code', 'music']);
+    createRouteTransition('blog', ['splash', 'index', 'code', 'music', 'dance']);
+
+    // Splash Transitions
+    var splashDuration = 150;
+    this.transition(
+        this.hasClass('application'),
+        this.toValue(false),
+        this.use('explode', {
+            pick: '.logo',
+            use: ['fly-to', {duration: splashDuration}]
+        }, {
+            pick: '.site-title',
+            use: ['fly-to', {duration: splashDuration}]
+        })
+    );
 
     // Carousel Transitions
     this.transition(
@@ -32,17 +46,17 @@ export default function () {
         this.hasClass('tech-description'),
         this.use('explode', {
             pick: '.tech-description-header',
-            use: ['fly-to', {techDuration}]
+            use: ['fly-to', {duration: techDuration}]
         }, {
             pickNew: '.tech-description-body',
-            use: ['toDown', {techDuration}]
+            use: ['toDown', {duration: techDuration}]
         }),
         this.reverse('explode', {
             pick: '.tech-description-header',
-            use: ['fly-to', {techDuration}]
+            use: ['fly-to', {duration: techDuration}]
         }, {
             pickOld: '.tech-description-body',
-            use: ['toUp', {techDuration}]
+            use: ['toUp', {duration: techDuration}]
         })
     );
 }
