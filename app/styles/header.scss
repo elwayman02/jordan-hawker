@@ -22,6 +22,10 @@
             position: relative;
             top: 20px;
             margin-left: -16.66667%;
+
+            @media (max-width: $screen-sm-max) {
+                font-size: 32px;
+            }
         }
     }
 }
