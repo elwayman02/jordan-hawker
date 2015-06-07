@@ -14,6 +14,7 @@ Router.map(function() {
   this.route('code');
   this.route('blog', { path: '/posts' });
   this.route('post', { path: '/posts/:post_id' });
+  this.route('the-candidate');
 });
 
 export default Router;

@@ -46,6 +46,14 @@ $fa-font-path: '/assets/fonts' !default;
     }
 }
 
+.title {
+  text-align: center;
+
+  p {
+    font-style: italic;
+  }
+}
+
 .item-list {
     padding-left: 15px;
 }
