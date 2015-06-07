@@ -3,7 +3,7 @@ import Resolver from 'ember/resolver';
 import loadInitializers from 'ember/load-initializers';
 import config from './config/environment';
 
-var App;
+let App;
 
 Ember.MODEL_FACTORY_INJECTIONS = true;
 
@@ -12,7 +12,7 @@ App = Ember.Application.extend({
   podModulePrefix: config.podModulePrefix,
   Resolver: Resolver,
 
-  ready: function () {
+  ready() {
       this.intl.set('locales', ['en-US']);
   }
 });

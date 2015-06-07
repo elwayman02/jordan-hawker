@@ -1,7 +1,7 @@
 import BaseRoute from 'jordan-hawker/routes/base';
 
 export default BaseRoute.extend({
-    model: function () {
+    model() {
         return {
             recommendations: this.store.find('recommendation'),
             experience: [{
@@ -14,10 +14,10 @@ export default BaseRoute.extend({
                 name: 'Ember Bug Widget',
                 url: 'https://github.com/elwayman02/ember-bug-widget',
                 description: 'A configurable addon for inserting a simple bug-reporting widget into any EmberJS application'
-              }, {
-                name: 'ChilloutMusic v2.0',
-                url: 'https://github.com/ChilloutMusic/website',
-                description: 'The redesigned website for ChilloutMusic.fm, a plug.dj community'
+              //}, {
+              //  name: 'ChilloutMusic v2.0',
+              //  url: 'https://github.com/ChilloutMusic/website',
+              //  description: 'The redesigned website for ChilloutMusic.fm, a plug.dj community'
               }, {
                 name: 'JordanHawker.com',
                 url: 'https://github.com/elwayman02/jordan-hawker',
@@ -116,6 +116,16 @@ export default BaseRoute.extend({
                 name: 'Select2',
                 url: 'https://select2.github.io/',
                 description: 'A jQuery plugin providing a customizable select box with support for searching, tagging, remote data sets, infinite scrolling, and many other highly used options'
+              }, {
+                  name: 'Bourbon',
+                  url: 'http://bourbon.io/',
+                  image: 'bourbon.png',
+                  description: 'A simple and lightweight mixin library for SASS'
+              }, {
+                  name: 'Bourbon Neat',
+                  url: 'http://neat.bourbon.io/',
+                  image: 'neat.png',
+                  description: 'A lightweight semantic grid framework for Sass and Bourbon'
               }]
             }, {
               title: 'Package Managers',

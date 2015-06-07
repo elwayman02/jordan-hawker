@@ -14,7 +14,7 @@ export default Ember.View.extend({
     }),
 
     actions: {
-        expand: function () {
+        expand() {
             this.toggleProperty('expanded');
         }
     }

@@ -21,7 +21,7 @@ export default Ember.View.extend({
     }),
 
     actions: {
-        toggleDescription: function () {
+        toggleDescription() {
             this.toggleProperty('expandDescription');
         }
     }
