@@ -3,8 +3,8 @@ import ApplicationAdapter from './application';
 export default ApplicationAdapter.extend({
     host: 'https://api.tumblr.com',
     namespace: 'v2/blog/jordanhawker.tumblr.com',
-    ajaxOptions: function() {
-        var hash = this._super.apply(this, arguments);
+    ajaxOptions() {
+        const hash = this._super.apply(this, arguments);
         if (!hash.data) {
             hash.data = {};
         }

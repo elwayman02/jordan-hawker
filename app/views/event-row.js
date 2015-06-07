@@ -8,7 +8,7 @@ export default Ember.View.extend({
   }),
 
   dateList: Ember.computed('content.dates.[]', function () {
-    var dates = this.get('content.dates');
+    const dates = this.get('content.dates');
     if (!Ember.isEmpty(dates)) {
       return dates.join(', ');
     }

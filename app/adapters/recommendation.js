@@ -1,7 +1,7 @@
 import ApplicationAdapter from './application';
 
 export default ApplicationAdapter.extend({
-    findAll: function () {
+    findAll() {
         return {
           "recommendationsReceived":  {
             "_total": 25,

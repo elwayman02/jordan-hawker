@@ -2,7 +2,7 @@ import Post from 'jordan-hawker/views/post-view';
 
 export default Post.extend({
     actions: {
-        expand: function () {
+        expand() {
             this.get('controller').send('viewBlog');
         }
     }

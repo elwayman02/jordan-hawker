@@ -1,6 +1,6 @@
 export default function () {
-    var createRouteTransition = (fromRoute, excludeRoutes) => {
-        var duration = 150;
+    const duration = 150;
+    const createRouteTransition = (fromRoute, excludeRoutes) => {
         if (!excludeRoutes) {
             excludeRoutes = [];
         }
@@ -18,19 +18,19 @@ export default function () {
     createRouteTransition('code', ['splash', 'index']);
     createRouteTransition('music', ['splash', 'index', 'code']);
     createRouteTransition('dance', ['splash', 'index', 'code', 'music']);
-    createRouteTransition('blog', ['splash', 'index', 'code', 'music', 'dance']);
+    createRouteTransition('the-candidate', ['splash', 'index', 'code', 'music', 'dance']);
+    createRouteTransition('blog', ['splash', 'index', 'code', 'music', 'dance', 'the-candidate']);
 
     // Splash Transitions
-    var splashDuration = 150;
     this.transition(
         this.hasClass('application'),
         this.toValue(false),
         this.use('explode', {
             pick: '.logo',
-            use: ['fly-to', {duration: splashDuration}]
+            use: ['fly-to', { duration }]
         }, {
             pick: '.site-title',
-            use: ['fly-to', {duration: splashDuration}]
+            use: ['fly-to', { duration }]
         })
     );
 
@@ -41,7 +41,7 @@ export default function () {
     );
 
     // Tech Description Transitions
-    var techDuration = 200;
+    const techDuration = 200;
     this.transition(
         this.hasClass('tech-description'),
         this.use('explode', {

@@ -1,7 +1,7 @@
 import BaseRoute from 'jordan-hawker/routes/base';
 
 export default BaseRoute.extend({
-    model: function (params/*, transition*/) {
+    model(params/*, transition*/) {
         return this.store.find('post', {
             id: params.post_id
         }).then(function (posts) {
