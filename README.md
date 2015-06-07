@@ -3,8 +3,10 @@
 [![Build Status](https://travis-ci.org/elwayman02/jordan-hawker.svg?branch=master)](https://travis-ci.org/elwayman02/jordan-hawker)
 [![Code Climate](https://codeclimate.com/github/elwayman02/jordan-hawker/badges/gpa.svg)](https://codeclimate.com/github/elwayman02/jordan-hawker)
 [![Codacy Badge](https://www.codacy.com/project/badge/2d266018cf964da9ba071035ccd59024)](https://www.codacy.com/app/hawker-jordan/jordan-hawker)
-[![NPM Dependency Status](https://www.versioneye.com/user/projects/557386f23363340020000006/badge.svg?style=flat)](https://www.versioneye.com/user/projects/557386f23363340020000006)
-[![Bower Dependency Status](https://www.versioneye.com/user/projects/557386f13363340023000003/badge.svg?style=flat)](https://www.versioneye.com/user/projects/557386f13363340023000003)
+
+NPM: [![NPM Dependency Status](https://www.versioneye.com/user/projects/557386f23363340020000006/badge.svg?style=flat)](https://www.versioneye.com/user/projects/557386f23363340020000006)
+
+Bower: [![Bower Dependency Status](https://www.versioneye.com/user/projects/557386f13363340023000003/badge.svg?style=flat)](https://www.versioneye.com/user/projects/557386f13363340023000003)
 
 This is the public repository for www.JordanHawker.com
 
