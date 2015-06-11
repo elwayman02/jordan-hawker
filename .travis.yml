@@ -28,3 +28,8 @@ deploy:
   on:
     repo: elwayman02/jordan-hawker
     tags: true
+addons:
+  code_climate:
+    repo_token: be35a6321e43eae63f72f2e9757cfceaec98f8a8339004c8d1332daef19fc588
+after_script:
+  - codeclimate < lcov.dat
