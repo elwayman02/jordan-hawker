@@ -1,7 +1,7 @@
 import BaseRoute from 'jordan-hawker/routes/base';
 
 export default BaseRoute.extend({
-  model: function () {
+  model() {
     return [{
       title: 'Exchanges & Workshops',
       list: [{

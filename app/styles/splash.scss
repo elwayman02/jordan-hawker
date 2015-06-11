@@ -1,0 +1,87 @@
+$darkSplashColor: #7586E8;
+$splashColor: #8DBDFF;
+
+$codeLightBackground: #3d130c;
+$codeBackground: #030612;
+
+$buttonLightColor: #81F7FF;
+$buttonColor: #75C2E8;
+$buttonShadow: #9081FF;
+$buttonText: $darkSplashColor;
+$buttonBorder: #75C2A3;
+
+#splash {
+    width: 100%;
+    min-height: 100vh;
+    color: white;
+    background-color: $splashColor;
+    background-image: -webkit-gradient(linear, left top, left bottom, from($darkSplashColor), to($splashColor));
+    background-image: -webkit-linear-gradient(top, $darkSplashColor, $splashColor);
+    background-image: -moz-linear-gradient(top, $darkSplashColor, $splashColor);
+    background-image: -o-linear-gradient(top, $darkSplashColor, $splashColor);
+    background-image: linear-gradient(to bottom, $darkSplashColor, $splashColor);
+
+    .content {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: 10%;
+        text-align: center;
+
+        .logo {
+            @include border-radius($borderRadius);
+        }
+
+        p {
+            font-size: 2em;
+        }
+
+        code {
+            @include border-radius($borderRadius);
+            width: 330px;
+            text-align: center;
+            display: block;
+            margin: 1em auto;
+            color: #C5B1E1;
+            font-size: 1.3em;
+            padding: .75em 0;
+            border-top: 2px solid #07081F;
+            border-bottom: 1px solid #6552D9;
+            background-color: $codeBackground;
+            background-image: -webkit-gradient(linear, left top, left bottom, from($codeLightBackground), to($codeBackground));
+            background-image: -webkit-linear-gradient(top, $codeLightBackground, $codeBackground);
+            background-image: -moz-linear-gradient(top, $codeLightBackground, $codeBackground);
+            background-image: -o-linear-gradient(top, $codeLightBackground, $codeBackground);
+            background-image: linear-gradient(to bottom, $codeLightBackground, $codeBackground);
+        }
+
+        a {
+            display: block;
+            height: auto;
+            float: none;
+            margin: 1em auto 2em;
+            border: 1px solid $buttonBorder;
+            border-bottom: 4px solid $buttonShadow;
+            padding: .95em .35em;
+            letter-spacing: .04em;
+            font-size: 1.1em;
+            font-family: "exomedium", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            text-transform: uppercase;
+            text-align: center;
+            text-shadow: 0 1px #fefcfc;
+            width: 256px;
+            color: $buttonText;
+            background-color: $buttonColor;
+            background-image: -webkit-gradient(linear, left top, left bottom, from($buttonLightColor), to($buttonColor));
+            background-image: -webkit-linear-gradient(top, $buttonLightColor, $buttonColor);
+            background-image: -moz-linear-gradient(top, $buttonLightColor, $buttonColor);
+            background-image: -o-linear-gradient(top, $buttonLightColor, $buttonColor);
+            background-image: linear-gradient(to bottom, $buttonLightColor, $buttonColor);
+            @include border-radius(7px);
+        }
+
+        iframe {
+            margin-left: 7px;
+        }
+    }
+}

@@ -6,6 +6,7 @@ $fa-font-path: '/assets/fonts' !default;
 @import 'colors';
 @import 'icons';
 @import 'variables';
+@import 'mixins';
 @import 'general';
 
 @import 'components/ember-carousel';
@@ -13,6 +14,7 @@ $fa-font-path: '/assets/fonts' !default;
 
 @import 'header';
 @import 'footer';
+@import 'splash';
 @import 'navbar';
 @import 'event-list';
 @import 'tech-list';
@@ -44,6 +46,14 @@ $fa-font-path: '/assets/fonts' !default;
     }
 }
 
+.title {
+    text-align: center;
+
+    p {
+        font-style: italic;
+    }
+}
+
 .item-list {
     padding-left: 15px;
 }
@@ -55,6 +65,10 @@ $fa-font-path: '/assets/fonts' !default;
         i {
             font-size: 50px;
         }
+
+        img {
+            @include border-radius($borderRadius);
+        }
     }
 }
 
@@ -65,9 +79,9 @@ $fa-font-path: '/assets/fonts' !default;
 }
 
 .biography {
+    @include border-radius($borderRadius);
     font-style: italic;
     margin-top: 10px;
     border: 1px dashed $border;
-    border-radius: 4px;
     padding: 5px;
 }

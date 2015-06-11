@@ -2,8 +2,12 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    height: $footerHeight;
+    height: auto;
     text-align: center;
-    padding-top: 20px;
+    padding: 20px 3px 10px;
     border-top: 1px solid $border;
+
+    p {
+        margin-bottom: 0;
+    }
 }

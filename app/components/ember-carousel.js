@@ -3,23 +3,23 @@ import Ember from 'ember';
 export default Ember.Component.extend({
     index: 0,
 
-    init: function () {
+    init() {
         this._super.apply(this, arguments);
 
         this.scheduleChange();
     },
 
-    scheduleChange: function () { // Change every 30 seconds
+    scheduleChange() { // Change every 30 seconds
         Ember.run.later(this, this.changeIndex, 20000);
     },
 
-    changeIndex: function () {
+    changeIndex() {
         this.moveRight();
         this.scheduleChange();
     },
 
     leftIndex: Ember.computed('index', 'content.[]', function () {
-        var index = this.get('index');
+        const index = this.get('index');
 
         if (index > 0) {
             return index - 1;
@@ -29,10 +29,9 @@ export default Ember.Component.extend({
     }),
 
     rightIndex: Ember.computed('index', 'content.[]', function () {
-        var index = this.get('index');
-        var length = this.get('content.length');
+        const index = this.get('index');
 
-        if (index < (length - 1)) {
+        if (index < (this.get('content.length') - 1)) {
             return index + 1;
         }
 
@@ -51,11 +50,11 @@ export default Ember.Component.extend({
         return this.get('content')[this.get('rightIndex')];
     }),
 
-    moveLeft: function () {
+    moveLeft() {
         this.set('index', this.get('leftIndex'));
     },
 
-    moveRight: function () {
+    moveRight() {
         this.set('index', this.get('rightIndex'));
     },
 

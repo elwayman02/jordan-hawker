@@ -1,7 +1,7 @@
 import BaseRoute from 'jordan-hawker/routes/base';
 
 export default BaseRoute.extend({
-    model: function () {
+    model() {
         return this.store.find('post', {
             limit: 1
         }).then(function (posts) {
@@ -10,7 +10,7 @@ export default BaseRoute.extend({
     },
 
     actions: {
-        viewBlog: function () {
+        viewBlog() {
             this.transitionTo('blog');
         }
     }

@@ -1,16 +1,20 @@
-<div class="fluid-container">
-    {{view 'header'}}
+{{#liquid-if isSplashPage class='application'}}
+    {{liquid-outlet}}
+{{else}}
+    <div class="fluid-container">
+        {{view 'header'}}
 
-    <div id="main-container" class="row">
-        <div id="navbar" class="col-xs-12 col-sm-2">
-            {{view 'navbar'}}
+        <div id="main-container" class="row">
+            <div id="navbar" class="col-xs-12 col-sm-2">
+                {{view 'navbar'}}
+            </div>
+            <div id="main" class="col-xs-11 col-sm-9" role="main">
+                {{liquid-outlet}}
+            </div>
         </div>
-        <div id="main" class="col-xs-11 col-sm-9" role="main">
-            {{liquid-outlet}}
-        </div>
+
+        {{view 'footer'}}
     </div>
-
-    {{view 'footer'}}
-</div>
+{{/liquid-if}}
 
 {{bug-widget url='https://github.com/elwayman02/jordan-hawker/issues/new'}}

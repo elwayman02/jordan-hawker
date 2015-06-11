@@ -26,7 +26,7 @@ test('it exists', function(assert) {
 test('styleList', function(assert) {
   assert.equal(view.get('styleList'), 'Blues, Fusion, Swing', 'sorted and concatenated by default');
 
-  var sList = view.get('content.styles').pushObject('Lindy');
+  view.get('content.styles').pushObject('Lindy');
   assert.equal(view.get('styleList'), 'Blues, Fusion, Lindy, Swing', 're-sorts when the array changes');
 });
 
