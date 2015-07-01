@@ -15,5 +15,5 @@ export default DS.Model.extend({
     short_url: attr('string'),
     note_count: attr('number'),
     title: attr('string'),
-    body: attr('string'),
+    body: attr('string')
 });
