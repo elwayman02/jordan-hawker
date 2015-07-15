@@ -8,7 +8,7 @@ export default BaseRoute.extend({
               title: 'Public Projects',
               list: [{
                 name: 'Js.Edgar',
-                url: 'http://bit.ly/JsEdgar',
+                url: 'http://jhawk.co/JsEdgar',
                 description: 'A lightweight spy/mock library for JavaScript, Js.Edgar is framework-agnostic and built to provide easy-to-use APIs and exactly what you need to test your application without unnecessary bloat'
               }, {
                 name: 'Ember Bug Widget',
@@ -27,23 +27,23 @@ export default BaseRoute.extend({
               title: 'Publications',
               list: [{
                 name: 'Using SQlite (Reviewer)',
-                url: 'http://bit.ly/JordanHawkerSQLite',
+                url: 'http://jhawk.co/JHSQLite',
                 description: 'Written by Jay A. Kreibich and published by O\'Reilly Media Inc, Using SQlite is an introduction to the SQlite database product.  I had the distinct pleasure of being a technical reviewer for the book.'
               }, {
                 name: 'queryCategorizr (Co-Author)',
-                url: 'http://bit.ly/queryCategorizr',
+                url: 'http://jhawk.co/querycategorizr',
                 description: 'The full title is "queryCategorizr: A Large-Scale Semi-Supervised System for Categorization of Web Search Queries". This paper was co-written with several talented colleagues at Yahoo: Mihajlo Grbovic, Nemanja Djuric, Vladan Radosavljevic, Narayan Bhamidipati, and Caleb Johnson. We submitted and were accepted to present the paper at the 24th International World Wide Web Conference in 2015.  A demo video is available here: http://youtu.be/RSQ7mK-xpH8'
               }]
             }, {
               title: 'Tech Profiles',
               list: [{
                 name: 'GitHub',
-                url: 'http://bit.ly/JordanHawkerGH',
+                url: 'http://jhawk.co/JHGitHub',
                 icon: 'github',
                 description: 'The world\'s largest code-hosting site'
               }, {
                 name: 'StackOverflow',
-                url: 'http://bit.ly/JordanHawkerSO',
+                url: 'http://jhawk.co/JHStackOverflow',
                 icon: 'stack-overflow',
                 description: 'The world\'s largest programming help community'
               }]
@@ -167,7 +167,7 @@ export default BaseRoute.extend({
                 description: 'A framework-agnostic XHR request interceptor for tests'
               }, {
                 name: 'Js.Edgar',
-                url: 'http://bit.ly/JsEdgar',
+                url: 'http://jhawk.co/JsEdgar',
                 description: 'A lightweight spy/mock library for JavaScript, Js.Edgar is framework-agnostic and built to provide easy-to-use APIs and exactly what you need to test your application without unnecessary bloat'
               }]
             }, {
