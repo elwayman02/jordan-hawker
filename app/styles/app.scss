@@ -21,6 +21,10 @@ $fa-font-path: '/assets/fonts' !default;
 @import 'recommendation';
 @import 'blog';
 
+body {
+    min-width: 600px;
+}
+
 #main-container {
     margin-right: 0;
     margin-bottom: 10px;
