@@ -1,4 +1,4 @@
-# Jordan Hawker's Personal Website
+# Jordan Hawker's Professional Website
 
 [![Build Status](https://travis-ci.org/elwayman02/jordan-hawker.svg?branch=master)](https://travis-ci.org/elwayman02/jordan-hawker)
 [![GitHub version](https://badge.fury.io/gh/elwayman02%2Fjordan-hawker.svg)](http://badge.fury.io/gh/elwayman02%2Fjordan-hawker)

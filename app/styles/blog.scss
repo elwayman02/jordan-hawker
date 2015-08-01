@@ -5,6 +5,10 @@
 
     img {
         @include border-radius($borderRadius);
+        left: 50%;
+        margin-left: -250px;
+        position: relative;
+        width: 500px;
     }
 
     .title {
