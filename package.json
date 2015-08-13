@@ -9,8 +9,8 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "ember server",
     "build": "ember build",
+    "start": "ember server",
     "test": "ember test",
     "postinstall": "bower cache clean && bower install",
     "clean": "npm cache clean && bower cache clean && rm -rf node_modules bower_components dist tmp"
@@ -21,7 +21,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "broccoli-asset-rev": "^2.1.0",
+    "broccoli-asset-rev": "^2.1.2",
     "broccoli-merge-trees": "^0.2.1",
     "broccoli-static-compiler": "^0.2.1",
     "ember-analytics": "0.0.5",
