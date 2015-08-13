@@ -27,7 +27,7 @@
     "ember-analytics": "0.0.5",
     "ember-bug-widget": "0.2.1",
     "ember-cli": "0.2.7",
-    "ember-cli-app-version": "0.4.0",
+    "ember-cli-app-version": "0.5.0",
     "ember-cli-babel": "^5.0.0",
     "ember-cli-blanket": "0.5.3",
     "ember-cli-dependency-checker": "^1.0.0",
