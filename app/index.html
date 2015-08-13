@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Jordan Hawker</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="assets/favicon.ico">
-
-    <script src="/assets/intl/polyfill/Intl.complete.js"></script>
+    <script src="assets/intl/intl.min.js"></script>
+    <script src="assets/intl/locales/en-us.js"></script>
     <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-      ga('create', 'UA-60996568-1', 'auto');
-      ga('send', 'pageview');
+        ga('create', 'UA-60996568-1', 'auto');
+        ga('send', 'pageview');
     </script>
 
     {{content-for 'head'}}
@@ -25,13 +25,13 @@
     <link rel="stylesheet" href="assets/jordan-hawker.css">
 
     {{content-for 'head-footer'}}
-  </head>
-  <body>
+</head>
+<body>
     {{content-for 'body'}}
 
     <script src="assets/vendor.js"></script>
     <script src="assets/jordan-hawker.js"></script>
 
     {{content-for 'body-footer'}}
-  </body>
+</body>
 </html>

@@ -17,6 +17,11 @@ module.exports = function (environment) {
             shortname: 'jordan-hawker'
         },
 
+        intl: {
+            defaultLocale: 'en-us',
+            locales: ['en-us']
+        },
+
         APP: {
             // Here you can pass flags/options to your application instance
             // when it is created

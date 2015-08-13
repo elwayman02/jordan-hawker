@@ -1,20 +1,18 @@
+var hhmmss = {
+    hour:   'numeric',
+    minute: 'numeric',
+    second: 'numeric'
+};
+
 export default {
-  date: {
-    'time-style': {
-      hour:   'numeric',
-      minute: 'numeric',
-      second: 'numeric'
+    time: {
+        hhmmss: hhmmss
+    },
+    date: {
+        hhmmss: hhmmss
+    },
+    number: {
+        EUR: { style: 'currency', currency: 'EUR' },
+        USD: { style: 'currency', currency: 'USD' }
     }
-  },
-  number: {
-    EUR: { style: 'currency', currency: 'EUR' },
-    USD: { style: 'currency', currency: 'USD' }
-  },
-  time: {
-    hhmmss: {
-      hour:   'numeric',
-      minute: 'numeric',
-      second: 'numeric'
-    }
-  }
 };
