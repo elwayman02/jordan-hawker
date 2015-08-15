@@ -23,26 +23,6 @@ window.deprecationWorkflow.config = {
             handler: "silence",
             matchMessage: "`lookup` was called on a Registry. The `initializer` API no longer receives a container, and you should use an `instanceInitializer` to look up objects from the container."
         },
-        {handler: "silence", matchMessage: "Ember.keys is deprecated in favor of Object.keys"},
-        {
-            handler: "silence",
-            matchMessage: "Ember.View is deprecated. Consult the Deprecations Guide for a migration strategy."
-        },
-        {
-            handler: "silence",
-            matchMessage: "You attempted to access `id` from `(generated index controller)`, but object proxying is deprecated. Please use `model.id` instead."
-        },
-        {
-            handler: "silence",
-            matchMessage: "You attempted to access `title` from `(generated index controller)`, but object proxying is deprecated. Please use `model.title` instead."
-        },
-        {
-            handler: "silence",
-            matchMessage: "You attempted to access `date` from `(generated index controller)`, but object proxying is deprecated. Please use `model.date` instead."
-        },
-        {
-            handler: "silence",
-            matchMessage: "You attempted to access `body` from `(generated index controller)`, but object proxying is deprecated. Please use `model.body` instead."
-        }
+        {handler: "silence", matchMessage: "Ember.keys is deprecated in favor of Object.keys"}
     ]
 };
