@@ -2,5 +2,9 @@
     <h3>The Candidate Series</h3>
     <p>Discovering and Achieving the Perfect Career Opportunity</p>
 </div>
-{{view 'posts' list=model sortProperties=view.sortProperties}}
+{{tumblr-blog
+    posts=model
+    postsRoute='post'
+    collapsible=true
+    sortBy=sortBy}}
 {{partial 'partials/subscribe'}}
