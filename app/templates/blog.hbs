@@ -1,2 +1,6 @@
-{{view 'posts' list=model}}
+{{tumblr-blog
+    posts=model
+    postsRoute='post'
+    collapsible=true
+    sortBy=sortBy}}
 {{partial 'partials/subscribe'}}

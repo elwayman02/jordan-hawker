@@ -10,4 +10,7 @@ Fellow dancers can learn about my background in {{link-to 'Dance' 'dance'}}.  En
 
 <h3>Latest Announcement</h3>
 
-{{view 'front-post' content=model}}
+{{front-post
+    post=model
+    postsRoute='post'
+    collapsible=true}}
