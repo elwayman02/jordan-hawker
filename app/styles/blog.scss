@@ -1,4 +1,4 @@
-.post {
+.tumblr-post-text {
     border: $borderStyle;
     padding: 15px 10px 40px 10px;
     margin-top: 20px;
@@ -11,25 +11,34 @@
         width: 500px;
     }
 
-    .title {
-        text-align: center;
+    .tumblr-title {
+        display: block;
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 1.1;
         margin-bottom: 15px;
-
-        h4 {
-            display: inline-block;
-            margin-top: 0;
-        }
+        margin-top: 0;
+        text-align: center;
     }
 
-    .date {
+    .tumblr-date {
         font-style: italic;
         margin-bottom: 5px;
     }
 
-    .body {
+    .tumblr-body {
         margin-bottom: 5px;
+    }
 
-        &.collapsed {
+    .tumblr-expand-button {
+        @extend .btn;
+        @extend .btn-sm;
+        @extend .btn-secondary;
+        @extend .right;
+    }
+
+    &.tumblr-post-collapsed {
+        .tumblr-body {
             max-height: 300px;
             overflow: hidden;
         }
