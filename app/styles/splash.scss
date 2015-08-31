@@ -80,6 +80,11 @@ $buttonBorder: #75C2A3;
             @include border-radius(7px);
         }
 
+        .hideSplash {
+            margin-top: -30px;
+            margin-bottom: 15px;
+        }
+
         iframe {
             margin-left: 7px;
         }
