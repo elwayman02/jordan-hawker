@@ -48,7 +48,7 @@
     "ember-local-storage": "0.0.6",
     "ember-moment": "1.2.1",
     "ember-try": "0.0.8",
-    "ember-tumblr": "0.6.1",
+    "ember-tumblr": "0.6.2",
     "ember-watson": "~0.6.2",
     "liquid-fire": "~0.21.2"
   }
