@@ -3,9 +3,9 @@
         <i class="fa fa-angle-left"></i>
     </div>
     {{!ember-carousel-item content=leftItem}}
-    {{#liquid-with mainItem as content}}
+    {{#liquid-bind mainItem as |content|}}
         {{ember-carousel-item content=content}}
-    {{/liquid-with}}
+    {{/liquid-bind}}
     {{!ember-carousel-item content=rightItem}}
     <div class="arrow right-arrow" {{action 'moveRight'}}>
         <i class="fa fa-angle-right"></i>

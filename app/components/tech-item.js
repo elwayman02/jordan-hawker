@@ -1,12 +1,10 @@
 import Ember from 'ember';
 
-export default Ember.View.extend({
-    templateName: 'tech-row',
-
+export default Ember.Component.extend({
     expandDescription: false,
 
-    hasDescription: Ember.computed('content.description', function () {
-        return !Ember.isEmpty(this.get('content.description'));
+    hasDescription: Ember.computed('item.description', function () {
+        return !Ember.isEmpty(this.get('item.description'));
     }),
 
     showDescription: Ember.computed('hasDescription', 'expandDescription', function () {
