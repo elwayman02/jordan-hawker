@@ -1,5 +1,5 @@
-{{#liquid-if view.showDescription class=view.rowClasses}}
-    <div {{action 'toggleDescription' target=view}} class="tech-description-header">
+{{#liquid-if showDescription class=rowClasses}}
+    <div {{action 'toggleDescription'}} class="tech-description-header">
         <a href="#">
             {{partial 'partials/brand-header'}}
             <i class="fa fa-minus"></i>
@@ -8,18 +8,18 @@
     <div class="tech-description-body">
         <div>
             <label>Site:</label>
-            <a href="{{url}}" target="_blank">
-                {{url}}
+            <a href="{{item.url}}" target="_blank">
+                {{item.url}}
                 <i class='fa fa-external-link'></i>
             </a>
         </div>
         <div>
             <label>Description:</label>
-            <p>{{description}}</p>
+            <p>{{item.description}}</p>
         </div>
     </div>
 {{else}}
-    <div {{action 'toggleDescription' target=view}} class="tech-description-header">
+    <div {{action 'toggleDescription'}} class="tech-description-header">
         <a href="#">{{partial 'partials/brand-header'}}</a>
     </div>
 {{/liquid-if}}

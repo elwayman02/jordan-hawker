@@ -23,5 +23,7 @@
 </div>
 
 <div class="item-list">
-    {{view 'item-list' listName='tech-list' content=model.experience}}
+    {{#each model.experience as |list|}}
+        {{tech-list content=list}}
+    {{/each}}
 </div>
