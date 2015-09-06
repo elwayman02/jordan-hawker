@@ -11,17 +11,21 @@ export default BaseRoute.extend({
                 url: 'http://jhawk.co/JsEdgar',
                 description: 'A lightweight spy/mock library for JavaScript, Js.Edgar is framework-agnostic and built to provide easy-to-use APIs and exactly what you need to test your application without unnecessary bloat'
               }, {
-                name: 'Ember Bug Widget',
+                name: 'Ember-Bug-Widget',
                 url: 'https://github.com/elwayman02/ember-bug-widget',
                 description: 'A configurable addon for inserting a simple bug-reporting widget into any EmberJS application'
-              //}, {
-              //  name: 'ChilloutMusic v2.0',
-              //  url: 'https://github.com/ChilloutMusic/website',
-              //  description: 'The redesigned website for ChilloutMusic.fm, a plug.dj community'
+              }, {
+                name: 'Ember-Tumblr',
+                url: 'http://github.jhawk.co/ember-tumblr/',
+                description: 'Tumblr API Adapters & Blog Components for Ember applications'
               }, {
                 name: 'JordanHawker.com',
                 url: 'https://github.com/elwayman02/jordan-hawker',
                 description: 'My personal and professional website'
+              }, {
+                name: 'Jordan Hawker CLI',
+                url: 'https://github.com/elwayman02/jordan-hawker-cli',
+                description: 'npm install -g jordan-hawker'
               }]
             }, {
               title: 'Publications',
