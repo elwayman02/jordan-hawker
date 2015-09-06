@@ -12,8 +12,9 @@ DA:17,0
 DA:18,0
 DA:19,0
 DA:20,0
-DA:23,1
-LF:14
+DA:21,0
+DA:24,1
+LF:15
 LH:5
 end_of_record
 SF:config/environment.js
@@ -75,7 +76,7 @@ SF:app/controllers/code.js
 DA:1,1
 DA:5,1
 DA:7,1
-DA:12,0
+DA:10,0
 LF:4
 LH:3
 end_of_record
@@ -163,6 +164,14 @@ DA:7,1
 LF:3
 LH:3
 end_of_record
+SF:app/routes/ember.js
+DA:1,1
+DA:5,1
+DA:7,1
+DA:9,0
+LF:4
+LH:3
+end_of_record
 SF:app/routes/index.js
 DA:1,1
 DA:5,1
@@ -227,8 +236,7 @@ SF:app/serializers/recommendation.js
 DA:1,1
 DA:5,1
 DA:7,1
-DA:9,0
-LF:4
+LF:3
 LH:3
 end_of_record
 SF:app/views/event-row.js
