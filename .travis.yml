@@ -1,38 +1,39 @@
 language: node_js
 node_js:
-- "0.12"
-
+- '0.12'
 sudo: false
-
 cache:
   directories:
   - node_modules
-
 env:
-  - EMBER_TRY_SCENARIO=default
-  - EMBER_TRY_SCENARIO=ember-beta
-  - EMBER_TRY_SCENARIO=ember-canary
-
+- EMBER_TRY_SCENARIO=default
+- EMBER_TRY_SCENARIO=ember-beta
+- EMBER_TRY_SCENARIO=ember-canary
 matrix:
   fast_finish: true
   allow_failures:
-    - env: EMBER_TRY_SCENARIO=ember-canary
-    - env: EMBER_TRY_SCENARIO=ember-beta
-    - env: EMBER_TRY_SCENARIO=ember-release
-
+  - env: EMBER_TRY_SCENARIO=ember-canary
+  - env: EMBER_TRY_SCENARIO=ember-beta
+  - env: EMBER_TRY_SCENARIO=ember-release
 before_install:
 - export PATH=/usr/local/phantomjs-2.0.0/bin:$PATH
-- "npm config set spin false"
-- "npm install -g npm@^2"
-
+- npm config set spin false
+- npm install -g npm@^2
 install:
 - npm install -g bower
 - npm install
 - bower install
-
 script:
 - ember try $EMBER_TRY_SCENARIO test
 deploy:
+  provider: divshot
+  api_key:
+    secure: fkdJ6ZZ7dGIiWAyVd/bTfA/5HeWw4FVDj5+LeV4bae3CFbr8aV0sRrsld9tyj2S9n0q5/TaG72U5/U5/CnSgzTLuZkvsK3hT/5lA7iDaGQtiW0St6Hiox+RbKvAvSKbGm44OP8//6K24ot1TlnqHs36rlP+6u3qw69tfmJjbJQ8=
+  environment: production
+  skip_cleanup: true
+  on:
+    repo: elwayman02/jordan-hawker
+    tags: true
   provider: heroku
   api_key:
     secure: HXgCcatanWBqaBMDCsu1BC/BawX6googs9NWCx7i6EuhMc6Do/WVkbmkdNj/7R4V7TPDfuttWsuURpw+BPSDUI6nijWEQOyXJcd+ROsWRGxyttiUYrS3xVJzTNrTYoY/GalaJKaIidlpc3MpAYq8tHPz9FuTJz04XjIrCMbYs+Q=
@@ -44,4 +45,4 @@ addons:
   code_climate:
     repo_token: be35a6321e43eae63f72f2e9757cfceaec98f8a8339004c8d1332daef19fc588
 after_script:
-  - codeclimate < lcov.dat
+- codeclimate < lcov.dat
