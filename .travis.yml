@@ -30,6 +30,7 @@ deploy:
   api_key:
     secure: fkdJ6ZZ7dGIiWAyVd/bTfA/5HeWw4FVDj5+LeV4bae3CFbr8aV0sRrsld9tyj2S9n0q5/TaG72U5/U5/CnSgzTLuZkvsK3hT/5lA7iDaGQtiW0St6Hiox+RbKvAvSKbGm44OP8//6K24ot1TlnqHs36rlP+6u3qw69tfmJjbJQ8=
   environment: production
+  skip_cleanup: true
   on:
     repo: elwayman02/jordan-hawker
     tags: true
