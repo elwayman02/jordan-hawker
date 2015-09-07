@@ -18,8 +18,9 @@ export default function () {
     createRouteTransition('code', ['splash', 'index']);
     createRouteTransition('music', ['splash', 'index', 'code']);
     createRouteTransition('dance', ['splash', 'index', 'code', 'music']);
-    createRouteTransition('the-candidate', ['splash', 'index', 'code', 'music', 'dance']);
-    createRouteTransition('blog', ['splash', 'index', 'code', 'music', 'dance', 'the-candidate']);
+    createRouteTransition('ember', ['splash', 'index', 'code', 'music', 'dance']);
+    createRouteTransition('the-candidate', ['splash', 'index', 'code', 'music', 'dance', 'ember']);
+    createRouteTransition('blog', ['splash', 'index', 'code', 'music', 'dance', 'ember', 'the-candidate']);
 
     // Splash Transitions
     this.transition(
