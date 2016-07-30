@@ -25,7 +25,7 @@
     "broccoli-merge-trees": "~0.2.3",
     "broccoli-static-compiler": "~0.2.1",
     "ember-analytics": "0.0.5",
-    "ember-bug-widget": "0.2.1",
+    "ember-bug-widget": "2.1.2",
     "ember-cli": "1.13.8",
     "ember-cli-app-version": "1.0.0",
     "ember-cli-babel": "~5.1.3",
