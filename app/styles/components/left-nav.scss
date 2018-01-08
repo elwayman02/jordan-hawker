@@ -1,0 +1,19 @@
+@value left-nav-footer-height: 0;
+
+.left-nav {
+  background: lightblue;
+  border-top: 1px solid lightgray;
+  height: 100%;
+  width: 100px;
+
+  .left-nav-body {
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - left-nav-footer-height);
+    width: 100px;
+  }
+
+  .left-nav-footer {
+    height: left-nav-footer-height;
+  }
+}

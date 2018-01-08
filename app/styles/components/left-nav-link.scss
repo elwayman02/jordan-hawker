@@ -1,0 +1,24 @@
+@value left-nav-link-height: 30px;
+
+.left-nav-link {
+  background: lightblue;
+  border: none;
+  border-bottom: 1px solid lightgray;
+  border-radius: 0;
+  cursor: pointer;
+  height: left-nav-link-height;
+  margin: 0;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    background: blue;
+  }
+
+  h4 {
+    line-height: left-nav-link-height;
+    margin: 0;
+  }
+}

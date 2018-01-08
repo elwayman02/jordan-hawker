@@ -1,17 +1,4 @@
-import BaseRoute from 'jordan-hawker/routes/base';
+import Route from '@ember/routing/route';
 
-export default BaseRoute.extend({
-    model() {
-        return this.store.findAll('tumblr-post-text', {
-            limit: 1
-        }).then(function (posts) {
-            return posts.get('firstObject');
-        });
-    },
-
-    actions: {
-        viewBlog() {
-            this.transitionTo('blog');
-        }
-    }
+export default Route.extend({
 });

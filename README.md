@@ -1,45 +1,56 @@
-# Jordan Hawker's Professional Website
+# jordan-hawker
 
-[![Build Status](https://travis-ci.org/elwayman02/jordan-hawker.svg?branch=master)](https://travis-ci.org/elwayman02/jordan-hawker)
-[![GitHub version](https://badge.fury.io/gh/elwayman02%2Fjordan-hawker.svg)](http://badge.fury.io/gh/elwayman02%2Fjordan-hawker)
-[![Code Climate](https://codeclimate.com/github/elwayman02/jordan-hawker/badges/gpa.svg)](https://codeclimate.com/github/elwayman02/jordan-hawker)
-[![Codacy Badge](https://www.codacy.com/project/badge/2d266018cf964da9ba071035ccd59024)](https://www.codacy.com/app/hawker-jordan/jordan-hawker)
-[![NPM Dependency Status](https://www.versioneye.com/user/projects/557386f23363340020000006/badge.svg?style=flat)](https://www.versioneye.com/user/projects/557386f23363340020000006)
+This README outlines the details of collaborating on this Ember application.
+A short introduction of this app could easily go here.
 
-This is the public repository for www.JordanHawker.com
-
-## Collaboration
-
-This section outlines the details of collaborating on this Ember application.  Contributions are encouraged; please fork the repository and submit a pull request with your changes.
-
-### Prerequisites
+## Prerequisites
 
 You will need the following things properly installed on your computer.
 
-* [Git](http://git-scm.com/)
-* [Node.js](http://nodejs.org/) (with NPM)
-* [Bower](http://bower.io/)
-* [Ember CLI](http://www.ember-cli.com/)
-* [PhantomJS](http://phantomjs.org/)
+* [Git](https://git-scm.com/)
+* [Node.js](https://nodejs.org/) (with npm)
+* [Ember CLI](https://ember-cli.com/)
+* [Google Chrome](https://google.com/chrome/)
 
-### Installation
+## Installation
 
-* `git clone git@github.com:elwayman02/jordan-hawker.git`
+* `git clone <repository-url>` this repository
 * `cd jordan-hawker`
-* `npm install -g ember-cli`
-* `npm install` (will run `bower install` automatically as a postinstall script)
+* `npm install`
 
-### Running / Development
+## Running / Development
 
-* `ember server` or `ember s`
+* `ember serve`
 * Visit your app at [http://localhost:4200](http://localhost:4200).
+* Visit your tests at [http://localhost:4200/tests](http://localhost:4200/tests).
 
-#### Running Tests
+### Code Generators
+
+Make use of the many generators for code, try `ember help generate` for more details
+
+### Running Tests
 
 * `ember test`
 * `ember test --server`
 
-#### Deploying
+### Linting
 
-Deployment to Heroku triggers automatically after a passing Travis-CI build completes on a tagged release commit.  
-Re-deploying the app is as simple as tagging a new release in GitHub.
+* `npm run lint:js`
+* `npm run lint:js -- --fix`
+
+### Building
+
+* `ember build` (development)
+* `ember build --environment production` (production)
+
+### Deploying
+
+Specify what it takes to deploy your app.
+
+## Further Reading / Useful Links
+
+* [ember.js](https://emberjs.com/)
+* [ember-cli](https://ember-cli.com/)
+* Development Browser Extensions
+  * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
+  * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)

@@ -1,21 +1,14 @@
-import Ember from 'ember';
+import EmberRouter from '@ember/routing/router';
 import config from './config/environment';
 
-const Router = Ember.Router.extend({
-  location: config.locationType
+const Router = EmberRouter.extend({
+  location: config.locationType,
+  rootURL: config.rootURL
 });
 
 Router.map(function() {
-  this.route('splash', { path: '/' });
-  this.route('index');
-  this.route('contact');
-  this.route('music');
-  this.route('dance');
+  this.route('twitch');
   this.route('code');
-  this.route('blog', { path: '/posts' });
-  this.route('post', { path: '/posts/:post_id' });
-  this.route('the-candidate');
-  this.route('ember');
 });
 
 export default Router;

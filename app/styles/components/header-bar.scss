@@ -1,0 +1,38 @@
+@value medium from 'jordan-hawker/styles/spacing';
+
+@value header-height: 28px;
+@value header-full-height: (header-height + 2*medium);
+
+.header-bar {
+  background: lightblue;
+  height: header-height;
+  padding: medium;
+  position: fixed;
+  text-align: center;
+  top: 0;
+  width: 100%;
+
+  h4 {
+    cursor: pointer;
+    line-height: header-height;
+    margin: 0 auto;
+    text-align: center;
+    width: 125px;
+  }
+
+  .header-icons {
+    line-height: header-height;
+    position: fixed;
+    right: medium;
+    top: medium;
+  }
+
+  .header-logo {
+    border-radius: 20px;
+    height: header-full-height;
+    margin-left: -(header-full-height + medium);
+    margin-top: -(medium);
+    position: fixed;
+    width: header-full-height;
+  }
+}
