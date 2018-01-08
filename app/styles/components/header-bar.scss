@@ -35,10 +35,10 @@
 
   .header-logo {
     border-radius: 20px;
-    height: header-full-height;
-    margin-left: -(header-full-height + medium);
-    margin-top: -(medium);
+    height: header-height + medium;
+    margin-left: -(header-full-height);
+    margin-top: -(medium/2);
     position: fixed;
-    width: header-full-height;
+    width: header-height + medium;
   }
 }
