@@ -18,7 +18,7 @@
   }
 
   .left-nav-body {
-    height: calc(100% - left-nav-footer-height);
+    height: calc(100% - (left-nav-footer-height + very-small));
   }
 
   .left-nav-footer {
