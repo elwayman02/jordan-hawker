@@ -1,6 +1,8 @@
+@value color-base from 'jordan-hawker/styles/colors';
 @value header-full-height from 'jordan-hawker/styles/components/header-bar';
 
 body {
+  background: color-base;
   margin: 0;
 }
 

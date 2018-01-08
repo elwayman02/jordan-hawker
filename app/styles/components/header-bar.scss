@@ -1,10 +1,12 @@
+@value color-dark, color-white from 'jordan-hawker/styles/colors';
 @value medium from 'jordan-hawker/styles/spacing';
 
 @value header-height: 28px;
 @value header-full-height: (header-height + 2*medium);
 
 .header-bar {
-  background: lightblue;
+  background: color-dark;
+  color: color-white;
   height: header-height;
   padding: medium;
   position: fixed;
@@ -25,6 +27,10 @@
     position: fixed;
     right: medium;
     top: medium;
+
+    :global(.fa) {
+      color: color-white;
+    }
   }
 
   .header-logo {
