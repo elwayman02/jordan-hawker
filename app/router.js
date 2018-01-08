@@ -9,6 +9,7 @@ const Router = EmberRouter.extend({
 Router.map(function() {
   this.route('twitch');
   this.route('code');
+  this.route('contact');
 });
 
 export default Router;
