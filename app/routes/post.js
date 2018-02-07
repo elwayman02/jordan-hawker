@@ -5,5 +5,11 @@ export default Route.extend({
     return this.get('store').queryRecord('tumblr-post-text', {
       id: params.post_slug
     });
+  },
+
+  actions: {
+    didTransition() {
+      document.getElementById('content').scrollTop = 0;
+    }
   }
 });
