@@ -20,7 +20,15 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-    }
+    },
+
+    metricsAdapters: [{
+      name: 'Mixpanel',
+      environments: ['all'],
+      config: {
+        token: 'd34a3165a293a3f5a5696eab98ba23d0'
+      }
+    }]
   };
 
   if (environment === 'development') {

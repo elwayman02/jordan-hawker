@@ -40,6 +40,7 @@
     "ember-export-application-global": "^2.0.0",
     "ember-fetch": "^3.4.4",
     "ember-load-initializers": "^1.0.0",
+    "ember-metrics": "^0.12.1",
     "ember-resolver": "^4.0.0",
     "ember-source": "~3.0.0-beta.1",
     "ember-tumblr": "^0.10.0",
