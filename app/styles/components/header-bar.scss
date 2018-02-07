@@ -1,7 +1,7 @@
 @value color-dark, color-white from 'jordan-hawker/styles/colors';
 @value medium from 'jordan-hawker/styles/spacing';
 
-@value header-height: 28px;
+@value header-height: 2.8rem;
 @value header-full-height: (header-height + 2*medium);
 
 .header-bar {
@@ -19,7 +19,7 @@
     line-height: header-height;
     margin: 0 auto;
     text-align: center;
-    width: 125px;
+    width: 12.5rem;
   }
 
   .header-icons {
@@ -34,7 +34,7 @@
   }
 
   .header-logo {
-    border-radius: 20px;
+    border-radius: 2rem;
     height: header-height + medium;
     margin-left: -(header-full-height);
     margin-top: -(medium/2);

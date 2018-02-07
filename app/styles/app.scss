@@ -1,8 +1,14 @@
 @value color-base from 'jordan-hawker/styles/colors';
 @value header-full-height from 'jordan-hawker/styles/components/header-bar';
+@value large from 'jordan-hawker/styles/spacing';
+
+html {
+  font-size: 62.5%;
+}
 
 body {
   background: color-base;
+  font-size: 1.6rem;
   margin: 0;
 }
 
@@ -10,4 +16,10 @@ body {
   display: flex;
   height: calc(100vh - header-full-height);
   margin-top: header-full-height;
+  overflow: hidden;
+
+  :global(#content) {
+    overflow: scroll;
+    padding: large;
+  }
 }
