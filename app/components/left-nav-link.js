@@ -1,11 +1,11 @@
 import Component from '@ember/component';
-import { inject as injectService } from '@ember/service';
+import { inject as service } from '@ember/service';
 
 const LeftNavLink =  Component.extend({
   tagName: 'button',
   localClassNames: 'left-nav-link',
 
-  router: injectService(),
+  router: service(),
 
   click() {
     this.get('router').transitionTo(this.get('name'));
