@@ -1,3 +1,5 @@
+'use strict';
+
 let browsers;
 if (process.env.EMBER_ENV === 'development') {
   browsers = ['last 1 Chrome versions']

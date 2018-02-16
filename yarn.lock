@@ -2729,6 +2729,20 @@ ember-inflector@^2.0.0:
   dependencies:
     ember-cli-babel "^6.0.0"
 
+ember-interactivity@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/ember-interactivity/-/ember-interactivity-0.2.0.tgz#aaba0d83b1cd431d78b625907b32b0e6871329f6"
+  dependencies:
+    ember-cli-babel "^6.6.0"
+    ember-cli-htmlbars "^2.0.1"
+    ember-is-visible "^0.1.2"
+
+ember-is-visible@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/ember-is-visible/-/ember-is-visible-0.1.2.tgz#bc1e8c4b8c10024b9e0e2ffc3d9aae97b376d33d"
+  dependencies:
+    ember-cli-babel "^6.6.0"
+
 ember-load-initializers@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/ember-load-initializers/-/ember-load-initializers-1.0.0.tgz#4919eaf06f6dfeca7e134633d8c05a6c9921e6e7"
