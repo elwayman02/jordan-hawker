@@ -26,3 +26,8 @@ body {
     width: 100%;
   }
 }
+
+:global(.brand-icon) {
+  height: 2rem;
+  width: 2rem;
+}

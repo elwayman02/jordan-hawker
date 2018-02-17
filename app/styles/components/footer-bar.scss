@@ -1,0 +1,14 @@
+@value small from 'jordan-hawker/styles/spacing';
+
+.footer-bar {
+  bottom: 0;
+  height: 11rem;
+  left: 0;
+  position: absolute;
+  right: 0;
+  text-align: center;
+
+  p {
+    margin: small;
+  }
+}
