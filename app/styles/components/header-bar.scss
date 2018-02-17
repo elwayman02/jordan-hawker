@@ -3,6 +3,7 @@
 
 @value header-height: 2.8rem;
 @value header-full-height: (header-height + 2*medium);
+@value header-logo-width: (header-height + medium);
 
 .header-bar {
   background: color-dark;
@@ -18,6 +19,7 @@
     cursor: pointer;
     line-height: header-height;
     margin: 0 auto;
+    padding-left: 10rem + (header-logo-width/2);
     text-align: center;
     width: 12.5rem;
   }
@@ -39,6 +41,6 @@
     margin-left: -(header-full-height);
     margin-top: -(medium/2);
     position: fixed;
-    width: header-height + medium;
+    width: header-logo-width;
   }
 }

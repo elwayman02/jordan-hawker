@@ -27,6 +27,17 @@ body {
   }
 }
 
+:global(.welcome) {
+  margin: large auto;
+  max-width: 80rem;
+  text-align: center;
+  width: 80%;
+}
+
+:global(.title) {
+  text-align: center;
+}
+
 :global(.brand-icon) {
   height: 2rem;
   width: 2rem;

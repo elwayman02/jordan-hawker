@@ -1,0 +1,48 @@
+@value color-alt from 'jordan-hawker/styles/colors';
+@value very-small, small, medium, large from 'jordan-hawker/styles/spacing';
+
+:global(.tumblr-error) {
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+}
+
+:global(.tumblr-post-text) {
+  border-bottom: very-small solid color-alt;
+  margin-top: medium;
+  padding: large small large small;
+
+  img {
+    left: 50%;
+    margin-left: -25rem;
+    position: relative;
+    width: 50rem;
+  }
+
+  :global(.tumblr-title) {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 500;
+    line-height: 1.1;
+    margin-bottom: small;
+    margin-top: 0;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  :global(.tumblr-date) {
+    font-style: italic;
+    margin-bottom: very-small;
+  }
+
+  :global(.tumblr-body) {
+    margin-bottom: very-small;
+  }
+
+  &:global(.tumblr-post-collapsed) {
+    :global(.tumblr-body) {
+      max-height: 30rem;
+      overflow: hidden;
+    }
+  }
+}
