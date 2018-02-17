@@ -2749,6 +2749,12 @@ ember-source@~3.0.0:
     jquery "^3.2.1"
     resolve "^1.3.3"
 
+ember-truth-helpers@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/ember-truth-helpers/-/ember-truth-helpers-2.0.0.tgz#f3e2eef667859197f1328bb4f83b0b35b661c1ac"
+  dependencies:
+    ember-cli-babel "^6.8.2"
+
 ember-tumblr@^0.10.0:
   version "0.10.0"
   resolved "https://registry.yarnpkg.com/ember-tumblr/-/ember-tumblr-0.10.0.tgz#47e83b54dc136995f7d3ee80b3aebc5e204e6c05"

@@ -1,0 +1,21 @@
+<div local-class="container">
+  <div local-class="tabs">
+    <button local-class="{{axleButtonClass}}" {{action 'toggle' 'axlehellfire'}}>AxleHellfire</button>
+    <button local-class="{{tiltedButtonClass}}" {{action 'toggle' 'boardgames'}}>BoardGames</button>
+  </div>
+  <div local-class="embeds">
+    <iframe
+      local-class="video"
+      src="{{videoUrl}}"
+      frameborder="0"
+      allowfullscreen>
+    </iframe>
+
+    <iframe
+      local-class="chat"
+      src="{{chatUrl}}"
+      frameborder="0"
+      scrolling="no">
+    </iframe>
+  </div>
+</div>
