@@ -31,6 +31,7 @@ Router.map(function() {
   this.route('posts');
   this.route('post', { path: '/p/:post_slug' });
   this.route('deprecated-post', { path: '/posts/:post_slug' });
+  this.route('resume');
 });
 
 export default Router;

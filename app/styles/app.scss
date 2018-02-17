@@ -19,7 +19,10 @@ body {
   overflow: hidden;
 
   :global(#content) {
+    height: 100%;
     overflow: scroll;
     padding: large;
+    position: relative;
+    width: 100%;
   }
 }

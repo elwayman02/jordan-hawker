@@ -1,0 +1,23 @@
+@value large from 'jordan-hawker/styles/spacing';
+
+.resume-embed {
+  height: calc(100% - 7rem);
+  min-height: 200px;
+  width: 100%;
+
+  .resume-link {
+    font-style: italic;
+    text-align: center;
+  }
+
+  .iframe-container {
+    height: 100%;
+    margin: 0 auto large auto;
+    width: 85rem;
+
+    iframe {
+      height: 100%;
+      width: 100%;
+    }
+  }
+}
