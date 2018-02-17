@@ -1,0 +1,26 @@
+@value color-dark, color-white from 'jordan-hawker/styles/colors';
+@value small, large, very-large from 'jordan-hawker/styles/spacing';
+
+.twitch-info {
+  background: color-dark;
+  border-radius: 0.5rem;
+  color: color-white;
+  padding: very-large;
+  margin: very-large;
+  text-align: center;
+  width: 100%;
+
+  .header {
+    line-height: 1.5rem;
+
+    .logo {
+      height: 4rem;
+      width: 4rem;
+    }
+
+    .title {
+      font-size: 4rem;
+      margin: auto 0;
+    }
+  }
+}
