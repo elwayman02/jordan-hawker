@@ -1,7 +1,7 @@
 @value color-alt, color-dark, color-white from 'jordan-hawker/styles/colors';
 @value very-small, small, medium, large, very-large from 'jordan-hawker/styles/spacing';
 
-@value twitch-button-height;
+@value twitch-button-height: 3rem;
 
 .twitch-embed {
   display: flex;
@@ -10,7 +10,7 @@
   .container {
     background: color-dark;
     border-radius: 0.5rem;
-    padding: medium large;
+    padding: medium large large large;
     margin: small;
 
     button {
@@ -20,6 +20,7 @@
       border-radius: 0;
       color: color-white;
       cursor: pointer;
+      font-size: 1.5rem;
       height: twitch-button-height;
       margin: 0;
 
