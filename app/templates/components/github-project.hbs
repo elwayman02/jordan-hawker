@@ -1,5 +1,10 @@
 <div>
-  <a href={{repo.htmlUrl}} target="_blank">{{repo.name}}</a>
-  {{repo.stargazersCount}}
-  <p>{{repo.description}}</p>
+  <span local-class="project-title">
+    <h4>
+      <a href="{{repo.htmlUrl}}" target="_blank">{{repo.name}}</a>
+      {{fa-icon 'star' size=1}} {{repo.stargazersCount}}
+    </h4>
+  </span>
+  <p><strong>{{repo.description}}</strong></p>
+  <p>Last Updated: {{repo.updatedAt}}</p>
 </div>

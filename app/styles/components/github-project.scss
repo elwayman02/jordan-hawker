@@ -1,10 +1,16 @@
-@value color-alt from 'jordan-hawker/styles/colors';
-@value medium, very-small from 'jordan-hawker/styles/spacing';
+@value color-dark from 'jordan-hawker/styles/colors';
+@value large, medium, very-small from 'jordan-hawker/styles/spacing';
 
 .github-project {
-  border: very-small solid color-alt;
-  height: 100px;
+  border: very-small solid color-dark;
+  border-radius: 1rem;
+  height: 200px;
   margin: medium;
-  padding: medium;
+  padding: 0 large;
   width: 200px;
+
+  .project-title {
+    text-align: center;
+    width: 100%;
+  }
 }
