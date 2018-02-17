@@ -2,6 +2,9 @@
   <div local-class="tabs">
     <button local-class="{{axleButtonClass}}" {{action 'toggle' 'axlehellfire'}}>AxleHellfire</button>
     <button local-class="{{tiltedButtonClass}}" {{action 'toggle' 'boardgames'}}>BoardGames</button>
+    {{#if followUser}}
+      <button local-class="{{followButtonClass}}" {{action 'toggle' followUser.login}}>{{followUser.displayName}}</button>
+    {{/if}}
   </div>
   <div local-class="embeds">
     <iframe
