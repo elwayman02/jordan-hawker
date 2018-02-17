@@ -7,11 +7,11 @@ export default Component.extend({
   username: 'axlehellfire',
 
   chatUrl: computed('username', function () {
-    return `http://www.twitch.tv/embed/${this.get('username')}/chat`;
+    return `https://www.twitch.tv/embed/${this.get('username')}/chat`;
   }),
 
   videoUrl: computed('username', function () {
-    return `http://player.twitch.tv/?channel=${this.get('username')}`;
+    return `https://player.twitch.tv/?channel=${this.get('username')}`;
   }),
 
   axleButtonClass: computed('username', function () {
