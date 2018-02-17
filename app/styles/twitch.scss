@@ -1,4 +1,10 @@
-:global(.twitch-container) {
+:global(.twitch) {
   display: flex;
-  height: 100%;
+  flex-direction: column;
+
+  :global(.twitch-container) {
+    display: flex;
+    height: 100%;
+  }
 }
+
