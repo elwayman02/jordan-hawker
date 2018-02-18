@@ -6,7 +6,7 @@ export default Component.extend({
 
   recommendation: null,
 
-  fullName: computed('recommendation.firstName', 'recommendation.lastName', function () {
+  fullName: computed('recommendation.{firstName,lastName}', function () {
     let name = this.get('recommendation.firstName');
     let lastName = this.get('recommendation.lastName');
     if (lastName) {

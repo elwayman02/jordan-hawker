@@ -108,7 +108,7 @@ export default Component.extend({
     }
   }),
 
-  followButtonClass: computed('activeUsername', 'followUser', function () {
+  followButtonClass: computed('{activeUsername,followUser}', function () {
     if (this.get('activeUsername') === this.get('followUser.login')) {
       return 'active';
     }
