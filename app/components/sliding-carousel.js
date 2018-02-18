@@ -1,0 +1,74 @@
+import Component from '@ember/component';
+import { computed } from '@ember/object';
+import { later } from '@ember/runloop';
+
+export default Component.extend({
+  localClassNames: 'sliding-carousel',
+
+  index: 0,
+
+  init() {
+    this._super(...arguments);
+
+    this.scheduleChange();
+  },
+
+  scheduleChange() { // Change every 30 seconds
+    later(this, this.changeIndex, 20000);
+  },
+
+  changeIndex() {
+    this.moveRight();
+    this.scheduleChange();
+  },
+
+  leftIndex: computed('index', 'content.[]', function () {
+    const index = this.get('index');
+
+    if (index > 0) {
+      return index - 1;
+    }
+
+    return this.get('content.length') - 1;
+  }),
+
+  rightIndex: computed('index', 'content.[]', function () {
+    const index = this.get('index');
+
+    if (index < (this.get('content.length') - 1)) {
+      return index + 1;
+    }
+
+    return 0;
+  }),
+
+  leftItem: computed('content.[]', 'leftIndex', function () {
+    return this.get('content').objectAt(this.get('leftIndex'));
+  }),
+
+  mainItem: computed('content.[]', 'index', function () {
+    return this.get('content').objectAt(this.get('index'));
+  }),
+
+  rightItem: computed('content.[]', 'rightIndex', function () {
+    return this.get('content').objectAt(this.get('rightIndex'));
+  }),
+
+  moveLeft() {
+    this.set('index', this.get('leftIndex'));
+  },
+
+  moveRight() {
+    this.set('index', this.get('rightIndex'));
+  },
+
+  actions: {
+    moveLeft() {
+      this.moveLeft();
+    },
+
+    moveRight() {
+      this.moveRight();
+    }
+  }
+});
