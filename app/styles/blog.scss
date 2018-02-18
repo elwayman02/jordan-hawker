@@ -1,4 +1,4 @@
-@value color-alt from 'jordan-hawker/styles/colors';
+@value color-alt, color-dark, color-white from 'jordan-hawker/styles/colors';
 @value very-small, small, medium, large from 'jordan-hawker/styles/spacing';
 
 :global(.blog) {
@@ -8,6 +8,18 @@
 
   :global(.tumblr-post-text) {
     border-bottom: very-small solid color-alt;
+
+    :global(.tumblr-expand-button) {
+      background: color-dark;
+      border-radius: 0.5rem;
+      color: color-white;
+      cursor: pointer;
+      padding: large medium;
+
+      &:hover {
+        background: color-alt;
+      }
+    }
   }
 }
 
