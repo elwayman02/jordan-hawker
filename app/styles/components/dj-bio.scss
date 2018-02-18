@@ -1,0 +1,14 @@
+@value color-dark from 'jordan-hawker/styles/colors';
+@value very-small, large from 'jordan-hawker/styles/spacing';
+
+.dj-bio {
+  border: very-small dashed color-dark;
+  border-radius: 1rem;
+  padding: large;
+  max-width: 50rem;
+
+  p {
+    font-style: italic;
+    margin: 0;
+  }
+}
