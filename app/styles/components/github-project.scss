@@ -1,10 +1,10 @@
 @value color-dark from 'jordan-hawker/styles/colors';
-@value large, medium, very-small from 'jordan-hawker/styles/spacing';
+@value very-small, large, medium from 'jordan-hawker/styles/spacing';
 
 .github-project {
   border: very-small solid color-dark;
   border-radius: 0.5rem;
-  height: 20rem;
+  height: 17rem;
   margin: medium;
   padding: 0 large;
   width: 24rem;
