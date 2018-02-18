@@ -50,7 +50,7 @@
     "ember-resolver": "^4.0.0",
     "ember-source": "~3.0.0",
     "ember-truth-helpers": "^2.0.0",
-    "ember-tumblr": "^0.10.0",
+    "ember-tumblr": "^0.11.0",
     "eslint-plugin-ember": "^5.0.0",
     "loader.js": "^4.2.3"
   },

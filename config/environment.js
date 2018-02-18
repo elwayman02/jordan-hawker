@@ -32,7 +32,11 @@ module.exports = function(environment) {
       config: {
         token: 'd34a3165a293a3f5a5696eab98ba23d0'
       }
-    }]
+    }],
+
+    moment: {
+      outputFormat: 'MMMM DD, YYYY'
+    }
   };
 
   if (environment === 'development') {

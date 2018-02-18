@@ -37,7 +37,7 @@ export default Component.extend({
     return this.findUser('axlehellfire');
   },
 
-  findUser(username, ids) {
+  findUser(username) {
     return this.get('store').queryRecord('twitch-user', { login: username }).then((user) => {
       return user.get('id');
     });

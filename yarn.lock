@@ -3041,12 +3041,13 @@ ember-truth-helpers@^2.0.0:
   dependencies:
     ember-cli-babel "^6.8.2"
 
-ember-tumblr@^0.10.0:
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/ember-tumblr/-/ember-tumblr-0.10.0.tgz#47e83b54dc136995f7d3ee80b3aebc5e204e6c05"
+ember-tumblr@^0.11.0:
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/ember-tumblr/-/ember-tumblr-0.11.0.tgz#7736ece6d4dcaa5d9c4d41993f0bf53ca2ed2bb6"
   dependencies:
     ember-cli-babel "^6.6.0"
     ember-cli-htmlbars "^2.0.1"
+    ember-truth-helpers "^2.0.0"
 
 ember-weakmap@^3.0.0:
   version "3.1.1"
