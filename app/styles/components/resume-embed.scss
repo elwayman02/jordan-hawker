@@ -1,7 +1,7 @@
 @value large from 'jordan-hawker/styles/spacing';
 
 .resume-embed {
-  height: calc(100% - 7rem);
+  flex: 1;
   min-height: 200px;
   width: 100%;
 
@@ -11,7 +11,7 @@
   }
 
   .iframe-container {
-    height: 100%;
+    height: calc(100% - (large + 6rem));
     margin: 0 auto large auto;
     width: 85rem;
 
