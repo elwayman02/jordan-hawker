@@ -33,6 +33,7 @@ Router.map(function() {
   this.route('resume');
   this.route('twitch');
   this.route('deprecated-post', { path: '/posts/:post_slug' });
+  this.route('about');
 });
 
 export default Router;

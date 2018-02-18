@@ -1,0 +1,47 @@
+@value color-alt, color-base, color-dark, color-white from 'jordan-hawker/styles/colors';
+@value large from 'jordan-hawker/styles/spacing';
+
+.splash-page {
+  background-color: color-base;
+  background-image: linear-gradient(to bottom, color-base, color-alt);
+  color: color-dark;
+  margin: (-(large)) 0 0 (-(large));
+  min-height: calc(100% + 2*large);
+  width: calc(100% + 2*large);
+
+  .content {
+    margin: auto;
+    padding-top: 5%;
+    text-align: center;
+    width: 90%;
+
+    .logo {
+      border-radius: 0.5rem;
+      height: 15rem;
+      width: 15rem;
+    }
+
+    .description {
+      font-size: 3rem;
+    }
+
+    code {
+      background-color: color-base;
+      background-image: linear-gradient(to bottom, color-white, color-base);
+      border-radius: 0.5rem;
+      color: color-dark;
+      display: block;
+      font-size: 2rem;
+      margin: large auto;
+      padding: large 0;
+      text-align: center;
+      width: 33rem;
+    }
+
+    iframe {
+      height: 3rem;
+      margin-left: 1rem;
+      width: 25.6rem;
+    }
+  }
+}

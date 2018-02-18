@@ -2,7 +2,7 @@
 @value very-small from 'jordan-hawker/styles/spacing';
 @value left-nav-link-height from 'jordan-hawker/styles/components/left-nav-link';
 
-@value left-nav-footer-height: (left-nav-link-height + very-small);
+@value left-nav-footer-height: (2*left-nav-link-height + very-small);
 
 .left-nav {
   background: color-dark;
