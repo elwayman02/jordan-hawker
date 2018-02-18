@@ -16,40 +16,43 @@ export default Component.extend({
 
     this.set('defaultUsernames', ['axlehellfire', 'boardgames']);
 
-    this.findDefaultUsers().then((ids) => {
-      return this.loadFollows(ids);
-    }).then((ids) => {
-      return this.findActiveStream(ids);
-    }).then((id) => {
-      this.loadActiveUser(id);
+    this.findActiveStream({ user_login: this.get('defaultUsernames') }).then((id) => {
+      if (id) {
+        this.loadActiveUser(id);
+      } else {
+        this.findDefaultUser().then((id) => {
+          return this.loadFollows(id);
+        }).then((ids) => {
+          return this.findActiveStream({ user_id: ids });
+        }).then((id) => {
+          this.loadActiveUser(id);
+        });
+      }
     });
+
+
   },
 
-  findDefaultUsers() {
-    let ids = [];
-    // For some reason the Twitch API doesn't like you to send multiple encoded logins, so we have to chain requests...
-    return this.findUser('axlehellfire', ids).then((newIds) => {
-      return this.findUser('boardgames', newIds);
-    });
+  findDefaultUser() {
+    return this.findUser('axlehellfire');
   },
 
   findUser(username, ids) {
     return this.get('store').queryRecord('twitch-user', { login: username }).then((user) => {
-      ids.push(user.get('id'));
-      return ids;
+      return user.get('id');
     });
   },
 
-  loadFollows(ids) {
-    return this.get('store').query('twitch-follow', { from_id: ids[0], first: 98 }).then((follows) => {
-      return ids.concat(follows.map((follow) => {
+  loadFollows(id) {
+    return this.get('store').query('twitch-follow', { from_id: id, first: 98 }).then((follows) => {
+      return follows.map((follow) => {
         return follow.get('toId');
-      }));
+      });
     });
   },
 
-  findActiveStream(ids) {
-    return this.get('store').query('twitch-stream', { user_id: ids }).then((streams) => {
+  findActiveStream(query) {
+    return this.get('store').query('twitch-stream', query).then((streams) => {
       let streamCount = streams.get('length');
       let liveId;
 
