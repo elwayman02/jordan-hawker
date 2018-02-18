@@ -1,0 +1,14 @@
+:global(.index-header) {
+  display: flex;
+
+  :global(.index-welcome) {
+    margin: 2.5rem auto;
+    max-width: 80rem;
+    text-align: center;
+  }
+}
+
+:global(.index-hr) {
+  margin-left: 0;
+  width: calc(100% - 22rem);
+}

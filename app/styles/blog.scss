@@ -1,6 +1,12 @@
 @value color-alt from 'jordan-hawker/styles/colors';
 @value very-small, small, medium, large from 'jordan-hawker/styles/spacing';
 
+:global(.blog) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 :global(.tumblr-error) {
   display: inline-block;
   text-align: center;

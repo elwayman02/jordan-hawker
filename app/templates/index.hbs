@@ -1,11 +1,17 @@
-<p class="welcome">
-  Congratulations! You've made it to...well, nowhere.
-  This is just my little corner of the web; feel free to poke around and see if there's anything you like.
-  Check out my {{#link-to 'blog'}}blog{{/link-to}}, browse my latest open-source {{#link-to 'code'}}projects{{/link-to}},
-  or go learn about my {{#link-to 'twitch'}}Twitch{{/link-to}} channels! Otherwise, just keep reading below to see my latest content:
-</p>
+<div class="index-header">
+  <p class="index-welcome">
+    Congratulations! You've made it to...well, nowhere. This is just my little corner of the web;
+    feel free to poke around and see if there's anything you like. Check out my {{#link-to 'blog'}}blog{{/link-to}},
+    browse my latest open-source {{#link-to 'code'}}projects{{/link-to}}, or go learn about my
+    {{#link-to 'twitch'}}Twitch{{/link-to}} channels! Otherwise, just keep reading below to see my latest content:
+  </p>
 
-<hr/>
+  <span class="index-signup">
+    {{newsletter-signup}}
+  </span>
+</div>
+
+<hr class="index-hr"/>
 
 {{front-post
   formatDates=false
