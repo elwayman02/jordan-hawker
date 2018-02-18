@@ -24,12 +24,12 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
-  this.route('code');
   this.route('contact');
   this.route('blog');
   this.route('music');
-  this.route('posts');
   this.route('post', { path: '/p/:post_slug' });
+  this.route('posts');
+  this.route('projects');
   this.route('resume');
   this.route('twitch');
   this.route('deprecated-post', { path: '/posts/:post_slug' });

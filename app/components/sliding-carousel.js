@@ -18,8 +18,10 @@ export default Component.extend({
   },
 
   changeIndex() {
-    this.moveRight();
-    this.scheduleChange();
+    if (!this.isDestroyed) {
+      this.moveRight();
+      this.scheduleChange();
+    }
   },
 
   leftIndex: computed('index', 'content.[]', function () {
