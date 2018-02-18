@@ -22,6 +22,10 @@ module.exports = function(environment) {
       // when it is created
     },
 
+    disqus: {
+      shortname: 'jordan-hawker'
+    },
+
     metricsAdapters: [{
       name: 'Mixpanel',
       environments: ['all'],

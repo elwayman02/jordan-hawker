@@ -37,6 +37,7 @@
     "ember-css-modules-sass": "^1.0.0",
     "ember-data": "~3.0.0",
     "ember-data-github": "elwayman02/ember-data-github.git#repo-by-user",
+    "ember-disqus": "^0.2.1",
     "ember-export-application-global": "^2.0.0",
     "ember-fetch": "^3.4.4",
     "ember-font-awesome": "^4.0.0-rc.2",
