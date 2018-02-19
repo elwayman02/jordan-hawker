@@ -6,19 +6,9 @@
       <button local-class="{{followButtonClass}}" {{action 'toggle' followUser.login}}>{{followUser.displayName}}</button>
     {{/if}}
   </div>
-  <div local-class="embeds">
-    <iframe
-      local-class="video"
-      src="{{videoUrl}}"
-      frameborder="0"
-      allowfullscreen>
-    </iframe>
-
-    <iframe
-      local-class="chat"
-      src="{{chatUrl}}"
-      frameborder="0"
-      scrolling="no">
-    </iframe>
-  </div>
+  <iframe
+    src="{{embedUrl}}"
+    frameborder="0"
+    allowfullscreen>
+  </iframe>
 </div>

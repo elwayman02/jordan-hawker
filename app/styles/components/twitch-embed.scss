@@ -13,16 +13,24 @@
     padding: medium large large large;
     margin: small;
 
+    .tabs {
+      margin: 0 medium;
+    }
+
     button {
       background: color-dark;
       border: none;
       border-bottom: very-small solid color-alt;
-      border-radius: 0;
+      border-radius: 0.5rem 0.5rem 0 0;
       color: color-white;
       cursor: pointer;
       font-size: 1.5rem;
       height: twitch-button-height;
       margin: 0;
+
+      &.active {
+        cursor: default;
+      }
 
       &:focus {
         outline: none;
@@ -32,25 +40,11 @@
         background: color-alt;
       }
     }
-  }
-
-  .embeds {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
 
     iframe {
-      margin: medium;
-    }
-
-    .video {
       height: 30rem;
-      width: 53.3rem;
-    }
-
-    .chat {
-      height: 30rem;
-      width: 40rem;
+      margin: medium medium 0 medium;
+      width: 87.3rem;
     }
   }
 }

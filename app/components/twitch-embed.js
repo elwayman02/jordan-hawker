@@ -88,12 +88,8 @@ export default Component.extend({
     });
   },
 
-  chatUrl: computed('activeUsername', function () {
-    return `https://www.twitch.tv/embed/${this.get('activeUsername')}/chat`;
-  }),
-
-  videoUrl: computed('activeUsername', function () {
-    return `https://player.twitch.tv/?channel=${this.get('activeUsername')}`;
+  embedUrl: computed('activeUsername', function () {
+    return `https://embed.twitch.tv/?channel=${this.get('activeUsername')}&theme=dark`;
   }),
 
   axleButtonClass: computed('activeUsername', function () {
