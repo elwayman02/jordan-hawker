@@ -1,8 +1,9 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
-import { later } from '@ember/runloop';
+import { later, run } from '@ember/runloop';
+import ComponentInteractivity from 'ember-interactivity/mixins/component-interactivity';
 
-export default Component.extend({
+export default Component.extend(ComponentInteractivity, {
   localClassNames: 'sliding-carousel',
 
   index: 0,
@@ -62,6 +63,11 @@ export default Component.extend({
 
   moveRight() {
     this.set('index', this.get('rightIndex'));
+  },
+
+  didInsertElement() {
+    this._super(...arguments);
+    run.scheduleOnce('afterRender', this, this.reportInteractive);
   },
 
   actions: {
