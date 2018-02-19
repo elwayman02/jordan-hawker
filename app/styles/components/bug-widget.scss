@@ -1,0 +1,33 @@
+@value color-alt, color-dark, color-white from 'jordan-hawker/styles/colors';
+@value very-small from 'jordan-hawker/styles/spacing';
+
+:global(.bug-widget) {
+  background: color-dark;
+  color: color-white;
+
+  &:global(.right) {
+    border: none;
+    border-radius: 0.5rem 0 0 0.5rem;
+  }
+
+  :global(.bug-main) {
+    border-left-color: color-alt !important;
+
+    a {
+      color: color-white;
+
+      &:hover {
+        background: color-alt;
+      }
+    }
+  }
+
+  :global(.bug-toggle) {
+    border: none;
+    border-radius: 0.5rem 0 0 0.5rem;
+
+    &:hover {
+      background: color-alt;
+    }
+  }
+}
