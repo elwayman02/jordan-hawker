@@ -1,6 +1,5 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
-import { run } from '@ember/runloop';
 import { inject as service } from '@ember/service';
 import ComponentInteractivity from 'ember-interactivity/mixins/component-interactivity';
 
