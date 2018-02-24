@@ -1,6 +1,12 @@
-{{header-bar}}
+{{#if media.isMobile}}
+  {{header-nav}}
+{{else}}
+  {{header-bar}}
+{{/if}}
 <div class="container">
-  {{left-nav}}
+  {{#if (not media.isMobile)}}
+    {{left-nav}}
+  {{/if}}
   <main id="content">
     {{outlet}}
   </main>

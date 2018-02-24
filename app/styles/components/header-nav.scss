@@ -1,0 +1,41 @@
+@value color-dark, color-white from 'jordan-hawker/styles/colors';
+@value small, medium from 'jordan-hawker/styles/spacing';
+
+@value logo-height: 3.2rem;
+@value header-height: logo-height + medium;
+
+.header-nav {
+  background: color-dark;
+  color: color-white;
+  height: header-height;
+  position: fixed;
+  top: 0;
+  width: 100%;
+
+  .header-container {
+    display: flex;
+    margin: 0 medium;
+
+    .links {
+      display: flex;
+    }
+
+    .spacer {
+      flex-grow: 1;
+    }
+
+    :global(.fa) {
+      color: color-white;
+      margin-top: medium;
+    }
+
+    .header-logo {
+      border-radius: 2rem;
+      cursor: pointer;
+      height: logo-height;
+      padding-right: small;
+      margin-top: (medium/2);
+      width: logo-height;
+    }
+  }
+}
