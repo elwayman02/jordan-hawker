@@ -11,6 +11,7 @@
 
   .soundcloud-embed {
     height: 30rem;
+    max-width: promo-width;
     width: promo-width;
   }
 
@@ -21,6 +22,14 @@
       margin: 0 0 large 0;
       max-width: promo-width;
       text-align: center;
+    }
+  }
+}
+
+@media screen and (max-width: promo-width) {
+  .dj-promo {
+    .soundcloud-embed {
+      width: 100%;
     }
   }
 }
