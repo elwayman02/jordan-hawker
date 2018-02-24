@@ -16,14 +16,22 @@ env:
   global:
     # See https://git.io/vdao3 for details.
     - JOBS=1
+    - secure: EgXe96ddKucTW/ggo48M+tbgOq16gc0k9ZmXWtq2qOmKGbSEpXMAZ+kUXP8ZQ7r2Xq6/N7kFf5nT/dEyS4be4CnOL1fV5VDVA7Em86wliEszrH6t+mANfU3CDEMHbMmla7nKYHfyI69sCd58p9cmPgXHE/JGVM3F+DdckRf/vZE=
 
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash
   - export PATH=$HOME/.yarn/bin:$PATH
+  - yarn global add greenkeeper-lockfile@1
 
 install:
   - yarn install --non-interactive
 
+before_script:
+  - greenkeeper-lockfile-update
+
 script:
   - yarn lint:js
   - yarn test
+
+after_script:
+  - greenkeeper-lockfile-upload
