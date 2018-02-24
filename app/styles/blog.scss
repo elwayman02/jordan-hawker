@@ -23,15 +23,19 @@
   }
 }
 
+:global(.tumblr-blog) {
+  width: 100%;
+}
+
 :global(.tumblr-error) {
   display: inline-block;
   text-align: center;
-  width: 100%;
 }
 
 :global(.tumblr-post-text) {
   margin-top: medium;
   padding: large small large small;
+  width: 100%;
 
   img {
     max-width: 50rem;
