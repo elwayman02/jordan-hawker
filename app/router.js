@@ -34,6 +34,9 @@ Router.map(function() {
   this.route('twitch');
   this.route('deprecated-post', { path: '/posts/:post_slug' });
   this.route('about');
+  this.route('deprecated-ember', { path: '/ember' });
+  this.route('deprecated-candidate', { path: '/the-candidate' });
+  this.route('deprecated-dance', { path: '/dance' });
 });
 
 export default Router;

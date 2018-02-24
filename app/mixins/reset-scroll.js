@@ -1,8 +1,12 @@
 import Mixin from '@ember/object/mixin';
 
 export default Mixin.create({
-  activate() {
-    this._super(...arguments);
-    window.scrollTo(0, 0);
+  actions: {
+    didTransition() {
+      let content = document.getElementById('content');
+      if (content) {
+        content.scrollTop = 0;
+      }
+    }
   }
 });
