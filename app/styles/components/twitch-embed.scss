@@ -56,13 +56,13 @@
 
   @media screen and (max-width: 46rem) {
     .container {
-      padding-bottom: 125%;
+      padding: small medium 125% medium;
     }
   }
 
   @media screen and (max-width: 30rem) {
     .container {
-      padding-bottom: 175%;
+      padding: very-small small 175% small;
 
       button {
         font-size: 1rem;
