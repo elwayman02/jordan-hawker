@@ -46,3 +46,9 @@
     }
   }
 }
+
+@media screen and (max-width: 30rem) {
+  .header-icon {
+    display: none;
+  }
+}
