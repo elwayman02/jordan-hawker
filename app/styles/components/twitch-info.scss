@@ -1,5 +1,5 @@
 @value color-dark, color-white from 'jordan-hawker/styles/colors';
-@value small, large, very-large from 'jordan-hawker/styles/spacing';
+@value small, medium, large, very-large from 'jordan-hawker/styles/spacing';
 
 .twitch-info {
   background: color-dark;
@@ -24,3 +24,45 @@
     }
   }
 }
+
+@media screen and (max-width: 51.6rem) {
+  .twitch-info {
+    padding: medium small;
+    margin: small;
+
+    .header {
+      .logo {
+        height: 2rem;
+        width: 2rem;
+      }
+
+      .title {
+        font-size: 2rem;
+      }
+    }
+
+    .description {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+@media screen and (max-width: 30rem) {
+  .twitch-info {
+    .header {
+      .logo {
+        height: 1.5rem;
+        width: 1.5rem;
+      }
+
+      .title {
+        font-size: 1.5rem;
+      }
+    }
+
+    .description {
+      font-size: 1.2rem;
+    }
+  }
+}
+

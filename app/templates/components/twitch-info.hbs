@@ -2,9 +2,9 @@
   <span local-class="header">
     <img local-class="logo" src={{user.profileImageUrl}}/>
     <span local-class="title">{{user.displayName}}</span>
-    <a href="{{url}}" target="_blank">{{fa-icon 'twitch' size=2}}</a>
+    <a href="{{url}}" target="_blank">{{fa-icon 'twitch' size=(if media.isMobile 1 2)}}</a>
   </span>
-  <p>{{user.description}}</p>
+  <p local-class="description">{{user.description}}</p>
 {{/if}}
 
 {{#each videos as |video|}}
