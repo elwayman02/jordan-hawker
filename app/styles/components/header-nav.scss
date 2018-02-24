@@ -18,6 +18,8 @@
 
     .links {
       display: flex;
+      flex-grow: 1;
+      justify-content: space-around;
     }
 
     .spacer {
@@ -36,6 +38,11 @@
       padding-right: small;
       margin-top: (medium/2);
       width: logo-height;
+    }
+
+    .header-icon {
+      line-height: (header-height - 2*small);
+      padding: small;
     }
   }
 }
