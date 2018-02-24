@@ -30,7 +30,7 @@ module.exports = function(environment) {
       name: 'Mixpanel',
       environments: ['all'],
       config: {
-        token: 'd34a3165a293a3f5a5696eab98ba23d0'
+        token: 'f8ca47de0f749e6463fc617d5faa0820'
       }
     }],
 
