@@ -30,3 +30,9 @@ body {
 :global(.title) {
   text-align: center;
 }
+
+@media screen and (max-width: 52rem) {
+  :global(#content) {
+    -webkit-overflow-scrolling: touch;
+  }
+}
