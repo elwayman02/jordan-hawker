@@ -13,7 +13,6 @@
     border-radius: 0.5rem;
     height: 0;
     margin: small large;
-    min-width: 68.1rem; // Breakpoint where embed tries to go vertical
     padding: medium large 45% large; // Forces aspect ratio
     position: relative;
     width: 100%;
@@ -52,6 +51,12 @@
       position: absolute;
       top: twitch-button-height + medium;
       width: calc(100% - 2*large);
+    }
+  }
+
+  @media screen and (max-width: 45.5rem) {
+    .container {
+      padding-bottom: 100%;
     }
   }
 }
