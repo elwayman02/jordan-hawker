@@ -1,65 +1,74 @@
-.pageHeader {
-    text-align: center;
+@value color-alt, color-dark, color-white from 'jordan-hawker/styles/colors';
+@value very-small, small, medium, large from 'jordan-hawker/styles/spacing';
+
+:global(.blog) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  :global(.tumblr-post-text) {
+    border-bottom: very-small solid color-alt;
+
+    :global(.tumblr-expand-button) {
+      background: color-dark;
+      border-radius: 0.5rem;
+      color: color-white;
+      cursor: pointer;
+      padding: large medium;
+
+      &:hover {
+        background: color-alt;
+      }
+    }
+  }
 }
 
-.tumblr-error {
-    @extend h5;
-    display: inline-block;
-    text-align: center;
+:global(.tumblr-error) {
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+}
+
+:global(.tumblr-post-text) {
+  margin-top: medium;
+  padding: large small large small;
+
+  img {
+    max-width: 50rem;
     width: 100%;
-}
+  }
 
-.tumblr-post-text {
-    border: $borderStyle;
-    padding: 15px 10px 40px 10px;
-    margin-top: 20px;
+  p {
+    width: 100%;
+  }
 
-    img {
-        @include border-radius($borderRadius);
-        left: 50%;
-        margin-left: -250px;
-        position: relative;
-        width: 500px;
-    }
+  :global(.tumblr-title) {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 500;
+    line-height: 1.1;
+    margin-bottom: small;
+    margin-top: 0;
+    text-align: center;
+    text-decoration: none;
+  }
 
-    .tumblr-title {
-        display: block;
-        font-size: 18px;
-        font-weight: 500;
-        line-height: 1.1;
-        margin-bottom: 15px;
-        margin-top: 0;
-        text-align: center;
-    }
+  :global(.tumblr-date) {
+    font-style: italic;
+    margin-bottom: very-small;
+  }
 
-    .tumblr-date {
-        font-style: italic;
-        margin-bottom: 5px;
-    }
-
-    .tumblr-body {
-        margin-bottom: 5px;
-    }
-
-    .tumblr-expand-button {
-        @extend .btn;
-        @extend .btn-sm;
-        @extend .btn-secondary;
-        @extend .right;
-    }
-
-    &.tumblr-post-collapsed {
-        .tumblr-body {
-            max-height: 300px;
-            overflow: hidden;
-        }
-    }
-}
-
-.social-widget {
+  :global(.tumblr-body) {
     align-items: center;
     display: flex;
-    justify-content: space-between;
-    padding: 5px;
-    width: 250px;
+    flex-direction: column;
+    margin-bottom: very-small;
+  }
+
+  &:global(.tumblr-post-collapsed) {
+    :global(.tumblr-body) {
+      max-height: 30rem;
+      overflow: hidden;
+    }
+  }
 }

@@ -1,0 +1,40 @@
+@value color-alt, color-dark, color-white from 'jordan-hawker/styles/colors';
+@value very-small, very-large from 'jordan-hawker/styles/spacing';
+
+@value carousel-border-radius: 0.5rem;
+@value carousel-min-height: 20rem;
+
+.sliding-carousel {
+  align-items: stretch;
+  background: color-dark;
+  border-radius: carousel-border-radius;
+  color: color-white;
+  display: flex;
+  flex-direction: row;
+  min-height: carousel-min-height;
+  margin: auto;
+  min-width: 30rem;
+  max-width: 50rem;
+
+  .arrow {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    padding: very-large;
+
+    &:hover {
+      background: color-alt;
+    }
+  }
+
+  .left-arrow {
+    border-radius: carousel-border-radius 0 0 carousel-border-radius;
+    border-right: very-small solid color-alt;
+  }
+
+  .right-arrow {
+    border-radius: 0 carousel-border-radius carousel-border-radius 0;
+    border-left: very-small solid color-alt;
+  }
+}

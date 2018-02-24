@@ -1,7 +1,7 @@
-import BaseRoute from 'jordan-hawker/routes/base';
+import Route from '@ember/routing/route';
 
-export default BaseRoute.extend({
-    model() {
-        return this.store.findAll('tumblr-post-text');
-    }
+export default Route.extend({
+  model() {
+    return this.get('store').findAll('tumblr-post-text');
+  }
 });

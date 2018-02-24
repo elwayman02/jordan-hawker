@@ -1,0 +1,46 @@
+@value color-dark, color-white from 'jordan-hawker/styles/colors';
+@value medium from 'jordan-hawker/styles/spacing';
+
+@value header-height: 2.8rem;
+@value header-full-height: (header-height + 2*medium);
+@value header-logo-width: (header-height + medium);
+
+.header-bar {
+  background: color-dark;
+  color: color-white;
+  height: header-height;
+  padding: medium;
+  position: fixed;
+  text-align: center;
+  top: 0;
+  width: 100%;
+
+  h4 {
+    cursor: pointer;
+    line-height: header-height;
+    margin: 0 auto;
+    padding-left: 10rem + (header-logo-width/2);
+    text-align: center;
+    width: 12.5rem;
+  }
+
+  .header-icons {
+    line-height: header-height;
+    position: fixed;
+    right: medium;
+    top: medium;
+
+    :global(.fa) {
+      color: color-white;
+    }
+  }
+
+  .header-logo {
+    border-radius: 2rem;
+    height: header-height + medium;
+    margin-left: -(header-full-height);
+    margin-top: -(medium/2);
+    position: fixed;
+    width: header-logo-width;
+  }
+}

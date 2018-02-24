@@ -1,92 +1,32 @@
-@import 'bootstrap';
-$fa-font-path: '/assets/fonts' !default;
-@import 'bower_components/fontawesome/scss/font-awesome.scss';
-//@import 'bug-widget';
+@value color-base from 'jordan-hawker/styles/colors';
+@value header-full-height from 'jordan-hawker/styles/components/header-bar';
+@value large from 'jordan-hawker/styles/spacing';
 
-@import 'colors';
-@import 'icons';
-@import 'variables';
-@import 'mixins';
-@import 'general';
-
-@import 'components/ember-carousel';
-@import 'subscribe';
-
-@import 'header';
-@import 'footer';
-@import 'banner';
-@import 'splash';
-@import 'navbar';
-@import 'event-list';
-@import 'tech-list';
-@import 'recommendation';
-@import 'blog';
+html {
+  font-size: 62.5%;
+}
 
 body {
-    min-width: 450px;
+  background: color-base;
+  font-size: 1.6rem;
+  margin: 0;
 }
 
-#main-container {
-    margin-right: 0;
-    margin-bottom: 10px;
+:global(.container) {
+  display: flex;
+  height: calc(100vh - header-full-height);
+  margin-top: header-full-height;
+  overflow: hidden;
+
+  :global(#content) {
+    height: calc(100% - large);
+    overflow: scroll;
+    padding: large large 0 large;
+    position: relative;
+    width: 100%;
+  }
 }
 
-#main {
-    margin-top: 10px;
-    margin-left: 10px;
-}
-
-.liquid-container {
-    .liquid-child {
-        > .row {
-            margin-left: 0;
-        }
-    }
-}
-
-@media all and (max-width: $screen-xs-max) {
-    #main {
-        margin-left: 25px;
-        margin-top: -25px;
-    }
-}
-
-.title {
-    text-align: center;
-
-    p {
-        font-style: italic;
-    }
-}
-
-.item-list {
-    padding-left: 15px;
-}
-
-.contact {
-    div {
-        margin-bottom: 10px;
-
-        i {
-            font-size: 50px;
-        }
-
-        img {
-            @include border-radius($borderRadius);
-        }
-    }
-}
-
-@media all and (max-width: $screen-xs-max) {
-    .contact {
-        margin-top: 15px;
-    }
-}
-
-.biography {
-    @include border-radius($borderRadius);
-    font-style: italic;
-    margin-top: 10px;
-    border: 1px dashed $border;
-    padding: 5px;
+:global(.title) {
+  text-align: center;
 }

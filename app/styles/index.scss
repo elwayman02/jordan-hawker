@@ -1,0 +1,13 @@
+:global(.index-header) {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  :global(.index-welcome) {
+    margin: 2.5rem auto;
+    max-width: 80rem;
+    min-width: 40rem;
+    text-align: center;
+    width: 50%;
+  }
+}

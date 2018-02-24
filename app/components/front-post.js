@@ -1,11 +1,20 @@
-import TumblrPostText from 'ember-tumblr/components/tumblr-post-text';
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
 
-export default TumblrPostText.extend({
-    layoutName: 'components/tumblr-post-text',
-    expandAction: 'viewBlog',
-    actions: {
-        expand() {
-            this.sendAction('expandAction');
-        }
-    }
+export default Component.extend({
+  localClassNames: 'front-post',
+
+  store: service(),
+
+  post: null,
+
+  init() {
+    this._super(...arguments);
+
+    this.get('store').queryRecord('tumblr-post-text', {
+      limit: 1
+    }).then((post) => {
+      this.set('post', post);
+    });
+  },
 });

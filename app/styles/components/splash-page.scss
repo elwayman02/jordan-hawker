@@ -1,0 +1,63 @@
+@value color-alt, color-base, color-dark, color-white from 'jordan-hawker/styles/colors';
+@value small, large from 'jordan-hawker/styles/spacing';
+
+.splash-page {
+  background-color: color-base;
+  background-image: linear-gradient(to bottom, color-base, color-alt);
+  color: color-dark;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0 0 0 (-(large));
+  min-height: calc(100% - (large/2));
+  padding: small 0;
+  width: calc(100% + 2*large);
+
+  .content {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-evenly;
+    margin: auto;
+    text-align: center;
+    width: 90%;
+
+    .logo {
+      border-radius: 0.5rem;
+      height: 15rem;
+      width: 15rem;
+    }
+
+    .title {
+      margin: small 0;
+    }
+
+    .version {
+      font-weight: bold;
+    }
+
+    .description {
+      font-size: 2.5rem;
+      margin: small 0;
+    }
+
+    code {
+      background-color: color-base;
+      background-image: linear-gradient(to bottom, color-white, color-base);
+      border-radius: 0.5rem;
+      color: color-dark;
+      display: block;
+      font-size: 2rem;
+      margin: 0 auto;
+      padding: large 0;
+      text-align: center;
+      width: 33rem;
+    }
+
+    iframe {
+      height: 3rem;
+      width: 25.6rem;
+    }
+  }
+}

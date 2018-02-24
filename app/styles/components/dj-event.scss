@@ -1,0 +1,32 @@
+@value color-dark, color-white from 'jordan-hawker/styles/colors';
+@value very-small, small, medium, large, very-large from 'jordan-hawker/styles/spacing';
+
+@value event-dimension: 16rem;
+
+.dj-event {
+  align-items: center;
+  background: color-dark;
+  border-radius: 0.5rem;
+  color: color-white;
+  display: flex;
+  flex-direction: column;
+  height: event-dimension;
+  justify-content: center;
+  margin: very-small;
+  padding: small;
+  text-align: center;
+  width: event-dimension;
+
+  .name {
+    margin-bottom: very-large;
+  }
+
+  .location {
+    font-style: italic;
+    margin-bottom: large;
+  }
+
+  .dance-styles {
+    margin-bottom: medium;
+  }
+}

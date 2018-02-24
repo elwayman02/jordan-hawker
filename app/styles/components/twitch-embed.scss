@@ -1,0 +1,56 @@
+@value color-alt, color-dark, color-white from 'jordan-hawker/styles/colors';
+@value very-small, small, medium, large, very-large from 'jordan-hawker/styles/spacing';
+
+@value twitch-button-height: 3rem;
+
+.twitch-embed {
+  display: flex;
+  justify-content: center;
+
+  .container {
+    background: color-dark;
+    border-radius: 0.5rem;
+    height: 0;
+    margin: small large;
+    min-width: 68.1rem; // Breakpoint where embed tries to go vertical
+    padding: medium large 45% large; // Forces aspect ratio
+    position: relative;
+    width: 100%;
+
+    .tabs {
+      margin: 0 medium;
+    }
+
+    button {
+      background: color-dark;
+      border: none;
+      border-bottom: very-small solid color-alt;
+      border-radius: 0.5rem 0.5rem 0 0;
+      color: color-white;
+      cursor: pointer;
+      font-size: 1.5rem;
+      height: twitch-button-height;
+      margin: 0;
+
+      &.active {
+        cursor: default;
+      }
+
+      &:focus {
+        outline: none;
+      }
+
+      &:hover, &.active {
+        background: color-alt;
+      }
+    }
+
+    iframe {
+      height: calc(100% - twitch-button-height - 3*medium);
+      left: large;
+      position: absolute;
+      top: twitch-button-height + medium;
+      width: calc(100% - 2*large);
+    }
+  }
+}

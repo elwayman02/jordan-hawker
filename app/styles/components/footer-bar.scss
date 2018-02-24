@@ -1,0 +1,22 @@
+@value color-white from 'jordan-hawker/styles/colors';
+@value small from 'jordan-hawker/styles/spacing';
+
+.footer-bar {
+  color: color-white;
+  min-height: 11rem;
+  text-align: center;
+  width: 100%;
+
+  p {
+    margin: small;
+  }
+
+  .github {
+    color: color-white;
+  }
+
+  .brand-icon {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+}

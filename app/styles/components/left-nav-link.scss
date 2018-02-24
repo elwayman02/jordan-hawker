@@ -1,0 +1,28 @@
+@value color-alt, color-dark, color-white from 'jordan-hawker/styles/colors';
+@value very-small from 'jordan-hawker/styles/spacing';
+
+@value left-nav-link-height: 3rem;
+
+.left-nav-link {
+  background: color-dark;
+  border: none;
+  border-bottom: very-small solid color-alt;
+  border-radius: 0;
+  color: color-white;
+  cursor: pointer;
+  height: left-nav-link-height;
+  margin: 0;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    background: color-alt;
+  }
+
+  h4 {
+    line-height: left-nav-link-height;
+    margin: 0;
+  }
+}

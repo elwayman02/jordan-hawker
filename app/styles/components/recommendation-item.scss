@@ -1,0 +1,10 @@
+@value very-small, small, medium, large, very-large from 'jordan-hawker/styles/spacing';
+
+.recommendation-item {
+  padding: large;
+
+  .text {
+    font-style: italic;
+    margin: 0 0 large 0;
+  }
+}

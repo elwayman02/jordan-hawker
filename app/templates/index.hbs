@@ -1,16 +1,15 @@
-<h2 id="title">Welcome!</h2>
+<div class="index-header">
+  <p class="index-welcome">
+    Congratulations! You've made it to...well, nowhere. This is just my little corner of the web;
+    feel free to poke around and see if there's anything you like. Check out my {{#link-to 'blog'}}blog{{/link-to}},
+    browse my latest open-source {{#link-to 'projects'}}projects{{/link-to}}, or go learn about my
+    {{#link-to 'twitch'}}Twitch{{/link-to}} channels! Otherwise, just keep reading below to see my latest content:
+  </p>
 
-<p>
-You've reached my little corner of the web, you lucky dog!
-You can find all sorts of information about me throughout this site.
-If you're a developer or recruiter, check out my {{link-to 'Code' 'code'}} page.
-If you're an event organizer or music promoter, you should head over to the {{link-to 'Music' 'music'}} section.
-Fellow dancers can learn about my background in {{link-to 'Dance' 'dance'}}.  Enjoy!
-</p>
-
-<h3>Latest Announcement</h3>
+  {{newsletter-signup}}
+</div>
 
 {{front-post
-    post=model
-    postsRoute='post'
-    collapsible=true}}
+  formatDates=true
+  post=model
+  collapsible=false}}

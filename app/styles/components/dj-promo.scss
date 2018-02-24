@@ -1,0 +1,35 @@
+@value large, very-large from 'jordan-hawker/styles/spacing';
+
+@value promo-width: 50rem;
+
+.dj-promo {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .soundcloud-embed {
+    height: 30rem;
+    max-width: promo-width;
+    width: promo-width;
+  }
+
+  .dj-info {
+    margin: very-large;
+
+    .dj-about {
+      margin: 0 0 large 0;
+      max-width: promo-width;
+      text-align: center;
+    }
+  }
+}
+
+@media screen and (max-width: promo-width) {
+  .dj-promo {
+    .soundcloud-embed {
+      width: 100%;
+    }
+  }
+}

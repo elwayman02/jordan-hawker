@@ -1,0 +1,34 @@
+@value color-alt, color-dark, color-white from 'jordan-hawker/styles/colors';
+@value very-small, medium, large from 'jordan-hawker/styles/spacing';
+
+.newsletter-signup {
+  border: very-small dashed color-dark;
+  border-radius: 0.5rem;
+  padding: medium;
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    height: 10rem;
+    justify-content: space-between;
+    width: 20rem;
+  }
+
+  .email {
+    border: very-small solid color-alt;
+    border-radius: 0.5rem;
+    padding: large medium;
+  }
+
+  .subscribe {
+    background: color-dark;
+    border-radius: 0.5rem;
+    color: color-white;
+    cursor: pointer;
+    padding: large medium;
+
+    &:hover {
+      background: color-alt;
+    }
+  }
+}

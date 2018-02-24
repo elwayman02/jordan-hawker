@@ -1,0 +1,8 @@
+.front-post {
+  &:global(.tumblr-post-collapsed) {
+    :global(.tumblr-body) {
+      max-height: 60rem !important; // TODO: important is !important *facepalm*
+      overflow: hidden;
+    }
+  }
+}

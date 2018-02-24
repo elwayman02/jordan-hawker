@@ -1,22 +1,14 @@
-<span id="forkongithub"><a href="http://jhawk.co/jordan-hawker-github" target="_blank">Fork me on GitHub</a></span>
-
-{{#liquid-if isSplashPage class='application'}}
-    {{liquid-outlet}}
+{{#if media.isMobile}}
+  {{header-nav}}
 {{else}}
-    <div class="fluid-container">
-        {{view 'header'}}
-
-        <div id="main-container" class="row">
-            <div id="navbar" class="col-xs-12 col-sm-2">
-                {{view 'navbar'}}
-            </div>
-            <div id="main" class="col-xs-11 col-sm-9" role="main">
-                {{liquid-outlet}}
-            </div>
-        </div>
-
-        {{view 'footer'}}
-    </div>
-{{/liquid-if}}
-
+  {{header-bar}}
+{{/if}}
+<div class="container">
+  {{#if (not media.isMobile)}}
+    {{left-nav}}
+  {{/if}}
+  <main id="content">
+    {{outlet}}
+  </main>
+</div>
 {{bug-widget url='https://github.com/elwayman02/jordan-hawker/issues/new'}}

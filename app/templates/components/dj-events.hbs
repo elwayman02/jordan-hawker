@@ -1,0 +1,15 @@
+<h3>Exchanges & Workshops</h3>
+
+<div local-class="event-list">
+  {{#each weekendEvents as |event|}}
+    {{dj-event event=event}}
+  {{/each}}
+</div>
+
+<h3>Weekly/Recurring Events</h3>
+
+<div local-class="event-list">
+  {{#each recurringEvents as |event|}}
+    {{dj-event event=event}}
+  {{/each}}
+</div>

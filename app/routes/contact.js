@@ -1,4 +1,7 @@
-import BaseRoute from 'jordan-hawker/routes/base';
+import Route from '@ember/routing/route';
 
-export default BaseRoute.extend({
+export default Route.extend({
+  isInteractive(didReportInteractive) {
+    return didReportInteractive('contact-list');
+  }
 });

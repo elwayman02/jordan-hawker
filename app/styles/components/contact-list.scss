@@ -1,0 +1,23 @@
+@value color-alt, color-dark from 'jordan-hawker/styles/colors';
+@value medium from 'jordan-hawker/styles/spacing';
+
+.contact-list {
+  display: flex;
+  justify-content: center;
+
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 42rem;
+
+    :global(.fa) {
+      color: color-dark;
+      margin: medium;
+
+      &:hover {
+        color: color-alt;
+      }
+    }
+  }
+}

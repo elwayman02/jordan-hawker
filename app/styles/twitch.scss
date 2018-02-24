@@ -1,0 +1,11 @@
+:global(.twitch) {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+
+  :global(.twitch-container) {
+    display: flex;
+    height: 100%;
+  }
+}
+

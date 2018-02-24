@@ -1,56 +1,67 @@
-/* jshint node: true */
+'use strict';
 
-module.exports = function (environment) {
-    var ENV = {
-        modulePrefix: 'jordan-hawker',
-        environment: environment,
-        baseURL: '/',
-        locationType: 'auto',
-        EmberENV: {
-            FEATURES: {
-                // Here you can enable experimental features on an ember canary build
-                // e.g. 'with-controller': true
-            }
-        },
+module.exports = function(environment) {
+  let ENV = {
+    modulePrefix: 'jordan-hawker',
+    environment,
+    rootURL: '/',
+    locationType: 'auto',
+    EmberENV: {
+      FEATURES: {
+        // Here you can enable experimental features on an ember canary build
+        // e.g. 'with-controller': true
+      },
+      EXTEND_PROTOTYPES: {
+        // Prevent Ember Data from overriding Date.parse.
+        Date: false
+      }
+    },
 
-        disqus: {
-            shortname: 'jordan-hawker'
-        },
+    APP: {
+      // Here you can pass flags/options to your application instance
+      // when it is created
+    },
 
-        intl: {
-            defaultLocale: 'en-us',
-            locales: ['en-us']
-        },
+    disqus: {
+      shortname: 'jordan-hawker'
+    },
 
-        APP: {
-            // Here you can pass flags/options to your application instance
-            // when it is created
-        }
-    };
+    metricsAdapters: [{
+      name: 'Mixpanel',
+      environments: ['all'],
+      config: {
+        token: 'd34a3165a293a3f5a5696eab98ba23d0'
+      }
+    }],
 
-    if (environment === 'development') {
-        // ENV.APP.LOG_RESOLVER = true;
-        // ENV.APP.LOG_ACTIVE_GENERATION = true;
-        // ENV.APP.LOG_TRANSITIONS = true;
-        // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
-        // ENV.APP.LOG_VIEW_LOOKUPS = true;
+    moment: {
+      outputFormat: 'MMMM DD, YYYY'
     }
+  };
 
-    if (environment === 'test') {
-        // Testem prefers this...
-        ENV.baseURL = '/';
-        ENV.locationType = 'none';
+  if (environment === 'development') {
+    // ENV.APP.LOG_RESOLVER = true;
+    // ENV.APP.LOG_ACTIVE_GENERATION = true;
+    // ENV.APP.LOG_TRANSITIONS = true;
+    // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
+    // ENV.APP.LOG_VIEW_LOOKUPS = true;
+  }
 
-        // keep test console output quieter
-        ENV.APP.LOG_ACTIVE_GENERATION = false;
-        ENV.APP.LOG_VIEW_LOOKUPS = false;
+  if (environment === 'test') {
+    // Testem prefers this...
+    ENV.locationType = 'none';
 
-        ENV.APP.rootElement = '#ember-testing';
-    }
+    // keep test console output quieter
+    ENV.APP.LOG_ACTIVE_GENERATION = false;
+    ENV.APP.LOG_VIEW_LOOKUPS = false;
 
-    if (environment === 'production') {
+    ENV.APP.rootElement = '#ember-testing';
+    ENV.APP.autoboot = false;
+  }
 
-    }
+  if (environment === 'production') {
+    // here you can enable a production-specific feature
+  }
 
-    return ENV;
+  return ENV;
 };

@@ -1,5 +1,9 @@
-import Ember from 'ember';
+import Controller from '@ember/controller';
 
-export default Ember.Controller.extend({
-    sortBy: ['date:desc']
+export default Controller.extend({
+  init() {
+    this._super(...arguments);
+
+    this.set('sortBy', ['date:desc']);
+  }
 });

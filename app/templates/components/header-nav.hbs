@@ -1,0 +1,18 @@
+<div local-class="header-container">
+  <div local-class="links">
+    <img local-class="header-logo" {{action 'goToIndex'}} src="assets/logo-small.jpg"/>
+    {{#header-nav-link 'blog'}}Blog{{/header-nav-link}}
+    {{#header-nav-link 'projects'}}Projects{{/header-nav-link}}
+    {{#header-nav-link 'twitch'}}Twitch{{/header-nav-link}}
+    {{#header-nav-link 'music'}}Music{{/header-nav-link}}
+    {{#header-nav-link 'resume'}}Resume{{/header-nav-link}}
+    {{#header-nav-link 'about'}}About{{/header-nav-link}}
+    {{#header-nav-link 'contact'}}Contact{{/header-nav-link}}
+  </div>
+
+  <div local-class="spacer"></div>
+
+  <a href="http://jhawk.co/hellfire-twitch" local-class="header-icon" target="_blank">{{fa-icon 'twitch' size=1}}</a>
+  <a href="http://jhawk.co/JHTwitter" local-class="header-icon" target="_blank">{{fa-icon 'twitter' size=1}}</a>
+  <a href="http://jhawk.co/JHLinkedIn" local-class="header-icon" target="_blank">{{fa-icon 'linkedin-square' size=1}}</a>
+</div>
