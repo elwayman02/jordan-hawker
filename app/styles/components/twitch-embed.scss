@@ -54,9 +54,20 @@
     }
   }
 
-  @media screen and (max-width: 45.5rem) {
+  @media screen and (max-width: 46rem) {
     .container {
-      padding-bottom: 100%;
+      padding-bottom: 125%;
+    }
+  }
+
+  @media screen and (max-width: 30rem) {
+    .container {
+      padding-bottom: 175%;
+
+      button {
+        font-size: 1rem;
+        padding: medium small;
+      }
     }
   }
 }
