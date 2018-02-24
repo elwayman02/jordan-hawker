@@ -1,0 +1,5 @@
+{{#if post}}
+  {{tumblr-post-text post=post formatDates=true}}
+
+  {{disqus-comments identifier=post.id title=post.title}}
+{{/if}}

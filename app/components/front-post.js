@@ -1,9 +1,7 @@
-import TumblrPostText from 'ember-tumblr/components/tumblr-post-text';
+import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 
-export default TumblrPostText.extend({
-  layoutName: 'components/tumblr-post-text',
-
+export default Component.extend({
   localClassNames: 'front-post',
 
   store: service(),
