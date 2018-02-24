@@ -10,8 +10,12 @@
   .container {
     background: color-dark;
     border-radius: 0.5rem;
-    padding: medium large large large;
-    margin: small;
+    height: 0;
+    margin: small large;
+    min-width: 68.1rem; // Breakpoint where embed tries to go vertical
+    padding: medium large 45% large; // Forces aspect ratio
+    position: relative;
+    width: 100%;
 
     .tabs {
       margin: 0 medium;
@@ -42,9 +46,11 @@
     }
 
     iframe {
-      height: 30rem;
-      margin: medium medium 0 medium;
-      width: 87.3rem;
+      height: calc(100% - twitch-button-height - 3*medium);
+      left: large;
+      position: absolute;
+      top: twitch-button-height + medium;
+      width: calc(100% - 2*large);
     }
   }
 }
