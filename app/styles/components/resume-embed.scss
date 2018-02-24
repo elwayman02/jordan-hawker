@@ -13,7 +13,7 @@
   .iframe-container {
     height: calc(100% - (large + 5rem));
     margin: 0 auto large auto;
-    width: 85rem;
+    max-width: 85rem;
 
     iframe {
       height: 100%;
