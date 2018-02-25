@@ -10,7 +10,7 @@ export default RESTAdapter.extend({
   clientId: 'gxz07x8f6xtut1t7aiv31tyw6qhnmq',
 
   headers: computed('clientId', function () {
-    return { 'Client-Id': this.get('clientId') };
+    return { 'Client-Id': this.clientId };
   }),
 
   pathForType(type) {

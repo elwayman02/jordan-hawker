@@ -16,7 +16,7 @@ export default Component.extend({
 
     this.set('defaultUsernames', ['axlehellfire', 'boardgames']);
 
-    this.findActiveStream({ user_login: this.get('defaultUsernames') }).then((id) => {
+    this.findActiveStream({ user_login: this.defaultUsernames }).then((id) => {
       if (id) {
         this.loadActiveUser(id);
       } else {
@@ -38,13 +38,13 @@ export default Component.extend({
   },
 
   findUser(username) {
-    return this.get('store').queryRecord('twitch-user', { login: username }).then((user) => {
+    return this.store.queryRecord('twitch-user', { login: username }).then((user) => {
       return user.get('id');
     });
   },
 
   loadFollows(id) {
-    return this.get('store').query('twitch-follow', { from_id: id, first: 98 }).then((follows) => {
+    return this.store.query('twitch-follow', { from_id: id, first: 98 }).then((follows) => {
       return follows.map((follow) => {
         return follow.get('toId');
       });
@@ -52,7 +52,7 @@ export default Component.extend({
   },
 
   findActiveStream(query) {
-    return this.get('store').query('twitch-stream', query).then((streams) => {
+    return this.store.query('twitch-stream', query).then((streams) => {
       let streamCount = streams.get('length');
       let liveId;
 
@@ -80,32 +80,32 @@ export default Component.extend({
   },
 
   loadActiveUser(id) {
-    this.get('store').queryRecord('twitch-user', { id }).then((user) => {
+    this.store.queryRecord('twitch-user', { id }).then((user) => {
       this.set('activeUsername', user.get('login'));
-      if (!this.get('defaultUsernames').includes(user.get('login'))) {
+      if (!this.defaultUsernames.includes(user.get('login'))) {
         this.set('followUser', user);
       }
     });
   },
 
   embedUrl: computed('activeUsername', function () {
-    return `https://embed.twitch.tv/?channel=${this.get('activeUsername')}&theme=dark`;
+    return `https://embed.twitch.tv/?channel=${this.activeUsername}&theme=dark`;
   }),
 
   axleButtonClass: computed('activeUsername', function () {
-    if (this.get('activeUsername') === 'axlehellfire') {
+    if (this.activeUsername === 'axlehellfire') {
       return 'active';
     }
   }),
 
   tiltedButtonClass: computed('activeUsername', function () {
-    if (this.get('activeUsername') === 'boardgames') {
+    if (this.activeUsername === 'boardgames') {
       return 'active';
     }
   }),
 
   followButtonClass: computed('{activeUsername,followUser}', function () {
-    if (this.get('activeUsername') === this.get('followUser.login')) {
+    if (this.activeUsername === this.get('followUser.login')) {
       return 'active';
     }
   }),

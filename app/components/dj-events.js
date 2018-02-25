@@ -17,7 +17,7 @@ export default Component.extend(ComponentInteractivity, {
 
     this.set('events', []);
 
-    this.get('store').findAll('event').then((events) => {
+    this.store.findAll('event').then((events) => {
       this.set('events', events);
       this.set('loading', false);
     });
@@ -28,6 +28,6 @@ export default Component.extend(ComponentInteractivity, {
   recurringEvents: computed.filterBy('events', 'type', 'recurring'),
 
   isInteractive(didReportInteractive) {
-    return !this.get('loading') && didReportInteractive('dj-event', { count: this.get('events.length') });
+    return !this.loading && didReportInteractive('dj-event', { count: this.get('events.length') });
   }
 });

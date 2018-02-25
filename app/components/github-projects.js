@@ -19,13 +19,13 @@ export default Component.extend(ComponentInteractivity, {
 
     this.set('repos', []);
 
-    this.get('store').query('github-repository', { user: 'elwayman02', sort: 'updated' }).then((repos) => {
+    this.store.query('github-repository', { user: 'elwayman02', sort: 'updated' }).then((repos) => {
       this.set('repos', repos);
       this.set('loading', false);
     });
   },
 
   isInteractive(didReportInteractive) {
-    return !this.get('loading') && didReportInteractive('github-project', { count: this.get('sourceRepos.length') });
+    return !this.loading && didReportInteractive('github-project', { count: this.get('sourceRepos.length') });
   }
 });

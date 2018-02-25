@@ -14,13 +14,13 @@ export default Component.extend(ComponentInteractivity, {
 
     this.set('recommendations', []);
 
-    this.get('store').findAll('recommendation').then((recommendations) => {
+    this.store.findAll('recommendation').then((recommendations) => {
       this.set('recommendations', recommendations);
       this.set('loading', false);
     });
   },
 
   isInteractive(didReportInteractive) {
-    return !this.get('loading') && didReportInteractive('recommendation-item');
+    return !this.loading && didReportInteractive('recommendation-item');
   }
 });

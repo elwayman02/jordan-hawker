@@ -8,7 +8,7 @@ export default Component.extend({
 
   actions: {
     goToIndex() {
-      this.get('router').transitionTo('index');
+      this.router.transitionTo('index');
     }
   }
 });
