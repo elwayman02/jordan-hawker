@@ -123,7 +123,7 @@ export default RESTAdapter.extend({
       "text": "Jordan is an extremely thorough developer with very strong analytical skills. In addition, he is very creative in his approach to solving problems. When working on our queryCategorizr project which was published at the top-tier International World Wide Web (WWW 2015) conference in Florence, he was always aware of the bigger picture and how individual items in the product affected the whole, and was critical to the project success. In addition to his engineering skills, Jordan always brings enthusiasm and positivity to the table, and I must say that he is a true pleasure to work with.",
       "firstName": "Nemanja",
       "lastName": "Djuric",
-      "role": "Senior Applied Scientist - Machine Learning Tech Lead",
+      "role": "Machine Learning Tech Lead",
       "company": "Uber Advanced Technologies Group"
     }, {
       "id": 529273981,
