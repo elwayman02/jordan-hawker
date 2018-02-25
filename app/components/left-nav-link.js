@@ -8,7 +8,7 @@ const LeftNavLink =  Component.extend({
   router: service(),
 
   click() {
-    this.get('router').transitionTo(this.get('name'));
+    this.router.transitionTo(this.name);
   }
 });
 

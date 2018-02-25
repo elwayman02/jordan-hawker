@@ -11,7 +11,7 @@ export default Component.extend({
   init() {
     this._super(...arguments);
 
-    this.get('store').queryRecord('tumblr-post-text', {
+    this.store.queryRecord('tumblr-post-text', {
       limit: 1
     }).then((post) => {
       this.set('post', post);

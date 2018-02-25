@@ -18,12 +18,11 @@ export default Component.extend({
   init() {
     this._super(...arguments);
 
-    let username = this.get('username');
-    if (username) {
-      this.get('store').queryRecord('twitch-user', { login: username }).then((user) => {
+    if (this.username) {
+      this.store.queryRecord('twitch-user', { login: this.username }).then((user) => {
         this.set('user', user);
 
-        this.get('store').query('twitch-video', { user_id: user.get('id') }).then((videos) => {
+        this.store.query('twitch-video', { user_id: user.get('id') }).then((videos) => {
           this.set('videos', videos);
         });
       });

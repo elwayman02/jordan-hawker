@@ -26,7 +26,7 @@ export default Component.extend(ComponentInteractivity, {
   },
 
   leftIndex: computed('index', 'content.[]', function () {
-    const index = this.get('index');
+    const index = this.index;
 
     if (index > 0) {
       return index - 1;
@@ -36,7 +36,7 @@ export default Component.extend(ComponentInteractivity, {
   }),
 
   rightIndex: computed('index', 'content.[]', function () {
-    const index = this.get('index');
+    const index = this.index;
 
     if (index < (this.get('content.length') - 1)) {
       return index + 1;
@@ -46,23 +46,23 @@ export default Component.extend(ComponentInteractivity, {
   }),
 
   leftItem: computed('content.[]', 'leftIndex', function () {
-    return this.get('content').objectAt(this.get('leftIndex'));
+    return this.content.objectAt(this.leftIndex);
   }),
 
   mainItem: computed('content.[]', 'index', function () {
-    return this.get('content').objectAt(this.get('index'));
+    return this.content.objectAt(this.index);
   }),
 
   rightItem: computed('content.[]', 'rightIndex', function () {
-    return this.get('content').objectAt(this.get('rightIndex'));
+    return this.content.objectAt(this.rightIndex);
   }),
 
   moveLeft() {
-    this.set('index', this.get('leftIndex'));
+    this.set('index', this.leftIndex);
   },
 
   moveRight() {
-    this.set('index', this.get('rightIndex'));
+    this.set('index', this.rightIndex);
   },
 
   didInsertElement() {

@@ -14,10 +14,10 @@ export default Model.extend({
   publishedAt: attr('date'),
 
   thumbnailImg: computed('thumbnailUrl', function () {
-    return this.get('thumbnailUrl').replace('%{width}', '160').replace('%{height}', '90');
+    return this.thumbnailUrl.replace('%{width}', '160').replace('%{height}', '90');
   }),
 
   url: computed('id', function () {
-    return `https://www.twitch.tv/videos/${this.get('id')}`;
+    return `https://www.twitch.tv/videos/${this.id}`;
   })
 });
