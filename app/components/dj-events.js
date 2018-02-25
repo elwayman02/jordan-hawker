@@ -4,8 +4,6 @@ import { inject as service } from '@ember/service';
 import ComponentInteractivity from 'ember-interactivity/mixins/component-interactivity';
 
 export default Component.extend(ComponentInteractivity, {
-  localClassNames: 'dj-events',
-
   store: service(),
 
   events: null,
