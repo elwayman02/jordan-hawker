@@ -6,6 +6,15 @@ module.exports = function(defaults) {
   let app = new EmberApp(defaults, {
     "ember-font-awesome": {
       includeFontFiles:false
+    },
+
+    prember: {
+      urls: [
+        '/',
+        '/about',
+        '/contact',
+        '/projects'
+      ]
     }
   });
 
