@@ -2,8 +2,6 @@ import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 
 export default Component.extend({
-  localClassNames: 'front-post',
-
   store: service(),
 
   post: null,
