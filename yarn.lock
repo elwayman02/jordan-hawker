@@ -6699,7 +6699,16 @@ prelude-ls@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.1.2.tgz#21932a549f5e52ffd9a827f570e04be62a97da54"
 
-prember@^0.2.2:
+prember-middleware@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/prember-middleware/-/prember-middleware-0.1.0.tgz#00314e6fe869fdb0b3c4ca7099f7f03315d66b9b"
+  dependencies:
+    chalk "^2.3.0"
+    clean-base-url "^1.0.0"
+    ember-cli-babel "^6.6.0"
+    prember "*"
+
+prember@*, prember@^0.2.2:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/prember/-/prember-0.2.2.tgz#77e6c2984908165138b7c1538269e3a9e64d9377"
   dependencies:
