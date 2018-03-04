@@ -1,10 +1,16 @@
 <div class="blog">
   {{newsletter-signup}}
 
-  {{tumblr-blog
-    posts=model
-    postsRoute='post'
-    collapsible=true
-    formatDates=true
-    sortBy=sortBy}}
+  {{#if model.isLoaded}}
+    {{tumblr-blog
+      posts=model
+      postsRoute='post'
+      collapsible=true
+      formatDates=true
+      sortBy=sortBy}}
+  {{else}}
+    {{placeholder-post}}
+    {{placeholder-post}}
+    {{placeholder-post}}
+  {{/if}}
 </div>

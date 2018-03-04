@@ -2917,6 +2917,13 @@ ember-compatibility-helpers@^0.1.1:
     ember-cli-version-checker "^2.0.0"
     semver "^5.4.1"
 
+ember-content-placeholders@elwayman02/ember-content-placeholders#ember-3:
+  version "0.5.0"
+  resolved "https://codeload.github.com/elwayman02/ember-content-placeholders/tar.gz/b2d0d4875c71917a6bdf8565f87fb6a5885c6f4f"
+  dependencies:
+    ember-cli-babel "^6.6.0"
+    ember-cli-htmlbars "^2.0.1"
+
 ember-css-modules-sass@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/ember-css-modules-sass/-/ember-css-modules-sass-1.0.0.tgz#657feddc9a257d18f2bf3bf5141c6365b1fa42ca"

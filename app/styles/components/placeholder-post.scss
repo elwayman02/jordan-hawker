@@ -1,0 +1,30 @@
+$ember-content-placeholders-line-height: 16px;
+$ember-content-placeholders-spacing: 5px;
+
+@import "ember-content-placeholders";
+
+@value large, very-large from 'jordan-hawker/styles/spacing';
+
+.placeholder-post {
+  margin-top: large;
+
+  :global(.ember-content-placeholders-heading__title) {
+    height: 2.4rem;
+    max-width: 50rem;
+  }
+
+  :global(.ember-content-placeholders-heading__subtitle) {
+    margin-bottom: very-large;
+    margin-left: 0;
+    max-width: 20rem;
+  }
+
+  :global(.ember-content-placeholders-text__line) {
+    margin-left: 0;
+  }
+
+  :global(.ember-content-placeholders-img) {
+    height: 20rem;
+    max-width: 50rem;
+  }
+}
