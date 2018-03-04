@@ -1,0 +1,11 @@
+@import 'ember-content-placeholders';
+
+.placeholder-video {
+  height: 9rem;
+  width: 16rem;
+
+  :global(.ember-content-placeholders-img) {
+    height: 9rem;
+    width: 16rem;
+  }
+}

@@ -1,3 +1,5 @@
+@import 'ember-content-placeholders';
+
 @value color-dark, color-white from 'jordan-hawker/styles/colors';
 @value small, medium, large, very-large from 'jordan-hawker/styles/spacing';
 
@@ -22,6 +24,34 @@
       font-size: 4rem;
       margin: auto 0;
     }
+  }
+
+  .videos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .video-thumbnail {
+      margin: 0 small;
+    }
+
+    :global(.placeholder-video) {
+      margin: small;
+    }
+  }
+
+  :global(.ember-content-placeholders-heading__title) {
+    height: 2.4rem;
+    margin-top: very-large;
+    width: 50%;
+  }
+
+  :global(.ember-content-placeholders-heading__subtitle) {
+    display: none;
+  }
+
+  :global(.ember-content-placeholders-text__line) {
+    margin-bottom: very-large;
   }
 }
 
