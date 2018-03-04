@@ -11,6 +11,12 @@ module.exports = function(defaults) {
     prember: {
       urls: [
         '/',
+        '/about',
+        '/blog',
+        '/contact',
+        '/music',
+        '/projects',
+        '/twitch'
       ]
     },
 

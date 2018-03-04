@@ -1,2 +1,8 @@
-/    /index.html   200
-/*    /_empty.html   200
+/         /index.html          200
+/about    /about/index.html    200
+/blog     /blog/index.html     200
+/contact  /contact/index.html  200
+/music    /music/index.html    200
+/projects /projects/index.html 200
+/twitch   /twitch/index.html   200
+/*        /_empty.html         200
