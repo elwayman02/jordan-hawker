@@ -1,0 +1,22 @@
+@import 'ember-content-placeholders';
+
+@value color-dark from 'jordan-hawker/styles/colors';
+@value very-small, large, medium, very-large from 'jordan-hawker/styles/spacing';
+
+.placeholder-project {
+  border: very-small solid color-dark;
+  border-radius: 0.5rem;
+  height: 17rem;
+  margin: medium;
+  padding: 0 large;
+  width: 24rem;
+
+  :global(.ember-content-placeholders-heading__title) {
+    height: 2.4rem;
+    margin-top: 2*very-large;
+  }
+
+  :global(.ember-content-placeholders-heading__subtitle) {
+    display: none;
+  }
+}
