@@ -1,4 +1,5 @@
 @value color-dark, color-white from 'jordan-hawker/styles/colors';
+@value z-index-above from 'jordan-hawker/styles/layers';
 @value medium from 'jordan-hawker/styles/spacing';
 
 @value header-height: 2.8rem;
@@ -14,6 +15,7 @@
   text-align: center;
   top: 0;
   width: 100%;
+  z-index: z-index-above;
 
   h4 {
     cursor: pointer;
