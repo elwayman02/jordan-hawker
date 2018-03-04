@@ -7,10 +7,16 @@ module.exports = function(defaults) {
     "ember-font-awesome": {
       includeFontFiles:false
     },
+
     prember: {
       urls: [
         '/',
       ]
+    },
+
+    sourcemaps: {
+      enabled: true,
+      extensions: ['js']
     }
   });
 

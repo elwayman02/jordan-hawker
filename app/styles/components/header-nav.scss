@@ -1,4 +1,5 @@
 @value color-dark, color-white from 'jordan-hawker/styles/colors';
+@value z-index-above from 'jordan-hawker/styles/layers';
 @value small, medium from 'jordan-hawker/styles/spacing';
 
 @value logo-height: 3.2rem;
@@ -11,6 +12,7 @@
   position: fixed;
   top: 0;
   width: 100%;
+  z-index: z-index-above;
 
   .header-container {
     display: flex;

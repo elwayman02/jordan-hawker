@@ -1,6 +1,8 @@
 @value color-base from 'jordan-hawker/styles/colors';
-@value header-full-height from 'jordan-hawker/styles/components/header-bar';
+@value z-index-default from 'jordan-hawker/styles/layers';
 @value large from 'jordan-hawker/styles/spacing';
+
+@value header-full-height from 'jordan-hawker/styles/components/header-bar';
 
 html {
   font-size: 62.5%;
@@ -17,6 +19,7 @@ body {
   height: calc(100vh - header-full-height);
   margin-top: header-full-height;
   overflow: hidden;
+  z-index: z-index-default;
 
   :global(#content) {
     height: calc(100% - large);
