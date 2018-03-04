@@ -5,6 +5,8 @@ export default Mixin.create({
   fastboot: service(),
   actions: {
     didTransition() {
+      this._super(...arguments);
+
       if(this.get('fastboot.isFastBoot')) {
         return;
       }
