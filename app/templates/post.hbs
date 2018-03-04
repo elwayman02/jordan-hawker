@@ -1,3 +1,7 @@
-{{tumblr-post-text post=model formatDates=true}}
+{{#if model.isLoaded}}
+  {{tumblr-post-text post=model formatDates=true}}
+{{else}}
+  {{placeholder-post}}
+{{/if}}
 
 {{disqus-comments identifier=model.id title=model.title}}
