@@ -5,10 +5,24 @@
     <a href="{{url}}" target="_blank">{{fa-icon 'twitch' size=(if media.isMobile 1 2)}}</a>
   </span>
   <p local-class="description">{{user.description}}</p>
+{{else}}
+  {{#content-placeholders centered=true rounded=true as |placeholder|}}
+    {{placeholder.heading}}
+    {{placeholder.text lines=1}}
+  {{/content-placeholders}}
 {{/if}}
 
-{{#each videos as |video|}}
-  <a href="{{video.url}}" target="_blank">
-    <img local-class="video-thumbnail" src="{{video.thumbnailImg}}"/>
-  </a>
-{{/each}}
+<div local-class="videos">
+  {{#each videos as |video|}}
+    <a href="{{video.url}}" target="_blank">
+      <img local-class="video-thumbnail" src="{{video.thumbnailImg}}"/>
+    </a>
+  {{else}}
+    {{placeholder-video}}
+    {{placeholder-video}}
+    {{placeholder-video}}
+    {{placeholder-video}}
+    {{placeholder-video}}
+    {{placeholder-video}}
+  {{/each}}
+</div>
