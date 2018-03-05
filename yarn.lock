@@ -3057,9 +3057,9 @@ ember-inflector@^2.0.0:
   dependencies:
     ember-cli-babel "^6.0.0"
 
-ember-interactivity@0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/ember-interactivity/-/ember-interactivity-0.3.0.tgz#97c5761597e948af5cde7c195b30b34424bcda1c"
+ember-interactivity@0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/ember-interactivity/-/ember-interactivity-0.4.0.tgz#cabc17ea05ef27e2d1407d6f7252e469a354c7e5"
   dependencies:
     ember-cli-babel "^6.6.0"
     ember-cli-htmlbars "^2.0.1"
