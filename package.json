@@ -46,7 +46,7 @@
     "ember-disqus": "^0.2.1",
     "ember-export-application-global": "^2.0.0",
     "ember-font-awesome": "^4.0.0-rc.2",
-    "ember-interactivity": "0.3.0",
+    "ember-interactivity": "0.4.0",
     "ember-load-initializers": "^1.0.0",
     "ember-maybe-import-regenerator": "^0.1.6",
     "ember-metrics": "^0.12.1",
