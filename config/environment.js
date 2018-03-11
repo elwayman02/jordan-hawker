@@ -5,7 +5,9 @@ module.exports = function(environment) {
     modulePrefix: 'jordan-hawker',
     environment,
     rootURL: '/',
-    locationType: 'auto',
+    locationType: 'router-scroll',
+    historySupportMiddleware: true,
+
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -36,6 +38,10 @@ module.exports = function(environment) {
 
     moment: {
       outputFormat: 'MMMM DD, YYYY'
+    },
+
+    routerScroll: {
+      scrollElement: '#content'
     }
   };
 
