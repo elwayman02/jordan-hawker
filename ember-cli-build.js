@@ -8,6 +8,10 @@ module.exports = function(defaults) {
       includeFontFiles:false
     },
 
+    fingerprint: {
+      exclude: ['favicon']
+    },
+
     prember: {
       urls: [
         '/',
