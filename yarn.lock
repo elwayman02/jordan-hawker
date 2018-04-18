@@ -3144,9 +3144,9 @@ ember-css-modules@^0.7.4:
     semver "^5.5.0"
     toposort "^1.0.6"
 
-ember-data-github@0.7.1:
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/ember-data-github/-/ember-data-github-0.7.1.tgz#b1751849b0f82176fadd10bb195b74e2dc4be637"
+ember-data-github@0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/ember-data-github/-/ember-data-github-0.8.0.tgz#715d210e4fbdc8e9366d72a29c1465eb18a6af12"
   dependencies:
     broccoli-funnel "^2.0.1"
     broccoli-merge-trees "^2.0.0"
