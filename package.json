@@ -44,7 +44,7 @@
     "ember-css-modules-sass": "^1.0.0",
     "ember-data": "~3.3.0-canary",
     "ember-data-github": "0.8.1",
-    "ember-disqus": "^0.2.1",
+    "ember-disqus": "^1.0.0",
     "ember-export-application-global": "^2.0.0",
     "ember-font-awesome": "^4.0.0-rc.2",
     "ember-interactivity": "^1.0.0",
