@@ -40,7 +40,7 @@
     "ember-cli-sri": "^2.1.0",
     "ember-cli-uglify": "^2.0.0",
     "ember-content-placeholders": "elwayman02/ember-content-placeholders#ember-3",
-    "ember-css-modules": "^0.7.4",
+    "ember-css-modules": "^1.0.1",
     "ember-css-modules-sass": "^1.0.0",
     "ember-data": "~3.3.0-canary",
     "ember-data-github": "0.8.1",
