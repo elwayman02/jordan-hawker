@@ -42,7 +42,7 @@
     "ember-content-placeholders": "elwayman02/ember-content-placeholders#ember-3",
     "ember-css-modules": "^1.0.1",
     "ember-css-modules-sass": "^1.0.0",
-    "ember-data": "~3.3.0-canary",
+    "ember-data": "~3.5.2",
     "ember-data-github": "0.8.1",
     "ember-disqus": "^1.0.0",
     "ember-export-application-global": "^2.0.0",
