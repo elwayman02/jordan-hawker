@@ -8159,9 +8159,10 @@ prember@*:
     fastboot "^1.1.0"
     mkdirp "^0.5.1"
 
-prember@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/prember/-/prember-0.3.0.tgz#cc32a6a7f71535ebe7bee2351f8224cb4c1b2dd6"
+prember@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/prember/-/prember-1.0.3.tgz#417c1fd4419b6e028c87477915d255ef8c045030"
+  integrity sha512-N4HanZE+elLgHnXGA0ti6L+zrxdRuAzAawea8qptJJ8oKMHhPHCcURBE9hAHgTNY3rl0vx8zrlIIr/94GRIhXA==
   dependencies:
     broccoli-debug "^0.6.3"
     broccoli-merge-trees "^2.0.0"
