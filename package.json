@@ -61,7 +61,7 @@
     "eslint-plugin-ember": "^5.0.0",
     "greenkeeper-lockfile": "^1.13.2",
     "loader.js": "^4.2.3",
-    "prember": "^0.3.0",
+    "prember": "^1.0.3",
     "prember-middleware": "^0.1.0"
   },
   "engines": {
