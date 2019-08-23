@@ -50,7 +50,7 @@
     "ember-interactivity": "^1.0.0",
     "ember-load-initializers": "^1.0.0",
     "ember-maybe-import-regenerator": "^0.1.6",
-    "ember-metrics": "^0.12.1",
+    "ember-metrics": "^0.14.0",
     "ember-moment": "^7.6.0",
     "ember-resolver": "^4.5.4",
     "ember-responsive": "^2.0.5",
