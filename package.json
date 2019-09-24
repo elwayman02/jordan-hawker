@@ -55,7 +55,7 @@
     "ember-resolver": "^4.5.4",
     "ember-responsive": "^2.0.5",
     "ember-router-scroll": "dollarshaveclub/ember-router-scroll#master",
-    "ember-source": "~3.1.0",
+    "ember-source": "~3.13.1",
     "ember-truth-helpers": "^2.0.0",
     "ember-tumblr": "^0.11.0",
     "eslint-plugin-ember": "^5.0.0",
