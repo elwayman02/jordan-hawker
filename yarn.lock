@@ -3947,13 +3947,15 @@ ember-css-modules@^1.0.1:
     semver "^5.5.0"
     toposort "^1.0.6"
 
-ember-data-github@0.8.1:
-  version "0.8.1"
-  resolved "https://registry.yarnpkg.com/ember-data-github/-/ember-data-github-0.8.1.tgz#42633f886d0cf9f61622e995ae3e954d50aa775c"
+ember-data-github@0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/ember-data-github/-/ember-data-github-0.9.0.tgz#6e4776a502f284bf5ef462d51660c52b5728bdc3"
+  integrity sha512-Nj9kQ5aTTupU5kxOjmgBjU6hadFEwyPWMZk5fFjQVyzps/qlUD2NxBtuoo8ZDM38qrHQ9ZdcEa1Gj74yx2c8lA==
   dependencies:
     broccoli-funnel "^2.0.1"
     broccoli-merge-trees "^3.0.1"
     ember-cli-babel "^6.9.0"
+    ember-inflector "^3.0.1"
 
 ember-data@~3.3.0-canary:
   version "3.3.0-canary"
@@ -4054,6 +4056,13 @@ ember-inflector@^2.0.0:
   resolved "https://registry.yarnpkg.com/ember-inflector/-/ember-inflector-2.1.0.tgz#afcb92d022a4eab58f08ff4578eafc3a1de2d09b"
   dependencies:
     ember-cli-babel "^6.0.0"
+
+ember-inflector@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/ember-inflector/-/ember-inflector-3.0.1.tgz#04be6df4d7e4000f6d6bd70787cdc995f77be4ab"
+  integrity sha512-fngrwMsnhkBt51KZgwNwQYxgURwV4lxtoHdjxf7RueGZ5zM7frJLevhHw7pbQNGqXZ3N+MRkhfNOLkdDK9kFdA==
+  dependencies:
+    ember-cli-babel "^6.6.0"
 
 ember-interactivity@^1.0.0:
   version "1.0.0"
