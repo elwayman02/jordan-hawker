@@ -1,0 +1,81 @@
+{
+  "name": "jordan-hawker",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Your Ember App's description here",
+  "repository": "",
+  "license": "MIT",
+  "author": "",
+  "type": "module",
+  "imports": {
+    "#app/*": "./app/*",
+    "#config": "./app/config.ts",
+    "#components/*": "./app/components/*",
+    "#services/*": "./app/services/*",
+    "#test-helpers/*": "./tests/helpers/*",
+    "#utils/*": "./app/utils/*"
+  },
+  "exports": {
+    "./tests/*": "./tests/*",
+    "./*": "./app/*"
+  },
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "start": "vite",
+    "lint:eslint": "eslint . --cache",
+    "lint:eslint:fix": "eslint . --fix",
+    "lint": "concurrently \"pnpm:lint:*(!fix)\" --names \"lint:\" --prefixColors auto",
+    "lint:fix": "concurrently \"pnpm:lint:*:fix\" --names \"fix:\" --prefixColors auto && pnpm format",
+    "format": "prettier --write .",
+    "lint:prettier": "prettier --check .",
+    "lint:types": "tsc --noEmit --runExternalCode",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui"
+  },
+  "dependencies": {
+    "@embroider/macros": "^1.21.4",
+    "@embroider/router": "^3.0.6",
+    "@glimmer/component": "^2.2.1",
+    "decorator-transforms": "^2.4.0",
+    "ember-source": "~7.2.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.29.7",
+    "@babel/plugin-transform-runtime": "^7.29.7",
+    "@babel/plugin-transform-typescript": "^7.29.9",
+    "@babel/runtime": "^7.29.10",
+    "@ember/app-tsconfig": "^2.1.0",
+    "@ember/test-helpers": "^5.7.0",
+    "@embroider/core": "^4.6.10",
+    "@embroider/legacy-inspector-support": "^0.1.3",
+    "@glint/ember-tsc": "^1.14.2",
+    "@glint/template": "^1.11.0",
+    "@nullvoxpopuli/ember-vite": "1.3.1",
+    "@rollup/plugin-babel": "^7.1.0",
+    "@typescript/native": "npm:typescript@^7.1.0-dev.20261029.1",
+    "@vitest/browser": "^4.1.12",
+    "@vitest/browser-webdriverio": "^4.1.11",
+    "@vitest/ui": "^4.1.12",
+    "babel-plugin-debug-macros": "^2.0.0",
+    "babel-plugin-ember-template-compilation": "^4.0.1",
+    "concurrently": "^9.2.5",
+    "ember-content-mapper": "^0.3.2",
+    "ember-eslint": "^1.0.0",
+    "ember-vitest": "^0.4.0",
+    "eslint": "^10.13.0",
+    "prettier": "^3.9.10",
+    "prettier-plugin-ember-template-tag": "^2.1.8",
+    "typescript": "npm:@typescript/typescript6@^6.0.2",
+    "vite": "^8.3.5",
+    "vitest": "^4.1.12",
+    "webdriverio": "^9.32.0"
+  },
+  "engines": {
+    "node": ">= 24"
+  },
+  "ember": {
+    "edition": "octane"
+  }
+}

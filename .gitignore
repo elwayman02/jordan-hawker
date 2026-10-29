@@ -1,0 +1,21 @@
+# compiled output
+/dist/
+/tmp/
+
+# dependencies
+/node_modules/
+
+# misc
+/.env*.local
+/.env
+/.eslintcache
+/.vite/
+/.netlify/
+/coverage/
+/.vitest-attachments/
+/__screenshots__/
+.DS_Store
+
+# editors
+/.idea/
+/.vscode/
