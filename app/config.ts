@@ -4,14 +4,17 @@ interface Config {
   rootURL: string;
   EmberENV?: Record<string, unknown>;
   APP: Record<string, unknown> & { rootElement?: string; autoboot?: boolean };
+  cloudflareAnalyticsToken?: string;
 }
 
 const ENV: Config = {
   environment: import.meta.env.DEV ? "development" : "production",
   rootURL: "/",
-  locationType: "history",
+  // tests drive the router without touching the real URL
+  locationType: import.meta.env.MODE === "test" ? "none" : "history",
   EmberENV: {},
   APP: {},
+  cloudflareAnalyticsToken: import.meta.env.VITE_CLOUDFLARE_ANALYTICS_TOKEN as string | undefined,
 };
 
 export default ENV;

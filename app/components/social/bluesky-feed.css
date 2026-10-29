@@ -1,0 +1,170 @@
+@layer components {
+  .bluesky {
+    display: grid;
+    gap: var(--space-s);
+    min-width: 0;
+  }
+
+  .bluesky__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-s);
+  }
+
+  .bluesky__handle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    text-decoration: none;
+    color: var(--muted);
+
+    & .icon {
+      color: #1185fe;
+    }
+  }
+
+  .bluesky__controls {
+    display: flex;
+    gap: var(--space-2xs);
+  }
+
+  .bluesky__track {
+    display: grid;
+    gap: var(--space-s);
+  }
+
+  .bluesky--carousel .bluesky__track {
+    grid-auto-flow: column;
+    grid-auto-columns: min(85%, 21rem);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    padding-bottom: var(--space-3xs);
+    mask-image: linear-gradient(to right, black calc(100% - 3rem), transparent);
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    & > li {
+      scroll-snap-align: start;
+    }
+  }
+
+  .skeet {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    padding: var(--space-s);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-m);
+    min-width: 0;
+  }
+
+  .skeet__text {
+    white-space: pre-line;
+    font-size: var(--step--1);
+    line-height: 1.55;
+    overflow-wrap: anywhere;
+  }
+
+  .skeet__images {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr));
+    gap: 4px;
+    border-radius: var(--radius-s);
+    overflow: hidden;
+
+    & img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+    }
+  }
+
+  .skeet__card,
+  .skeet__quote {
+    display: grid;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-s);
+    overflow: hidden;
+    text-decoration: none;
+    font-size: 0.85rem;
+    background: var(--bg);
+
+    &:hover {
+      border-color: var(--accent);
+      color: inherit;
+    }
+  }
+
+  .skeet__card img {
+    width: 100%;
+    aspect-ratio: 1.91 / 1;
+    object-fit: cover;
+  }
+
+  .skeet__card-text,
+  .skeet__quote {
+    display: grid;
+    gap: 0.15rem;
+    padding: var(--space-2xs) var(--space-xs);
+  }
+
+  .skeet__card-host {
+    color: var(--muted);
+    font-size: 0.75rem;
+  }
+
+  .skeet__card-title,
+  .skeet__quote-author {
+    font-weight: 600;
+  }
+
+  .skeet__quote-text {
+    color: var(--muted);
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .skeet__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    font-size: 0.8rem;
+    color: var(--muted);
+
+    & a {
+      color: inherit;
+      text-decoration: none;
+
+      &:hover {
+        color: var(--accent-strong);
+      }
+    }
+  }
+
+  .skeet__stats {
+    display: flex;
+    gap: var(--space-xs);
+
+    & span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25em;
+    }
+
+    & .icon {
+      width: 0.95em;
+      height: 0.95em;
+    }
+  }
+}

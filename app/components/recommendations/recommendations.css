@@ -1,0 +1,114 @@
+@layer components {
+  .recommendation-wall {
+    columns: 3 20rem;
+    column-gap: var(--space-m);
+  }
+
+  .recommendation {
+    break-inside: avoid;
+    display: grid;
+    gap: var(--space-s);
+    margin-bottom: var(--space-m);
+    padding: var(--space-m);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-m);
+  }
+
+  .recommendation__mark {
+    color: var(--accent);
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .recommendation__text {
+    font-size: var(--step--1);
+    line-height: 1.65;
+  }
+
+  .recommendation__by {
+    display: grid;
+    line-height: 1.35;
+  }
+
+  .recommendation__name {
+    font-weight: 650;
+  }
+
+  .recommendation__role {
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+
+  .quote-rotator {
+    position: relative;
+    display: grid;
+    gap: var(--space-m);
+    padding: clamp(var(--space-m), 5vw, var(--space-xl));
+    border-radius: var(--radius-l);
+    background:
+      radial-gradient(circle at 100% 0%, var(--accent-soft), transparent 55%), var(--surface);
+    border: 1px solid var(--line);
+  }
+
+  .quote-rotator__mark {
+    width: 2.5rem;
+    height: 2.5rem;
+    color: var(--accent);
+  }
+
+  .quote-rotator__slide {
+    display: grid;
+    gap: var(--space-m);
+    animation: quote-in 0.5s var(--ease-out);
+  }
+
+  .quote-rotator__text {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    font-weight: 400;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    text-wrap: pretty;
+  }
+
+  .quote-rotator__by {
+    display: grid;
+  }
+
+  .quote-rotator__controls {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+
+  .quote-rotator__position {
+    font-size: var(--step--1);
+    color: var(--muted);
+    min-width: 5.5em;
+    text-align: center;
+  }
+
+  .quote-rotator__button {
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    aspect-ratio: 1;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--bg);
+    cursor: pointer;
+
+    &:hover {
+      border-color: var(--accent);
+      color: var(--accent-strong);
+    }
+  }
+
+  @keyframes quote-in {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+  }
+}
