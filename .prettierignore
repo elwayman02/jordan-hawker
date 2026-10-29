@@ -20,3 +20,7 @@ package-lock.json
 
 # ember-try
 /.node_modules.ember-try/
+
+# test fixtures are byte-for-byte copies of upstream formats
+/server/fixtures/
+/.netlify/

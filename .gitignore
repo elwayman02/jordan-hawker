@@ -13,7 +13,7 @@
 /.netlify/
 /coverage/
 /.vitest-attachments/
-/__screenshots__/
+__screenshots__/
 .DS_Store
 
 # editors

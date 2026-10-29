@@ -8,12 +8,14 @@
       "@embroider/core/virtual",
       "vite/client",
       "@glint/ember-tsc/types",
-    ],
+      "unplugin-icons/types/raw",
+      "node"
+    ]
   },
   "contentMappers": [
     {
       "package": "ember-content-mapper",
-      "extensions": [".gts", ".gjs"],
-    },
-  ],
+      "extensions": [".gts", ".gjs"]
+    }
+  ]
 }
