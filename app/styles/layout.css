@@ -69,6 +69,22 @@
       top: 6rem;
     }
   }
+
+  /* see app/modifiers/sticky-rail.ts */
+  .sticky-rail {
+    @media (min-width: 48rem) {
+      position: sticky;
+      top: min(6rem, 100dvh - var(--rail-height, 0px) - var(--space-l));
+    }
+  }
+
+  .split--rail {
+    @media (min-width: 48rem) {
+      grid-template-columns: minmax(0, 1fr) clamp(16rem, 30vw, 20rem);
+      gap: var(--space-l) clamp(var(--space-l), 4vw, var(--space-xl));
+      align-items: start;
+    }
+  }
 }
 
 @layer components {

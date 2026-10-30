@@ -21,6 +21,7 @@ import repeat from "~icons/lucide/repeat-2";
 import star from "~icons/lucide/star";
 import sun from "~icons/lucide/sun";
 import bluesky from "~icons/ri/bluesky-fill";
+import discord from "~icons/ri/discord-fill";
 import facebook from "~icons/ri/facebook-circle-fill";
 import github from "~icons/ri/github-fill";
 import instagram from "~icons/ri/instagram-line";
@@ -38,6 +39,7 @@ export const icons = {
   bluesky,
   chevronLeft,
   chevronRight,
+  discord,
   facebook,
   fileText,
   gitFork,

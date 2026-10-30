@@ -1,3 +1,4 @@
+import CopyButton from "#components/copy-button.gts";
 import Icon from "#components/icon.gts";
 import SocialLinks from "#components/social-links.gts";
 import { hellaDrunk, site, socialLinks } from "#app/data/site.ts";
@@ -14,14 +15,20 @@ const year = new Date().getFullYear();
           <p class="eyebrow">hello</p>
           <h2 class="site-footer__title">Let’s talk.</h2>
           <p class="muted">
-            Whether it’s a role, a project, a talk, or a track — my inbox is open.
+            Whether it’s a role, a project, a talk, or a track — my inbox and DMs are open.
           </p>
-          <p>
+          <div class="site-footer__channels">
             <a class="button primary" href="mailto:{{site.email}}">
               <Icon @name="mail" />
               {{site.email}}
             </a>
-          </p>
+            <CopyButton
+              @value={{site.discord}}
+              @label="@{{site.discord}}"
+              @icon="discord"
+              @description="Discord username"
+            />
+          </div>
         </div>
 
         <SocialLinks @links={{socialLinks}} @detailed={{true}} />

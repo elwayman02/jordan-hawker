@@ -19,11 +19,12 @@ import "./index.css";
 
 const take = <T,>(items: T[], count: number) => items.slice(0, count);
 
+/** Each path reads as a verb: "Jordan… works", "Jordan… codes" */
 const INDEX = [
-  { route: "works", blurb: "Experience, resume & recommendations" },
-  { route: "codes", blurb: "Open source I build and maintain" },
-  { route: "sound", blurb: "Music I produce as Axle Hellfire" },
-  { route: "words", blurb: "Writing, old and new" },
+  { route: "works", blurb: "on ambitious web apps" },
+  { route: "codes", blurb: "in the open" },
+  { route: "sound", blurb: "out as Axle Hellfire" },
+  { route: "words", blurb: "every now and then" },
 ] as const;
 
 <template>
@@ -32,7 +33,10 @@ const INDEX = [
   <section class="hero">
     <div class="wrap hero__inner">
       <div class="hero__copy">
-        <p class="hero__kicker mono">Staff software engineer · SF Bay Area</p>
+        <p class="hero__kicker mono">
+          Staff software engineer · SF Bay Area
+          <a href="#contact" class="hero__status">Open to new roles</a>
+        </p>
         <h1 class="hero__title">
           Hi, I’m Jordan.
           <span class="hero__statement">I build ambitious web applications, and the platforms,
@@ -41,7 +45,7 @@ const INDEX = [
         <p class="hero__lede">
           Fifteen years building for the web at LinkedIn, Twitch, Yahoo and more: performance,
           platform architecture, developer experience, open source, and lately AI-powered product
-          work.
+          work. My next commit could be on your repo.
         </p>
         <div class="hero__actions">
           <LinkTo @route="works" class="button primary">
@@ -53,7 +57,8 @@ const INDEX = [
         <SocialLinks @links={{professionalLinks}} class="hero__social" />
       </div>
 
-      <nav class="hero__index" aria-label="Sections">
+      <nav class="hero__index" aria-labelledby="hero-index-label">
+        <p class="hero__index-label" id="hero-index-label">Jordan…</p>
         {{#each INDEX as |item|}}
           <LinkTo @route={{item.route}} class="hero__index-link">
             <span class="hero__index-word"><span

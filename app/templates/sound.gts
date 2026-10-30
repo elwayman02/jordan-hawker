@@ -14,8 +14,8 @@ import { api } from "#utils/remote.ts";
       <p class="eyebrow">sound</p>
       <h1>{{music.alias}}</h1>
       <p>
-        After years behind the decks at dance events across the country, I spend my studio time
-        writing and producing original music as
+        After years curating vibes at dance events across the country, I now spend my time in the
+        studio writing and producing original music as
         {{music.alias}}.
       </p>
       <div class="hero__actions">
