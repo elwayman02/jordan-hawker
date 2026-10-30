@@ -2,7 +2,7 @@ import { describe, expect, test } from "vitest";
 
 import { parseHella } from "./hella.ts";
 import { sanitizeArticle, unwrapLink } from "./html.ts";
-import { parseSoundCloud, parseYouTubeFeed } from "./sound.ts";
+import { parsePlaylistItems, parseSoundCloud, parseYouTubeFeed } from "./sound.ts";
 import { toPost } from "./words.ts";
 
 describe("parseSoundCloud", () => {
@@ -34,7 +34,7 @@ describe("parseSoundCloud", () => {
 });
 
 describe("parseYouTubeFeed", () => {
-  test("reads videos from the channel Atom feed", () => {
+  test("reads videos from the playlist Atom feed", () => {
     const xml = `<?xml version="1.0"?>
       <feed xmlns:yt="http://www.youtube.com/xml/schemas/2015" xmlns="http://www.w3.org/2005/Atom">
         <entry>
@@ -52,6 +52,28 @@ describe("parseYouTubeFeed", () => {
         publishedAt: "2022-08-12T00:00:00.000Z",
         thumbnail: "https://i.ytimg.com/vi/6PhHhEO3vYg/hqdefault.jpg",
       },
+    ]);
+  });
+});
+
+describe("parsePlaylistItems", () => {
+  const item = (videoId: string, title: string, videoPublishedAt?: string) => ({
+    snippet: { title, publishedAt: "2026-01-01T00:00:00Z", resourceId: { videoId } },
+    contentDetails: videoPublishedAt ? { videoPublishedAt } : {},
+  });
+
+  test("lists playlist videos newest first, skipping private or deleted ones", () => {
+    const videos = parsePlaylistItems({
+      items: [
+        item("older", "Slumber", "2020-05-09T00:00:00Z"),
+        item("gone", "Private video"),
+        item("newer", "Panorama", "2022-08-12T00:00:00Z"),
+      ],
+    });
+
+    expect(videos.map((video) => [video.id, video.publishedAt])).toEqual([
+      ["newer", "2022-08-12T00:00:00.000Z"],
+      ["older", "2020-05-09T00:00:00.000Z"],
     ]);
   });
 });

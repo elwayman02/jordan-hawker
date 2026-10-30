@@ -18,7 +18,8 @@ export const HIDDEN_REPOS: string[] = ["jordan-hawker"];
 
 export const SOUNDCLOUD_USER_ID = "28259228";
 
-export const YOUTUBE_CHANNEL_ID = "UCVYM8upCQAFKXI5VmBqz65w";
+/** Only music videos are shown, from this public playlist */
+export const YOUTUBE_PLAYLIST_ID = "PL_4QtJfs2R4kxBtVNg9Nxq65Q4gf1jNTZ";
 
 export const TUMBLR_BLOG = "jordanhawker.tumblr.com";
 

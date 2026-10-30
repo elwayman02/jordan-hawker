@@ -38,7 +38,7 @@ Nothing on the site requires a rebuild or redeploy to update. External content i
 | ------------------- | ----------------------------------------------------------------- | ------------- | --------- |
 | Resume              | Published Google Doc ([jhawk.co/resume](https://jhawk.co/resume)) | `/api/resume` | ~3 hours  |
 | Projects            | GitHub repos owned by `elwayman02`                                | `/api/codes`  | ~6 hours  |
-| Tracks & videos     | SoundCloud RSS, YouTube RSS (or Data API)                         | `/api/sound`  | ~12 hours |
+| Tracks & videos     | SoundCloud RSS, YouTube music video playlist                      | `/api/sound`  | ~12 hours |
 | Blog posts          | Tumblr API                                                        | `/api/words`  | ~12 hours |
 | Hella Drunk reviews | helladrunk.com RSS                                                | `/api/hella`  | ~1 day    |
 | Bluesky posts       | Bluesky public API, called from the browser                       | none          | live      |
@@ -67,7 +67,7 @@ Set these in Netlify (Site configuration → Environment variables) and in a loc
 | --------------------------------- | -------- | -------------------------------------------------------------------------------------------------- |
 | `TUMBLR_API_KEY`                  | yes      | Tumblr API key for `/words`                                                                        |
 | `GITHUB_TOKEN`                    | no       | Raises GitHub's API rate limit (a fine-grained token with no scopes is enough)                     |
-| `YOUTUBE_API_KEY`                 | no       | YouTube Data API v3 fallback when the channel RSS feed is unavailable                              |
+| `YOUTUBE_API_KEY`                 | no       | Reads the music video playlist on `/sound` (YouTube's no-key feed is usually unavailable)          |
 | `VITE_CLOUDFLARE_ANALYTICS_TOKEN` | no       | Enables [Cloudflare Web Analytics](https://www.cloudflare.com/web-analytics/) (read at build time) |
 
 ## Deployment

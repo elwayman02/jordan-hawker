@@ -1,5 +1,5 @@
 import type { Sound, Track, Video } from "../shared/api.ts";
-import { env, SOUNDCLOUD_USER_ID, YOUTUBE_CHANNEL_ID } from "./config.ts";
+import { env, SOUNDCLOUD_USER_ID, YOUTUBE_PLAYLIST_ID } from "./config.ts";
 import { fetchJson, fetchText, parseXml } from "./fetch.ts";
 
 const LIMIT = 8;
@@ -52,9 +52,16 @@ interface YouTubeFeed {
 export function parseYouTubeFeed(xml: string): Video[] {
   const entries = parseXml<YouTubeFeed>(xml).feed.entry ?? [];
 
-  return entries
-    .slice(0, LIMIT)
-    .map((entry) => toVideo(entry["yt:videoId"], entry.title, entry.published));
+  return newestFirst(
+    entries.map((entry) => toVideo(entry["yt:videoId"], entry.title, entry.published)),
+  );
+}
+
+/** Playlists keep their own order; the site shows the newest videos first */
+function newestFirst(videos: Video[]): Video[] {
+  return [...videos]
+    .sort((a, b) => Date.parse(b.publishedAt) - Date.parse(a.publishedAt))
+    .slice(0, LIMIT);
 }
 
 function toVideo(id: string, title: string, publishedAt: string): Video {
@@ -67,37 +74,43 @@ function toVideo(id: string, title: string, publishedAt: string): Video {
   };
 }
 
-interface PlaylistItems {
+export interface PlaylistItems {
   items: {
     snippet: { title: string; publishedAt: string; resourceId: { videoId: string } };
+    /** missing for private or deleted videos */
     contentDetails?: { videoPublishedAt?: string };
   }[];
 }
 
+export function parsePlaylistItems({ items }: PlaylistItems): Video[] {
+  return newestFirst(
+    items
+      .filter(({ contentDetails }) => contentDetails?.videoPublishedAt)
+      .map(({ snippet, contentDetails }) =>
+        toVideo(snippet.resourceId.videoId, snippet.title, contentDetails!.videoPublishedAt!),
+      ),
+  );
+}
+
 /**
- * The channel RSS feed needs no key, but has been unreliable.
- * When YOUTUBE_API_KEY is set, the Data API (uploads playlist, 1 quota unit) is used as a fallback.
+ * The playlist RSS feed needs no key, but has been unreliable (often a 404).
+ * When YOUTUBE_API_KEY is set, the Data API (1 quota unit per call) is used as a fallback.
  */
 async function getVideos(): Promise<Video[]> {
   try {
     return parseYouTubeFeed(
-      await fetchText(`https://www.youtube.com/feeds/videos.xml?channel_id=${YOUTUBE_CHANNEL_ID}`),
+      await fetchText(
+        `https://www.youtube.com/feeds/videos.xml?playlist_id=${YOUTUBE_PLAYLIST_ID}`,
+      ),
     );
   } catch (feedError) {
     const key = env("YOUTUBE_API_KEY");
 
     if (!key) throw feedError;
 
-    const uploads = YOUTUBE_CHANNEL_ID.replace(/^UC/, "UU");
-    const { items } = await fetchJson<PlaylistItems>(
-      `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&maxResults=${LIMIT}&playlistId=${uploads}&key=${key}`,
-    );
-
-    return items.map(({ snippet, contentDetails }) =>
-      toVideo(
-        snippet.resourceId.videoId,
-        snippet.title,
-        contentDetails?.videoPublishedAt ?? snippet.publishedAt,
+    return parsePlaylistItems(
+      await fetchJson<PlaylistItems>(
+        `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&maxResults=50&playlistId=${YOUTUBE_PLAYLIST_ID}&key=${key}`,
       ),
     );
   }
