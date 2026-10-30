@@ -59,8 +59,8 @@ export function parseYouTubeFeed(xml: string): Video[] {
 
 /** Playlists keep their own order; the site shows the newest videos first */
 function newestFirst(videos: Video[]): Video[] {
-  return [...videos]
-    .sort((a, b) => Date.parse(b.publishedAt) - Date.parse(a.publishedAt))
+  return videos
+    .toSorted((a, b) => Date.parse(b.publishedAt) - Date.parse(a.publishedAt))
     .slice(0, LIMIT);
 }
 
