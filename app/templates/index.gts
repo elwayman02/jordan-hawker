@@ -40,7 +40,7 @@ const INDEX = [
         <h1 class="hero__title">
           Hi, I’m Jordan.
           <span class="hero__statement">I build ambitious web applications, and the platforms,
-            tooling &amp; teams behind them.</span>
+            tooling and teams behind them.</span>
         </h1>
         <p class="hero__lede">
           Fifteen years building for the web at LinkedIn, Twitch, Yahoo and more: performance,
