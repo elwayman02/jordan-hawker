@@ -11,3 +11,7 @@ minimumReleaseAgeExclude:
   - "@typescript/typescript-win32-arm64@7.1.0-dev.20261029.1"
   - "@typescript/typescript-win32-x64@7.1.0-dev.20261029.1"
   - typescript@7.1.0-dev.20261029.1
+overrides:
+  # htmlparser2 12 is ESM-only, and sanitize-html require()s it. Netlify's function
+  # runtime doesn't support require(esm) yet, so keep sanitize-html on v10 (CJS).
+  "sanitize-html>htmlparser2": "^10.1.0"
