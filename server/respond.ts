@@ -9,7 +9,8 @@ interface CacheOptions {
   staleWhileRevalidate?: number;
 }
 
-const DAY = 60 * 60 * 24;
+export const HOUR = 60 * 60;
+const DAY = 24 * HOUR;
 
 function snapshots() {
   return getStore({ name: "api-snapshots", consistency: "strong" });
