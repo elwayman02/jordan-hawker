@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Jordan Hawker</title>
+    <meta
+      name="description"
+      content="Jordan Hawker is a staff software engineer building ambitious web applications, developer platforms, and the teams behind them."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fbf8f3" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1a1512" media="(prefers-color-scheme: dark)" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Jordan Hawker" />
+    <meta property="og:title" content="Jordan Hawker" />
+    <meta
+      property="og:description"
+      content="Staff software engineer. Web platforms, developer experience, open source, and music."
+    />
+    <meta property="og:url" content="https://www.jordanhawker.com/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="me" href="https://github.com/elwayman02" />
+    <link rel="me" href="https://bsky.app/profile/axle.jhawk.co" />
+    <!-- Cascade layer order must be declared before any stylesheet loads -->
+    <style>
+      @layer reset, tokens, base, layout, components, utilities;
+    </style>
+    <script src="/theme.js"></script>
+  </head>
+  <body>
+    <script type="module">
+      import Application from "#app/app";
+      import environment from "#config";
+
+      Application.create(environment.APP);
+    </script>
+  </body>
+</html>

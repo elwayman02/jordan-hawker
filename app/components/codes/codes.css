@@ -1,0 +1,149 @@
+@layer components {
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+    gap: var(--space-m);
+  }
+
+  .project-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    padding: var(--space-m);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-m);
+    transition:
+      border-color 0.2s,
+      transform 0.25s var(--ease-out),
+      box-shadow 0.25s;
+
+    &:hover {
+      border-color: color-mix(in oklch, var(--accent) 60%, var(--line));
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    &:has(a:focus-visible) {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+  }
+
+  .project-card__name {
+    font-family: var(--font-mono);
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+
+    & a {
+      text-decoration: none;
+
+      /* whole card is clickable */
+      &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+      }
+
+      &:focus-visible {
+        outline: none;
+      }
+    }
+  }
+
+  .project-card__description {
+    color: var(--muted);
+    font-size: var(--step--1);
+  }
+
+  .project-card__topics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3xs);
+  }
+
+  .project-card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2xs) var(--space-s);
+    margin-top: auto;
+    padding-top: var(--space-2xs);
+    font-size: 0.85rem;
+    color: var(--muted);
+
+    & > span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3em;
+    }
+
+    & .icon {
+      width: 1em;
+      height: 1em;
+    }
+  }
+
+  .project-card__language::before {
+    content: "";
+    width: 0.65em;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--language);
+  }
+
+  .project-card__updated {
+    margin-left: auto;
+  }
+
+  .archive {
+    margin-top: var(--space-xl);
+    border-top: 1px solid var(--line);
+    padding-top: var(--space-m);
+
+    & summary {
+      cursor: pointer;
+      font-family: var(--font-mono);
+      color: var(--muted);
+      width: fit-content;
+
+      &:hover {
+        color: var(--text);
+      }
+    }
+  }
+
+  .archive__list {
+    display: grid;
+    margin-top: var(--space-m);
+
+    & li {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0 var(--space-s);
+      padding-block: var(--space-xs);
+      border-bottom: 1px solid var(--line);
+    }
+
+    & a {
+      font-family: var(--font-mono);
+      font-weight: 550;
+    }
+  }
+
+  .archive__description {
+    flex: 1 1 20rem;
+    color: var(--muted);
+    font-size: var(--step--1);
+  }
+
+  .archive__meta {
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-variant-numeric: tabular-nums;
+  }
+}
