@@ -13,8 +13,6 @@ const waiter = buildWaiter("view-transition");
 
 const prefersReducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-const nextFrame = () => new Promise((resolve) => requestAnimationFrame(resolve));
-
 /** Same-origin, same-tab, plain left-clicks on links to other pages of this site */
 function internalPath(event: MouseEvent): string | undefined {
   if (event.defaultPrevented || event.button !== 0) return;
@@ -82,8 +80,8 @@ export default class ApplicationRoute extends Route {
       } catch {
         // superseded by another navigation; nothing to animate
       }
-
-      await nextFrame();
+      // Don't wait for an animation frame here: the browser pauses rendering until
+      // this callback finishes, so a frame never comes (Chrome gives up after ~4s).
     });
 
     // A newer navigation can skip this transition; that's expected, not an error.
