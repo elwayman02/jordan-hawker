@@ -22,14 +22,6 @@
     gap: var(--space-xs);
   }
 
-  .copy-button__status {
-    margin-left: 0.25em;
-    padding-left: 0.6em;
-    border-left: 1px solid var(--line);
-    color: var(--muted);
-    font-weight: 450;
-  }
-
   .site-footer__title {
     font-size: var(--step-4);
   }

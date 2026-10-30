@@ -35,7 +35,7 @@ const INDEX = [
       <div class="hero__copy">
         <p class="hero__kicker mono">
           Staff software engineer · SF Bay Area
-          <a href="#contact" class="hero__status">Open to new roles</a>
+          <a href="#contact" class="hero__status">Open to exciting opportunities</a>
         </p>
         <h1 class="hero__title">
           Hi, I’m Jordan.
@@ -45,7 +45,7 @@ const INDEX = [
         <p class="hero__lede">
           Fifteen years building for the web at LinkedIn, Twitch, Yahoo and more: performance,
           platform architecture, developer experience, open source, and lately AI-powered product
-          work. My next commit could be on your repo.
+          work. My next commit could be to your codebase.
         </p>
         <div class="hero__actions">
           <LinkTo @route="works" class="button primary">
@@ -96,7 +96,7 @@ const INDEX = [
       <div class="section-heading section-heading--row">
         <div>
           <p class="eyebrow">codes</p>
-          <h2 id="home-codes">Open source, recently active</h2>
+          <h2 id="home-codes">Built in the open</h2>
         </div>
         <LinkTo @route="codes" class="link-arrow">
           All projects

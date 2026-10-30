@@ -21,4 +21,13 @@ describe("<ProjectCard>", () => {
       "addon",
     ]);
   });
+
+  renderingTest("hides star counts under 10", async ({ element }) => {
+    const repo = { ...codes.active[0]!, stars: 7, forks: 0 };
+
+    await render(<template><ProjectCard @repo={{repo}} /></template>);
+
+    expect(element.querySelector("[title='Stars']")).toBeNull();
+    expect(element.querySelector(".project-card__meta")?.textContent).not.toContain("7");
+  });
 });

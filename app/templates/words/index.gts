@@ -9,26 +9,26 @@ import { api } from "#utils/remote.ts";
 <template>
   {{pageTitle "Words"}}
 
-  <div class="wrap page">
-    <header class="page-header">
-      <p class="eyebrow">words</p>
-      <h1>Words</h1>
-      <p>
-        Longer-form writing on web technology, engineering careers, and the occasional tangent. For
-        the day-to-day, find me on Bluesky.
-      </p>
-    </header>
+  <div class="wrap page split split--rail">
+    <div>
+      <header class="page-header">
+        <p class="eyebrow">words</p>
+        <h1>Words</h1>
+        <p>
+          Longer-form writing on web technology, engineering careers, and the occasional tangent.
+          For the day-to-day, find me on Bluesky.
+        </p>
+      </header>
 
-    <div class="split split--rail">
       <Await @remote={{api "words"}} @skeletonHeight="30rem" as |words|>
         <PostList @posts={{words.posts}} />
       </Await>
-
-      <aside class="stack words__aside sticky-rail" aria-label="Elsewhere" {{stickyRail}}>
-        <h2 class="visually-hidden">Recent posts on Bluesky</h2>
-        <BlueskyFeed @layout="list" @limit={{4}} />
-        <HellaCard @compact={{true}} />
-      </aside>
     </div>
+
+    <aside class="stack words__aside sticky-rail" aria-label="Elsewhere" {{stickyRail}}>
+      <h2 class="visually-hidden">Recent posts on Bluesky</h2>
+      <BlueskyFeed @layout="list" @limit={{4}} />
+      <HellaCard @compact={{true}} />
+    </aside>
   </div>
 </template>

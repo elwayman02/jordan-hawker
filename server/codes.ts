@@ -23,8 +23,10 @@ const MONTH = 1000 * 60 * 60 * 24 * 30.44;
 
 /** A repo pushed within this window stays "active" regardless of stars */
 const ACTIVE_WINDOW_MONTHS = 36;
-/** ...and a repo with at least this many stars stays active regardless of age */
+/** ...and a repo with at least this many stars stays active for longer */
 const ACTIVE_STARS = 25;
+/** Untouched this long, a repo is archived however many stars it has (unless featured) */
+const ARCHIVE_AFTER_MONTHS = 8 * 12;
 
 /**
  * Popularity grows logarithmically (100 stars isn't 10x as interesting as 10),
@@ -62,7 +64,9 @@ export function rank(repos: GitHubRepo[], now = Date.now()): Codes {
 
     const ageInMonths = (now - Date.parse(repo.pushed_at)) / MONTH;
     const isActive =
-      entry.featured || ageInMonths <= ACTIVE_WINDOW_MONTHS || entry.stars >= ACTIVE_STARS;
+      entry.featured ||
+      (ageInMonths < ARCHIVE_AFTER_MONTHS &&
+        (ageInMonths <= ACTIVE_WINDOW_MONTHS || entry.stars >= ACTIVE_STARS));
 
     (isActive ? active : archive).push(entry);
   }

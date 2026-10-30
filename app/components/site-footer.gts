@@ -1,4 +1,3 @@
-import CopyButton from "#components/copy-button.gts";
 import Icon from "#components/icon.gts";
 import SocialLinks from "#components/social-links.gts";
 import { hellaDrunk, site, socialLinks } from "#app/data/site.ts";
@@ -22,12 +21,11 @@ const year = new Date().getFullYear();
               <Icon @name="mail" />
               {{site.email}}
             </a>
-            <CopyButton
-              @value={{site.discord}}
-              @label="@{{site.discord}}"
-              @icon="discord"
-              @description="Discord username"
-            />
+            <a class="button" href={{site.discordUrl}} target="_blank" rel="me noopener noreferrer">
+              <Icon @name="discord" />
+              @{{site.discord}}
+              <span class="visually-hidden">on Discord</span>
+            </a>
           </div>
         </div>
 

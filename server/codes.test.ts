@@ -1,8 +1,13 @@
-import { describe, expect, test } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 
 import { rank, score } from "./codes.ts";
 
 const NOW = Date.parse("2026-10-01T00:00:00Z");
+
+vi.mock("./config.ts", async (original) => ({
+  ...(await original<typeof import("./config.ts")>()),
+  FEATURED_REPOS: ["featured-ancient"],
+}));
 
 function repo(name: string, stars: number, pushedAt: string, extra: Record<string, unknown> = {}) {
   return {
@@ -42,7 +47,9 @@ describe("rank", () => {
   const codes = rank(
     [
       repo("old-and-quiet", 2, "2017-05-01T00:00:00Z"),
-      repo("popular-classic", 80, "2016-01-01T00:00:00Z"),
+      repo("popular-classic", 80, "2019-01-01T00:00:00Z"),
+      repo("popular-ancient", 300, "2018-09-01T00:00:00Z"),
+      repo("featured-ancient", 3, "2015-01-01T00:00:00Z"),
       repo("fresh", 5, "2026-09-20T00:00:00Z"),
       repo("forked", 900, "2026-09-20T00:00:00Z", { fork: true }),
       repo("archived", 900, "2026-09-20T00:00:00Z", { archived: true }),
@@ -60,11 +67,23 @@ describe("rank", () => {
     expect(names).not.toContain("jordan-hawker");
   });
 
-  test("keeps recent or well-starred repos active, ranked by score", () => {
-    expect(codes.active.map((r) => r.name)).toEqual(["fresh", "popular-classic"]);
+  test("keeps recent or well-starred repos active, featured first, then by score", () => {
+    expect(codes.active.map((r) => r.name)).toEqual([
+      "featured-ancient",
+      "fresh",
+      "popular-classic",
+    ]);
+  });
+
+  test("archives anything untouched for 8+ years, however popular", () => {
+    expect(codes.archive.map((r) => r.name)).toContain("popular-ancient");
   });
 
   test("puts the rest in the archive, newest first", () => {
-    expect(codes.archive.map((r) => r.name)).toEqual(["older-quiet", "old-and-quiet"]);
+    expect(codes.archive.map((r) => r.name)).toEqual([
+      "older-quiet",
+      "popular-ancient",
+      "old-and-quiet",
+    ]);
   });
 });

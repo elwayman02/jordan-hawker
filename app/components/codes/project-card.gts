@@ -28,6 +28,9 @@ const dot = (language: string) =>
 
 const firstTopics = (topics: string[]) => topics.slice(0, 3);
 
+/** A handful of stars undersells a project more than it helps, so small counts aren't shown */
+export const showStars = (stars: number) => stars >= 10;
+
 interface ProjectCardSignature {
   Args: { repo: Repo };
   Element: HTMLElement;
@@ -55,11 +58,13 @@ const ProjectCard: TOC<ProjectCardSignature> = <template>
       {{#if @repo.language}}
         <span class="project-card__language" style={{dot @repo.language}}>{{@repo.language}}</span>
       {{/if}}
-      <span title="Stars">
-        <Icon @name="star" />
-        {{compactNumber @repo.stars}}
-        <span class="visually-hidden">stars</span>
-      </span>
+      {{#if (showStars @repo.stars)}}
+        <span title="Stars">
+          <Icon @name="star" />
+          {{compactNumber @repo.stars}}
+          <span class="visually-hidden">stars</span>
+        </span>
+      {{/if}}
       {{#if @repo.forks}}
         <span title="Forks">
           <Icon @name="gitFork" />

@@ -1,6 +1,6 @@
 import Await from "#components/await.gts";
 import Icon from "#components/icon.gts";
-import ProjectCard from "#components/codes/project-card.gts";
+import ProjectCard, { showStars } from "#components/codes/project-card.gts";
 import pageTitle from "#app/helpers/page-title.ts";
 import { formatMonth, isoDate } from "#utils/format.ts";
 import { api } from "#utils/remote.ts";
@@ -13,8 +13,8 @@ import { api } from "#utils/remote.ts";
       <p class="eyebrow">codes</p>
       <h1>Codes</h1>
       <p>
-        Open-source projects I own, ranked by how active and how loved they are. Most are Ember
-        addons; all of them scratched an itch.
+        Open-source projects I’ve built and maintain. Most are Ember addons; all of them scratched
+        an itch.
       </p>
     </header>
 
@@ -35,9 +35,11 @@ import { api } from "#utils/remote.ts";
                   <a href={{repo.url}} target="_blank" rel="noopener noreferrer">{{repo.name}}</a>
                   <span class="archive__description">{{repo.description}}</span>
                   <span class="archive__meta">
-                    <Icon @name="star" />
-                    {{repo.stars}}
-                    ·
+                    {{#if (showStars repo.stars)}}
+                      <Icon @name="star" />
+                      {{repo.stars}}
+                      ·
+                    {{/if}}
                     <time datetime={{isoDate repo.pushedAt}}>{{formatMonth repo.pushedAt}}</time>
                   </span>
                 </li>

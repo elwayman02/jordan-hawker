@@ -11,8 +11,8 @@ export const site = {
   name: "Jordan Hawker",
   url: "https://www.jordanhawker.com",
   email: "hawker.jordan@gmail.com",
-  /** Discord has no profile links by username, so the site offers it to copy */
   discord: "axlehellfire",
+  discordUrl: "https://discord.com/users/103262044609863680",
   /** jhawk.co/resume → the published Google Doc */
   resumeUrl: "https://jhawk.co/resume",
   repoUrl: "https://github.com/elwayman02/jordan-hawker",
