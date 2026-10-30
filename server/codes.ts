@@ -1,4 +1,4 @@
-import type { Codes, Repo } from "../shared/api.ts";
+import { MIN_STARS_SHOWN, type Codes, type Repo } from "../shared/api.ts";
 import { env, FEATURED_REPOS, GITHUB_USER, HIDDEN_REPOS } from "./config.ts";
 import { fetchJson } from "./fetch.ts";
 
@@ -77,7 +77,13 @@ export function rank(repos: GitHubRepo[], now = Date.now()): Codes {
 
     return b.score - a.score;
   });
-  archive.sort((a, b) => Date.parse(b.pushedAt) - Date.parse(a.pushedAt));
+  // Starred projects first (most stars first), then the rest by most recently updated
+  archive.sort((a, b) => {
+    const starsA = a.stars >= MIN_STARS_SHOWN ? a.stars : 0;
+    const starsB = b.stars >= MIN_STARS_SHOWN ? b.stars : 0;
+
+    return starsB - starsA || Date.parse(b.pushedAt) - Date.parse(a.pushedAt);
+  });
 
   return { active, archive };
 }

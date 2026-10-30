@@ -68,6 +68,9 @@ export interface Resume {
 
 /* ---------------------------------- codes ---------------------------------- */
 
+/** Star counts below this undersell a project more than they help, so the site hides them */
+export const MIN_STARS_SHOWN = 10;
+
 export interface Repo {
   name: string;
   description: string | null;

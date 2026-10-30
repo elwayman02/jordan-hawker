@@ -49,6 +49,7 @@ describe("rank", () => {
       repo("old-and-quiet", 2, "2017-05-01T00:00:00Z"),
       repo("popular-classic", 80, "2019-01-01T00:00:00Z"),
       repo("popular-ancient", 300, "2018-09-01T00:00:00Z"),
+      repo("starred-ancient", 12, "2014-01-01T00:00:00Z"),
       repo("featured-ancient", 3, "2015-01-01T00:00:00Z"),
       repo("fresh", 5, "2026-09-20T00:00:00Z"),
       repo("forked", 900, "2026-09-20T00:00:00Z", { fork: true }),
@@ -79,10 +80,11 @@ describe("rank", () => {
     expect(codes.archive.map((r) => r.name)).toContain("popular-ancient");
   });
 
-  test("puts the rest in the archive, newest first", () => {
+  test("sorts the archive by stars (10+), then newest first", () => {
     expect(codes.archive.map((r) => r.name)).toEqual([
-      "older-quiet",
       "popular-ancient",
+      "starred-ancient",
+      "older-quiet",
       "old-and-quiet",
     ]);
   });

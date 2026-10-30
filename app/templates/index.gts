@@ -11,7 +11,7 @@ import SocialLinks from "#components/social-links.gts";
 import TrackList from "#components/sound/track-list.gts";
 import pageTitle from "#app/helpers/page-title.ts";
 import { highlightedRecommendations } from "#app/data/recommendations.ts";
-import { professionalLinks } from "#app/data/site.ts";
+import { contactLinks } from "#app/data/site.ts";
 import { formatDate, isoDate } from "#utils/format.ts";
 import { api } from "#utils/remote.ts";
 
@@ -54,7 +54,7 @@ const INDEX = [
           </LinkTo>
           <a href="#contact" class="button">Get in touch</a>
         </div>
-        <SocialLinks @links={{professionalLinks}} class="hero__social" />
+        <SocialLinks @links={{contactLinks}} class="hero__social" />
       </div>
 
       <nav class="hero__index" aria-labelledby="hero-index-label">

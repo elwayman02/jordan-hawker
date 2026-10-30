@@ -2,7 +2,7 @@ import { htmlSafe } from "@ember/template";
 
 import Icon from "#components/icon.gts";
 import { compactNumber, isoDate, timeAgo } from "#utils/format.ts";
-import type { Repo } from "#shared/api.ts";
+import { MIN_STARS_SHOWN, type Repo } from "#shared/api.ts";
 
 import type { TOC } from "@ember/component/template-only";
 
@@ -28,8 +28,7 @@ const dot = (language: string) =>
 
 const firstTopics = (topics: string[]) => topics.slice(0, 3);
 
-/** A handful of stars undersells a project more than it helps, so small counts aren't shown */
-export const showStars = (stars: number) => stars >= 10;
+export const showStars = (stars: number) => stars >= MIN_STARS_SHOWN;
 
 interface ProjectCardSignature {
   Args: { repo: Repo };

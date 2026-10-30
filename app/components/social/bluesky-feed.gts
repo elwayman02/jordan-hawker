@@ -68,6 +68,10 @@ export default class BlueskyFeed extends Component<BlueskyFeedSignature> {
           </div>
         {{/if}}
       </div>
+      <p class="bluesky__disclaimer">
+        My personal account: off-the-clock thoughts, puns and hot takes. Opinions are mine alone,
+        not my employer’s.
+      </p>
 
       <Await @remote={{this.posts}} @skeletonHeight="12rem">
         <:default as |posts|>

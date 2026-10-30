@@ -12,6 +12,13 @@
     gap: var(--space-s);
   }
 
+  .bluesky__disclaimer {
+    margin-top: calc(-1 * var(--space-2xs));
+    color: var(--muted);
+    font-size: var(--step--1);
+    font-style: italic;
+  }
+
   .bluesky__handle {
     display: inline-flex;
     align-items: center;

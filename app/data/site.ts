@@ -69,6 +69,16 @@ export const personalLinks: SocialLink[] = [
   },
 ];
 
+export const discordLink: SocialLink = {
+  label: "Discord",
+  handle: `@${site.discord}`,
+  url: site.discordUrl,
+  icon: "discord",
+};
+
+/** Where to reach me directly, alongside email */
+export const contactLinks: SocialLink[] = [...professionalLinks, discordLink];
+
 export const socialLinks = [...professionalLinks, ...personalLinks];
 
 export const music = {
