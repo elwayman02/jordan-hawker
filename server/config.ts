@@ -8,6 +8,12 @@
 export const RESUME_DOC_URL =
   "https://docs.google.com/document/d/e/2PACX-1vRDZl11201ZpzQLkD8shFgOwo0ARixDMkS0XP1HY5H5-iH37pzrj35-RPMgoW1nvcV_-eWZ3p64Zx2o/pub";
 
+/**
+ * Public Google Drive folder of election guides (Google Docs).
+ * Every doc in it is listed on /votes, newest election first.
+ */
+export const VOTES_FOLDER_ID = "1_qrgSdnRQvNQiBBbox1XA-_8BEsCcIfi";
+
 export const GITHUB_USER = "elwayman02";
 
 /** Always shown in the active list, in this order, ahead of ranked repos */

@@ -1,4 +1,4 @@
-import { parse, type HTMLElement, NodeType, type Node } from "node-html-parser";
+import { parse, type HTMLElement, NodeType } from "node-html-parser";
 import sanitizeHtml from "sanitize-html";
 
 import type {
@@ -10,143 +10,21 @@ import type {
 } from "../shared/api.ts";
 import { RESUME_DOC_URL } from "./config.ts";
 import { fetchText } from "./fetch.ts";
+import {
+  readClassStyles,
+  type Segment,
+  segmentsOf,
+  segmentsToHtml,
+  segmentsToText,
+} from "./gdoc.ts";
 import { unwrapLink } from "./html.ts";
 
 export async function getResume(): Promise<Resume> {
   return parseResume(await fetchText(RESUME_DOC_URL));
 }
 
-interface TextStyle {
-  bold: boolean;
-  italic: boolean;
-  /** in pt; 0 when unknown */
-  size: number;
-}
-
-interface Segment extends TextStyle {
-  text: string;
-  href?: string;
-}
-
-/**
- * Google Docs "publish to web" pages put each style in a generated class (.c0, .c1, …).
- * Collect the bits we care about per class.
- */
-function readClassStyles(css: string): Map<string, Partial<TextStyle>> {
-  const styles = new Map<string, Partial<TextStyle>>();
-
-  for (const [, name, body] of css.matchAll(/\.(c\d+)\{([^}]*)\}/g)) {
-    const style: Partial<TextStyle> = {};
-    const weight = /font-weight:(\d+)/.exec(body!)?.[1];
-    const size = /font-size:([\d.]+)pt/.exec(body!)?.[1];
-
-    if (weight) style.bold = Number(weight) >= 600;
-    if (size) style.size = Number(size);
-    if (/font-style:italic/.test(body!)) style.italic = true;
-
-    styles.set(name!, style);
-  }
-
-  return styles;
-}
-
-function styleOf(element: HTMLElement, classes: Map<string, Partial<TextStyle>>): TextStyle {
-  const style: TextStyle = { bold: false, italic: false, size: 0 };
-
-  for (const name of element.classList.values()) {
-    Object.assign(style, classes.get(name));
-  }
-
-  return style;
-}
-
 /** Runs of 2+ non-breaking spaces (or tabs) separate "left" from "right" columns */
 const COLUMN_GAP = /[\u00a0\t]{2,}|\t/;
-
-function segmentsOf(paragraph: HTMLElement, classes: Map<string, Partial<TextStyle>>): Segment[] {
-  const segments: Segment[] = [];
-
-  const visit = (node: Node, inherited: TextStyle, href?: string) => {
-    if (node.nodeType === NodeType.TEXT_NODE) {
-      const text = node.text;
-
-      if (text) segments.push({ ...inherited, text, href });
-
-      return;
-    }
-
-    const element = node as HTMLElement;
-    const style = element.tagName === "SPAN" ? styleOf(element, classes) : inherited;
-    const link =
-      element.tagName === "A" ? unwrapLink(element.getAttribute("href") ?? "") || href : href;
-
-    for (const child of element.childNodes) visit(child, style, link);
-  };
-
-  for (const child of paragraph.childNodes) {
-    visit(child, { bold: false, italic: false, size: 0 });
-  }
-
-  return segments;
-}
-
-function escape(text: string): string {
-  return text
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
-}
-
-/** Merge neighbouring segments that render identically (Docs splits runs arbitrarily) */
-function coalesce(segments: Segment[]): Segment[] {
-  const merged: Segment[] = [];
-
-  for (const segment of segments) {
-    const previous = merged.at(-1);
-
-    if (
-      previous &&
-      previous.bold === segment.bold &&
-      previous.italic === segment.italic &&
-      previous.href === segment.href
-    ) {
-      previous.text += segment.text;
-    } else {
-      merged.push({ ...segment });
-    }
-  }
-
-  return merged;
-}
-
-function segmentsToHtml(segments: Segment[]): string {
-  return coalesce(segments)
-    .map((segment) => {
-      let html = escape(segment.text.replace(/\u00a0/g, " "));
-
-      if (!html) return "";
-      if (segment.bold && html.trim()) html = `<strong>${html}</strong>`;
-      if (segment.italic && html.trim()) html = `<em>${html}</em>`;
-      if (segment.href) {
-        html = `<a href="${escape(segment.href)}" target="_blank" rel="noopener noreferrer">${html}</a>`;
-      }
-
-      return html;
-    })
-    .join("")
-    .replace(/<\/strong><strong>/g, "")
-    .trim();
-}
-
-function segmentsToText(segments: Segment[]): string {
-  return segments
-    .map((segment) => segment.text)
-    .join("")
-    .replace(/\u00a0/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-}
 
 /** Split segments at the first column gap */
 function splitColumns(segments: Segment[]): [Segment[], Segment[]] {

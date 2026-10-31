@@ -15,5 +15,9 @@ Router.map(function () {
   this.route("words", function () {
     this.route("post", { path: "/:slug" });
   });
+  this.route("votes", function () {
+    // "2024" or "2024/primary"
+    this.route("guide", { path: "/*slug" });
+  });
   this.route("not-found", { path: "/*path" });
 });

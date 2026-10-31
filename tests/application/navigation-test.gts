@@ -1,4 +1,4 @@
-import { click, currentURL, settled, visit, waitUntil } from "@ember/test-helpers";
+import { click, currentURL, fillIn, settled, visit, waitUntil } from "@ember/test-helpers";
 import { afterEach, beforeEach, describe, expect } from "vitest";
 import { applicationTest } from "ember-vitest";
 
@@ -31,12 +31,21 @@ describe("navigation", () => {
   applicationTest("the five-letter nav reaches every section", async ({ element }) => {
     await visit("/");
 
-    for (const section of ["works", "codes", "sound", "words"]) {
+    // /votes settles on the latest guide's own address
+    const landing: Record<string, string> = { votes: "/votes/2026" };
+
+    for (const section of ["works", "codes", "sound", "words", "votes"]) {
+      const url = landing[section] ?? `/${section}`;
+
+      expect(
+        element.querySelector(`.site-nav a[aria-label="${section}"]`)?.getAttribute("href"),
+      ).toBe(`/${section}`);
+
       await click(`.site-nav a[aria-label="${section}"]`);
       // link clicks navigate inside a View Transition, after the old page is snapshotted
-      await waitUntil(() => currentURL() === `/${section}`);
+      await waitUntil(() => currentURL() === url);
 
-      expect(currentURL()).toBe(`/${section}`);
+      expect(currentURL()).toBe(url);
       expect(element.querySelector(".site-nav .active")?.getAttribute("aria-label")).toBe(section);
     }
   });
@@ -69,10 +78,65 @@ describe("navigation", () => {
     expect(text(element.querySelector(".prose"))).toContain("read on");
   });
 
+  applicationTest("votes shows the latest guide with its ballot outline", async ({ element }) => {
+    await visit("/votes");
+    await waitUntil(() => currentURL() === "/votes/2026");
+
+    expect(text(element.querySelector(".vote-guide__title"))).toBe(
+      "2026 Progressive Voter Guide - Nov General",
+    );
+    expect(element.querySelector<HTMLSelectElement>("#votes-election")?.value).toBe("2026");
+    expect(text(element.querySelector(".votes__outline li"))).toBe(
+      "Proposition 1: Affordable Housing yes",
+    );
+    expect(element.querySelector(".vote-guide .notice")).toBeNull();
+    expect(document.title).toBe("Votes · Jordan Hawker");
+  });
+
+  applicationTest(
+    "the election dropdown switches to a past guide and back",
+    async ({ element }) => {
+      await visit("/votes");
+
+      await fillIn("#votes-election", "2024/primary");
+      await waitUntil(() => currentURL() === "/votes/2024/primary");
+
+      expect(text(element.querySelector(".vote-guide__title"))).toBe(
+        "2024 Progressive Voter Guide - Mar Primary",
+      );
+      expect(text(element.querySelector(".vote-guide .notice"))).toContain("from a past election");
+      expect(document.title).toBe("March 2024 Primary · Votes · Jordan Hawker");
+
+      await fillIn("#votes-election", "2026");
+      await waitUntil(() => currentURL() === "/votes/2026");
+    },
+  );
+
+  applicationTest("links between guides stay on the site", async () => {
+    await visit("/votes");
+    await click('.vote-guide__body a[href="/votes/2024/primary"]');
+    await waitUntil(() => currentURL() === "/votes/2024/primary");
+
+    expect(currentURL()).toBe("/votes/2024/primary");
+  });
+
+  applicationTest("a general election lives at just the year", async ({ element }) => {
+    await visit("/votes/2026/general");
+
+    expect(currentURL()).toBe("/votes/2026");
+    expect(text(element.querySelector(".vote-guide__title"))).toBe(
+      "2026 Progressive Voter Guide - Nov General",
+    );
+  });
+
   applicationTest("unknown posts and pages say so", async ({ element }) => {
     await visit("/words/nope");
 
     expect(text(element.querySelector("h1"))).toBe("Post not found");
+
+    await visit("/votes/1999-november-general");
+
+    expect(text(element.querySelector(".notice"))).toContain("couldn’t find that guide");
 
     await visit("/somewhere/else");
 

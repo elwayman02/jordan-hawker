@@ -16,6 +16,7 @@
   }
 
   .brand {
+    flex-shrink: 0;
     display: inline-flex;
     align-items: center;
     gap: 0.6rem;
@@ -52,6 +53,13 @@
     @media (max-width: 40rem) {
       display: none;
     }
+  }
+
+  /* On the narrowest phones the nav scrolls sideways rather than overflowing the page */
+  .site-nav {
+    min-width: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
   }
 
   .site-nav ul {
@@ -91,7 +99,7 @@
     color: color-mix(in oklch, var(--muted) 60%, transparent);
     margin-right: 0.05em;
 
-    @media (max-width: 30rem) {
+    @media (max-width: 36rem) {
       display: none;
     }
   }
@@ -134,7 +142,7 @@
 }
 
 @layer components {
-  @media (max-width: 30rem) {
+  @media (max-width: 36rem) {
     .site-header__inner {
       gap: var(--space-2xs);
     }
