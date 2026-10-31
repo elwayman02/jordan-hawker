@@ -58,7 +58,7 @@ If the doc's structure stops looking like a resume, the page falls back to rende
 
 `/votes` lists every Google Doc in the [voter guides folder](https://drive.google.com/drive/folders/1_qrgSdnRQvNQiBBbox1XA-_8BEsCcIfi) (`VOTES_FOLDER_ID` in `server/config.ts`). No API key is needed, but each doc must be viewable by anyone with the link (docs added to the folder inherit its sharing).
 
-- **Which election**: read from the doc's name: the year, a month if there is one (`March`, `Nov`, …), and `Primary` / `Special` / `Recall` (otherwise General). Without a month, primaries are assumed to be in June and other elections in November. The newest election is shown at `/votes`. Each guide also has its own path: general elections are just the year (`/votes/2024`), others add the kind (`/votes/2024/primary`). `/votes/2024/general` redirects to `/votes/2024`.
+- **Which election**: read from the doc's name: the year, a month if there is one (`March`, `Nov`, …), and `Primary` / `Special` / `Recall` (otherwise General). Without a month, primaries are assumed to be in June and other elections in November. `/votes` shows the newest election and then switches the address to that guide's own path: general elections are just the year (`/votes/2024`), others add the kind (`/votes/2024/primary`). `/votes/2024/general` redirects to `/votes/2024`.
 - **Structure**: the doc's Title and Subtitle head the page. **Heading 1** starts a section of the ballot outline and **Heading 2** adds a race or measure to it. A Heading 2 ending in `- YES` or `- NO` shows that pick as a badge.
 - Links from one guide to another open that guide on the site.
 

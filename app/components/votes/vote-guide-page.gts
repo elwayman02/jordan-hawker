@@ -2,7 +2,7 @@ import Component from "@glimmer/component";
 import { service } from "@ember/service";
 import { htmlSafe } from "@ember/template";
 import { on } from "@ember/modifier";
-import { eq, fn } from "@ember/helper";
+import { eq } from "@ember/helper";
 import { LinkTo } from "@ember/routing";
 import { modifier } from "ember-modifier";
 
@@ -32,6 +32,20 @@ const isLatest = (votes: Votes, guide: VoteGuide) => votes.guides[0] === guide;
 /** Guide bodies are sanitized by /api/votes */
 const body = (guide: VoteGuide) => htmlSafe(guide.body);
 
+/**
+ * Guides load after the page, too late for the browser's own jump to a #fragment,
+ * so a shared link to a race (/votes/2026#prop-1) scrolls there once the guide renders.
+ */
+const scrollToFragment = modifier(() => {
+  const id = decodeURIComponent(location.hash.slice(1));
+
+  if (!id) return;
+
+  const frame = requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView());
+
+  return () => cancelAnimationFrame(frame);
+});
+
 /** The ballot outline starts open beside the guide, and collapsed above it on small screens */
 const openOnWideScreens = modifier((details: HTMLDetailsElement) => {
   details.open = window.matchMedia("(min-width: 48rem)").matches;
@@ -40,14 +54,8 @@ const openOnWideScreens = modifier((details: HTMLDetailsElement) => {
 export default class VoteGuidePage extends Component<VoteGuidePageSignature> {
   @service declare router: RouterService;
 
-  choose = (votes: Votes, event: Event) => {
-    const slug = (event.target as HTMLSelectElement).value;
-
-    if (slug === votes.guides[0]?.slug) {
-      void this.router.transitionTo("votes.index");
-    } else {
-      void this.router.transitionTo("votes.guide", slug);
-    }
+  choose = (event: Event) => {
+    void this.router.transitionTo("votes.guide", (event.target as HTMLSelectElement).value);
   };
 
   <template>
@@ -68,7 +76,7 @@ export default class VoteGuidePage extends Component<VoteGuidePageSignature> {
 
               <div class="votes__picker">
                 <label for="votes-election">Election</label>
-                <select id="votes-election" {{on "change" (fn this.choose votes)}}>
+                <select id="votes-election" {{on "change" this.choose}}>
                   {{#each votes.guides as |choice index|}}
                     <option value={{choice.slug}} selected={{eq choice.slug guide.slug}}>
                       {{choice.label}}{{if (eq index 0) " (latest)"}}
@@ -92,7 +100,7 @@ export default class VoteGuidePage extends Component<VoteGuidePageSignature> {
                     {{/unless}}
                   </header>
 
-                  <div class="prose vote-guide__body">{{body guide}}</div>
+                  <div class="prose vote-guide__body" {{scrollToFragment}}>{{body guide}}</div>
 
                   <footer class="vote-guide__footer">
                     <a

@@ -31,12 +31,21 @@ describe("navigation", () => {
   applicationTest("the five-letter nav reaches every section", async ({ element }) => {
     await visit("/");
 
+    // /votes settles on the latest guide's own address
+    const landing: Record<string, string> = { votes: "/votes/2026" };
+
     for (const section of ["works", "codes", "sound", "words", "votes"]) {
+      const url = landing[section] ?? `/${section}`;
+
+      expect(
+        element.querySelector(`.site-nav a[aria-label="${section}"]`)?.getAttribute("href"),
+      ).toBe(`/${section}`);
+
       await click(`.site-nav a[aria-label="${section}"]`);
       // link clicks navigate inside a View Transition, after the old page is snapshotted
-      await waitUntil(() => currentURL() === `/${section}`);
+      await waitUntil(() => currentURL() === url);
 
-      expect(currentURL()).toBe(`/${section}`);
+      expect(currentURL()).toBe(url);
       expect(element.querySelector(".site-nav .active")?.getAttribute("aria-label")).toBe(section);
     }
   });
@@ -71,6 +80,7 @@ describe("navigation", () => {
 
   applicationTest("votes shows the latest guide with its ballot outline", async ({ element }) => {
     await visit("/votes");
+    await waitUntil(() => currentURL() === "/votes/2026");
 
     expect(text(element.querySelector(".vote-guide__title"))).toBe(
       "2026 Progressive Voter Guide - Nov General",
@@ -98,7 +108,7 @@ describe("navigation", () => {
       expect(document.title).toBe("March 2024 Primary · Votes · Jordan Hawker");
 
       await fillIn("#votes-election", "2026");
-      await waitUntil(() => currentURL() === "/votes");
+      await waitUntil(() => currentURL() === "/votes/2026");
     },
   );
 
