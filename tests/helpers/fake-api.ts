@@ -147,7 +147,7 @@ const bluesky = {
 export const votes: Votes = {
   guides: [
     {
-      slug: "2026-november-general",
+      slug: "2026",
       label: "November 2026 General",
       election: "2026-11-01",
       title: "2026 Progressive Voter Guide - Nov General",
@@ -156,7 +156,7 @@ export const votes: Votes = {
       body:
         '<p>Do your own research.</p><h3 id="propositions">Propositions</h3>' +
         '<h4 id="proposition-1">Proposition 1: Affordable Housing <span class="pick pick--yes">yes</span></h4>' +
-        '<p>See <a href="/votes/2024-march-primary">my 2024 guide</a>.</p>',
+        '<p>See <a href="/votes/2024/primary">my 2024 guide</a>.</p>',
       outline: [
         {
           id: "propositions",
@@ -166,7 +166,7 @@ export const votes: Votes = {
       ],
     },
     {
-      slug: "2024-march-primary",
+      slug: "2024/primary",
       label: "March 2024 Primary",
       election: "2024-03-01",
       title: "2024 Progressive Voter Guide - Mar Primary",

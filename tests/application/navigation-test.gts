@@ -75,9 +75,7 @@ describe("navigation", () => {
     expect(text(element.querySelector(".vote-guide__title"))).toBe(
       "2026 Progressive Voter Guide - Nov General",
     );
-    expect(element.querySelector<HTMLSelectElement>("#votes-election")?.value).toBe(
-      "2026-november-general",
-    );
+    expect(element.querySelector<HTMLSelectElement>("#votes-election")?.value).toBe("2026");
     expect(text(element.querySelector(".votes__outline li"))).toBe(
       "Proposition 1: Affordable Housing yes",
     );
@@ -90,8 +88,8 @@ describe("navigation", () => {
     async ({ element }) => {
       await visit("/votes");
 
-      await fillIn("#votes-election", "2024-march-primary");
-      await waitUntil(() => currentURL() === "/votes/2024-march-primary");
+      await fillIn("#votes-election", "2024/primary");
+      await waitUntil(() => currentURL() === "/votes/2024/primary");
 
       expect(text(element.querySelector(".vote-guide__title"))).toBe(
         "2024 Progressive Voter Guide - Mar Primary",
@@ -99,17 +97,26 @@ describe("navigation", () => {
       expect(text(element.querySelector(".vote-guide .notice"))).toContain("from a past election");
       expect(document.title).toBe("March 2024 Primary · Votes · Jordan Hawker");
 
-      await fillIn("#votes-election", "2026-november-general");
+      await fillIn("#votes-election", "2026");
       await waitUntil(() => currentURL() === "/votes");
     },
   );
 
   applicationTest("links between guides stay on the site", async () => {
     await visit("/votes");
-    await click('.vote-guide__body a[href="/votes/2024-march-primary"]');
-    await waitUntil(() => currentURL() === "/votes/2024-march-primary");
+    await click('.vote-guide__body a[href="/votes/2024/primary"]');
+    await waitUntil(() => currentURL() === "/votes/2024/primary");
 
-    expect(currentURL()).toBe("/votes/2024-march-primary");
+    expect(currentURL()).toBe("/votes/2024/primary");
+  });
+
+  applicationTest("a general election lives at just the year", async ({ element }) => {
+    await visit("/votes/2026/general");
+
+    expect(currentURL()).toBe("/votes/2026");
+    expect(text(element.querySelector(".vote-guide__title"))).toBe(
+      "2026 Progressive Voter Guide - Nov General",
+    );
   });
 
   applicationTest("unknown posts and pages say so", async ({ element }) => {

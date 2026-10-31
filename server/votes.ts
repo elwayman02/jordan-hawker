@@ -46,6 +46,9 @@ const MONTHS = [
  * Reads the election from a guide's name, e.g.
  * "2024 Progressive Voter Guide - CA/Alameda/Hayward - March Primary" → March 2024 Primary.
  * Without a month, primaries are assumed to be in June and everything else in November.
+ *
+ * The slug is the guide's path under /votes: just the year for a general election
+ * ("2024"), and the year plus the kind for anything else ("2024/primary").
  */
 export function parseElection(name: string) {
   const year = /\b(?:19|20)\d{2}\b/.exec(name)?.[0];
@@ -67,7 +70,7 @@ export function parseElection(name: string) {
   const monthName = MONTHS[month]!;
 
   return {
-    slug: `${year}-${monthName}-${kind}`.toLowerCase(),
+    slug: kind === "General" ? year : `${year}/${kind.toLowerCase()}`,
     label: `${monthName} ${year} ${kind}`,
     election: `${year}-${String(month + 1).padStart(2, "0")}-01`,
   };

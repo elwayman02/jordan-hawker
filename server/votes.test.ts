@@ -24,35 +24,30 @@ describe("parseElection", () => {
   test.each([
     [
       "2026 Progressive Voter Guide - CA/Alameda/Hayward - General Election",
-      "2026-november-general",
+      "2026",
       "November 2026 General",
       "2026-11-01",
     ],
     [
       "2024 Progressive Voter Guide - CA/Alameda/Hayward - March Primary",
-      "2024-march-primary",
+      "2024/primary",
       "March 2024 Primary",
       "2024-03-01",
     ],
     [
       "2022 Progressive Voter Guide - June Primary",
-      "2022-june-primary",
+      "2022/primary",
       "June 2022 Primary",
       "2022-06-01",
     ],
-    [
-      "2022 Progressive Voter Guide - Nov General",
-      "2022-november-general",
-      "November 2022 General",
-      "2022-11-01",
-    ],
+    ["2022 Progressive Voter Guide - Nov General", "2022", "November 2022 General", "2022-11-01"],
     [
       "2020 Progressive Voter Guide - California/Alameda County/Hayward",
-      "2020-november-general",
+      "2020",
       "November 2020 General",
       "2020-11-01",
     ],
-    ["2025 Special Election Guide", "2025-november-special", "November 2025 Special", "2025-11-01"],
+    ["2025 Special Election Guide", "2025/special", "November 2025 Special", "2025-11-01"],
   ])("%s", (name, slug, label, election) => {
     expect(parseElection(name)).toEqual({ slug, label, election });
   });
@@ -157,8 +152,8 @@ describe("linkGuides", () => {
       '<a href="https://docs.google.com/document/d/old/" target="_blank" rel="noopener noreferrer">2022 guide</a> ' +
       '<a href="https://docs.google.com/document/d/other/" target="_blank" rel="noopener noreferrer">notes</a>';
 
-    expect(linkGuides(html, new Map([["old", "2022-november-general"]]))).toBe(
-      '<a href="/votes/2022-november-general">2022 guide</a> ' +
+    expect(linkGuides(html, new Map([["old", "2022"]]))).toBe(
+      '<a href="/votes/2022">2022 guide</a> ' +
         '<a href="https://docs.google.com/document/d/other/" target="_blank" rel="noopener noreferrer">notes</a>',
     );
   });

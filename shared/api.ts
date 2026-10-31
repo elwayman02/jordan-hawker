@@ -170,7 +170,7 @@ export interface VoteGuideSection {
 }
 
 export interface VoteGuide {
-  /** e.g. "2026-november-general" */
+  /** path under /votes: "2026" for a general election, "2024/primary" otherwise */
   slug: string;
   /** e.g. "November 2026 General" */
   label: string;

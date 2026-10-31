@@ -14,5 +14,8 @@
 /ember          /               301
 /the-candidate  /words          301
 
+# General elections live at just the year
+/votes/:year/general  /votes/:year  301
+
 # Single-page app: every other path renders the app
 /*              /index.html     200
