@@ -2,7 +2,7 @@
 
 Personal website for Jordan Hawker: work, open source, music, and writing.
 
-Every section has a five-letter path: [`/works`](https://www.jordanhawker.com/works), [`/codes`](https://www.jordanhawker.com/codes), [`/sound`](https://www.jordanhawker.com/sound), and [`/words`](https://www.jordanhawker.com/words).
+Every section has a five-letter path: [`/works`](https://www.jordanhawker.com/works), [`/codes`](https://www.jordanhawker.com/codes), [`/sound`](https://www.jordanhawker.com/sound), [`/words`](https://www.jordanhawker.com/words), and [`/votes`](https://www.jordanhawker.com/votes).
 
 ## Stack
 
@@ -41,6 +41,7 @@ Nothing on the site requires a rebuild or redeploy to update. External content i
 | Tracks & videos     | SoundCloud RSS, YouTube music video playlist                      | `/api/sound`  | ~12 hours |
 | Blog posts          | Tumblr API                                                        | `/api/words`  | ~12 hours |
 | Hella Drunk reviews | helladrunk.com RSS                                                | `/api/hella`  | ~1 day    |
+| Voter guides        | Google Docs in a public Drive folder                              | `/api/votes`  | ~1 hour   |
 | Bluesky posts       | Bluesky public API, called from the browser                       | none          | live      |
 
 ### The resume
@@ -52,6 +53,14 @@ The Google Doc is the single source of truth. `/api/resume` parses the published
 - **Right-hand column** (dates, locations): separated from the left by a tab or a run of spaces
 
 If the doc's structure stops looking like a resume, the page falls back to rendering the original document (sanitized, inside a shadow root) rather than breaking.
+
+### Voter guides
+
+`/votes` lists every Google Doc in the [voter guides folder](https://drive.google.com/drive/folders/1_qrgSdnRQvNQiBBbox1XA-_8BEsCcIfi) (`VOTES_FOLDER_ID` in `server/config.ts`). No API key is needed, but each doc must be viewable by anyone with the link (docs added to the folder inherit its sharing).
+
+- **Which election**: read from the doc's name: the year, a month if there is one (`March`, `Nov`, …), and `Primary` / `Special` / `Recall` (otherwise General). Without a month, primaries are assumed to be in June and other elections in November. The newest election is shown at `/votes`; older ones at `/votes/<year>-<month>-<kind>`.
+- **Structure**: the doc's Title and Subtitle head the page. **Heading 1** starts a section of the ballot outline and **Heading 2** adds a race or measure to it. A Heading 2 ending in `- YES` or `- NO` shows that pick as a badge.
+- Links from one guide to another open that guide on the site.
 
 ### Hand-maintained content
 

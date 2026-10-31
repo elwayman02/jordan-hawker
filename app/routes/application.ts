@@ -92,10 +92,16 @@ export default class ApplicationRoute extends Route {
     void viewTransition.finished.catch(ignore).finally(() => waiter.endAsync(token));
   };
 
-  didChange = (transition: Transition) => {
-    const samePage = transition.from?.name === transition.to?.name;
+  #lastPath = location.pathname;
 
-    if (transition.from && !samePage && !location.hash) {
+  /** New pages start at the top, including the same route with a new param (another guide or post) */
+  didChange = (transition: Transition) => {
+    const path = location.pathname;
+    const newPage = path !== this.#lastPath;
+
+    this.#lastPath = path;
+
+    if (transition.from && newPage && !location.hash) {
       window.scrollTo({ top: 0, behavior: "instant" });
     }
   };

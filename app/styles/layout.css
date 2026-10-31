@@ -2,6 +2,8 @@
   .site {
     display: grid;
     grid-template-rows: auto 1fr auto;
+    /* lets wide content (like the nav on tiny phones) shrink or scroll instead of widening the page */
+    grid-template-columns: minmax(0, 1fr);
     min-height: 100dvh;
   }
 

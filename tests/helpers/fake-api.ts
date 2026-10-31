@@ -1,6 +1,6 @@
 import { setFetcher } from "#utils/remote.ts";
 
-import type { ApiResponse, Codes, Hella, Resume, Sound, Words } from "#shared/api.ts";
+import type { ApiResponse, Codes, Hella, Resume, Sound, Votes, Words } from "#shared/api.ts";
 
 export const resume: Resume = {
   name: "Jordan Hawker",
@@ -144,12 +144,52 @@ const bluesky = {
   ],
 };
 
+export const votes: Votes = {
+  guides: [
+    {
+      slug: "2026-november-general",
+      label: "November 2026 General",
+      election: "2026-11-01",
+      title: "2026 Progressive Voter Guide - Nov General",
+      subtitle: "California, Alameda County, and Hayward",
+      url: "https://docs.google.com/document/d/new/edit",
+      body:
+        '<p>Do your own research.</p><h3 id="propositions">Propositions</h3>' +
+        '<h4 id="proposition-1">Proposition 1: Affordable Housing <span class="pick pick--yes">yes</span></h4>' +
+        '<p>See <a href="/votes/2024-march-primary">my 2024 guide</a>.</p>',
+      outline: [
+        {
+          id: "propositions",
+          title: "Propositions",
+          items: [{ id: "proposition-1", title: "Proposition 1: Affordable Housing", pick: "yes" }],
+        },
+      ],
+    },
+    {
+      slug: "2024-march-primary",
+      label: "March 2024 Primary",
+      election: "2024-03-01",
+      title: "2024 Progressive Voter Guide - Mar Primary",
+      url: "https://docs.google.com/document/d/old/edit",
+      body: '<h3 id="federal">Federal Positions</h3><h4 id="president">President</h4>',
+      outline: [
+        {
+          id: "federal",
+          title: "Federal Positions",
+          items: [{ id: "president", title: "President" }],
+        },
+      ],
+    },
+  ],
+};
+
 const routes: Record<string, unknown> = {
   "/api/resume": envelope(resume),
   "/api/codes": envelope(codes),
   "/api/sound": envelope(sound),
   "/api/words": envelope(words),
   "/api/hella": envelope(hella),
+  "/api/votes": envelope(votes),
 };
 
 /** Serve fixture data for every remote source; `failing` paths respond 502 */

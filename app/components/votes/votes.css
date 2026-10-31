@@ -1,0 +1,174 @@
+@layer components {
+  .votes__picker {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2xs) var(--space-xs);
+    margin-bottom: var(--space-l);
+
+    & label {
+      font-family: var(--font-mono);
+      font-size: var(--step--1);
+      color: var(--muted);
+    }
+
+    & select {
+      max-width: 100%;
+      text-overflow: ellipsis;
+      font: inherit;
+      font-weight: 550;
+      padding: 0.55em 2.4em 0.55em 1em;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface)
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")
+        no-repeat right 0.9em center / 1em;
+      color: var(--text);
+      appearance: none;
+      cursor: pointer;
+
+      &:hover {
+        border-color: var(--accent);
+      }
+    }
+  }
+
+  .vote-guide {
+    display: grid;
+    gap: var(--space-l);
+    min-width: 0;
+  }
+
+  .vote-guide__header {
+    display: grid;
+    gap: var(--space-2xs);
+  }
+
+  .vote-guide__title {
+    font-size: var(--step-3);
+    letter-spacing: -0.02em;
+  }
+
+  .vote-guide__subtitle {
+    color: var(--muted);
+    font-size: var(--step-1);
+  }
+
+  .vote-guide__body {
+    & h3 {
+      margin-top: 2em;
+      padding-bottom: var(--space-2xs);
+      border-bottom: 1px solid var(--line);
+      font-size: var(--step-2);
+    }
+
+    & h4 {
+      font-size: var(--step-1);
+    }
+
+    & h3,
+    & h4,
+    & h5 {
+      scroll-margin-top: 6rem;
+    }
+
+    & .pick {
+      margin-left: 0.4em;
+      vertical-align: 0.15em;
+    }
+  }
+
+  .vote-guide__footer {
+    padding-top: var(--space-m);
+    border-top: 1px solid var(--line);
+  }
+
+  .pick {
+    display: inline-block;
+    padding: 0.15em 0.6em;
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .pick--yes {
+    color: light-dark(oklch(42% 0.12 150), oklch(82% 0.13 150));
+    background: light-dark(oklch(93% 0.05 150), oklch(30% 0.06 150));
+  }
+
+  .pick--no {
+    color: light-dark(oklch(45% 0.16 25), oklch(80% 0.12 25));
+    background: light-dark(oklch(93% 0.04 25), oklch(30% 0.07 25));
+  }
+
+  .votes__outline {
+    font-size: var(--step--1);
+
+    & summary {
+      font-family: var(--font-mono);
+      color: var(--accent-strong);
+      cursor: pointer;
+      padding-block: var(--space-2xs);
+    }
+
+    & nav {
+      display: grid;
+      gap: var(--space-2xs);
+      padding-top: var(--space-2xs);
+    }
+
+    & ul {
+      display: grid;
+      gap: 0.35rem;
+      margin-bottom: var(--space-xs);
+      padding-left: var(--space-xs);
+      border-left: 1px solid var(--line);
+    }
+
+    & li {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: var(--space-2xs);
+    }
+
+    & a {
+      color: var(--muted);
+      text-decoration: none;
+
+      &:hover {
+        color: var(--accent-strong);
+      }
+    }
+
+    @media (max-width: 47.99rem) {
+      order: -1;
+      padding: var(--space-2xs) var(--space-s);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-m);
+      background: var(--surface);
+    }
+
+    /* Beside the guide: stays in view, scrolling on its own when the ballot is long */
+    @media (min-width: 48rem) {
+      position: sticky;
+      top: 6rem;
+      max-height: calc(100dvh - 8rem);
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      scrollbar-width: thin;
+    }
+  }
+
+  .votes__outline-section {
+    font-weight: 600;
+
+    &:is(a) {
+      color: var(--text);
+    }
+  }
+}

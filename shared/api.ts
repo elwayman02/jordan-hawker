@@ -150,3 +150,42 @@ export interface HellaPost {
 export interface Hella {
   posts: HellaPost[];
 }
+
+/* ---------------------------------- votes ---------------------------------- */
+
+export type VotePick = "yes" | "no";
+
+export interface VoteGuideItem {
+  /** anchor in `body` */
+  id: string;
+  title: string;
+  /** for ballot measures whose heading ends in "- YES" / "- NO" */
+  pick?: VotePick;
+}
+
+export interface VoteGuideSection {
+  id: string;
+  title: string;
+  items: VoteGuideItem[];
+}
+
+export interface VoteGuide {
+  /** e.g. "2026-november-general" */
+  slug: string;
+  /** e.g. "November 2026 General" */
+  label: string;
+  /** first of the election month, YYYY-MM-01 */
+  election: string;
+  title: string;
+  subtitle?: string;
+  /** the Google Doc */
+  url: string;
+  /** sanitized HTML, headings carry ids from `outline` */
+  body: string;
+  outline: VoteGuideSection[];
+}
+
+export interface Votes {
+  /** newest election first */
+  guides: VoteGuide[];
+}

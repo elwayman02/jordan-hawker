@@ -1,6 +1,6 @@
 import { tracked } from "@glimmer/tracking";
 
-import type { ApiResponse, Codes, Hella, Resume, Sound, Words } from "#shared/api.ts";
+import type { ApiResponse, Codes, Hella, Resume, Sound, Votes, Words } from "#shared/api.ts";
 
 /**
  * Reactive wrapper around a one-shot async load.
@@ -39,6 +39,7 @@ export interface Endpoints {
   sound: Sound;
   words: Words;
   hella: Hella;
+  votes: Votes;
 }
 
 type Fetcher = (url: string) => Promise<Response>;
