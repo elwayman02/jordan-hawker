@@ -5,7 +5,6 @@ import {
   highlightedRecommendations,
   recommendations,
 } from "#app/data/recommendations.ts";
-import { intoColumns } from "#components/recommendations/recommendation-wall.gts";
 
 describe("recommendations", () => {
   test("dates are real dates, or empty when unknown", () => {
@@ -47,21 +46,5 @@ describe("byNewest", () => {
       "undated",
       "also undated",
     ]);
-  });
-});
-
-describe("intoColumns", () => {
-  test("fills the first row in order, then the shortest column", () => {
-    const heights: Record<string, number> = { a: 3, b: 1, c: 2, d: 1, e: 1 };
-
-    expect(intoColumns(["a", "b", "c", "d", "e"], 3, (item) => heights[item]!)).toEqual([
-      ["a"],
-      ["b", "d", "e"],
-      ["c"],
-    ]);
-  });
-
-  test("a single column keeps the original order", () => {
-    expect(intoColumns([1, 2, 3], 1, () => 1)).toEqual([[1, 2, 3]]);
   });
 });

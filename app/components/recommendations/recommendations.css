@@ -1,20 +1,7 @@
 @layer components {
-  /* columns are filled by recommendation-wall.gts (up to 3, each at least 20rem) */
-  .recommendation-wall {
-    display: flex;
-    gap: var(--space-m);
-    align-items: start;
-  }
-
-  .recommendation-wall__column {
-    flex: 1;
-    min-width: 0;
-  }
-
   .recommendation {
     display: grid;
     gap: var(--space-s);
-    margin-bottom: var(--space-m);
     padding: var(--space-m);
     background: var(--surface);
     border: 1px solid var(--line);

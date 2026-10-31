@@ -72,6 +72,40 @@
     }
   }
 
+  /*
+   * Staggered columns that keep reading order across rows: up to --masonry-columns
+   * columns of at least --masonry-min. Items need the masonry-item modifier
+   * (app/modifiers/masonry-item.ts) until browsers support display: grid-lanes.
+   */
+  .masonry {
+    --masonry-gap: var(--space-m);
+    --masonry-track: minmax(
+      min(
+        100%,
+        max(
+          var(--masonry-min, 20rem),
+          (100% - (var(--masonry-columns, 3) - 1) * var(--masonry-gap)) / var(--masonry-columns, 3)
+        )
+      ),
+      1fr
+    );
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, var(--masonry-track));
+    grid-auto-rows: 1px;
+    column-gap: var(--masonry-gap);
+
+    & > * {
+      align-self: start;
+    }
+
+    @supports (display: grid-lanes) {
+      display: grid-lanes;
+      grid-auto-rows: auto;
+      gap: var(--masonry-gap);
+    }
+  }
+
   /* see app/modifiers/sticky-rail.ts */
   .sticky-rail {
     @media (min-width: 48rem) {
