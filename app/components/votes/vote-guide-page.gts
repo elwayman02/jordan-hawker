@@ -64,7 +64,7 @@ export default class VoteGuidePage extends Component<VoteGuidePageSignature> {
         <p class="eyebrow">votes</p>
         <h1>Votes</h1>
         <p>
-          My progressive voter guides: how I’m voting, and why. Personal views, not my employer’s.
+          My progressive voter guides: how I’m voting, and why.
         </p>
       </header>
 
