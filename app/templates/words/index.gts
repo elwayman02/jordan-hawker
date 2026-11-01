@@ -5,6 +5,7 @@ import PostList from "#components/words/post-list.gts";
 import pageTitle from "#app/helpers/page-title.ts";
 import stickyRail from "#app/modifiers/sticky-rail.ts";
 import { api } from "#utils/remote.ts";
+import Icon from "#components/icon.gts";
 
 <template>
   {{pageTitle "Words"}}
@@ -12,7 +13,7 @@ import { api } from "#utils/remote.ts";
   <div class="wrap page split split--rail">
     <div>
       <header class="page-header">
-        <p class="eyebrow">words</p>
+        <p class="eyebrow">words<Icon @name="penLine" class="eyebrow__icon" /></p>
         <h1>Words</h1>
         <p>
           Longer-form writing on web technology, engineering careers, and the occasional tangent.

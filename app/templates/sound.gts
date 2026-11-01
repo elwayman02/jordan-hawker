@@ -11,7 +11,7 @@ import { api } from "#utils/remote.ts";
 
   <div class="wrap page">
     <header class="page-header">
-      <p class="eyebrow">sound</p>
+      <p class="eyebrow">sound<Icon @name="audioLines" class="eyebrow__icon" /></p>
       <h1>{{music.alias}}</h1>
       <p>
         After years curating vibes at dance events across the country, I now spend my time in the
