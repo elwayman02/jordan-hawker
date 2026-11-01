@@ -3,6 +3,7 @@ import { tracked } from "@glimmer/tracking";
 import { on } from "@ember/modifier";
 import type Owner from "@ember/owner";
 
+import { playFlurry, stopFlurry } from "#components/holidays/holiday-fall.gts";
 import Icon from "#components/icon.gts";
 import {
   applyTheme,
@@ -66,6 +67,10 @@ export default class ThemeToggle extends Component {
     this.theme = this.next;
     saveChoice(this.theme);
     applyTheme(this.theme, this.holiday);
+
+    // picking the holiday theme shows off its flurry; leaving it clears any still falling
+    if (this.theme === "holiday" && this.holiday) playFlurry(this.holiday);
+    else stopFlurry();
   };
 
   <template>

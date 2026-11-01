@@ -282,7 +282,14 @@ export const PIECES: Record<string, string[]> = {
     leaf("#7cc46a", "#3f7a32"),
   ],
   pi: [piSymbol("#4a6fd6"), pieSlice, piSymbol("#e0894a"), latticePie],
-  pride: [rainbowArc, progressFlag, ...PRIDE.map((color) => heart(color))],
+  // the Progress Pride flag twice, so it turns up more often (2 in 9 pieces)
+  pride: [
+    rainbowArc,
+    progressFlag,
+    ...PRIDE.slice(0, 3).map((color) => heart(color)),
+    progressFlag,
+    ...PRIDE.slice(3).map((color) => heart(color)),
+  ],
   summer: [watermelon, beachBall, popsicle, hotSun],
   halloween: [pumpkin, candyCorn, bat, ghost],
   thanksgiving: [

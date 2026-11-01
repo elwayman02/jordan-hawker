@@ -165,6 +165,37 @@ describe("holiday themes", () => {
     expect(element.querySelectorAll(".holiday-fall__piece svg").length).toBeGreaterThan(0);
   });
 
+  renderingTest(
+    "picking the holiday theme plays its flurry; leaving it stops",
+    async ({ element }) => {
+      travelTo(HALLOWEEN);
+      picked("system", 2);
+      await render(
+        <template>
+          <ThemeToggle />
+          <HolidayFall />
+        </template>,
+      );
+
+      expect(element.querySelector(".holiday-fall")).toBeNull();
+
+      // system → light → dark → holiday
+      await click(".theme-toggle");
+      await click(".theme-toggle");
+
+      expect(element.querySelector(".holiday-fall")).toBeNull();
+
+      await click(".theme-toggle");
+
+      expect(toggle().dataset.themeChoice).toBe("holiday");
+      expect(element.querySelectorAll(".holiday-fall__piece svg").length).toBeGreaterThan(0);
+
+      await click(".theme-toggle");
+
+      expect(element.querySelector(".holiday-fall")).toBeNull();
+    },
+  );
+
   renderingTest("nothing falls for readers who picked another theme", async ({ element }) => {
     travelTo(HALLOWEEN);
     picked("system", 2);
