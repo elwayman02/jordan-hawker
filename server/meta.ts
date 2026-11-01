@@ -92,15 +92,23 @@ const escape = (text: string) =>
 export const START = "<!-- page meta -->";
 export const END = "<!-- /page meta -->";
 
-/** The page's tags, ready for index.html */
-export function renderMeta({ title, description, image }: PageMeta, url: string): string {
+/**
+ * The page's tags, ready for index.html. `url` is its canonical (production) address;
+ * images come from `origin`, wherever the page is being served (a deploy preview has them
+ * before production does).
+ */
+export function renderMeta(
+  { title, description, image }: PageMeta,
+  url: string,
+  origin: string = SITE_URL,
+): string {
   return [
     `<title>${escape(title)}</title>`,
     `<meta name="description" content="${escape(description)}" />`,
     `<meta property="og:title" content="${escape(title)}" />`,
     `<meta property="og:description" content="${escape(description)}" />`,
     `<meta property="og:url" content="${escape(url)}" />`,
-    `<meta property="og:image" content="${SITE_URL}/og/${image}.png" />`,
+    `<meta property="og:image" content="${escape(origin)}/og/${image}.png" />`,
     `<meta property="og:image:width" content="1200" />`,
     `<meta property="og:image:height" content="630" />`,
     `<meta property="og:image:alt" content="${escape(IMAGE_ALT[image] ?? title)}" />`,
@@ -122,7 +130,7 @@ export function withMeta(html: string, url: URL): string {
   return (
     html.slice(0, start + START.length) +
     "\n    " +
-    renderMeta(metaFor(url.pathname), canonical) +
+    renderMeta(metaFor(url.pathname), canonical, url.origin) +
     "\n    " +
     html.slice(end)
   );

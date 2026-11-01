@@ -107,6 +107,19 @@ describe("link previews", () => {
     expect(image("/nope")).toBe("https://www.jordanhawker.com/og/home.png");
   });
 
+  test("images come from wherever the page is served (a deploy preview has them first)", () => {
+    const html = withMeta(
+      indexHtml,
+      new URL("https://deploy-preview-12--jordanhawker.netlify.app/works"),
+    );
+
+    expect(tag(html, /og:image" content="([^"]*)"/)).toBe(
+      "https://deploy-preview-12--jordanhawker.netlify.app/og/works.png",
+    );
+    // the link itself is still the real address
+    expect(tag(html, /og:url" content="([^"]*)"/)).toBe("https://www.jordanhawker.com/works");
+  });
+
   test("every card image exists, at 1200×630", () => {
     const paths = ["/", "/works", "/codes", "/sound", "/words", "/votes", "/votes/2024"];
 
