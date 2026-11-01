@@ -29,6 +29,7 @@
     "lint": "concurrently \"pnpm:lint:*(!fix)\" --names \"lint:\" --prefixColors auto",
     "lint:fix": "concurrently \"pnpm:lint:*:fix\" --names \"fix:\" --prefixColors auto && pnpm format",
     "format": "prettier --write .",
+    "og-images": "node scripts/og-images.mjs",
     "lint:prettier": "prettier --check .",
     "lint:types": "tsc --noEmit --runExternalCode",
     "test": "vitest run",
