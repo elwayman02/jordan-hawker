@@ -1,0 +1,105 @@
+/*
+ * Holiday themes: light touches over the usual palette, still following the system's
+ * light or dark preference. Applied as <html data-holiday> (see app/utils/theme.ts).
+ */
+@layer tokens {
+  /* Halloween: a dusk-purple tint, pumpkin accents, purple on hover */
+  :root[data-holiday="halloween"] {
+    --bg: light-dark(oklch(98.4% 0.01 310), oklch(16% 0.024 300));
+    --surface: light-dark(oklch(96.2% 0.015 310), oklch(20% 0.03 300));
+    --surface-2: light-dark(oklch(93% 0.02 310), oklch(24.5% 0.035 300));
+    --line: light-dark(oklch(88% 0.022 310), oklch(31% 0.035 300));
+    --accent: light-dark(oklch(60% 0.19 48), oklch(74% 0.17 55));
+    --accent-strong: light-dark(oklch(48% 0.17 305), oklch(78% 0.12 305));
+  }
+
+  /* Thanksgiving: harvest cream and brown, rust accents, cranberry (or gold, by night) on hover */
+  :root[data-holiday="thanksgiving"] {
+    --bg: light-dark(oklch(98.4% 0.014 85), oklch(17% 0.02 55));
+    --surface: light-dark(oklch(96.2% 0.02 82), oklch(21% 0.024 55));
+    --surface-2: light-dark(oklch(93% 0.026 80), oklch(25% 0.028 55));
+    --line: light-dark(oklch(88% 0.028 78), oklch(31% 0.03 55));
+    --accent: light-dark(oklch(56% 0.16 42), oklch(73% 0.15 62));
+    --accent-strong: light-dark(oklch(46% 0.16 18), oklch(83% 0.13 85));
+  }
+
+  /* Winter: a frosty tint, icy-blue accents, deep slate (or frost, by night) on hover */
+  :root[data-holiday="winter"] {
+    --bg: light-dark(oklch(98.6% 0.008 230), oklch(16.5% 0.02 245));
+    --surface: light-dark(oklch(96.4% 0.012 230), oklch(20.5% 0.025 245));
+    --surface-2: light-dark(oklch(93.2% 0.018 230), oklch(24.5% 0.03 245));
+    --line: light-dark(oklch(88% 0.02 230), oklch(31% 0.03 245));
+    --accent: light-dark(oklch(52% 0.13 245), oklch(76% 0.11 232));
+    --accent-strong: light-dark(oklch(41% 0.1 262), oklch(87% 0.06 220));
+  }
+
+  /* New Year’s: midnight blue with amber (by day), champagne gold with silver (by night) */
+  :root[data-holiday="newyear"] {
+    --bg: light-dark(oklch(98.4% 0.006 260), oklch(15.5% 0.025 270));
+    --surface: light-dark(oklch(96.2% 0.01 260), oklch(19.5% 0.03 270));
+    --surface-2: light-dark(oklch(93% 0.014 260), oklch(23.5% 0.035 270));
+    --line: light-dark(oklch(88% 0.016 260), oklch(30% 0.035 270));
+    --accent: light-dark(oklch(40% 0.12 270), oklch(82% 0.13 85));
+    --accent-strong: light-dark(oklch(60% 0.15 70), oklch(90% 0.03 260));
+  }
+
+  /* Valentine's Day: a blush tint, rose accents, deep berry (or soft pink, by night) on hover */
+  :root[data-holiday="valentine"] {
+    --bg: light-dark(oklch(98.5% 0.01 10), oklch(16.5% 0.02 0));
+    --surface: light-dark(oklch(96.3% 0.016 10), oklch(20.5% 0.026 0));
+    --surface-2: light-dark(oklch(93% 0.022 10), oklch(24.5% 0.03 0));
+    --line: light-dark(oklch(88% 0.026 10), oklch(31% 0.035 0));
+    --accent: light-dark(oklch(57% 0.19 12), oklch(72% 0.16 8));
+    --accent-strong: light-dark(oklch(45% 0.16 355), oklch(85% 0.09 350));
+  }
+
+  /* Birthday: party magenta, with teal on hover */
+  :root[data-holiday="birthday"] {
+    --bg: light-dark(oklch(98.5% 0.01 320), oklch(16.5% 0.022 315));
+    --surface: light-dark(oklch(96.3% 0.016 320), oklch(20.5% 0.028 315));
+    --surface-2: light-dark(oklch(93% 0.022 320), oklch(24.5% 0.032 315));
+    --line: light-dark(oklch(88% 0.026 320), oklch(31% 0.036 315));
+    --accent: light-dark(oklch(55% 0.2 330), oklch(74% 0.16 330));
+    --accent-strong: light-dark(oklch(48% 0.1 195), oklch(83% 0.1 190));
+  }
+
+  /* Spring: fresh green, with blossom pink on hover */
+  :root[data-holiday="spring"] {
+    --bg: light-dark(oklch(98.6% 0.012 140), oklch(16.5% 0.018 150));
+    --surface: light-dark(oklch(96.4% 0.018 140), oklch(20.5% 0.024 150));
+    --surface-2: light-dark(oklch(93.2% 0.024 140), oklch(24.5% 0.028 150));
+    --line: light-dark(oklch(88% 0.028 140), oklch(31% 0.032 150));
+    --accent: light-dark(oklch(52% 0.13 150), oklch(76% 0.14 150));
+    --accent-strong: light-dark(oklch(52% 0.16 350), oklch(84% 0.09 350));
+  }
+
+  /* Summer: sun-warmed sand by day, a sea-blue night, ocean teal with coral (or sunshine) on hover */
+  :root[data-holiday="summer"] {
+    --bg: light-dark(oklch(98.6% 0.014 95), oklch(16.5% 0.022 220));
+    --surface: light-dark(oklch(96.4% 0.02 92), oklch(20.5% 0.028 220));
+    --surface-2: light-dark(oklch(93.2% 0.026 90), oklch(24.5% 0.032 220));
+    --line: light-dark(oklch(88% 0.03 90), oklch(31% 0.036 220));
+    --accent: light-dark(oklch(53% 0.11 200), oklch(76% 0.11 195));
+    --accent-strong: light-dark(oklch(55% 0.17 35), oklch(86% 0.14 90));
+  }
+
+  /* Pi Day: graph-paper blue, with golden pie crust on hover */
+  :root[data-holiday="pi"] {
+    --bg: light-dark(oklch(98.5% 0.008 250), oklch(16.5% 0.02 255));
+    --surface: light-dark(oklch(96.3% 0.012 250), oklch(20.5% 0.026 255));
+    --surface-2: light-dark(oklch(93% 0.018 250), oklch(24.5% 0.03 255));
+    --line: light-dark(oklch(88% 0.022 250), oklch(31% 0.034 255));
+    --accent: light-dark(oklch(50% 0.15 262), oklch(75% 0.12 258));
+    --accent-strong: light-dark(oklch(56% 0.13 62), oklch(83% 0.12 75));
+  }
+
+  /* Pride Month: violet accents, magenta on hover (the rainbow is in the header: see site-header.css) */
+  :root[data-holiday="pride"] {
+    --bg: light-dark(oklch(98.6% 0.006 300), oklch(16.5% 0.016 300));
+    --surface: light-dark(oklch(96.4% 0.01 300), oklch(20.5% 0.02 300));
+    --surface-2: light-dark(oklch(93.2% 0.014 300), oklch(24.5% 0.024 300));
+    --line: light-dark(oklch(88% 0.018 300), oklch(31% 0.028 300));
+    --accent: light-dark(oklch(50% 0.2 300), oklch(74% 0.15 300));
+    --accent-strong: light-dark(oklch(52% 0.2 350), oklch(82% 0.12 350));
+  }
+}

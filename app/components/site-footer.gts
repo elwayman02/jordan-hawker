@@ -1,4 +1,5 @@
 import Icon from "#components/icon.gts";
+import HolidayPreview from "#components/holidays/holiday-preview.gts";
 import SocialLinks from "#components/social-links.gts";
 import { hellaDrunk, site, socialLinks } from "#app/data/site.ts";
 
@@ -34,6 +35,7 @@ const year = new Date().getFullYear();
 
       <div class="site-footer__meta">
         <p>© 2015–{{year}} {{site.name}}</p>
+        <HolidayPreview />
         <p>
           Also pouring at
           <a

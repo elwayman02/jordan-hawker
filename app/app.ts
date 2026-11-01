@@ -19,6 +19,7 @@ import "@fontsource-variable/jetbrains-mono";
 import "./styles/tokens.css";
 import "./styles/base.css";
 import "./styles/layout.css";
+import "./styles/holidays.css";
 
 export default class App extends Application {
   modules = {

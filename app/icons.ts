@@ -6,20 +6,29 @@
 import arrowLeft from "~icons/lucide/arrow-left";
 import arrowRight from "~icons/lucide/arrow-right";
 import arrowUpRight from "~icons/lucide/arrow-up-right";
+import cake from "~icons/lucide/cake";
 import chevronLeft from "~icons/lucide/chevron-left";
 import chevronRight from "~icons/lucide/chevron-right";
 import fileText from "~icons/lucide/file-text";
+import flower from "~icons/lucide/flower";
+import ghost from "~icons/lucide/ghost";
 import gitFork from "~icons/lucide/git-fork";
 import heart from "~icons/lucide/heart";
+import leaf from "~icons/lucide/leaf";
 import martini from "~icons/lucide/martini";
 import messageCircle from "~icons/lucide/message-circle";
 import monitor from "~icons/lucide/monitor";
 import moon from "~icons/lucide/moon";
+import partyPopper from "~icons/lucide/party-popper";
+import pi from "~icons/lucide/pi";
 import play from "~icons/lucide/play";
 import quote from "~icons/lucide/quote";
+import rainbow from "~icons/lucide/rainbow";
 import repeat from "~icons/lucide/repeat-2";
+import snowflake from "~icons/lucide/snowflake";
 import star from "~icons/lucide/star";
 import sun from "~icons/lucide/sun";
+import treePalm from "~icons/lucide/tree-palm";
 import bluesky from "~icons/ri/bluesky-fill";
 import discord from "~icons/ri/discord-fill";
 import facebook from "~icons/ri/facebook-circle-fill";
@@ -37,27 +46,36 @@ export const icons = {
   arrowUpRight,
   bandcamp,
   bluesky,
+  cake,
   chevronLeft,
   chevronRight,
   discord,
   facebook,
   fileText,
+  flower,
+  ghost,
   gitFork,
   github,
   heart,
   instagram,
+  leaf,
   linkedin,
   mail,
   martini,
   messageCircle,
   monitor,
   moon,
+  partyPopper,
+  pi,
   play,
   quote,
+  rainbow,
   repeat,
+  snowflake,
   soundcloud,
   star,
   sun,
+  treePalm,
   youtube,
 } as const;
 

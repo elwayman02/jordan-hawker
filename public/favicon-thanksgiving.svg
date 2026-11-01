@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="harvest" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b93d16"/>
+      <stop offset=".55" stop-color="#df7a1d"/>
+      <stop offset="1" stop-color="#e3ad35"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="url(#harvest)"/>
+  <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-weight="700" font-size="34" fill="#fffaf3">jh</text>
+</svg>

@@ -1,5 +1,6 @@
 import SiteFooter from "#components/site-footer.gts";
 import SiteHeader from "#components/site-header.gts";
+import HolidayFall from "#components/holidays/holiday-fall.gts";
 
 <template>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -10,4 +11,5 @@ import SiteHeader from "#components/site-header.gts";
     </main>
     <SiteFooter />
   </div>
+  <HolidayFall />
 </template>

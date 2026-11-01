@@ -110,3 +110,25 @@
     white-space: nowrap;
   }
 }
+
+@layer components {
+  /* only while previewing a holiday theme (?holiday=name) */
+  .holiday-preview {
+    color: var(--accent-strong);
+  }
+
+  .holiday-preview__stop {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--text);
+    }
+  }
+}

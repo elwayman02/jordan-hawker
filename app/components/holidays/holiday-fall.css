@@ -1,0 +1,58 @@
+@layer components {
+  /* Above everything, but never in the way: clicks and scrolling pass straight through */
+  .holiday-fall {
+    position: fixed;
+    inset: 0;
+    z-index: 30;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .holiday-fall__piece {
+    position: absolute;
+    top: 0;
+    left: var(--x);
+    width: var(--size);
+    opacity: 0;
+    animation: holiday-fall var(--fall) linear var(--delay) both;
+  }
+
+  /* Drifts side to side on its way down, like a snowflake */
+  .holiday-fall__sway {
+    display: block;
+    animation: holiday-sway var(--sway-time) ease-in-out var(--delay) infinite alternate both;
+
+    & svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  @keyframes holiday-fall {
+    0% {
+      opacity: 0;
+      transform: translateY(-120%);
+    }
+
+    10%,
+    80% {
+      opacity: var(--alpha);
+    }
+
+    100% {
+      opacity: 0;
+      transform: translateY(100vh);
+    }
+  }
+
+  @keyframes holiday-sway {
+    from {
+      transform: translateX(calc(var(--sway) * -1)) rotate(calc(var(--tilt) * -1));
+    }
+
+    to {
+      transform: translateX(var(--sway)) rotate(var(--tilt));
+    }
+  }
+}

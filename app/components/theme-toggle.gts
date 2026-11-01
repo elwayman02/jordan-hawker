@@ -1,62 +1,81 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
 import { on } from "@ember/modifier";
+import type Owner from "@ember/owner";
 
 import Icon from "#components/icon.gts";
-
-type Theme = "system" | "light" | "dark";
-
-const ORDER: Theme[] = ["system", "light", "dark"];
-const KEY = "theme";
-
-function readTheme(): Theme {
-  try {
-    const stored = localStorage.getItem(KEY);
-
-    return stored === "light" || stored === "dark" ? stored : "system";
-  } catch {
-    return "system";
-  }
-}
+import {
+  applyTheme,
+  holidayOffer,
+  readSaved,
+  rememberHolidayWindows,
+  resolveTheme,
+  saveChoice,
+  type ThemeChoice,
+} from "#utils/theme.ts";
 
 /**
- * Cycles system → light → dark. The choice is applied as <html data-theme>,
- * which public/theme.js also applies before first paint.
+ * Cycles system → light → dark, and the holiday theme while a holiday is near (shown by
+ * default then: see resolveTheme in app/utils/theme.ts).
  */
 export default class ThemeToggle extends Component {
-  @tracked theme: Theme = readTheme();
+  /** Fixed for the page view: a holiday doesn't start or end under the reader */
+  offer = holidayOffer();
 
-  get label() {
-    return `Color theme: ${this.theme}. Switch to ${this.next}.`;
+  /** What's showing: the reader's pick, or the default for today */
+  @tracked theme: ThemeChoice = resolveTheme(readSaved(), this.offer);
+
+  constructor(owner: Owner, args: object) {
+    super(owner, args);
+
+    rememberHolidayWindows();
+    // public/theme.js applied this from a cache; settle it with today's calendar
+    applyTheme(this.theme, this.holiday);
   }
 
-  get next(): Theme {
-    return ORDER[(ORDER.indexOf(this.theme) + 1) % ORDER.length]!;
+  get holiday() {
+    return this.offer?.holiday;
+  }
+
+  get order(): ThemeChoice[] {
+    return this.holiday ? ["holiday", "system", "light", "dark"] : ["system", "light", "dark"];
+  }
+
+  get next(): ThemeChoice {
+    return this.order[(this.order.indexOf(this.theme) + 1) % this.order.length]!;
+  }
+
+  name(theme: ThemeChoice) {
+    if (theme !== "holiday") return theme;
+    if (!this.holiday) return "system";
+
+    return this.offer?.preview ? `${this.holiday.label} (preview)` : this.holiday.label;
+  }
+
+  get label() {
+    return `Color theme: ${this.name(this.theme)}. Switch to ${this.name(this.next)}.`;
   }
 
   get icon() {
+    if (this.theme === "holiday" && this.holiday) return this.holiday.icon;
+
     return this.theme === "system" ? "monitor" : this.theme === "light" ? "sun" : "moon";
   }
 
   cycle = () => {
     this.theme = this.next;
-
-    if (this.theme === "system") {
-      delete document.documentElement.dataset.theme;
-    } else {
-      document.documentElement.dataset.theme = this.theme;
-    }
-
-    try {
-      if (this.theme === "system") localStorage.removeItem(KEY);
-      else localStorage.setItem(KEY, this.theme);
-    } catch {
-      // storage unavailable (private mode): the choice lasts for this page view
-    }
+    saveChoice(this.theme);
+    applyTheme(this.theme, this.holiday);
   };
 
   <template>
-    <button type="button" class="theme-toggle" title={{this.label}} {{on "click" this.cycle}}>
+    <button
+      type="button"
+      class="theme-toggle"
+      data-theme-choice={{this.theme}}
+      title={{this.label}}
+      {{on "click" this.cycle}}
+    >
       <Icon @name={{this.icon}} @label={{this.label}} />
     </button>
   </template>

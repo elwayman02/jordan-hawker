@@ -11,6 +11,7 @@ export default defineConfig({
         test: {
           name: "browser",
           include: ["tests/**/*-test.{js,ts,gjs,gts}"],
+          setupFiles: ["./tests/helpers/setup.ts"],
           maxConcurrency: 1,
           passWithNoTests: true,
           browser: {

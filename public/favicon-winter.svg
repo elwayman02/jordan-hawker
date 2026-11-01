@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="ice" x1="0" y1="0" x2=".6" y2="1">
+      <stop offset="0" stop-color="#6aa6d8"/>
+      <stop offset="1" stop-color="#3a6eb3"/>
+    </linearGradient>
+  </defs>
+  <rect y="4" width="64" height="60" rx="16" fill="url(#ice)"/>
+  <!-- the same snow cap as the header mark (app/components/site-header.css), scaled up -->
+  <path transform="translate(-0.5 0) scale(1.625)" d="M2 7a6 6 0 0 1 6-6h24a6 6 0 0 1 6 6a2.5 2.5 0 0 1-5 0a2 2 0 0 1-4 0v2.6a1.3 1.3 0 0 1-2.6 0V7a2.6 2.6 0 0 1-5.2 0a2.2 2.2 0 0 1-4.4 0v1.6a1.1 1.1 0 0 1-2.2 0V7a2.3 2.3 0 0 1-4.6 0a2.4 2.4 0 0 1-4.8 0a1.6 1.6 0 0 1-3.2 0z" fill="#f8fbff" stroke="#c4d7ec" stroke-width=".7" stroke-linejoin="round"/>
+  <text x="50%" y="64%" dominant-baseline="middle" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-weight="700" font-size="32" fill="#fffaf3">jh</text>
+</svg>

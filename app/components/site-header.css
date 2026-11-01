@@ -49,6 +49,166 @@
     transition: transform 0.25s var(--ease-out);
   }
 
+  /* Holiday variants of the mark (public/favicon-{holiday}.svg match) */
+  :root[data-holiday="halloween"] .brand__mark {
+    position: relative;
+    border-radius: 46% 46% 42% 42%;
+    background:
+      radial-gradient(ellipse 30% 55% at 50% 52%, oklch(74% 0.17 55), transparent),
+      linear-gradient(90deg, oklch(60% 0.18 45), oklch(70% 0.18 52) 40% 60%, oklch(60% 0.18 45));
+    color: oklch(24% 0.04 300);
+
+    /* the stem */
+    &::before {
+      content: "";
+      position: absolute;
+      top: -0.3rem;
+      left: 50%;
+      width: 0.32rem;
+      height: 0.55rem;
+      border-radius: 0.2rem;
+      background: oklch(50% 0.12 135);
+      translate: -50% 0;
+      rotate: 14deg;
+    }
+  }
+
+  /*
+   * A little badge tucked into the mark's top-right corner. Each holiday sets --mark-badge
+   * (an SVG; public/favicon-{holiday}.svg match) and its own colors.
+   */
+  :root:is(
+      [data-holiday="thanksgiving"],
+      [data-holiday="newyear"],
+      [data-holiday="valentine"],
+      [data-holiday="spring"],
+      [data-holiday="summer"],
+      [data-holiday="pi"]
+    )
+    .brand__mark {
+    position: relative;
+    color: oklch(99% 0.005 80);
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: -0.35rem;
+      right: -0.3rem;
+      width: 0.9rem;
+      height: 0.9rem;
+      rotate: var(--mark-badge-rotate, 0deg);
+      background: var(--mark-badge) center / contain no-repeat;
+    }
+  }
+
+  /* an autumn gradient, with a leaf */
+  :root[data-holiday="thanksgiving"] .brand__mark {
+    --mark-badge: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 21.5C5 15.5 5 7 12 2.5c7 4.5 7 13 0 19z' fill='%23dcab2c'/%3E%3Cpath d='M12 22.5V5' stroke='%2380600e' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E");
+    --mark-badge-rotate: 35deg;
+
+    background: linear-gradient(
+      145deg,
+      oklch(52% 0.17 32),
+      oklch(64% 0.17 55) 55%,
+      oklch(74% 0.15 80)
+    );
+  }
+
+  /* midnight, with champagne-gold letters and a star */
+  :root[data-holiday="newyear"] .brand__mark {
+    --mark-badge: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2.5l2.8 5.9 6.4.8-4.7 4.4 1.2 6.3L12 16.8l-5.7 3.1 1.2-6.3-4.7-4.4 6.4-.8z' fill='%23f2c14e' stroke='%23fff' stroke-width='1.2' stroke-linejoin='round'/%3E%3C/svg%3E");
+    --mark-badge-rotate: 12deg;
+
+    background: linear-gradient(160deg, oklch(34% 0.09 268), oklch(22% 0.06 275));
+    color: oklch(86% 0.12 85);
+  }
+
+  /* rose, with a heart */
+  :root[data-holiday="valentine"] .brand__mark {
+    --mark-badge: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 20.5C5.5 16 3 12.5 3 9.2 3 6.6 5 4.6 7.5 4.6c1.8 0 3.5 1 4.5 2.6 1-1.6 2.7-2.6 4.5-2.6C19 4.6 21 6.6 21 9.2c0 3.3-2.5 6.8-9 11.3z' fill='%23e0394f' stroke='%23fff' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E");
+    --mark-badge-rotate: 14deg;
+
+    background: linear-gradient(160deg, oklch(66% 0.16 8), oklch(54% 0.19 6));
+  }
+
+  /* fresh green, with a blossom */
+  :root[data-holiday="spring"] .brand__mark {
+    --mark-badge: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='%23f5a3c0' stroke='%23fff' stroke-width='.9'%3E%3Ccircle cx='12' cy='7' r='3.6'/%3E%3Ccircle cx='16.76' cy='10.45' r='3.6'/%3E%3Ccircle cx='14.94' cy='16.05' r='3.6'/%3E%3Ccircle cx='9.06' cy='16.05' r='3.6'/%3E%3Ccircle cx='7.24' cy='10.45' r='3.6'/%3E%3C/g%3E%3Ccircle cx='12' cy='12' r='2' fill='%23f7d35c'/%3E%3C/svg%3E");
+
+    background: linear-gradient(160deg, oklch(68% 0.14 145), oklch(55% 0.13 155));
+  }
+
+  /* ocean teal, with the sun */
+  :root[data-holiday="summer"] .brand__mark {
+    --mark-badge: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0.6L13.25 5.72L15.6 3.32L15.56 6.68L20.06 3.94L17.32 8.44L20.68 8.4L18.28 10.75L23.4 12L18.28 13.25L20.68 15.6L17.32 15.56L20.06 20.06L15.56 17.32L15.6 20.68L13.25 18.28L12 23.4L10.75 18.28L8.4 20.68L8.44 17.32L3.94 20.06L6.68 15.56L3.32 15.6L5.72 13.25L0.6 12L5.72 10.75L3.32 8.4L6.68 8.44L3.94 3.94L8.44 6.68L8.4 3.32L10.75 5.72Z' fill='%23ffa53e' stroke='%23fff' stroke-width='.9' stroke-linejoin='round'/%3E%3Ccircle cx='12' cy='12' r='5.6' fill='%23ffd34d'/%3E%3C/svg%3E");
+
+    background: linear-gradient(160deg, oklch(68% 0.11 198), oklch(54% 0.11 215));
+  }
+
+  /* graph-paper blue, with a slice of pie */
+  :root[data-holiday="pi"] .brand__mark {
+    --mark-badge: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 20L9.8 4A17 17 0 0 1 20 14.2Z' fill='%23e99a4a' stroke='%23fff' stroke-width='1.4' stroke-linejoin='round'/%3E%3Cpath d='M9.8 4A17 17 0 0 1 20 14.2' fill='none' stroke='%23c98a3e' stroke-width='2.6' stroke-linecap='round'/%3E%3Ccircle cx='12.6' cy='12' r='1.9' fill='%23fff8ee'/%3E%3C/svg%3E");
+    --mark-badge-rotate: -8deg;
+
+    background: linear-gradient(160deg, oklch(58% 0.14 258), oklch(46% 0.15 265));
+  }
+
+  /* the rainbow flag's stripes, and a rainbow line under the header (same 1px border) */
+  :root[data-holiday="pride"] .brand__mark {
+    background: linear-gradient(
+      #e8453c 0 16.67%,
+      #f28c28 0 33.33%,
+      #f2c91f 0 50%,
+      #3fae5a 0 66.67%,
+      #3b7dd8 0 83.33%,
+      #8a4fc9 0
+    );
+    color: oklch(99% 0.005 80);
+    text-shadow: 0 1px 2px oklch(20% 0.02 300 / 55%);
+  }
+
+  :root[data-holiday="pride"] .site-header {
+    border-image: linear-gradient(90deg, #e8453c, #f28c28, #f2c91f, #3fae5a, #3b7dd8, #8a4fc9) 1;
+  }
+
+  /* party magenta, wearing a party hat */
+  :root[data-holiday="birthday"] .brand__mark {
+    position: relative;
+    background: linear-gradient(160deg, oklch(62% 0.2 330), oklch(54% 0.18 298));
+    color: oklch(99% 0.005 80);
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: -0.62rem;
+      left: 0.2rem;
+      width: 1.15rem;
+      height: 1.25rem;
+      rotate: -18deg;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 3.5 18.5 20h-13z' fill='%238b6ce0' stroke='%23fff' stroke-width='1' stroke-linejoin='round'/%3E%3Ccircle cx='11' cy='11' r='1' fill='%23f7c84a'/%3E%3Ccircle cx='13.6' cy='14.6' r='1' fill='%23f7c84a'/%3E%3Ccircle cx='9.4' cy='17' r='1' fill='%23f7c84a'/%3E%3Cpath d='M5 20.3h14' stroke='%23f7a8cf' stroke-width='1.8' stroke-linecap='round'/%3E%3Ccircle cx='12' cy='3.2' r='1.9' fill='%23f7a8cf'/%3E%3C/svg%3E")
+        center / contain no-repeat;
+    }
+  }
+
+  /* icy blue, with snow settled on top (public/favicon-winter.svg has the same cap) */
+  :root[data-holiday="winter"] .brand__mark {
+    position: relative;
+    background: linear-gradient(160deg, oklch(66% 0.1 225), oklch(52% 0.13 248));
+    color: oklch(99% 0.005 230);
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: -0.3rem;
+      left: -0.125rem;
+      width: calc(100% + 0.25rem);
+      height: 0.75rem;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 12'%3E%3Cpath d='M2 7a6 6 0 0 1 6-6h24a6 6 0 0 1 6 6a2.5 2.5 0 0 1-5 0a2 2 0 0 1-4 0v2.6a1.3 1.3 0 0 1-2.6 0V7a2.6 2.6 0 0 1-5.2 0a2.2 2.2 0 0 1-4.4 0v1.6a1.1 1.1 0 0 1-2.2 0V7a2.3 2.3 0 0 1-4.6 0a2.4 2.4 0 0 1-4.8 0a1.6 1.6 0 0 1-3.2 0z' fill='%23f8fbff' stroke='%23c4d7ec' stroke-width='.7' stroke-linejoin='round'/%3E%3C/svg%3E")
+        center / 100% 100% no-repeat;
+      filter: drop-shadow(0 1px 1px oklch(20% 0.03 245 / 22%));
+    }
+  }
+
   .brand__name {
     @media (max-width: 40rem) {
       display: none;

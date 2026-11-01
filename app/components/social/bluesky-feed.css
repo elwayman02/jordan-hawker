@@ -30,6 +30,11 @@
 
     & .icon {
       color: #1185fe;
+
+      /* holiday themes recolor the butterfly to match */
+      :root[data-holiday] & {
+        color: var(--accent);
+      }
     }
   }
 

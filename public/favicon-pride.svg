@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <clipPath id="tile"><rect width="64" height="64" rx="16"/></clipPath>
+  </defs>
+  <g clip-path="url(#tile)">
+    <rect width="64" height="11" fill="#e8453c"/>
+    <rect y="10.67" width="64" height="11" fill="#f28c28"/>
+    <rect y="21.33" width="64" height="11" fill="#f2c91f"/>
+    <rect y="32" width="64" height="11" fill="#3fae5a"/>
+    <rect y="42.67" width="64" height="11" fill="#3b7dd8"/>
+    <rect y="53.33" width="64" height="10.67" fill="#8a4fc9"/>
+  </g>
+  <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-weight="700" font-size="34" fill="#fffaf3" stroke="#2a2030" stroke-opacity=".55" stroke-width="2.4" paint-order="stroke">jh</text>
+</svg>
