@@ -19,6 +19,160 @@ export interface Recommendation {
 
 const all: Recommendation[] = [
   {
+    name: "Matt Burdick",
+    role: "Senior Engineering Manager",
+    company: "LinkedIn",
+    date: "2026-06-25",
+    text: "Jordan was a key contributor to my UI Infra team, consistently demonstrating care and thoughtfulness in his work. He led several complex infrastructure initiatives, including in one instance an analysis of our repo structure. His recommendation to consolidate our numerous repositories into a leaner, more efficient set substantially increased iteration speed for a 60-developer team, significantly boosting overall productivity. He also organized regular tech meetups. I highly recommend him, as I truly valued his exceptional communication skills and meticulous attention to detail across all his projects."
+  },
+  {
+    name: "Victor Correa",
+    role: "Staff Software Engineer",
+    company: "LinkedIn",
+    date: "2026-05-22",
+    text: "I had the chance to work with Jordan for almost 4 years at LinkedIn and he was a reference for me since the beginning. His vast and deep knowledge of web development, sense of community building, and enthusiasm for engaging in technical and process discussions made him a person I could trust and rely on for partnering on greater initiatives. Most recently, I witnessed firsthand how he was able to adapt to a new scope (and type) of work, which took us both away from front-end development and into backend/prompt tuning tasks. Jordan was able to ramp up quickly and still find ways to improve future onboarding for others by automating tasks and documenting knowledge. He delivered high-quality work that was key to driving insights about user behavior and helping focus on initiatives that had a higher impact. I learned a lot from Jordan as a teammate and as a person. He doesn't shy away from healthy discussions to make things better and supports others in bringing their own perspectives and contributions forward. Any team and company will be lucky to have him, not only for his technical expertise but also for the way he builds community."
+  },
+  {
+    name: "Abilash Badri",
+    role: "Software Engineering Manager",
+    company: "LinkedIn",
+    date: "2026-05-20",
+    text: "I had the pleasure of managing Jordan Hawker directly, and I would highly recommend him. Jordan brings deep expertise in UI infrastructure, especially around Ember, where he was a go-to subject matter expert for the team. During his time reporting to me, he consistently focused on improving developer experience, code quality, and engineering velocity. He is a strong communicator, highly professional. Jordan was often the first person engineers went to with Ember-related questions, and he always made time to help others understand the system better. Beyond his technical depth, Jordan strongly advocated for engineering craft. He led and supported several code cleanup and quality initiatives that helped improve the maintainability of the codebase. He also mentored junior engineers and interns, contributing meaningfully to their growth and confidence. Jordan would be a strong addition to any team looking for a thoughtful, experienced UI engineer who cares deeply about craft, developer productivity, and helping others succeed."
+  },
+  {
+    name: "Victoria Shi",
+    role: "Senior Software Engineer",
+    company: "LinkedIn",
+    date: "2026-05-15",
+    text: "Jordan has been my teammate at LinkedIn for many years. When I think about what makes working with Jordan special, it's not just that he's deeply knowledgeable in all things frontend and web (although he is), or that he is passionate about maintaining high code quality and craftsmanship (although he is), or that he's a team player, a hard worker, and outspoken about the things that matter (although, of course, all these things are true). In my opinion, what makes Jordan exceptional is his generosity with people. He is the first person to jump on a general question on Slack, sharing his knowledge to unblock others. He is a person who junior engineers feel comfortable to approach to ask their questions. He shares his technical expertise and his time with people, whether on his team or not, in his organization or not. I have learned from him communication and project management skills, not just engineering knowledge. He makes everyone better at their job, and that's invaluable. I highly recommend him for any role."
+  },
+  {
+    name: "Phil Zhang",
+    role: "Senior Software Engineer",
+    company: "LinkedIn",
+    date: "2026-05-14",
+    text: "Jordan is an engineer I’ve learned a lot from, both in engineering craft and in how to approach work with care. He has a strong commitment to quality, pays close attention to details, and consistently raises the bar for the team. What stands out to me is not only his technical depth, but also how much he cares about people, collaboration, and building things the right way. I really enjoyed working with him and would highly recommend him to any team."
+  },
+  {
+    name: "Zhuowei Li",
+    role: "Staff Software Engineer",
+    company: "LinkedIn",
+    date: "2026-05-13",
+    text: "During our time working together, Jorden consistently delivered high-quality work. I especially appreciated his attention to detail, thoughtful communication, and willingness to collaborate closely with cross-functional partners. I’m happy to work with him and highly recommend him to any team in future."
+  },
+  {
+    name: "Yang Piao",
+    role: "Staff Software Engineer",
+    company: "LinkedIn",
+    date: "2026-05-13",
+    text: "I’ve had the pleasure of working with Jordan on the same team for over 4 years, and he is one of the people that I’ve had the most fun working with. Jordan has exceptional technical skills in web development. He was seen by many as the go-to person to consult about UI development and the Ember.js ecosystem, because he's not just knowledgeable but also very good at teaching/mentoring others and helping them grow. Many engineers, including me, have learned great things from him and are very grateful. Jordan is passionate about code quality and craft. His willingness to tackle \"unattractive\" work to improve the infrastructure and health of our code base is inspiring to me. His attention to details is also outstanding. He's definitely a great teammate that'll help a team succeed. Outside of work, Jordan's fun to talk to. I've had good times chatting with him on various topics, and I think I'll particularly miss his BBQ talks. I enjoyed working with Jordan. May our paths cross again."
+  },
+  {
+    name: "Alex Vovchuk",
+    role: "Staff Software Engineer",
+    company: "LinkedIn",
+    date: "2026-05-13",
+    text: "I had the pleasure of working with Jordan Hawker at LinkedIn Talent Solutions, and he is one of the strongest engineers I’ve worked with. Jordan is the go-to person for solving complex technical problems and for architectural guidance. If a problem is unclear or challenging, he’s the one people turn to - he consistently finds the right solution, balancing deep technical insight with practical judgment. He played a key role in shaping dependency management and AI productivity systems within LinkedIn Hiring Solutions, raising the bar for both architecture and execution. What stands out most is his clarity of thought - discussing complex problems with him is always efficient and insightful, and he reliably drives toward the best outcome."
+  },
+  {
+    name: "Kevin Suen",
+    role: "Staff Frontend Engineer",
+    company: "LinkedIn",
+    date: "2026-05-13",
+    text: "A bright spot in a storm sea. I worked with Jordan in the Talent Solutions organization where he was a subject matter expert in Ember/JavaScript he helped drive several complex migrations and continued to support a application in constant transition. He consistently provided clear guidance to complex problems often times outside his domain of expertise. I would recommend him for any team and not just frontend, his capability, flexibility, and communication skills effortless outclassed many other I've worked with in the past."
+  },
+  {
+    name: "Jason Edelman",
+    role: "Senior UI Engineer",
+    company: "LinkedIn",
+    date: "2025-02-02",
+    text: "Working with Jordan was an absolute pleasure. He's extremely knowledgeable and will bend over backwards to help you should you need it. With his support, I was able to push org-level code that affected the hygiene of the codebase. Can't recommend him enough!"
+  },
+  {
+    name: "Nikko Bautista",
+    role: "Director, Product Security",
+    company: "Confluent",
+    date: "2025-01-17",
+    text: "I worked with Jordan at LinkedIn as he was one of our most senior FE engineers in the Talent Solutions organization. Jordan provided a clear vision of what our FE landscape should look like, based on his vast experience which made him an incredible asset to the organization. He mentored and worked with multiple FE engineers from my team on Ember.js fundamentals and helped accelerate their growth and execution. Would full heartedly recommend working with Jordan! I enjoyed my team collaborating with him at Linkedin."
+  },
+  {
+    name: "Eric Shirley",
+    role: "Founding Engineer",
+    company: "Stealth Startup",
+    date: "2025-01-08",
+    text: "I had the pleasure of working with Jordan at LinkedIn. Jordan possesses strong opinions grounded in experience, making him a valuable resource for technical discussions. He was an exceptional teacher, patiently explaining concepts and guiding me through challenging initiatives. His extensive network within the Ember.js ecosystem facilitated collaborations and accelerated our team's projects. As my mentor, Jordan helped choose projects that challenged me and introduced me to key individuals within the Ember community. As my teammate, we worked together on large infrastructure projects such as migrating large swaths of code to new paradigms, conducting developer surveys to improve our infra team alignment with the engineers we served, and rolling out code quality improvements for fixing linting issues."
+  },
+  {
+    name: "Chris Krycho",
+    role: "Principal Software Engineer",
+    company: "Vanta",
+    date: "2025-01-08",
+    text: "Jordan is a passionate developer who is always looking for ways to imporve the product he works on, especially by leveling up other developers and their tools—including a willingness to take on unglamorous projects that can take months to get across the finish line but have a huge impact on developer productivity and engineering efficiency."
+  },
+  {
+    name: "Peter Shatara",
+    role: "Software Engineer Technical Lead",
+    company: "Snap Inc",
+    date: "2024-12-20",
+    text: "I had the pleasure of working with Jordan for 2 years while at LinkedIn, and can confidently say that he's the type of engineer any organization would benefit from having on their team. He's an all around fantastic team mate, who has identified and solved large scale infrastructure challenges, that had far reaching benefits to the LinkedIn Talent Solutions organization. He's an expert at understanding the needs of an organization and translating that into impactful engineering initiatives. As a mentor, Jordan is passionate about his craft, and found every opportunity he could to share his knowledge with the team at large. Both in large forums, or one on one, Jordan's an excellent communicator who works tirelessly to up-level his teammates. He's a wealth of information, and has a talent for looking at a topic from multiple angles; patiently working with his teammates to ensure they've developed a deep understanding of a problem space, options for approaching that problem, and weighing out solutions. He has helped me personally to rethink how I approach problem solving, considering more broadly the long term business and technical impact of my decision making. I am absolutely a better engineer for having the opportunity to work with Jordan."
+  },
+  {
+    name: "Agustin Vaca",
+    role: "Software Engineer",
+    company: "Microsoft",
+    date: "2024-12-16",
+    text: "I was lucky to have Jordan as my mentor during my internship at LinkedIn, and he was without a doubt the biggest driver of my growth and success. He is not only an outstanding engineer but also a remarkable mentor. I was a complete beginner to many of the technologies we were using. His mastery of frontend technologies was evident during every interaction. The constant guidance he offered helped me navigate all of the challenges I faced, and his constructive feedback pushed me to better myself. Beyond technical ability, what struck me the most was his patience and dedication. Despite a demanding schedule, he always made time to answer my questions, review my code, and offer general advice. He created a safe and encouraging environment that allowed me to experiment, learn, and grow. Also, his ability to communicate is a skill I'll strive to gain during my career. He was consistently clear, empathic, and confident when expressing himself. I am immensely grateful for the opportunity to learn from Jordan. His passion and care for his work and those he mentors truly sets him apart as an amazing professional."
+  },
+  {
+    name: "Biing-Yann Hsiung",
+    role: "Engineering Director",
+    company: "OKX",
+    date: "2024-12-15",
+    text: "I had the pleasure of getting to know Jordan Hawker when we both worked as web engineers at LinkedIn (circa 2018–2021). Even before he joined, I recall being impressed by his depth of computer science knowledge during the interview process. I initially recommended considering him for a Senior Engineer role, but after seeing his breadth of understanding and skill, I urged the team to scale the position up to Staff level. One interesting point about Jordan is his background in the Ember.js community—back then, Twitch (where he was heavily involved) was known to use Ember extensively. His passion for Ember and the broader web ecosystem made LinkedIn a natural fit, given its active engineering community and extensive frontend frameworks. Although we didn’t work together on any specific product features at LinkedIn, Jordan found other ways to stand out. He helped me set up my open-source Ember form validation project, guiding me through everything from choosing the right license to establishing a documentation site and configuring the CI pipeline on GitHub. His willingness to share his knowledge and mentor others—me included—was remarkable, and it contributed significantly to the success of that project. Jordan’s technical acuity, strong mentoring skills, and community-driven spirit made him not only deserving of a Staff-level role at LinkedIn but a standout engineer in the team. I highly recommend him for any role that values deep technical insight, open-source contribution, and collaborative leadership."
+  },
+  {
+    name: "Rob Graeber",
+    role: "Founder",
+    company: "Stimulating AI Inc",
+    date: "2024-12-14",
+    text: "Jordan was one of the most dedicated and efficient staff software engineers I had the pleasure of working with at LinkedIn. He has a very strong work ethic, unparalleled analytical and problem-solving skills, and understands complex matters even when outside his direct area of expertise. Jordan is an organized and team-oriented perfectionist who has no problem working hard when necessary. He is self-motivated, methodical, and always ready to deal with difficult situations, solving problems on time. His ability to mentor junior developers and share knowledge across teams has been invaluable to our organization. Jordan consistently delivers high-quality code while maintaining excellent documentation practices and fostering a collaborative environment. His strategic thinking and technical leadership have been instrumental in driving several critical initiatives to successful completion."
+  },
+  {
+    name: "Kacey Lewis",
+    role: "Senior Engineering Manager",
+    company: "Vanta",
+    date: "2024-12-13",
+    text: "Jordan has always been a delight to work with. I worked with Jordan as a cross-functional partner, and he was one of the best advocates for best practices and developer productivity. I could always rely on him to do the right thing - whether it was a tedious migration chore, or a greenfield feature ask, Jordan was game to get it done and/or make sure the right folks were on it. Jordan is also a great frontend and UI engineer; able to go deep technically and root cause an annoying data layer issue, or brainstorm about improvements in the UI/UX. He also is a wonderful culture carrier, putting in extra effort to ensure team culture is healthy and all voices are heard."
+  },
+  {
+    name: "Carlos Alba",
+    role: "Full Stack Software Engineer",
+    company: "DoorDash",
+    date: "2024-12-12",
+    text: "I had the opportunity to work with Jordan for nearly three years at LinkedIn. He was one of the individuals who carried a significant amount of responsibility on the web infrastructure side of our organization. I deeply valued the many conversations we had about technical topics, as I always felt I could learn something from him. He was consistently a bar raiser, in my opinion, in terms of how we could improve things on a large scale. I think he truly combines strong technical leadership with a high level of approachability. I never felt like I couldn’t reach out to him for feedback or questions on any topic, whether it was LinkedIn-specific or related to the broader open-source community. I would love the opportunity to work with him again someday!"
+  },
+  {
+    name: "Tyler Becks",
+    role: "CTO, Cofounder",
+    company: "Gobi",
+    date: "2024-12-12",
+    text: "Jordan has been one of the most influential mentors in my career, profoundly shaping my growth as an engineer during our five years working together. His technical leadership was instrumental in transforming our frontend architecture from microservices to a monorepo, while his guidance proved invaluable during my first major initiative - the Ember Octane migration, which he helped architect. What sets Jordan apart is not just his exceptional technical abilities, but his unique talent for elevating entire engineering teams. He consistently offers innovative perspectives while remaining genuinely receptive to others' ideas and feedback. His rare combination of deep technical expertise and broad architectural vision is matched only by his dedication to mentoring others. I've witnessed firsthand how he empowers his peers to reach their full potential, always taking time to share knowledge and provide thoughtful guidance. Having had the privilege of working closely with Jordan, I can confidently say that any team would be fortunate to have him. I would jump at the opportunity to work together again."
+  },
+  {
+    name: "Michael Calvillo, PhD",
+    role: "Senior UX Researcher",
+    company: "Bayer Crop Science",
+    date: "2023-07-06",
+    text: "What can I say? Jordan is a rare, top shelf talent! He asks the right questions. He listens. He evaluates. He delivers!"
+  },
+  {
+    name: "Dave Laird",
+    role: "Product Engineer",
+    company: "Moonset Health",
+    date: "2018-10-05",
+    text: "Jordan comes highly commended. He cultivates a culture of craftsmanship and performant code. Quickly after joining Twitch, Jordan played a significant role in getting the frontend application at Twitch under tests. He built tools that allowed me and other developers to be successful in adding their well-tested features. Jordan is also a delight on a team not just his immediate team but each team he interacts with. Have a look at the open source projects that Jordan maintains this also shows his commitment to the developer community as a whole. "
+  },
+  {
     name: "Anonymous",
     role: "Software Engineer",
     company: "Twitch",
