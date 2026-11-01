@@ -1,6 +1,6 @@
 @layer components {
   .hella {
-    --wine: light-dark(oklch(42% 0.14 15), oklch(72% 0.13 15));
+    --wine: light-dark(oklch(42% 0.14 15deg), oklch(72% 0.13 15deg));
 
     display: grid;
     gap: var(--space-s);

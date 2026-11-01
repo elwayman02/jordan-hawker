@@ -11,6 +11,7 @@ concurrency:
   group: ci-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
+# Node matches netlify.toml's NODE_VERSION
 jobs:
   lint:
     name: "Lints"
@@ -18,6 +19,8 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: wyvox/action-setup-pnpm@v3
+        with:
+          node-version: 24
       - run: pnpm lint
   test:
     name: "Tests"
@@ -25,4 +28,15 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: wyvox/action-setup-pnpm@v3
+        with:
+          node-version: 24
       - run: pnpm test
+  build:
+    name: "Build"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: wyvox/action-setup-pnpm@v3
+        with:
+          node-version: 24
+      - run: pnpm build

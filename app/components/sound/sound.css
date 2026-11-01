@@ -53,7 +53,7 @@
     display: grid;
     place-items: center;
     color: white;
-    background: oklch(0% 0 0 / 25%);
+    background: oklch(0% 0 0deg / 25%);
     transition: background 0.2s;
 
     & .icon {
@@ -63,13 +63,13 @@
       border-radius: 999px;
       background: var(--accent);
       color: var(--on-accent);
-      box-shadow: 0 6px 20px oklch(0% 0 0 / 30%);
+      box-shadow: 0 6px 20px oklch(0% 0 0deg / 30%);
     }
   }
 
   .track__play:hover .track__play-icon,
   .video__poster:hover .video__play {
-    background: oklch(0% 0 0 / 10%);
+    background: oklch(0% 0 0deg / 10%);
   }
 
   .track__info {

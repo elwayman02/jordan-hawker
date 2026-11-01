@@ -1,9 +1,11 @@
+// @ts-check
 // Applies the color theme before first paint. Mirrors resolveTheme in app/utils/theme.ts.
 try {
   const root = document.documentElement;
   const now = Date.now();
 
   // The holiday calendar the app keeps current (every holiday appears in a year's worth)
+  /** @type {{ name: string, from: number, until: number }[]} (HolidayWindow in app/utils/holidays.ts) */
   const windows = JSON.parse(localStorage.getItem("holidays") || "[]");
   const known = new Set(windows.map((window) => window.name));
 
@@ -46,9 +48,11 @@ try {
 
   if (theme === "light" || theme === "dark") root.dataset.theme = theme;
 
-  if (theme === "holiday" && /^[a-z]+$/.test(offer.name)) {
+  if (theme === "holiday" && offer && /^[a-z]+$/.test(offer.name)) {
+    const icon = document.querySelector('link[rel="icon"]');
+
     root.dataset.holiday = offer.name;
-    document.querySelector('link[rel="icon"]').href = `/favicon-${offer.name}.svg`;
+    if (icon instanceof HTMLLinkElement) icon.href = `/favicon-${offer.name}.svg`;
   }
 } catch {
   // storage unavailable or unreadable: follow the system preference

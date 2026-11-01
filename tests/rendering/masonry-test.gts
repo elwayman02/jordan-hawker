@@ -12,12 +12,14 @@ const HEIGHTS = [100, 50, 80, 30, 30];
 
 const height = (px: number) => htmlSafe(`height: ${px}px`);
 
+// 600px wide with a 24px gap → three 184px columns
+const grid = htmlSafe("width: 600px; --masonry-min: 100px; --masonry-gap: 24px");
+
 describe("masonry-item", () => {
   renderingTest("fills the top row in order, then the shortest column", async ({ element }) => {
-    // 600px wide with a 24px gap → three 184px columns
     await render(
       <template>
-        <div class="masonry" style="width: 600px; --masonry-min: 100px; --masonry-gap: 24px">
+        <div class="masonry" style={{grid}}>
           {{#each HEIGHTS as |px index|}}
             <div data-index={{index}} style={{height px}} {{masonryItem}}></div>
           {{/each}}
