@@ -6,7 +6,7 @@ import ThemeToggle from "#components/theme-toggle.gts";
 import "./site-header.css";
 
 /** Every section is exactly five letters. */
-const SECTIONS = ["works", "codes", "sound", "words", "votes"] as const;
+const SECTIONS = ["works", "codes", "sound", "votes", "words"] as const;
 
 const letters = (word: string) => [...word];
 const delay = (index: number) => htmlSafe(`--i: ${index}`);
