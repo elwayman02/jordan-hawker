@@ -24,8 +24,8 @@ const INDEX = [
   { route: "works", blurb: "on ambitious web apps" },
   { route: "codes", blurb: "in the open" },
   { route: "sound", blurb: "out as Axle Hellfire" },
-  { route: "words", blurb: "every now and then" },
   { route: "votes", blurb: "in every election, with notes" },
+  { route: "words", blurb: "every now and then" },
 ] as const;
 
 <template>
