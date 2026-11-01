@@ -56,6 +56,10 @@ import { api } from "#utils/remote.ts";
             <Icon @name="linkedin" />
             LinkedIn profile
           </a>
+          <a class="button" href="#recommendations">
+            <Icon @name="quote" />
+            Recommendations
+          </a>
           <p class="muted works__sync">
             This resume is pulled live from its source document
             {{#if resume.fetchedAt}}
