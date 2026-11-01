@@ -10,7 +10,7 @@ import { api } from "#utils/remote.ts";
 
   <div class="wrap page">
     <header class="page-header">
-      <p class="eyebrow">codes</p>
+      <p class="eyebrow">codes<Icon @name="codeXml" class="eyebrow__icon" /></p>
       <h1>Codes</h1>
       <p>
         Open-source projects I’ve built and maintain. Most are Ember addons; all of them scratched

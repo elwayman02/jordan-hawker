@@ -276,3 +276,28 @@
     --stack-gap: var(--space-l);
   }
 }
+
+@layer components {
+  /* Each section's icon, faint after its /slug label (the link-preview images use the same ones).
+     In components, so it sits with the general .icon sizing it adjusts. */
+  /* a label with an icon lines the two up on their centers */
+  .eyebrow:has(> .eyebrow__icon) {
+    display: flex;
+    align-items: center;
+  }
+
+  .eyebrow__icon {
+    width: 1.75em;
+    height: 1.75em;
+    margin-inline-start: 0.45em;
+    /* without making the label's line any taller */
+    margin-block: -0.3em;
+    /* faint, like a watermark */
+    color: var(--accent);
+    opacity: 0.45;
+
+    & svg {
+      stroke-width: 1.25;
+    }
+  }
+}

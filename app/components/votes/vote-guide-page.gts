@@ -61,7 +61,7 @@ export default class VoteGuidePage extends Component<VoteGuidePageSignature> {
   <template>
     <div class="wrap page">
       <header class="page-header">
-        <p class="eyebrow">votes</p>
+        <p class="eyebrow">votes<Icon @name="vote" class="eyebrow__icon" /></p>
         <h1>Votes</h1>
         <p>
           My progressive voter guides: how I’m voting, and why.

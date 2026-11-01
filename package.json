@@ -1,6 +1,6 @@
 {
   "name": "jordan-hawker",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "private": true,
   "description": "Personal website for Jordan Hawker",
   "repository": "https://github.com/elwayman02/jordan-hawker",
@@ -29,6 +29,7 @@
     "lint": "concurrently \"pnpm:lint:*(!fix)\" --names \"lint:\" --prefixColors auto",
     "lint:fix": "concurrently \"pnpm:lint:*:fix\" --names \"fix:\" --prefixColors auto && pnpm format",
     "format": "prettier --write .",
+    "og-images": "node scripts/og-images.mjs",
     "lint:prettier": "prettier --check .",
     "lint:types": "tsc --noEmit --runExternalCode",
     "test": "vitest run",
