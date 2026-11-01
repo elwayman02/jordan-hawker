@@ -22,7 +22,8 @@ interface QuoteRotatorSignature {
  * Pauses on hover/focus, and never auto-advances for reduced-motion users.
  */
 export default class QuoteRotator extends Component<QuoteRotatorSignature> {
-  @tracked index = Math.floor(Math.random() * this.args.recommendations.length);
+  /** starts with the first (newest) recommendation */
+  @tracked index = 0;
   @tracked paused = false;
 
   get current() {

@@ -1,14 +1,7 @@
 @layer components {
-  .recommendation-wall {
-    columns: 3 20rem;
-    column-gap: var(--space-m);
-  }
-
   .recommendation {
-    break-inside: avoid;
     display: grid;
     gap: var(--space-s);
-    margin-bottom: var(--space-m);
     padding: var(--space-m);
     background: var(--surface);
     border: 1px solid var(--line);
