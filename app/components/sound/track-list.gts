@@ -4,6 +4,7 @@ import { fn } from "@ember/helper";
 import { on } from "@ember/modifier";
 
 import Icon from "#components/icon.gts";
+import { accentHex } from "#utils/color.ts";
 import { formatDate, isoDate } from "#utils/format.ts";
 import type { Track } from "#shared/api.ts";
 
@@ -12,11 +13,12 @@ import "./sound.css";
 /**
  * SoundCloud's player is only loaded once a visitor presses play,
  * keeping the page fast and free of third-party scripts until then.
+ * Its controls take the page's accent color at that moment, so they match the theme.
  */
 function playerUrl(track: Track) {
   const params = new URLSearchParams({
     url: `https://api.soundcloud.com/tracks/${track.id}`,
-    color: "#d9532b",
+    color: accentHex(),
     auto_play: "true",
     hide_related: "true",
     show_comments: "false",
