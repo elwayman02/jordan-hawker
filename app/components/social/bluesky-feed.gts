@@ -6,10 +6,13 @@ import Await from "#components/await.gts";
 import Icon from "#components/icon.gts";
 import IconButton from "#components/icon-button.gts";
 import { site } from "#app/data/site.ts";
-import { blueskyPosts } from "#utils/bluesky.ts";
+import { blueskyPosts, type BlueskyPost } from "#utils/bluesky.ts";
 import { compactNumber, isoDate, timeAgo } from "#utils/format.ts";
 
 import "./bluesky-feed.css";
+
+/** Counts of zero aren't shown, and neither is the group when every count is zero */
+const hasStats = (post: BlueskyPost) => post.replies + post.reposts + post.likes > 0;
 
 interface BlueskyFeedSignature {
   Args: {
@@ -137,13 +140,22 @@ export default class BlueskyFeed extends Component<BlueskyFeedSignature> {
                   <a href={{post.url}} target="_blank" rel="noopener noreferrer">
                     <time datetime={{isoDate post.createdAt}}>{{timeAgo post.createdAt}}</time>
                   </a>
-                  <span class="skeet__stats">
-                    <span title="Replies"><Icon @name="messageCircle" />
-                      {{compactNumber post.replies}}</span>
-                    <span title="Reposts"><Icon @name="repeat" />
-                      {{compactNumber post.reposts}}</span>
-                    <span title="Likes"><Icon @name="heart" /> {{compactNumber post.likes}}</span>
-                  </span>
+                  {{#if (hasStats post)}}
+                    <span class="skeet__stats">
+                      {{#if post.replies}}
+                        <span title="Replies"><Icon @name="messageCircle" />
+                          {{compactNumber post.replies}}</span>
+                      {{/if}}
+                      {{#if post.reposts}}
+                        <span title="Reposts"><Icon @name="repeat" />
+                          {{compactNumber post.reposts}}</span>
+                      {{/if}}
+                      {{#if post.likes}}
+                        <span title="Likes"><Icon @name="heart" />
+                          {{compactNumber post.likes}}</span>
+                      {{/if}}
+                    </span>
+                  {{/if}}
                 </footer>
               </li>
             {{else}}

@@ -131,6 +131,17 @@ const bluesky = {
           createdAt: "2026-10-27T00:00:00Z",
         },
         likeCount: 3,
+        repostCount: 0,
+      },
+    },
+    {
+      post: {
+        uri: "at://did:plc:abc/app.bsky.feed.post/3def",
+        author: { handle: "axle.jhawk.co" },
+        record: { text: "A quiet post nobody has reacted to", createdAt: "2026-10-26T12:00:00Z" },
+        likeCount: 0,
+        repostCount: 0,
+        replyCount: 0,
       },
     },
     {

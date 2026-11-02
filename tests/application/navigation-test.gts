@@ -42,7 +42,18 @@ describe("navigation", () => {
     expect(text(element.querySelector(".timeline"))).toContain("Staff Software Engineer");
     expect(text(element.querySelector(".project-card__name"))).toContain("ember-user-activity");
     expect(text(element.querySelector(".track__title"))).toContain("Panorama");
-    expect(element.querySelectorAll(".skeet")).toHaveLength(1);
+    const [liked, quiet] = element.querySelectorAll(".skeet");
+
+    expect(element.querySelectorAll(".skeet")).toHaveLength(2);
+    // only non-zero counts show, and nothing at all when every count is zero
+    expect(
+      [...liked!.querySelectorAll(".skeet__stats [title]")].map((stat) =>
+        stat.getAttribute("title"),
+      ),
+    ).toEqual(["Likes"]);
+    expect(text(liked!.querySelector(".skeet__stats"))).toBe("3");
+    expect(quiet!.querySelector(".skeet__stats")).toBeNull();
+    expect(quiet!.querySelector(".skeet__meta time")).not.toBeNull();
     expect(text(element.querySelector(".hella__posts"))).toContain("Akashi White Oak");
     expect(document.title).toBe("Jordan Hawker");
   });
@@ -84,6 +95,18 @@ describe("navigation", () => {
     expect(element.querySelectorAll(".project-card")).toHaveLength(1);
     expect(text(element.querySelector(".archive summary"))).toContain("1 older projects");
   });
+
+  applicationTest(
+    "the /words sidebar leads with Hella Drunk, then Bluesky",
+    async ({ element }) => {
+      await visit("/words");
+
+      const aside = element.querySelector(".words__aside");
+      const cards = [...(aside?.querySelectorAll(":scope > .hella, :scope > .bluesky") ?? [])];
+
+      expect(cards.map((card) => card.classList[0])).toEqual(["hella", "bluesky"]);
+    },
+  );
 
   applicationTest("posts open from the list", async ({ element }) => {
     await visit("/words");
