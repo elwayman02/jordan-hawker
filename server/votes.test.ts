@@ -1,6 +1,14 @@
-import { describe, expect, test } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 
-import { linkGuides, parseElection, parseFolder, parseGuide } from "./votes.ts";
+import type { VoteGuide } from "../shared/api.ts";
+import {
+  assignSlugs,
+  keepLoaded,
+  linkGuides,
+  parseElection,
+  parseFolder,
+  parseGuide,
+} from "./votes.ts";
 
 describe("parseFolder", () => {
   test("lists the Google Docs in a public folder", () => {
@@ -156,5 +164,59 @@ describe("linkGuides", () => {
       '<a href="/votes/2022">2022 guide</a> ' +
         '<a href="https://docs.google.com/document/d/other/" target="_blank" rel="noopener noreferrer">notes</a>',
     );
+  });
+});
+
+describe("keepLoaded", () => {
+  const entries = [
+    { id: "a", name: "2026 guide" },
+    { id: "b", name: "Private draft" },
+  ];
+
+  test("leaves out a guide that failed to load, keeping the rest", () => {
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+    const results: PromiseSettledResult<string>[] = [
+      { status: "fulfilled", value: "2026 guide" },
+      { status: "rejected", reason: new Error("302 Found") },
+    ];
+
+    expect(keepLoaded(results, entries)).toEqual(["2026 guide"]);
+    expect(warn).toHaveBeenCalledWith('[votes] skipped "Private draft"', expect.any(Error));
+
+    warn.mockRestore();
+  });
+
+  test("fails only when no guide loads", () => {
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+    const results: PromiseSettledResult<string>[] = entries.map(() => ({
+      status: "rejected",
+      reason: new Error("503"),
+    }));
+
+    expect(() => keepLoaded(results, entries)).toThrow(AggregateError);
+
+    warn.mockRestore();
+  });
+});
+
+describe("assignSlugs", () => {
+  const guide = (slug: string) => ({ slug }) as VoteGuide;
+
+  test("keeps slugs unique, counting up from the election's own", () => {
+    const slugs = assignSlugs([
+      ["a", guide("2026")],
+      ["b", guide("2024")],
+      ["c", guide("2024")],
+      ["d", guide("2024")],
+      ["e", guide("2024/primary")],
+    ]);
+
+    expect([...slugs]).toEqual([
+      ["a", "2026"],
+      ["b", "2024"],
+      ["c", "2024-2"],
+      ["d", "2024-3"],
+      ["e", "2024/primary"],
+    ]);
   });
 });

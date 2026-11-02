@@ -4,6 +4,7 @@
  */
 import { type HTMLElement, NodeType, type Node } from "node-html-parser";
 
+import { escape } from "./escape.ts";
 import { unwrapLink } from "./html.ts";
 
 export interface TextStyle {
@@ -81,14 +82,6 @@ export function segmentsOf(
   }
 
   return segments;
-}
-
-export function escape(text: string): string {
-  return text
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
 }
 
 /** Merge neighbouring segments that render identically (Docs splits runs arbitrarily) */

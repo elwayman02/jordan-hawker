@@ -13,6 +13,8 @@ export class Remote<T> {
   /** true when the server served its last-known-good snapshot */
   @tracked stale = false;
   @tracked fetchedAt: Date | undefined;
+  /** true once the load has failed (not tracked: `error` is what templates read) */
+  failed = false;
 
   readonly promise: Promise<void>;
 
@@ -26,6 +28,7 @@ export class Remote<T> {
       },
       (error: unknown) => {
         console.error(error);
+        this.failed = true;
         this.error = error;
         this.isLoading = false;
       },
@@ -64,17 +67,22 @@ export async function fetchJson<T>(url: string): Promise<T> {
 /**
  * Shared, cached remote state keyed by `key`.
  * Each source is fetched once per page load; Netlify's CDN keeps the data fresh.
+ * A failure isn't kept: whatever asks next (another page, a return visit) tries again.
  */
 export function remote<T>(
   key: string,
   load: () => Promise<{ value: T; stale?: boolean; fetchedAt?: string }>,
 ): Remote<T> {
-  let entry = cache.get(key) as Remote<T> | undefined;
+  const cached = cache.get(key) as Remote<T> | undefined;
 
-  if (!entry) {
-    entry = new Remote(load);
-    cache.set(key, entry);
-  }
+  if (cached) return cached;
+
+  const entry = new Remote(load);
+
+  cache.set(key, entry);
+  void entry.promise.then(() => {
+    if (entry.failed && cache.get(key) === entry) cache.delete(key);
+  });
 
   return entry;
 }

@@ -7,6 +7,9 @@
  * their path (/votes/2024 is a general election, /votes/2024/primary a primary).
  */
 
+import { readElectionSlug } from "../shared/elections.ts";
+import { escape } from "./escape.ts";
+
 export const SITE_NAME = "Jordan Hawker";
 export const SITE_URL = "https://www.jordanhawker.com";
 
@@ -50,24 +53,17 @@ const SECTIONS: Record<string, PageMeta> = {
   votes: page("Votes", "Progressive voter guides for current and past elections."),
 };
 
-/** The kinds of election a guide's path can name; anything else is a general election */
-const ELECTIONS: Record<string, string> = {
-  primary: "Primary",
-  special: "Special",
-  recall: "Recall",
-};
-
 /** /votes/2024 → General, /votes/2024/primary → Primary (and so on); else undefined */
-function voterGuide(year: string | undefined, kind: string | undefined): PageMeta | undefined {
-  if (!year || !/^(?:19|20)\d{2}$/.test(year)) return undefined;
-
-  const election = kind === undefined ? "General" : ELECTIONS[kind.toLowerCase()];
+function voterGuide(slug: string): PageMeta | undefined {
+  const election = readElectionSlug(slug);
 
   if (!election) return undefined;
 
+  const { year, kind } = election;
+
   return page(
-    `${year} ${election} Election Voter Guide`,
-    `Progressive Voter Guide for the ${year} ${election.toLowerCase()} election.`,
+    `${year} ${kind} Election Voter Guide`,
+    `Progressive Voter Guide for the ${year} ${kind.toLowerCase()} election.`,
     "votes",
   );
 }
@@ -78,15 +74,12 @@ export function metaFor(pathname: string): PageMeta {
 
   if (!section) return SITE_META;
   if (section === "votes" && rest.length) {
-    return (rest.length <= 2 && voterGuide(rest[0], rest[1])) || SECTIONS.votes!;
+    return voterGuide(rest.join("/")) ?? SECTIONS.votes!;
   }
 
   // posts (/words/some-post) share the Words preview
   return SECTIONS[section] ?? SITE_META;
 }
-
-const escape = (text: string) =>
-  text.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
 /** Marks the tags in index.html that change from page to page */
 export const START = "<!-- page meta -->";
