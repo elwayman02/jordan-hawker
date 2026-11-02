@@ -31,3 +31,5 @@ Netlify deploys every merge to `master` as usual; a release is a record of what 
 ## Version history
 
 Releases through 2.6.0 were bumped by hand and tagged without the `v` prefix (`2.6.0`). release-plan finds the previous release from the most recent tag either way.
+
+The changelog entries before 2.0.0 were rebuilt from git history and the original GitHub release notes. Work merged after 1.1.0 (2018–2020) was deployed but never versioned, so it's listed as "Unreleased". New entries are always added at the top, so editing older ones is safe.
