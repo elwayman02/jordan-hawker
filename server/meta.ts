@@ -11,6 +11,7 @@ import { readElectionSlug } from "../shared/elections.ts";
 import { SECTIONS, type SectionName } from "../shared/sections.ts";
 import { SITE_HOST, SITE_NAME, SITE_URL } from "../shared/site.ts";
 import { escape } from "./escape.ts";
+import { OG_VERSIONS } from "./og-versions.ts";
 
 export interface PageMeta {
   title: string;
@@ -83,6 +84,17 @@ export const END = "<!-- /page meta -->";
  * images come from `origin`, wherever the page is being served (a deploy preview has them
  * before production does).
  */
+/**
+ * A card image's address, versioned by its contents (server/og-versions.ts): link previews
+ * cache images by URL, so a changed card must have a new one. (Discord once kept a broken
+ * copy of /og/home.png however many times the page was shared.)
+ */
+export function imageUrl(image: string, origin: string = SITE_URL): string {
+  const version = OG_VERSIONS[image];
+
+  return `${origin}/og/${image}.png${version ? `?v=${version}` : ""}`;
+}
+
 export function renderMeta(
   { title, description, image }: PageMeta,
   url: string,
@@ -94,7 +106,7 @@ export function renderMeta(
     `<meta property="og:title" content="${escape(title)}" />`,
     `<meta property="og:description" content="${escape(description)}" />`,
     `<meta property="og:url" content="${escape(url)}" />`,
-    `<meta property="og:image" content="${escape(origin)}/og/${image}.png" />`,
+    `<meta property="og:image" content="${escape(imageUrl(image, origin))}" />`,
     `<meta property="og:image:width" content="1200" />`,
     `<meta property="og:image:height" content="630" />`,
     `<meta property="og:image:alt" content="${escape(IMAGE_ALT[image] ?? title)}" />`,
