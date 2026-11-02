@@ -21,6 +21,12 @@ export default [
   { files: ["**/*.{gts,gjs}"], rules: templateRules },
   // Tests use vitest's `expect`, not QUnit's assertion counting
   { files: ["tests/**/*"], rules: { "qunit/require-expect": "off" } },
+  // package.json isn't "private" (release-plan skips private packages), but the site is never
+  // published to npm ("skipNpmPublish"), so config files may import devDependencies.
+  {
+    files: ["**/*.{js,mjs,cjs}"],
+    rules: { "n/no-unpublished-import": "off", "n/no-unpublished-require": "off" },
+  },
   // your modifications here
   // see: https://eslint.org/docs/user-guide/configuring/configuration-files#how-do-overrides-work
 ];
