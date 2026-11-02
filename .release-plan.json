@@ -1,0 +1,18 @@
+{
+  "solution": {
+    "jordan-hawker": {
+      "impact": "patch",
+      "oldVersion": "2.6.0",
+      "newVersion": "2.6.1",
+      "tagName": "latest",
+      "constraints": [
+        {
+          "impact": "patch",
+          "reason": "Appears in changelog section :house: Internal"
+        }
+      ],
+      "pkgJSONPath": "./package.json"
+    }
+  },
+  "description": "## Release (2026-11-02)\n\n* jordan-hawker 2.6.1 (patch)\n\n#### :house: Internal\n* `jordan-hawker`\n  * [#403](https://github.com/elwayman02/jordan-hawker/pull/403) Release automation with release-plan ([@elwayman02](https://github.com/elwayman02))\n\n#### Committers: 1\n- Jordan Hawker ([@elwayman02](https://github.com/elwayman02))\n"
+}
