@@ -7,7 +7,7 @@ Every section has a five-letter path: [`/works`](https://www.jordanhawker.com/wo
 ## Stack
 
 - [Ember 7](https://emberjs.com) with `.gts` components and Vite, generated with [ember.nvp](https://github.com/NullVoxPopuli/ember.nvp)
-- TypeScript + Glint, ESLint, Prettier
+- TypeScript 7 (`.gts` via [ember-content-mapper](https://github.com/NullVoxPopuli/ember-content-mapper)), ESLint (with template linting), Stylelint, Prettier
 - [Vitest](https://vitest.dev) (browser mode via [ember-vitest](https://github.com/NullVoxPopuli/ember-vitest), plus Node tests for the data layer)
 - [Netlify](https://www.netlify.com): static hosting, [Functions](https://docs.netlify.com/functions/overview/) for live data, [Blobs](https://docs.netlify.com/blobs/overview/) for fallbacks
 - Plain modern CSS (cascade layers, nesting, `light-dark()`, container queries, View Transitions)
@@ -23,7 +23,7 @@ pnpm install
 pnpm dev          # app + Netlify Functions at http://localhost:5173
 pnpm test         # browser + node tests
 pnpm test:node    # data-layer tests only
-pnpm lint         # eslint, prettier, glint
+pnpm lint         # eslint, stylelint, prettier, tsc
 pnpm lint:fix
 pnpm build
 ```

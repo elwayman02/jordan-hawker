@@ -96,13 +96,13 @@
   }
 
   .pick--yes {
-    color: light-dark(oklch(42% 0.12 150), oklch(82% 0.13 150));
-    background: light-dark(oklch(93% 0.05 150), oklch(30% 0.06 150));
+    color: light-dark(oklch(42% 0.12 150deg), oklch(82% 0.13 150deg));
+    background: light-dark(oklch(93% 0.05 150deg), oklch(30% 0.06 150deg));
   }
 
   .pick--no {
-    color: light-dark(oklch(45% 0.16 25), oklch(80% 0.12 25));
-    background: light-dark(oklch(93% 0.04 25), oklch(30% 0.07 25));
+    color: light-dark(oklch(45% 0.16 25deg), oklch(80% 0.12 25deg));
+    background: light-dark(oklch(93% 0.04 25deg), oklch(30% 0.07 25deg));
   }
 
   .votes__outline {
@@ -145,7 +145,7 @@
       }
     }
 
-    @media (max-width: 47.99rem) {
+    @media (width <= 47.99rem) {
       order: -1;
       padding: var(--space-2xs) var(--space-s);
       border: 1px solid var(--line);
@@ -154,7 +154,7 @@
     }
 
     /* Beside the guide: stays in view, scrolling on its own when the ballot is long */
-    @media (min-width: 48rem) {
+    @media (width >= 48rem) {
       position: sticky;
       top: 6rem;
       max-height: calc(100dvh - 8rem);

@@ -10,7 +10,7 @@
     display: grid;
     gap: var(--space-xl);
 
-    @media (min-width: 56rem) {
+    @media (width >= 56rem) {
       grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
       align-items: center;
     }

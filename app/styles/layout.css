@@ -2,6 +2,7 @@
   .site {
     display: grid;
     grid-template-rows: auto 1fr auto;
+
     /* lets wide content (like the nav on tiny phones) shrink or scroll instead of widening the page */
     grid-template-columns: minmax(0, 1fr);
     min-height: 100dvh;
@@ -59,14 +60,14 @@
     display: grid;
     gap: var(--space-xl);
 
-    @media (min-width: 60rem) {
+    @media (width >= 60rem) {
       grid-template-columns: minmax(0, 1fr) 20rem;
       align-items: start;
     }
   }
 
   .sticky-aside {
-    @media (min-width: 60rem) {
+    @media (width >= 60rem) {
       position: sticky;
       top: 6rem;
     }
@@ -108,14 +109,14 @@
 
   /* see app/modifiers/sticky-rail.ts */
   .sticky-rail {
-    @media (min-width: 48rem) {
+    @media (width >= 48rem) {
       position: sticky;
       top: min(6rem, 100dvh - var(--rail-height, 0px) - var(--space-l));
     }
   }
 
   .split--rail {
-    @media (min-width: 48rem) {
+    @media (width >= 48rem) {
       grid-template-columns: minmax(0, 1fr) clamp(16rem, 30vw, 20rem);
       gap: var(--space-l) clamp(var(--space-l), 4vw, var(--space-xl));
       align-items: start;
@@ -280,6 +281,7 @@
 @layer components {
   /* Each section's icon, faint after its /slug label (the link-preview images use the same ones).
      In components, so it sits with the general .icon sizing it adjusts. */
+
   /* a label with an icon lines the two up on their centers */
   .eyebrow:has(> .eyebrow__icon) {
     display: flex;
@@ -290,8 +292,10 @@
     width: 1.75em;
     height: 1.75em;
     margin-inline-start: 0.45em;
+
     /* without making the label's line any taller */
     margin-block: -0.3em;
+
     /* faint, like a watermark */
     color: var(--accent);
     opacity: 0.45;

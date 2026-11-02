@@ -42,6 +42,8 @@
 
 @layer base {
   html {
+    /* iOS Safari only knows the prefixed form */
+    /* stylelint-disable-next-line property-no-vendor-prefix */
     -webkit-text-size-adjust: none;
     text-size-adjust: none;
     scrollbar-gutter: stable;
