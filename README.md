@@ -82,3 +82,7 @@ Set these in Netlify (Site configuration → Environment variables) and in a loc
 ## Deployment
 
 Netlify builds every push. Pull requests get deploy previews, and merges to `master` go to production. Build settings live in `netlify.toml`, and v1 URLs are redirected in `public/_redirects`.
+
+## Releases
+
+Versions, the [changelog](./CHANGELOG.md) and GitHub releases are managed by [release-plan](https://github.com/embroider-build/release-plan): label each pull request (`enhancement`, `bug`, `internal`, …) and merge the **Prepare Release** PR when you want to cut a release. See [RELEASE.md](./RELEASE.md).
