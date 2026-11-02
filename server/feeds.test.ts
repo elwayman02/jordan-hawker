@@ -1,5 +1,6 @@
 import { describe, expect, test } from "vitest";
 
+import { redact } from "./fetch.ts";
 import { parseHella } from "./hella.ts";
 import { sanitizeArticle, unwrapLink } from "./html.ts";
 import { parsePlaylistItems, parseSoundCloud, parseYouTubeFeed } from "./sound.ts";
@@ -130,5 +131,22 @@ describe("html helpers", () => {
     expect(sanitizeArticle('<p> </p><img src="https://x/y.png" onerror="z()">')).toBe(
       '<img src="https://x/y.png" loading="lazy" />',
     );
+  });
+});
+
+describe("redact", () => {
+  test("hides secret query parameters, for error messages", () => {
+    expect(
+      redact("https://api.tumblr.com/v2/blog/x/posts/text?api_key=s3cret&limit=20&offset=0"),
+    ).toBe("https://api.tumblr.com/v2/blog/x/posts/text?api_key=REDACTED&limit=20&offset=0");
+    expect(redact("https://example.com/feed?key=abc&token=def")).toBe(
+      "https://example.com/feed?key=REDACTED&token=REDACTED",
+    );
+  });
+
+  test("leaves URLs without secrets exactly as they were", () => {
+    const url = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails";
+
+    expect(redact(url)).toBe(url);
   });
 });

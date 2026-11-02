@@ -108,9 +108,11 @@ async function getVideos(): Promise<Video[]> {
 
     if (!key) throw feedError;
 
+    // The key goes in a header, not the URL, so it can't end up in an error message
     return parsePlaylistItems(
       await fetchJson<PlaylistItems>(
-        `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&maxResults=50&playlistId=${YOUTUBE_PLAYLIST_ID}&key=${key}`,
+        `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&maxResults=50&playlistId=${YOUTUBE_PLAYLIST_ID}`,
+        { headers: { "x-goog-api-key": key } },
       ),
     );
   }

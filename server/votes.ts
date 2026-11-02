@@ -2,9 +2,11 @@ import { parse, type HTMLElement, NodeType } from "node-html-parser";
 import sanitizeHtml from "sanitize-html";
 
 import type { VoteGuide, VoteGuideSection, VotePick, Votes } from "../shared/api.ts";
+import { electionSlug, OTHER_KINDS } from "../shared/elections.ts";
 import { VOTES_FOLDER_ID } from "./config.ts";
 import { fetchText } from "./fetch.ts";
-import { escape, readClassStyles, segmentsOf, segmentsToHtml, segmentsToText } from "./gdoc.ts";
+import { escape } from "./escape.ts";
+import { readClassStyles, segmentsOf, segmentsToHtml, segmentsToText } from "./gdoc.ts";
 
 export interface FolderEntry {
   id: string;
@@ -55,13 +57,8 @@ export function parseElection(name: string) {
 
   if (!year) return undefined;
 
-  const kind = /\bprimary\b/i.test(name)
-    ? "Primary"
-    : /\bspecial\b/i.test(name)
-      ? "Special"
-      : /\brecall\b/i.test(name)
-        ? "Recall"
-        : "General";
+  const kind =
+    OTHER_KINDS.find((other) => new RegExp(`\\b${other}\\b`, "i").test(name)) ?? "General";
 
   const named = MONTHS.findIndex((month) =>
     new RegExp(`\\b${month.slice(0, 3)}(?:${month.slice(3)})?\\b`, "i").test(name),
@@ -70,7 +67,7 @@ export function parseElection(name: string) {
   const monthName = MONTHS[month]!;
 
   return {
-    slug: kind === "General" ? year : `${year}/${kind.toLowerCase()}`,
+    slug: electionSlug(year, kind),
     label: `${monthName} ${year} ${kind}`,
     election: `${year}-${String(month + 1).padStart(2, "0")}-01`,
   };
@@ -202,6 +199,73 @@ export function linkGuides(html: string, slugs: Map<string, string>): string {
   );
 }
 
+type LoadedGuide = [docId: string, guide: VoteGuide];
+
+async function loadGuide({ id, name }: FolderEntry): Promise<LoadedGuide> {
+  // The lightweight view is consistently fast; the HTML export can take 40s+ for some docs.
+  // A doc that isn't public redirects to a sign-in page: treat that as a failure, not a guide.
+  const doc = parseGuide(
+    await fetchText(`https://docs.google.com/document/d/${id}/mobilebasic`, {
+      redirect: "manual",
+    }),
+  );
+  const election = parseElection(name) ?? parseElection(doc.title);
+
+  return [
+    id,
+    {
+      slug: election?.slug ?? id,
+      label: election?.label ?? name,
+      election: election?.election ?? "",
+      ...doc,
+      title: doc.title || name,
+      url: `https://docs.google.com/document/d/${id}/edit`,
+    },
+  ];
+}
+
+/**
+ * The guides that loaded. One that didn't (a doc that isn't public, say) is left out with a
+ * warning rather than taking every other guide down with it; only when none load is it an error.
+ */
+export function keepLoaded<T>(results: PromiseSettledResult<T>[], entries: FolderEntry[]): T[] {
+  const loaded: T[] = [];
+  const failures: unknown[] = [];
+
+  results.forEach((result, index) => {
+    if (result.status === "fulfilled") {
+      loaded.push(result.value);
+    } else {
+      console.warn(`[votes] skipped "${entries[index]?.name}"`, result.reason);
+      failures.push(result.reason);
+    }
+  });
+
+  if (!loaded.length) throw new AggregateError(failures, "No guide could be loaded");
+
+  return loaded;
+}
+
+/**
+ * Doc id → slug, in the order given (newest first). Slugs are kept unique, should two guides
+ * be for the same election: 2024, 2024-2, 2024-3.
+ */
+export function assignSlugs(guides: LoadedGuide[]): Map<string, string> {
+  const slugs = new Map<string, string>();
+  const taken = new Set<string>();
+
+  for (const [id, guide] of guides) {
+    let slug = guide.slug;
+
+    for (let n = 2; taken.has(slug); n++) slug = `${guide.slug}-${n}`;
+
+    taken.add(slug);
+    slugs.set(id, slug);
+  }
+
+  return slugs;
+}
+
 export async function getVotes(): Promise<Votes> {
   const entries = parseFolder(
     await fetchText(`https://drive.google.com/embeddedfolderview?id=${VOTES_FOLDER_ID}`),
@@ -210,44 +274,16 @@ export async function getVotes(): Promise<Votes> {
   // An empty listing most likely means Google changed the page; keep serving the last good one.
   if (!entries.length) throw new Error("No guides found in the votes folder");
 
-  const loaded = await Promise.all(
-    entries.map(async ({ id, name }): Promise<[docId: string, guide: VoteGuide]> => {
-      // The lightweight view is consistently fast; the HTML export can take 40s+ for some docs.
-      // A doc that isn't public redirects to a sign-in page: treat that as a failure, not a guide.
-      const doc = parseGuide(
-        await fetchText(`https://docs.google.com/document/d/${id}/mobilebasic`, {
-          redirect: "manual",
-        }),
-      );
-      const election = parseElection(name) ?? parseElection(doc.title);
-
-      return [
-        id,
-        {
-          slug: election?.slug ?? id,
-          label: election?.label ?? name,
-          election: election?.election ?? "",
-          ...doc,
-          title: doc.title || name,
-          url: `https://docs.google.com/document/d/${id}/edit`,
-        },
-      ];
-    }),
-  );
+  const loaded = keepLoaded(await Promise.allSettled(entries.map(loadGuide)), entries);
 
   loaded.sort(([, a], [, b]) => b.election.localeCompare(a.election));
 
-  // doc id → slug, with slugs kept unique (e.g. two guides for the same election)
-  const slugs = new Map<string, string>();
-
-  for (const [id, guide] of loaded) {
-    const taken = new Set(slugs.values());
-
-    while (taken.has(guide.slug)) guide.slug += "-2";
-    slugs.set(id, guide.slug);
-  }
-
-  const guides = loaded.map(([, guide]) => ({ ...guide, body: linkGuides(guide.body, slugs) }));
+  const slugs = assignSlugs(loaded);
+  const guides = loaded.map(([id, guide]) => ({
+    ...guide,
+    slug: slugs.get(id)!,
+    body: linkGuides(guide.body, slugs),
+  }));
 
   return { guides };
 }
