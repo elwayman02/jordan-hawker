@@ -96,6 +96,18 @@ describe("navigation", () => {
     expect(text(element.querySelector(".archive summary"))).toContain("1 older projects");
   });
 
+  applicationTest(
+    "the /words sidebar leads with Hella Drunk, then Bluesky",
+    async ({ element }) => {
+      await visit("/words");
+
+      const aside = element.querySelector(".words__aside");
+      const cards = [...(aside?.querySelectorAll(":scope > .hella, :scope > .bluesky") ?? [])];
+
+      expect(cards.map((card) => card.classList[0])).toEqual(["hella", "bluesky"]);
+    },
+  );
+
   applicationTest("posts open from the list", async ({ element }) => {
     await visit("/words");
 

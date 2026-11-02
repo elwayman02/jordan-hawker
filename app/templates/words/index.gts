@@ -25,9 +25,10 @@ import PageHeader from "#components/page-header.gts";
     </div>
 
     <aside class="stack words__aside sticky-rail" aria-label="Elsewhere" {{stickyRail}}>
+      {{! the Hella Drunk card is short, so it goes first where it's seen without scrolling }}
+      <HellaCard @compact={{true}} />
       <h2 class="visually-hidden">Recent posts on Bluesky</h2>
       <BlueskyFeed @layout="list" @limit={{4}} />
-      <HellaCard @compact={{true}} />
     </aside>
   </div>
 </template>
