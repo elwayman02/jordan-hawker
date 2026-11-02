@@ -1,6 +1,10 @@
 # unconventionally formatted files
 /.changeset
 
+# written by release-plan (see RELEASE.md)
+/CHANGELOG.md
+/.release-plan.json
+
 # compiled output
 /dist/
 /tmp/

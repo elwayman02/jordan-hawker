@@ -1,0 +1,34 @@
+# Runs when a "Prepare Release" PR is merged (it changes .release-plan.json):
+# tags the release (vX.Y.Z) and creates a GitHub release with its changelog.
+# Nothing is published to npm ("skipNpmPublish" in package.json). See RELEASE.md.
+
+name: Release
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      - ".release-plan.json"
+
+concurrency:
+  group: publish-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  release:
+    name: Tag and GitHub release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v6
+      - uses: wyvox/action-setup-pnpm@v3
+        with:
+          node-version: 24
+      - name: Tag and create the GitHub release
+        run: pnpm release-plan publish
+        env:
+          GITHUB_AUTH: ${{ secrets.GITHUB_TOKEN }}
