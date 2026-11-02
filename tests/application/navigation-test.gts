@@ -42,7 +42,18 @@ describe("navigation", () => {
     expect(text(element.querySelector(".timeline"))).toContain("Staff Software Engineer");
     expect(text(element.querySelector(".project-card__name"))).toContain("ember-user-activity");
     expect(text(element.querySelector(".track__title"))).toContain("Panorama");
-    expect(element.querySelectorAll(".skeet")).toHaveLength(1);
+    const [liked, quiet] = element.querySelectorAll(".skeet");
+
+    expect(element.querySelectorAll(".skeet")).toHaveLength(2);
+    // only non-zero counts show, and nothing at all when every count is zero
+    expect(
+      [...liked!.querySelectorAll(".skeet__stats [title]")].map((stat) =>
+        stat.getAttribute("title"),
+      ),
+    ).toEqual(["Likes"]);
+    expect(text(liked!.querySelector(".skeet__stats"))).toBe("3");
+    expect(quiet!.querySelector(".skeet__stats")).toBeNull();
+    expect(quiet!.querySelector(".skeet__meta time")).not.toBeNull();
     expect(text(element.querySelector(".hella__posts"))).toContain("Akashi White Oak");
     expect(document.title).toBe("Jordan Hawker");
   });
