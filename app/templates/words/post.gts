@@ -3,6 +3,7 @@ import { LinkTo } from "@ember/routing";
 
 import Await from "#components/await.gts";
 import Icon from "#components/icon.gts";
+import PageHeader from "#components/page-header.gts";
 import pageTitle from "#app/helpers/page-title.ts";
 import { formatDate, isoDate } from "#utils/format.ts";
 import { api } from "#utils/remote.ts";
@@ -50,15 +51,13 @@ const PostTemplate: TOC<{ Args: { model: { slug: string } } }> = <template>
           </article>
         {{else}}
           {{pageTitle "Post not found"}}
-          <header class="page-header">
-            <p class="eyebrow">words</p>
-            <h1>Post not found</h1>
+          <PageHeader @eyebrow="words" @title="Post not found">
             <p>That post may have moved or been retired.</p>
             <LinkTo @route="words" class="link-arrow">
               <Icon @name="arrowLeft" />
               All words
             </LinkTo>
-          </header>
+          </PageHeader>
         {{/if}}
       {{/let}}
     </Await>

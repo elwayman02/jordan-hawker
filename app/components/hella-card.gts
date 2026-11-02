@@ -1,8 +1,10 @@
 import Component from "@glimmer/component";
+import { uniqueId } from "@ember/helper";
 
 import Await from "#components/await.gts";
 import Icon from "#components/icon.gts";
 import { hellaDrunk } from "#app/data/site.ts";
+import { take } from "#app/helpers/array.ts";
 import { formatMonth, isoDate } from "#utils/format.ts";
 import { api } from "#utils/remote.ts";
 
@@ -20,15 +22,20 @@ interface HellaCardSignature {
 export default class HellaCard extends Component<HellaCardSignature> {
   hella = api("hella");
 
-  take = <T,>(items: T[]) => items.slice(0, this.args.limit ?? 2);
+  /** The card can appear more than once on a page, so its heading's id can't be fixed */
+  titleId = uniqueId();
+
+  get limit() {
+    return this.args.limit ?? 2;
+  }
 
   <template>
-    <aside class="hella {{if @compact 'hella--compact'}}" aria-labelledby="hella-title">
+    <aside class="hella {{if @compact 'hella--compact'}}" aria-labelledby={{this.titleId}}>
       <div class="hella__brand">
         <span class="hella__badge"><Icon @name="martini" /></span>
         <div>
           <p class="hella__kicker mono">also by me</p>
-          <h2 class="hella__title" id="hella-title">{{hellaDrunk.name}}</h2>
+          <h2 class="hella__title" id={{this.titleId}}>{{hellaDrunk.name}}</h2>
         </div>
       </div>
       <p class="hella__tagline">{{hellaDrunk.tagline}}</p>
@@ -36,7 +43,7 @@ export default class HellaCard extends Component<HellaCardSignature> {
       <Await @remote={{this.hella}} @skeletonHeight="4rem">
         <:default as |hella|>
           <ul role="list" class="hella__posts">
-            {{#each (this.take hella.posts) as |post|}}
+            {{#each (take hella.posts this.limit) as |post|}}
               <li>
                 <a href={{post.url}} target="_blank" rel="noopener noreferrer">{{post.title}}</a>
                 <time datetime={{isoDate post.publishedAt}}>{{formatMonth post.publishedAt}}</time>

@@ -1,0 +1,17 @@
+@layer components {
+  .icon-button {
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    aspect-ratio: 1;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--bg);
+    cursor: pointer;
+
+    &:hover {
+      border-color: var(--accent);
+      color: var(--accent-strong);
+    }
+  }
+}

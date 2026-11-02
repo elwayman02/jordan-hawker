@@ -1,14 +1,3 @@
-/**
- * Looking for services that come from addons?
- *
- * App-tree merging from libraries is not supported.
- * See: https://github.com/embroider-build/embroider/issues/2659
- *
- * For services, look in to either of:
- * - https://github.com/chancancode/ember-polaris-service-
- * - https://ember-primitives.pages.dev/6-utils/createService.md
- *   - https://ember-primitives.pages.dev/6-utils/createAsyncService.md
- */
 import Application from "@ember/application";
 import setupInspector from "@embroider/legacy-inspector-support/ember-source-4.12";
 
@@ -19,6 +8,7 @@ import "@fontsource-variable/jetbrains-mono";
 import "./styles/tokens.css";
 import "./styles/base.css";
 import "./styles/layout.css";
+import "./styles/prose.css";
 import "./styles/holidays.css";
 
 export default class App extends Application {
@@ -26,7 +16,8 @@ export default class App extends Application {
     ...import.meta.glob("./router.*", { eager: true }),
     ...import.meta.glob("./routes/**/*", { eager: true }),
     ...import.meta.glob("./templates/**/*", { eager: true }),
-    ...import.meta.glob("./services/**/*", { eager: true }),
+    // The app has no services. Adding some? Glob "./services/**/*" here too, and note that
+    // addons' services aren't merged in: https://github.com/embroider-build/embroider/issues/2659
   };
   inspector = setupInspector(this);
 }

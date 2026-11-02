@@ -30,12 +30,9 @@ export default class Await<T> extends Component<AwaitSignature<T>> {
       {{#if (has-block "loading")}}
         {{yield to="loading"}}
       {{else}}
-        <div
-          class="skeleton"
-          style={{this.skeletonStyle}}
-          aria-busy="true"
-          aria-label="Loading"
-        ></div>
+        <div class="skeleton" style={{this.skeletonStyle}} role="status" aria-busy="true">
+          <span class="visually-hidden">Loading…</span>
+        </div>
       {{/if}}
     {{else if @remote.value}}
       {{yield @remote.value @remote}}

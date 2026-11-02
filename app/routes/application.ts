@@ -5,13 +5,13 @@ import { getOwner } from "@ember/owner";
 import { buildWaiter } from "@ember/test-waiters";
 
 import { setupAnalytics } from "#utils/analytics.ts";
+import { prefersReducedMotion } from "#utils/motion.ts";
 
+import type ApplicationInstance from "@ember/application/instance";
 import type RouterService from "@ember/routing/router-service";
 import type Transition from "@ember/routing/transition";
 
 const waiter = buildWaiter("view-transition");
-
-const prefersReducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /** Same-origin, same-tab, plain left-clicks on links to other pages of this site */
 function internalPath(event: MouseEvent): string | undefined {
@@ -49,11 +49,14 @@ export default class ApplicationRoute extends Route {
   }
 
   get rootElement(): Element {
-    const { rootElement } = getOwner(this) as unknown as { rootElement?: string | Element };
+    // A route's owner is the application instance
+    const { rootElement } = getOwner(this) as ApplicationInstance;
 
     if (rootElement instanceof Element) return rootElement;
 
-    return (rootElement && document.querySelector(rootElement)) || document.body;
+    return (
+      (typeof rootElement === "string" && document.querySelector(rootElement)) || document.body
+    );
   }
 
   /**

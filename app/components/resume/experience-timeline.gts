@@ -1,9 +1,9 @@
+import { take } from "#app/helpers/array.ts";
 import type { ResumeExperience } from "#shared/api.ts";
 import type { TOC } from "@ember/component/template-only";
 
 import "./experience-timeline.css";
 
-const take = <T,>(items: T[], count: number) => items.slice(0, count);
 const first = (items: string[]) => items[0];
 
 interface ExperienceTimelineSignature {

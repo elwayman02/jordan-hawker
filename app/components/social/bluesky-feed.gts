@@ -4,6 +4,7 @@ import { modifier } from "ember-modifier";
 
 import Await from "#components/await.gts";
 import Icon from "#components/icon.gts";
+import IconButton from "#components/icon-button.gts";
 import { site } from "#app/data/site.ts";
 import { blueskyPosts } from "#utils/bluesky.ts";
 import { compactNumber, isoDate, timeAgo } from "#utils/format.ts";
@@ -59,12 +60,8 @@ export default class BlueskyFeed extends Component<BlueskyFeedSignature> {
         </a>
         {{#if this.isCarousel}}
           <div class="bluesky__controls">
-            <button type="button" class="quote-rotator__button" {{on "click" this.previous}}>
-              <Icon @name="chevronLeft" @label="Previous posts" />
-            </button>
-            <button type="button" class="quote-rotator__button" {{on "click" this.next}}>
-              <Icon @name="chevronRight" @label="More posts" />
-            </button>
+            <IconButton @icon="chevronLeft" @label="Previous posts" {{on "click" this.previous}} />
+            <IconButton @icon="chevronRight" @label="More posts" {{on "click" this.next}} />
           </div>
         {{/if}}
       </div>

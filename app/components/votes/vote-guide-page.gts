@@ -8,17 +8,14 @@ import { modifier } from "ember-modifier";
 
 import Await from "#components/await.gts";
 import Icon from "#components/icon.gts";
-import { sectionNamed } from "#shared/sections.ts";
+import PageHeader from "#components/page-header.gts";
 import pageTitle from "#app/helpers/page-title.ts";
 import { api } from "#utils/remote.ts";
 import type { VoteGuide, Votes } from "#shared/api.ts";
 
 import type RouterService from "@ember/routing/router-service";
 
-import "#components/words/words.css";
 import "./votes.css";
-
-const VOTES = sectionNamed("votes");
 
 interface VoteGuidePageSignature {
   Args: {
@@ -63,13 +60,11 @@ export default class VoteGuidePage extends Component<VoteGuidePageSignature> {
 
   <template>
     <div class="wrap page">
-      <header class="page-header">
-        <p class="eyebrow">{{VOTES.name}}<Icon @name={{VOTES.icon}} class="eyebrow__icon" /></p>
-        <h1>Votes</h1>
+      <PageHeader @section="votes">
         <p>
           My progressive voter guides: how I’m voting, and why.
         </p>
-      </header>
+      </PageHeader>
 
       <Await @remote={{api "votes"}} @skeletonHeight="40rem">
         <:default as |votes|>
