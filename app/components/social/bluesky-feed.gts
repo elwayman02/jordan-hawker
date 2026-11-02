@@ -49,7 +49,7 @@ export default class BlueskyFeed extends Component<BlueskyFeedSignature> {
     <div class="bluesky {{if this.isCarousel 'bluesky--carousel' 'bluesky--list'}}">
       <div class="bluesky__header">
         <a
-          href="https://bsky.app/profile/{{site.blueskyHandle}}"
+          href={{site.blueskyUrl}}
           target="_blank"
           rel="noopener noreferrer"
           class="bluesky__handle"
@@ -158,11 +158,8 @@ export default class BlueskyFeed extends Component<BlueskyFeedSignature> {
         <:error>
           <p class="notice">
             Bluesky isn’t responding right now —
-            <a
-              href="https://bsky.app/profile/{{site.blueskyHandle}}"
-              target="_blank"
-              rel="noopener noreferrer"
-            >see posts on bsky.app</a>.
+            <a href={{site.blueskyUrl}} target="_blank" rel="noopener noreferrer">see posts on
+              bsky.app</a>.
           </p>
         </:error>
       </Await>

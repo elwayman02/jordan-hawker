@@ -6,6 +6,9 @@ import pageTitle from "#app/helpers/page-title.ts";
 import stickyRail from "#app/modifiers/sticky-rail.ts";
 import { api } from "#utils/remote.ts";
 import Icon from "#components/icon.gts";
+import { sectionNamed } from "#shared/sections.ts";
+
+const WORDS = sectionNamed("words");
 
 <template>
   {{pageTitle "Words"}}
@@ -13,7 +16,7 @@ import Icon from "#components/icon.gts";
   <div class="wrap page split split--rail">
     <div>
       <header class="page-header">
-        <p class="eyebrow">words<Icon @name="penLine" class="eyebrow__icon" /></p>
+        <p class="eyebrow">{{WORDS.name}}<Icon @name={{WORDS.icon}} class="eyebrow__icon" /></p>
         <h1>Words</h1>
         <p>
           Longer-form writing on web technology, engineering careers, and the occasional tangent.

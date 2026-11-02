@@ -1,3 +1,5 @@
+import { SITE_NAME, SITE_URL } from "#shared/site.ts";
+
 import type { IconName } from "#app/icons.ts";
 
 export interface SocialLink {
@@ -7,16 +9,30 @@ export interface SocialLink {
   icon: IconName;
 }
 
+const github = "https://github.com/elwayman02";
+const blueskyHandle = "axle.jhawk.co";
+
 export const site = {
-  name: "Jordan Hawker",
-  url: "https://www.jordanhawker.com",
+  name: SITE_NAME,
+  url: SITE_URL,
   email: "hawker.jordan@gmail.com",
   discord: "axlehellfire",
   discordUrl: "https://discord.com/users/103262044609863680",
   /** jhawk.co/resume → the published Google Doc */
   resumeUrl: "https://jhawk.co/resume",
-  repoUrl: "https://github.com/elwayman02/jordan-hawker",
-  blueskyHandle: "axle.jhawk.co",
+  githubUrl: github,
+  githubReposUrl: `${github}?tab=repositories`,
+  repoUrl: `${github}/jordan-hawker`,
+  linkedinUrl: "https://www.linkedin.com/in/jordanhawker/",
+  blueskyHandle,
+  blueskyUrl: `https://bsky.app/profile/${blueskyHandle}`,
+} as const;
+
+export const music = {
+  alias: "Axle Hellfire",
+  soundcloud: "https://soundcloud.com/axlehellfire",
+  youtube: "https://www.youtube.com/axlehellfire",
+  bandcamp: "https://axlehellfire.bandcamp.com",
 } as const;
 
 /** Professional profiles, shown first */
@@ -24,19 +40,19 @@ export const professionalLinks: SocialLink[] = [
   {
     label: "GitHub",
     handle: "elwayman02",
-    url: "https://github.com/elwayman02",
+    url: site.githubUrl,
     icon: "github",
   },
   {
     label: "LinkedIn",
     handle: "jordanhawker",
-    url: "https://www.linkedin.com/in/jordanhawker/",
+    url: site.linkedinUrl,
     icon: "linkedin",
   },
   {
     label: "Bluesky",
-    handle: "@axle.jhawk.co",
-    url: "https://bsky.app/profile/axle.jhawk.co",
+    handle: `@${site.blueskyHandle}`,
+    url: site.blueskyUrl,
     icon: "bluesky",
   },
 ];
@@ -46,13 +62,13 @@ export const personalLinks: SocialLink[] = [
   {
     label: "SoundCloud",
     handle: "axlehellfire",
-    url: "https://soundcloud.com/axlehellfire",
+    url: music.soundcloud,
     icon: "soundcloud",
   },
   {
     label: "YouTube",
     handle: "@axlehellfire",
-    url: "https://www.youtube.com/axlehellfire",
+    url: music.youtube,
     icon: "youtube",
   },
   {
@@ -80,13 +96,6 @@ export const discordLink: SocialLink = {
 export const contactLinks: SocialLink[] = [...professionalLinks, discordLink];
 
 export const socialLinks = [...professionalLinks, ...personalLinks];
-
-export const music = {
-  alias: "Axle Hellfire",
-  soundcloud: "https://soundcloud.com/axlehellfire",
-  youtube: "https://www.youtube.com/axlehellfire",
-  bandcamp: "https://axlehellfire.bandcamp.com",
-} as const;
 
 export const hellaDrunk = {
   name: "Hella Drunk",

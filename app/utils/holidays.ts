@@ -1,8 +1,25 @@
 import type { IconName } from "#app/icons.ts";
 
+/**
+ * Every holiday with a theme. Each needs an entry in HOLIDAYS, a set of falling pieces
+ * (app/components/holidays/pieces.ts), styles (app/styles/holidays.css) and
+ * public/favicon-{name}.svg.
+ */
+export type HolidayName =
+  | "newyear"
+  | "valentine"
+  | "birthday"
+  | "pi"
+  | "spring"
+  | "pride"
+  | "summer"
+  | "halloween"
+  | "thanksgiving"
+  | "winter";
+
 export interface Holiday {
   /** Used as <html data-holiday>, ?holiday={name}, and public/favicon-{name}.svg */
-  name: string;
+  name: HolidayName;
   label: string;
   /** Shown on the theme toggle while this holiday's theme is on */
   icon: IconName;
@@ -125,7 +142,7 @@ export const DAYS_AFTER = 7;
 export const DAYS_KEPT_IN_OVERLAP = 1;
 
 export interface HolidayWindow {
-  name: string;
+  name: HolidayName;
   /** Start of the first day the theme is offered (ms) */
   from: number;
   /** Start of the first day it's no longer offered (ms) */

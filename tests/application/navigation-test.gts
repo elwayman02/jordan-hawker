@@ -1,9 +1,18 @@
-import { click, currentURL, fillIn, settled, visit, waitUntil } from "@ember/test-helpers";
+import {
+  click,
+  currentRouteName,
+  currentURL,
+  fillIn,
+  settled,
+  visit,
+  waitUntil,
+} from "@ember/test-helpers";
 import { afterEach, beforeEach, describe, expect } from "vitest";
 import { applicationTest } from "ember-vitest";
 
 import App from "#app/app.ts";
 import { fakeApi, resetApi } from "#test-helpers/fake-api.ts";
+import { SECTIONS } from "#shared/sections.ts";
 
 const text = (element: Element | null | undefined) =>
   element?.textContent?.replace(/\s+/g, " ").trim();
@@ -15,6 +24,16 @@ describe("navigation", () => {
 
   beforeEach(() => fakeApi());
   afterEach(() => resetApi());
+
+  applicationTest("every section in shared/sections.ts has a page", async ({ element }) => {
+    for (const { name, label } of SECTIONS) {
+      await visit(`/${name}`);
+
+      expect(currentRouteName(), name).toMatch(new RegExp(`^${name}(\\.|$)`));
+      expect(text(element.querySelector(".page-header .eyebrow")), name).toBe(name);
+      expect(document.title, name).toContain(label);
+    }
+  });
 
   applicationTest("home shows experience, projects, sound and Bluesky", async ({ element }) => {
     await visit("/");

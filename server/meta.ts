@@ -8,10 +8,9 @@
  */
 
 import { readElectionSlug } from "../shared/elections.ts";
+import { SECTIONS, type SectionName } from "../shared/sections.ts";
+import { SITE_HOST, SITE_NAME, SITE_URL } from "../shared/site.ts";
 import { escape } from "./escape.ts";
-
-export const SITE_NAME = "Jordan Hawker";
-export const SITE_URL = "https://www.jordanhawker.com";
 
 export interface PageMeta {
   title: string;
@@ -22,12 +21,8 @@ export interface PageMeta {
 
 /** What the card images show, for screen readers */
 const IMAGE_ALT: Record<string, string> = {
-  home: "Jordan Hawker, staff software engineer",
-  works: "Works, on jordanhawker.com",
-  codes: "Codes, on jordanhawker.com",
-  sound: "Sound, on jordanhawker.com",
-  words: "Words, on jordanhawker.com",
-  votes: "Votes, on jordanhawker.com",
+  home: `${SITE_NAME}, staff software engineer`,
+  ...Object.fromEntries(SECTIONS.map(({ name, label }) => [name, `${label}, on ${SITE_HOST}`])),
 };
 
 /** Anything without a page of its own (and the home page) */
@@ -38,20 +33,18 @@ export const SITE_META: PageMeta = {
   image: "home",
 };
 
-const page = (name: string, description: string, image = name.toLowerCase()): PageMeta => ({
-  title: `${name} · ${SITE_NAME}`,
+const page = (title: string, description: string, image: string): PageMeta => ({
+  title: `${title} · ${SITE_NAME}`,
   description,
   image,
 });
 
 /** The site's sections, as their intros describe them */
-const SECTIONS: Record<string, PageMeta> = {
-  works: page("Works", "Work experience, resume, and recommendations."),
-  codes: page("Codes", "Open-source projects I’ve built and maintain."),
-  sound: page("Sound", "Original music I've written and produced."),
-  words: page("Words", "Blog posts and short-form content."),
-  votes: page("Votes", "Progressive voter guides for current and past elections."),
-};
+const SECTION_META = Object.fromEntries(
+  SECTIONS.map(({ name, label, description }) => [name, page(label, description, name)]),
+) as Record<SectionName, PageMeta>;
+
+const isSection = (name: string): name is SectionName => Object.hasOwn(SECTION_META, name);
 
 /** /votes/2024 → General, /votes/2024/primary → Primary (and so on); else undefined */
 function voterGuide(slug: string): PageMeta | undefined {
@@ -74,11 +67,11 @@ export function metaFor(pathname: string): PageMeta {
 
   if (!section) return SITE_META;
   if (section === "votes" && rest.length) {
-    return voterGuide(rest.join("/")) ?? SECTIONS.votes!;
+    return voterGuide(rest.join("/")) ?? SECTION_META.votes;
   }
 
   // posts (/words/some-post) share the Words preview
-  return SECTIONS[section] ?? SITE_META;
+  return isSection(section) ? SECTION_META[section] : SITE_META;
 }
 
 /** Marks the tags in index.html that change from page to page */
