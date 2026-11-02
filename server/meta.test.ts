@@ -1,8 +1,10 @@
-import { readFileSync } from "node:fs";
+import { createHash } from "node:crypto";
+import { readFileSync, readdirSync } from "node:fs";
 
 import { describe, expect, test } from "vitest";
 
-import { END, metaFor, renderMeta, SITE_META, START, withMeta } from "./meta.ts";
+import { END, imageUrl, metaFor, renderMeta, SITE_META, START, withMeta } from "./meta.ts";
+import { OG_VERSIONS } from "./og-versions.ts";
 
 const indexHtml = readFileSync(new URL("../index.html", import.meta.url), "utf8");
 const tag = (html: string, pattern: RegExp) => pattern.exec(html)?.[1];
@@ -88,9 +90,7 @@ describe("link previews", () => {
     expect(tag(indexHtml, /property="og:description"\s+content="([^"]*)"/)).toBe(
       SITE_META.description,
     );
-    expect(tag(indexHtml, /property="og:image" content="([^"]*)"/)).toBe(
-      "https://www.jordanhawker.com/og/home.png",
-    );
+    expect(tag(indexHtml, /property="og:image" content="([^"]*)"/)).toBe(imageUrl("home"));
   });
 
   test("each section has its own image; guides use Votes', posts Words'", () => {
@@ -100,11 +100,14 @@ describe("link previews", () => {
         /og:image" content="([^"]*)"/,
       );
 
-    expect(image("/")).toBe("https://www.jordanhawker.com/og/home.png");
-    expect(image("/works")).toBe("https://www.jordanhawker.com/og/works.png");
-    expect(image("/votes/2024/primary")).toBe("https://www.jordanhawker.com/og/votes.png");
-    expect(image("/words/some-post")).toBe("https://www.jordanhawker.com/og/words.png");
-    expect(image("/nope")).toBe("https://www.jordanhawker.com/og/home.png");
+    const card = (name: string) =>
+      `https://www.jordanhawker.com/og/${name}.png?v=${OG_VERSIONS[name]}`;
+
+    expect(image("/")).toBe(card("home"));
+    expect(image("/works")).toBe(card("works"));
+    expect(image("/votes/2024/primary")).toBe(card("votes"));
+    expect(image("/words/some-post")).toBe(card("words"));
+    expect(image("/nope")).toBe(card("home"));
   });
 
   test("images come from wherever the page is served (a deploy preview has them first)", () => {
@@ -114,7 +117,7 @@ describe("link previews", () => {
     );
 
     expect(tag(html, /og:image" content="([^"]*)"/)).toBe(
-      "https://deploy-preview-12--jordanhawker.netlify.app/og/works.png",
+      `https://deploy-preview-12--jordanhawker.netlify.app/og/works.png?v=${OG_VERSIONS.works}`,
     );
     // the link itself is still the real address
     expect(tag(html, /og:url" content="([^"]*)"/)).toBe("https://www.jordanhawker.com/works");
@@ -128,6 +131,24 @@ describe("link previews", () => {
 
       // a PNG's width and height sit at bytes 16–23
       expect([png.readUInt32BE(16), png.readUInt32BE(20)], image).toEqual([1200, 630]);
+    }
+  });
+
+  test("each card's URL is versioned by its contents, so a changed card is a new URL", () => {
+    const cards = readdirSync(new URL("../public/og/", import.meta.url))
+      .filter((file) => file.endsWith(".png"))
+      .map((file) => file.replace(/\.png$/, ""));
+
+    // regenerate with `pnpm og-images`, which rewrites server/og-versions.ts
+    expect(Object.keys(OG_VERSIONS).toSorted()).toEqual(cards.toSorted());
+
+    for (const name of cards) {
+      const png = readFileSync(new URL(`../public/og/${name}.png`, import.meta.url));
+      const hash = createHash("sha256").update(png).digest("hex");
+
+      expect(hash.startsWith(OG_VERSIONS[name]!), `${name}.png changed: run pnpm og-images`).toBe(
+        true,
+      );
     }
   });
 
