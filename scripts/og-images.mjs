@@ -12,6 +12,9 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
+import { SECTIONS } from "../shared/sections.ts";
+import { SITE_HOST, SITE_NAME } from "../shared/site.ts";
+
 const root = fileURLToPath(new URL("..", import.meta.url));
 const out = join(root, "public/og");
 const chrome =
@@ -26,8 +29,9 @@ const font = (pkg, file) =>
 const lucide = JSON.parse(
   readFileSync(join(root, "node_modules/@iconify-json/lucide/icons.json"), "utf8"),
 );
+/** The app's icon names are camelCase (codeXml); Lucide's are kebab-case (code-xml) */
 const icon = (name) =>
-  `<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">${lucide.icons[name].body}</svg>`;
+  `<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">${lucide.icons[name.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`)].body}</svg>`;
 
 /**
  * name → its card image. Only identifying text (the name of the section, and the site's):
@@ -35,12 +39,8 @@ const icon = (name) =>
  * doesn't repeat it, or anything the page itself says.
  */
 const CARDS = {
-  home: { title: "Jordan Hawker", home: true },
-  works: { title: "Works", icon: "briefcase" },
-  codes: { title: "Codes", icon: "code-xml" },
-  sound: { title: "Sound", icon: "audio-lines" },
-  words: { title: "Words", icon: "pen-line" },
-  votes: { title: "Votes", icon: "vote" },
+  home: { title: SITE_NAME, home: true },
+  ...Object.fromEntries(SECTIONS.map(({ name, label, icon }) => [name, { title: label, icon }])),
 };
 
 const page = ({ title, icon: iconName, home }) => `<!doctype html>
@@ -124,8 +124,8 @@ const page = ({ title, icon: iconName, home }) => `<!doctype html>
   }
 </style>
 <div class="card">
-  <div class="brand"><span class="mark">jh</span>${home ? "" : "Jordan Hawker"}</div>
-  <span class="url">jordanhawker.com</span>
+  <div class="brand"><span class="mark">jh</span>${home ? "" : SITE_NAME}</div>
+  <span class="url">${SITE_HOST}</span>
   ${iconName ? icon(iconName) : ""}
   <h1>${title}</h1>
 </div>`;

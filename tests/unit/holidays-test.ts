@@ -1,6 +1,9 @@
 import { describe, expect, test } from "vitest";
 
+import { PIECES } from "#components/holidays/pieces.ts";
 import { activeHoliday, easter, HOLIDAYS, holidayWindows } from "#utils/holidays.ts";
+
+import holidayStyles from "#app/styles/holidays.css?raw";
 
 const on = (year: number, month: number, day: number, hour = 12) =>
   new Date(year, month - 1, day, hour);
@@ -111,5 +114,29 @@ describe("holidays", () => {
       from: on(2026, 10, 17, 0).getTime(),
       until: on(2026, 11, 8, 0).getTime(),
     });
+  });
+});
+
+describe("each holiday's theme is complete", () => {
+  test("names are unique, and match the falling pieces one for one", () => {
+    const names = HOLIDAYS.map(({ name }) => name);
+
+    expect(new Set(names).size).toBe(names.length);
+    expect(Object.keys(PIECES).toSorted()).toEqual(names.toSorted());
+  });
+
+  test("each has its colors in holidays.css", () => {
+    for (const { name } of HOLIDAYS) {
+      expect(holidayStyles, name).toContain(`[data-holiday="${name}"]`);
+    }
+  });
+
+  test("each has a favicon", async () => {
+    for (const { name } of HOLIDAYS) {
+      // the dev server answers unknown paths with index.html, so check what comes back
+      const response = await fetch(`/favicon-${name}.svg`);
+
+      expect(response.headers.get("content-type"), name).toContain("image/svg+xml");
+    }
   });
 });

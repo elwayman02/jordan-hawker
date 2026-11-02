@@ -1,16 +1,20 @@
 import Await from "#components/await.gts";
 import Icon from "#components/icon.gts";
+import { sectionNamed } from "#shared/sections.ts";
+import { site } from "#app/data/site.ts";
 import ProjectCard, { showStars } from "#components/codes/project-card.gts";
 import pageTitle from "#app/helpers/page-title.ts";
 import { formatMonth, isoDate } from "#utils/format.ts";
 import { api } from "#utils/remote.ts";
+
+const CODES = sectionNamed("codes");
 
 <template>
   {{pageTitle "Codes"}}
 
   <div class="wrap page">
     <header class="page-header">
-      <p class="eyebrow">codes<Icon @name="codeXml" class="eyebrow__icon" /></p>
+      <p class="eyebrow">{{CODES.name}}<Icon @name={{CODES.icon}} class="eyebrow__icon" /></p>
       <h1>Codes</h1>
       <p>
         Open-source projects I’ve built and maintain. Most are Ember addons; all of them scratched
@@ -52,11 +56,8 @@ import { api } from "#utils/remote.ts";
       <:error>
         <p class="notice">
           GitHub isn’t responding right now —
-          <a
-            href="https://github.com/elwayman02?tab=repositories"
-            target="_blank"
-            rel="noopener noreferrer"
-          >browse my repositories on GitHub</a>.
+          <a href={{site.githubReposUrl}} target="_blank" rel="noopener noreferrer">browse my
+            repositories on GitHub</a>.
         </p>
       </:error>
     </Await>

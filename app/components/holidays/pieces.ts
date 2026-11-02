@@ -1,3 +1,5 @@
+import type { HolidayName } from "#utils/holidays.ts";
+
 /**
  * Little SVGs that drift down the page when a holiday theme loads, keyed by holiday name.
  * Each is drawn on a 24×24 grid, and colored to read on both light and dark backgrounds.
@@ -271,7 +273,7 @@ const progressFlag = svg(
     `<rect x="2" y="5" width="20" height="14" fill="none" stroke="#1c1c1c" stroke-opacity=".3" stroke-width=".5"/>`,
 );
 
-export const PIECES: Record<string, string[]> = {
+export const PIECES: Record<HolidayName, string[]> = {
   newyear: [confetti("#e3b341"), streamer, midnightBall, star("#f2c14e")],
   valentine: [heart("#e0394f"), heart("#9b5de5"), loveLetter, heart("#f9c2d1", "#e8809b")],
   birthday: [cupcake, partyHat, gift, confetti("#4fc1c9")],

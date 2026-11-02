@@ -12,21 +12,13 @@ import TrackList from "#components/sound/track-list.gts";
 import pageTitle from "#app/helpers/page-title.ts";
 import { highlightedRecommendations } from "#app/data/recommendations.ts";
 import { contactLinks } from "#app/data/site.ts";
+import { SECTIONS } from "#shared/sections.ts";
 import { formatDate, isoDate } from "#utils/format.ts";
 import { api } from "#utils/remote.ts";
 
 import "./index.css";
 
 const take = <T,>(items: T[], count: number) => items.slice(0, count);
-
-/** Each path reads as a verb: "Jordan… works", "Jordan… codes" */
-const INDEX = [
-  { route: "works", blurb: "on ambitious web apps" },
-  { route: "codes", blurb: "in the open" },
-  { route: "sound", blurb: "out as Axle Hellfire" },
-  { route: "votes", blurb: "in every election, with notes" },
-  { route: "words", blurb: "every now and then" },
-] as const;
 
 <template>
   {{pageTitle}}
@@ -60,11 +52,12 @@ const INDEX = [
 
       <nav class="hero__index" aria-labelledby="hero-index-label">
         <p class="hero__index-label" id="hero-index-label">Jordan…</p>
-        {{#each INDEX as |item|}}
-          <LinkTo @route={{item.route}} class="hero__index-link">
+        {{! Each path reads as a verb: "Jordan… works", "Jordan… codes" }}
+        {{#each SECTIONS as |item|}}
+          <LinkTo @route={{item.name}} class="hero__index-link">
             <span class="hero__index-word"><span
                 class="hero__index-slash"
-              >/</span>{{item.route}}</span>
+              >/</span>{{item.name}}</span>
             <span class="hero__index-blurb">{{item.blurb}}</span>
             <Icon @name="arrowRight" class="hero__index-arrow" />
           </LinkTo>

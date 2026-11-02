@@ -1,17 +1,20 @@
 import Await from "#components/await.gts";
 import Icon from "#components/icon.gts";
+import { sectionNamed } from "#shared/sections.ts";
 import TrackList from "#components/sound/track-list.gts";
 import VideoGrid from "#components/sound/video-grid.gts";
 import pageTitle from "#app/helpers/page-title.ts";
 import { music } from "#app/data/site.ts";
 import { api } from "#utils/remote.ts";
 
+const SOUND = sectionNamed("sound");
+
 <template>
   {{pageTitle "Sound"}}
 
   <div class="wrap page">
     <header class="page-header">
-      <p class="eyebrow">sound<Icon @name="audioLines" class="eyebrow__icon" /></p>
+      <p class="eyebrow">{{SOUND.name}}<Icon @name={{SOUND.icon}} class="eyebrow__icon" /></p>
       <h1>{{music.alias}}</h1>
       <p>
         After years curating vibes at dance events across the country, I now spend my time in the
