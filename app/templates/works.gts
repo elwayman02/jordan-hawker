@@ -1,6 +1,6 @@
 import Await from "#components/await.gts";
 import Icon from "#components/icon.gts";
-import { sectionNamed } from "#shared/sections.ts";
+import PageHeader from "#components/page-header.gts";
 import RecommendationWall from "#components/recommendations/recommendation-wall.gts";
 import ResumeDocument from "#components/resume/resume-document.gts";
 import pageTitle from "#app/helpers/page-title.ts";
@@ -9,20 +9,16 @@ import { site } from "#app/data/site.ts";
 import { timeAgo } from "#utils/format.ts";
 import { api } from "#utils/remote.ts";
 
-const WORKS = sectionNamed("works");
-
 <template>
   {{pageTitle "Works"}}
 
   <div class="wrap page">
-    <header class="page-header">
-      <p class="eyebrow">{{WORKS.name}}<Icon @name={{WORKS.icon}} class="eyebrow__icon" /></p>
-      <h1>Works</h1>
+    <PageHeader @section="works">
       <p>
         Fifteen years of shipping for the web, from ad platforms and live video to enterprise
         developer platforms.
       </p>
-    </header>
+    </PageHeader>
 
     {{#let (api "resume") as |resume|}}
       <div class="split">

@@ -5,7 +5,9 @@ import { on } from "@ember/modifier";
 import { modifier } from "ember-modifier";
 
 import Icon from "#components/icon.gts";
+import IconButton from "#components/icon-button.gts";
 import type { Recommendation } from "#app/data/recommendations.ts";
+import { prefersReducedMotion } from "#utils/motion.ts";
 
 import "./recommendations.css";
 
@@ -48,7 +50,7 @@ export default class QuoteRotator extends Component<QuoteRotatorSignature> {
   resume = () => (this.paused = false);
 
   autoplay = modifier(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (prefersReducedMotion()) return;
 
     const timer = setInterval(() => {
       if (!this.paused && document.visibilityState === "visible") this.next();
@@ -83,13 +85,13 @@ export default class QuoteRotator extends Component<QuoteRotatorSignature> {
           </div>
         {{/each}}
         <div class="quote-rotator__controls">
-          <button type="button" class="quote-rotator__button" {{on "click" this.previous}}>
-            <Icon @name="chevronLeft" @label="Previous recommendation" />
-          </button>
+          <IconButton
+            @icon="chevronLeft"
+            @label="Previous recommendation"
+            {{on "click" this.previous}}
+          />
           <span class="quote-rotator__position mono">{{this.position}}</span>
-          <button type="button" class="quote-rotator__button" {{on "click" this.next}}>
-            <Icon @name="chevronRight" @label="Next recommendation" />
-          </button>
+          <IconButton @icon="chevronRight" @label="Next recommendation" {{on "click" this.next}} />
         </div>
       </figure>
     {{/if}}

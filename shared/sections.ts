@@ -49,11 +49,3 @@ export const SECTIONS = [
 
 export type Section = (typeof SECTIONS)[number];
 export type SectionName = Section["name"];
-
-/**
- * One section, by name. (Not `section`: imported into a template, that name would turn every
- * <section> element into a component invocation.)
- */
-export function sectionNamed<N extends SectionName>(name: N): Extract<Section, { name: N }> {
-  return SECTIONS.find((entry) => entry.name === name) as Extract<Section, { name: N }>;
-}

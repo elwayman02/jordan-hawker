@@ -1,26 +1,22 @@
 import Await from "#components/await.gts";
 import Icon from "#components/icon.gts";
-import { sectionNamed } from "#shared/sections.ts";
+import PageHeader from "#components/page-header.gts";
 import { site } from "#app/data/site.ts";
 import ProjectCard, { showStars } from "#components/codes/project-card.gts";
 import pageTitle from "#app/helpers/page-title.ts";
 import { formatMonth, isoDate } from "#utils/format.ts";
 import { api } from "#utils/remote.ts";
 
-const CODES = sectionNamed("codes");
-
 <template>
   {{pageTitle "Codes"}}
 
   <div class="wrap page">
-    <header class="page-header">
-      <p class="eyebrow">{{CODES.name}}<Icon @name={{CODES.icon}} class="eyebrow__icon" /></p>
-      <h1>Codes</h1>
+    <PageHeader @section="codes">
       <p>
         Open-source projects I’ve built and maintain. Most are Ember addons; all of them scratched
         an itch.
       </p>
-    </header>
+    </PageHeader>
 
     <Await @remote={{api "codes"}} @skeletonHeight="30rem">
       <:default as |codes|>

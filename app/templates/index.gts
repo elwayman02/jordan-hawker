@@ -3,6 +3,7 @@ import { LinkTo } from "@ember/routing";
 import Await from "#components/await.gts";
 import HellaCard from "#components/hella-card.gts";
 import Icon from "#components/icon.gts";
+import SectionHeading from "#components/section-heading.gts";
 import ProjectCard from "#components/codes/project-card.gts";
 import QuoteRotator from "#components/recommendations/quote-rotator.gts";
 import ExperienceTimeline from "#components/resume/experience-timeline.gts";
@@ -14,11 +15,10 @@ import { highlightedRecommendations } from "#app/data/recommendations.ts";
 import { contactLinks } from "#app/data/site.ts";
 import { SECTIONS } from "#shared/sections.ts";
 import { formatDate, isoDate } from "#utils/format.ts";
+import { take } from "#app/helpers/array.ts";
 import { api } from "#utils/remote.ts";
 
 import "./index.css";
-
-const take = <T,>(items: T[], count: number) => items.slice(0, count);
 
 <template>
   {{pageTitle}}
@@ -68,10 +68,7 @@ const take = <T,>(items: T[], count: number) => items.slice(0, count);
 
   <div class="wrap">
     <section class="section home-works" aria-labelledby="home-works">
-      <div class="section-heading">
-        <p class="eyebrow">works</p>
-        <h2 id="home-works">Where I’ve been building</h2>
-      </div>
+      <SectionHeading @eyebrow="works" @title="Where I’ve been building" @id="home-works" />
       <div class="home-works__grid">
         <Await @remote={{api "resume"}} @skeletonHeight="22rem" as |resume|>
           <div class="stack">
@@ -87,16 +84,13 @@ const take = <T,>(items: T[], count: number) => items.slice(0, count);
     </section>
 
     <section class="section" aria-labelledby="home-codes">
-      <div class="section-heading section-heading--row">
-        <div>
-          <p class="eyebrow">codes</p>
-          <h2 id="home-codes">Built in the open</h2>
-        </div>
-        <LinkTo @route="codes" class="link-arrow">
-          All projects
-          <Icon @name="arrowRight" />
-        </LinkTo>
-      </div>
+      <SectionHeading
+        @eyebrow="codes"
+        @title="Built in the open"
+        @id="home-codes"
+        @route="codes"
+        @linkLabel="All projects"
+      />
       <Await @remote={{api "codes"}} @skeletonHeight="14rem" as |codes|>
         <div class="project-grid">
           {{#each (take codes.active 6) as |repo|}}
@@ -108,16 +102,13 @@ const take = <T,>(items: T[], count: number) => items.slice(0, count);
 
     <section class="section home-split">
       <div class="stack" aria-labelledby="home-sound">
-        <div class="section-heading section-heading--row">
-          <div>
-            <p class="eyebrow">sound</p>
-            <h2 id="home-sound">Fresh from the studio</h2>
-          </div>
-          <LinkTo @route="sound" class="link-arrow">
-            Listen
-            <Icon @name="arrowRight" />
-          </LinkTo>
-        </div>
+        <SectionHeading
+          @eyebrow="sound"
+          @title="Fresh from the studio"
+          @id="home-sound"
+          @route="sound"
+          @linkLabel="Listen"
+        />
         <Await @remote={{api "sound"}} @skeletonHeight="13rem" as |sound|>
           <TrackList @tracks={{take sound.tracks 2}} />
         </Await>
@@ -126,10 +117,7 @@ const take = <T,>(items: T[], count: number) => items.slice(0, count);
     </section>
 
     <section class="section" aria-labelledby="home-bluesky">
-      <div class="section-heading">
-        <p class="eyebrow">lately</p>
-        <h2 id="home-bluesky">On Bluesky</h2>
-      </div>
+      <SectionHeading @eyebrow="lately" @title="On Bluesky" @id="home-bluesky" />
       <BlueskyFeed @layout="carousel" @limit={{8}} />
     </section>
 

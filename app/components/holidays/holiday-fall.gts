@@ -6,6 +6,7 @@ import type Owner from "@ember/owner";
 
 import { PIECES } from "#components/holidays/pieces.ts";
 import { holidayOffer, readSaved, resolveTheme } from "#utils/theme.ts";
+import { prefersReducedMotion } from "#utils/motion.ts";
 
 import type { Holiday } from "#utils/holidays.ts";
 
@@ -66,7 +67,7 @@ export default class HolidayFall extends Component {
   play(holiday: Holiday) {
     const art = PIECES[holiday.name];
 
-    if (!art?.length || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!art?.length || prefersReducedMotion()) return;
 
     // Sparse: about one piece per 60px of width
     const count = Math.round(Math.min(Math.max(window.innerWidth / 60, 10), 26));
