@@ -2,6 +2,17 @@
 
 ## Release (2026-11-02)
 
+* jordan-hawker 2.6.1 (patch)
+
+#### :house: Internal
+* `jordan-hawker`
+  * [#403](https://github.com/elwayman02/jordan-hawker/pull/403) Release automation with release-plan ([@elwayman02](https://github.com/elwayman02))
+
+#### Committers: 1
+- Jordan Hawker ([@elwayman02](https://github.com/elwayman02))
+
+## Release (2026-11-02)
+
 - jordan-hawker 2.6.0 (minor)
 
 Catch-up release for PRs merged without their own version bump.
