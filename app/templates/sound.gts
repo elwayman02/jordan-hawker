@@ -6,7 +6,7 @@ import SectionHeading from "#components/section-heading.gts";
 import TrackList from "#components/sound/track-list.gts";
 import VideoGrid from "#components/sound/video-grid.gts";
 import pageTitle from "#app/helpers/page-title.ts";
-import { music, site } from "#app/data/site.ts";
+import { music } from "#app/data/site.ts";
 import { api } from "#utils/remote.ts";
 
 <template>
@@ -79,10 +79,7 @@ import { api } from "#utils/remote.ts";
           <ListeningNow @listening={{listening}} />
         </:default>
         <:error>
-          <p class="notice">
-            My listening history isn’t loading right now —
-            <a href={{site.lastfmUrl}} target="_blank" rel="noopener noreferrer">see it on Last.fm</a>.
-          </p>
+          <p class="notice">My listening history isn’t loading right now.</p>
         </:error>
       </Await>
     </section>

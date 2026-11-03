@@ -281,7 +281,7 @@ describe("when a source is down", () => {
   // eslint-disable-next-line no-empty-pattern
   applicationTest.override({ app: ({}, use) => use(App) });
 
-  beforeEach(() => fakeApi({ failing: ["/api/resume", "bluesky"] }));
+  beforeEach(() => fakeApi({ failing: ["/api/resume", "bluesky", "/api/listening"] }));
   afterEach(() => resetApi());
 
   applicationTest("pages degrade to helpful notices", async ({ element }) => {
@@ -292,5 +292,19 @@ describe("when a source is down", () => {
     await visit("/words");
 
     expect(text(element.querySelector(".bluesky .notice"))).toContain("see posts on bsky.app");
+  });
+
+  applicationTest("missing listening data doesn't name its source", async ({ element }) => {
+    for (const [url, section] of [
+      ["/", "[aria-labelledby=home-listening]"],
+      ["/sound", "[aria-labelledby=listening]"],
+    ] as const) {
+      await visit(url);
+
+      const notice = element.querySelector(`${section} .notice`);
+
+      expect(text(notice), url).toBe("My listening history isn’t loading right now.");
+      expect(element.textContent, url).not.toContain("Last.fm");
+    }
   });
 });

@@ -155,7 +155,7 @@ import "./index.css";
             <ScrobbleList @tracks={{take listening.recent 5}} />
           </:default>
           <:error>
-            <p class="notice">Last.fm isn’t responding right now.</p>
+            <p class="notice">My listening history isn’t loading right now.</p>
           </:error>
         </Await>
       </div>
