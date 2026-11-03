@@ -31,6 +31,12 @@ export const TUMBLR_BLOG = "jordanhawker.tumblr.com";
 
 export const HELLA_DRUNK_FEED = "https://www.helladrunk.com/rss.xml";
 
+/**
+ * Goodreads user for /reads. Goodreads has no API or RSS any more (the feeds went in Oct 2026),
+ * so shelves come from its public bookshelf widget and stats from the public profile page.
+ */
+export const GOODREADS_USER_ID = "21718161";
+
 export const USER_AGENT = "jordanhawker.com (+https://github.com/elwayman02/jordan-hawker)";
 
 export function env(name: string): string | undefined {

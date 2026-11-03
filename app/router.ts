@@ -12,6 +12,7 @@ Router.map(function () {
   this.route("works");
   this.route("codes");
   this.route("sound");
+  this.route("reads");
   this.route("words", function () {
     this.route("post", { path: "/:slug" });
   });

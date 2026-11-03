@@ -1,6 +1,16 @@
 import { setFetcher } from "#utils/remote.ts";
 
-import type { ApiResponse, Codes, Hella, Resume, Sound, Votes, Words } from "#shared/api.ts";
+import type {
+  ApiResponse,
+  Book,
+  Codes,
+  Hella,
+  Reads,
+  Resume,
+  Sound,
+  Votes,
+  Words,
+} from "#shared/api.ts";
 
 export const resume: Resume = {
   name: "Jordan Hawker",
@@ -194,6 +204,67 @@ export const votes: Votes = {
   ],
 };
 
+const butcher = { id: "10", name: "Jim Butcher" };
+
+const readsBook = (id: string, title: string, extra: Partial<Book> = {}): Book => ({
+  id,
+  url: `https://www.goodreads.com/book/show/${id}`,
+  title,
+  author: butcher,
+  cover: `https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1l/${id}._SY300_.jpg`,
+  rating: 5,
+  ...extra,
+});
+
+const ownedNext = readsBook("d19", "Mirror Mirror", {
+  series: { name: "The Dresden Files", number: "19" },
+  rating: 0,
+});
+
+export const reads: Reads = {
+  current: [
+    readsBook("c1", "All Hail Chaos", {
+      series: { name: "Time of Iron", number: "2" },
+      author: { id: "20", name: "Sarah Rees Brennan" },
+      rating: 0,
+    }),
+  ],
+  recent: [
+    readsBook("r1", "The Noble Hustle", {
+      author: { id: "30", name: "Colson Whitehead" },
+      rating: 2,
+      review: "This book was OK, but I wanted something more exciting…",
+    }),
+    readsBook("d18", "Twelve Months", { series: { name: "The Dresden Files", number: "18" } }),
+  ],
+  favorites: [
+    readsBook("d18", "Twelve Months", { series: { name: "The Dresden Files", number: "18" } }),
+  ],
+  mostRead: {
+    authors: [{ kind: "author", key: "10", name: "Jim Butcher", read: 29, owned: [ownedNext] }],
+    series: [
+      {
+        kind: "series",
+        key: "The Dresden Files",
+        name: "The Dresden Files",
+        read: 21,
+        owned: [ownedNext],
+      },
+      { kind: "series", key: "Redwall", name: "Redwall", read: 17, owned: [] },
+    ],
+  },
+  upNext: [
+    {
+      kind: "series",
+      key: "The Dresden Files",
+      name: "The Dresden Files",
+      read: 21,
+      owned: [ownedNext],
+    },
+  ],
+  stats: { read: 337, ratings: 333, averageRating: 4.37, genres: ["Fantasy", "Science fiction"] },
+};
+
 const routes: Record<string, unknown> = {
   "/api/resume": envelope(resume),
   "/api/codes": envelope(codes),
@@ -201,6 +272,7 @@ const routes: Record<string, unknown> = {
   "/api/words": envelope(words),
   "/api/hella": envelope(hella),
   "/api/votes": envelope(votes),
+  "/api/reads": envelope(reads),
 };
 
 /** Serve fixture data for every remote source; `failing` paths respond 502 */

@@ -7,6 +7,7 @@ import arrowLeft from "~icons/lucide/arrow-left";
 import arrowRight from "~icons/lucide/arrow-right";
 import arrowUpRight from "~icons/lucide/arrow-up-right";
 import audioLines from "~icons/lucide/audio-lines";
+import bookOpen from "~icons/lucide/book-open";
 import briefcase from "~icons/lucide/briefcase";
 import cake from "~icons/lucide/cake";
 import chevronLeft from "~icons/lucide/chevron-left";
@@ -44,6 +45,7 @@ import mail from "~icons/ri/mail-line";
 import soundcloud from "~icons/ri/soundcloud-fill";
 import youtube from "~icons/ri/youtube-fill";
 import bandcamp from "~icons/simple-icons/bandcamp";
+import goodreads from "~icons/simple-icons/goodreads";
 
 export const icons = {
   arrowLeft,
@@ -52,6 +54,7 @@ export const icons = {
   audioLines,
   bandcamp,
   bluesky,
+  bookOpen,
   briefcase,
   cake,
   chevronLeft,
@@ -64,6 +67,7 @@ export const icons = {
   ghost,
   gitFork,
   github,
+  goodreads,
   heart,
   instagram,
   leaf,

@@ -1,0 +1,285 @@
+@layer components {
+  .reads-intro {
+    margin-top: calc(-1 * var(--space-s));
+    margin-bottom: var(--space-m);
+    font-size: var(--step--1);
+  }
+
+  /* ------------------------------- stats ------------------------------- */
+
+  .reads-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-s) var(--space-xl);
+    margin-bottom: var(--space-xl);
+    padding: var(--space-m);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-m);
+    background: var(--surface);
+
+    & dt {
+      font-family: var(--font-mono);
+      font-size: var(--step--1);
+      color: var(--muted);
+    }
+
+    & dd {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-3xs) var(--space-2xs);
+      font-family: var(--font-display);
+      font-size: var(--step-3);
+      line-height: 1.2;
+    }
+  }
+
+  .reads-stats__star {
+    width: 0.6em;
+    height: 0.6em;
+    margin-left: 0.15em;
+    color: var(--accent);
+
+    /* Lucide's outline shape has fill="none" on its path */
+    & path {
+      fill: currentColor;
+    }
+  }
+
+  .reads-stats__genres dd {
+    margin-top: var(--space-2xs);
+    font-family: var(--font-body);
+    font-size: var(--step--1);
+  }
+
+  /* ------------------------------- books ------------------------------- */
+
+  .book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 9.5rem), 1fr));
+    gap: var(--space-l) var(--space-m);
+  }
+
+  .book-grid--compact {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 7.5rem), 1fr));
+  }
+
+  .book-row {
+    display: grid;
+    gap: var(--space-m);
+  }
+
+  .book {
+    display: grid;
+    gap: var(--space-xs);
+    align-content: start;
+  }
+
+  .book__cover {
+    display: block;
+    border-radius: var(--radius-s);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    background: var(--surface-2);
+    transition: transform 0.2s var(--ease-out);
+
+    &:hover {
+      transform: translateY(-3px);
+    }
+
+    & img,
+    & .book__no-cover {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+  }
+
+  .book__no-cover {
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+
+    & .icon {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+
+  .book__details {
+    display: grid;
+    gap: 0.15rem;
+    min-width: 0;
+  }
+
+  .book__title {
+    font-family: var(--font-body);
+    font-size: var(--step--1);
+    font-weight: 600;
+    line-height: 1.3;
+
+    & a {
+      text-decoration: none;
+
+      &:hover {
+        color: var(--accent-strong);
+      }
+    }
+  }
+
+  .book__series,
+  .book__author {
+    color: var(--muted);
+    font-size: 0.8rem;
+    line-height: 1.35;
+  }
+
+  .book__series {
+    font-style: italic;
+  }
+
+  .book__rating {
+    display: flex;
+    gap: 0.1rem;
+    margin-top: 0.2rem;
+  }
+
+  .book__star {
+    width: 0.85rem;
+    height: 0.85rem;
+    color: var(--line);
+  }
+
+  .book__star--on {
+    color: var(--accent);
+
+    & path {
+      fill: currentColor;
+    }
+  }
+
+  .book__review {
+    margin-top: var(--space-2xs);
+    padding-left: var(--space-xs);
+    border-left: 2px solid var(--accent);
+    color: var(--muted);
+    font-size: 0.8rem;
+    font-style: italic;
+    line-height: 1.5;
+
+    /* already an excerpt (Goodreads cuts reviews short); this keeps the card in proportion */
+    & p {
+      display: -webkit-box;
+      overflow: hidden;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 5;
+      line-clamp: 5;
+    }
+  }
+
+  /* Currently reading: a bigger cover, with the details beside it */
+  .book--featured {
+    grid-template-columns: minmax(7rem, 11rem) minmax(0, 1fr);
+    gap: var(--space-m);
+    align-items: start;
+    max-width: 40rem;
+
+    & .book__title {
+      font-family: var(--font-display);
+      font-size: var(--step-2);
+      font-weight: 600;
+    }
+
+    & .book__series,
+    & .book__author {
+      font-size: var(--step-0);
+    }
+  }
+
+  /* ----------------------------- most read ----------------------------- */
+
+  .reads-most {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+    gap: var(--space-l) var(--space-xl);
+  }
+
+  .reads-groups__label {
+    margin-bottom: var(--space-xs);
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    font-weight: 400;
+    color: var(--muted);
+  }
+
+  .reads-groups__list {
+    display: grid;
+    padding: 0;
+    list-style: none;
+    counter-reset: reads;
+    border-top: 1px solid var(--line);
+  }
+
+  .reads-groups__item {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-3xs) var(--space-s);
+    padding-block: var(--space-2xs);
+    border-bottom: 1px solid var(--line);
+    counter-increment: reads;
+
+    &::before {
+      content: counter(reads);
+      min-width: 1.5rem;
+      font-family: var(--font-mono);
+      font-size: var(--step--1);
+      color: var(--muted);
+    }
+  }
+
+  .reads-groups__name {
+    flex: 1;
+    font-weight: 550;
+  }
+
+  .reads-groups__counts {
+    display: inline-flex;
+    align-items: baseline;
+    gap: var(--space-2xs);
+    color: var(--muted);
+    font-size: var(--step--1);
+  }
+
+  .reads-owned {
+    background: var(--accent-soft);
+    color: var(--accent-strong);
+  }
+
+  /* ------------------------------ up next ------------------------------ */
+
+  .reads-next {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+    gap: var(--space-xl) var(--space-l);
+    align-items: start;
+  }
+
+  .reads-next__name {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-3xs) var(--space-xs);
+    margin-bottom: var(--space-s);
+    font-size: var(--step-1);
+  }
+
+  .reads-next__meta {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    font-weight: 400;
+    color: var(--muted);
+  }
+}

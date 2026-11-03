@@ -10,5 +10,6 @@ export const OG_VERSIONS: Record<string, string> = {
   codes: "51c13d5864",
   sound: "55b7d2d739",
   votes: "824b9f89ff",
+  reads: "4ef02a7362",
   words: "86b70213e3",
 };
