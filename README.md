@@ -34,16 +34,17 @@ Local secrets go in a `.env` file (gitignored). See [environment variables](#env
 
 Nothing on the site requires a rebuild or redeploy to update. External content is served through small Netlify Functions (`netlify/functions/*` → `server/*`). Netlify's CDN caches each response and refreshes it in the background when it expires (`stale-while-revalidate`), so a function runs at most about once per refresh interval, and only if someone visits. To pick up a change sooner, clear the cache from the Netlify UI or redeploy. If an upstream source is down, the function serves the last good response from Netlify Blobs.
 
-| Content             | Source                                                            | Endpoint      | Refreshes |
-| ------------------- | ----------------------------------------------------------------- | ------------- | --------- |
-| Resume              | Published Google Doc ([jhawk.co/resume](https://jhawk.co/resume)) | `/api/resume` | ~3 hours  |
-| Projects            | GitHub repos owned by `elwayman02`                                | `/api/codes`  | ~6 hours  |
-| Tracks & videos     | SoundCloud RSS, YouTube music video playlist                      | `/api/sound`  | ~12 hours |
-| Blog posts          | Tumblr API                                                        | `/api/words`  | ~12 hours |
-| Hella Drunk reviews | helladrunk.com RSS                                                | `/api/hella`  | ~1 day    |
-| Voter guides        | Google Docs in a public Drive folder                              | `/api/votes`  | ~1 hour   |
-| Books               | Goodreads bookshelf widget and public profile                     | `/api/reads`  | ~6 hours  |
-| Bluesky posts       | Bluesky public API, called from the browser                       | none          | live      |
+| Content             | Source                                                            | Endpoint         | Refreshes   |
+| ------------------- | ----------------------------------------------------------------- | ---------------- | ----------- |
+| Resume              | Published Google Doc ([jhawk.co/resume](https://jhawk.co/resume)) | `/api/resume`    | ~3 hours    |
+| Projects            | GitHub repos owned by `elwayman02`                                | `/api/codes`     | ~6 hours    |
+| Tracks & videos     | SoundCloud RSS, YouTube music video playlist                      | `/api/sound`     | ~12 hours   |
+| Blog posts          | Tumblr API                                                        | `/api/words`     | ~12 hours   |
+| Hella Drunk reviews | helladrunk.com RSS                                                | `/api/hella`     | ~1 day      |
+| Voter guides        | Google Docs in a public Drive folder                              | `/api/votes`     | ~1 hour     |
+| Books               | Goodreads bookshelf widget and public profile                     | `/api/reads`     | ~6 hours    |
+| Listening           | Last.fm API: recent tracks and last month's top artists           | `/api/listening` | ~15 minutes |
+| Bluesky posts       | Bluesky public API, called from the browser                       | none             | live        |
 
 ### The resume
 
@@ -84,12 +85,13 @@ From those it builds recent reads, five-star favorites, most-read authors and se
 
 Set these in Netlify (Site configuration → Environment variables) and in a local `.env` for development.
 
-| Variable                          | Required | Purpose                                                                                            |
-| --------------------------------- | -------- | -------------------------------------------------------------------------------------------------- |
-| `TUMBLR_API_KEY`                  | yes      | Tumblr API key for `/words`                                                                        |
-| `GITHUB_TOKEN`                    | no       | Raises GitHub's API rate limit (a fine-grained token with no scopes is enough)                     |
-| `YOUTUBE_API_KEY`                 | no       | Reads the music video playlist on `/sound` (YouTube's no-key feed is usually unavailable)          |
-| `VITE_CLOUDFLARE_ANALYTICS_TOKEN` | no       | Enables [Cloudflare Web Analytics](https://www.cloudflare.com/web-analytics/) (read at build time) |
+| Variable                          | Required | Purpose                                                                                                                                                              |
+| --------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `TUMBLR_API_KEY`                  | yes      | Tumblr API key for `/words`                                                                                                                                          |
+| `GITHUB_TOKEN`                    | no       | Raises GitHub's API rate limit (a fine-grained token with no scopes is enough)                                                                                       |
+| `YOUTUBE_API_KEY`                 | no       | Reads the music video playlist on `/sound` (YouTube's no-key feed is usually unavailable)                                                                            |
+| `LASTFM_API_KEY`                  | no       | Last.fm API key for the listening section on `/sound` ([create one](https://www.last.fm/api/account/create)); without it the section shows a link to Last.fm instead |
+| `VITE_CLOUDFLARE_ANALYTICS_TOKEN` | no       | Enables [Cloudflare Web Analytics](https://www.cloudflare.com/web-analytics/) (read at build time)                                                                   |
 
 ## Deployment
 

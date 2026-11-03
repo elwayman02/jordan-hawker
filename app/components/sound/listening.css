@@ -1,0 +1,185 @@
+@layer components {
+  /* Recently played on the left, top artists on the right; stacked on narrow screens */
+  .listening {
+    display: grid;
+    gap: var(--space-xl);
+    align-items: start;
+
+    @media (width >= 48rem) {
+      grid-template-columns: minmax(0, 1.4fr) minmax(16rem, 1fr);
+    }
+  }
+
+  .listening__label {
+    margin-bottom: var(--space-xs);
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    font-weight: 400;
+    color: var(--muted);
+  }
+
+  .listening__top {
+    display: grid;
+    gap: var(--space-m);
+    justify-items: start;
+
+    & .listening__label {
+      margin-bottom: calc(-1 * var(--space-xs));
+    }
+  }
+
+  /* ---------------------------- recently played ---------------------------- */
+
+  .scrobbles {
+    display: grid;
+    border-top: 1px solid var(--line);
+  }
+
+  .scrobble {
+    display: grid;
+    grid-template-columns: 3rem minmax(0, 1fr) auto;
+    gap: var(--space-s);
+    align-items: center;
+    padding-block: var(--space-2xs);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .scrobble__art {
+    width: 3rem;
+    height: 3rem;
+    border-radius: var(--radius-s);
+    object-fit: cover;
+    background: var(--surface-2);
+  }
+
+  .scrobble__art--none {
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+
+    & .icon {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }
+
+  .scrobble__info {
+    display: grid;
+    min-width: 0;
+    line-height: 1.35;
+  }
+
+  .scrobble__name {
+    overflow: hidden;
+    font-weight: 550;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &:hover {
+      color: var(--accent-strong);
+    }
+  }
+
+  .scrobble__artist {
+    overflow: hidden;
+    color: var(--muted);
+    font-size: var(--step--1);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .scrobble__when {
+    color: var(--muted);
+    font-size: 0.8rem;
+    white-space: nowrap;
+  }
+
+  .scrobble__now {
+    background: var(--accent-soft);
+    color: var(--accent-strong);
+    white-space: nowrap;
+  }
+
+  /* three bars bouncing like an equalizer while a track plays */
+  .scrobble__bars {
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 0.75em;
+
+    & i {
+      width: 2px;
+      height: 100%;
+      background: currentColor;
+      animation: scrobble-bars 0.9s ease-in-out infinite alternate;
+      transform-origin: bottom;
+    }
+
+    & i:nth-child(2) {
+      animation-delay: -0.3s;
+    }
+
+    & i:nth-child(3) {
+      animation-delay: -0.6s;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      & i {
+        animation: none;
+      }
+    }
+  }
+
+  @keyframes scrobble-bars {
+    from {
+      transform: scaleY(0.3);
+    }
+
+    to {
+      transform: scaleY(1);
+    }
+  }
+
+  /* ------------------------------ top artists ------------------------------ */
+
+  .top-artists {
+    display: grid;
+    width: 100%;
+    counter-reset: artists;
+    border-top: 1px solid var(--line);
+  }
+
+  .top-artists__item {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-s);
+    padding-block: var(--space-2xs);
+    border-bottom: 1px solid var(--line);
+    counter-increment: artists;
+
+    &::before {
+      content: counter(artists);
+      min-width: 1.5rem;
+      font-family: var(--font-mono);
+      font-size: var(--step--1);
+      color: var(--muted);
+    }
+
+    & a {
+      flex: 1;
+      font-weight: 550;
+      text-decoration: none;
+
+      &:hover {
+        color: var(--accent-strong);
+      }
+    }
+  }
+
+  .top-artists__plays {
+    color: var(--muted);
+    font-size: var(--step--1);
+    white-space: nowrap;
+  }
+}

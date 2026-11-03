@@ -242,3 +242,32 @@ export interface Reads {
     genres: string[];
   };
 }
+
+/* -------------------------------- listening -------------------------------- */
+
+export interface ListenedTrack {
+  name: string;
+  artist: string;
+  album?: string;
+  /** the track on Last.fm */
+  url: string;
+  /** album art, when Last.fm has it */
+  image?: string;
+  /** when I played it; absent while it's playing */
+  playedAt?: string;
+  nowPlaying: boolean;
+}
+
+export interface ListenedArtist {
+  name: string;
+  /** the artist on Last.fm */
+  url: string;
+  plays: number;
+}
+
+export interface Listening {
+  /** most recent first; a track playing right now comes first */
+  recent: ListenedTrack[];
+  /** most played over the last month */
+  topArtists: ListenedArtist[];
+}

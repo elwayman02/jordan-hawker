@@ -35,6 +35,9 @@ export const HELLA_DRUNK_FEED = "https://www.helladrunk.com/rss.xml";
  * Goodreads user for /reads. Goodreads has no API or RSS any more (the feeds went in Oct 2026),
  * so shelves come from its public bookshelf widget and stats from the public profile page.
  */
+/** Last.fm user for the listening section on /sound (API key: LASTFM_API_KEY) */
+export const LASTFM_USER = "elwayman02";
+
 export const GOODREADS_USER_ID = "21718161";
 
 export interface CanceledAuthor {

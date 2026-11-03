@@ -5,6 +5,7 @@ import type {
   Book,
   Codes,
   Hella,
+  Listening,
   Reads,
   Resume,
   Sound,
@@ -274,6 +275,30 @@ export const reads: Reads = {
   stats: { read: 337, ratings: 333, averageRating: 4.37, genres: ["Fantasy", "Science fiction"] },
 };
 
+export const listening: Listening = {
+  recent: [
+    {
+      name: "Pandora's Box",
+      artist: "Beats Antique",
+      album: "Collide",
+      url: "https://www.last.fm/music/Beats+Antique/_/Pandora%27s+Box",
+      image: "https://lastfm.freetls.fastly.net/i/u/300x300/abc.jpg",
+      nowPlaying: true,
+    },
+    {
+      name: "Left Alone (feat. Chet Faker)",
+      artist: "Flume",
+      url: "https://www.last.fm/music/Flume/_/Left+Alone",
+      playedAt: "2026-11-01T11:42:00.000Z",
+      nowPlaying: false,
+    },
+  ],
+  topArtists: [
+    { name: "T-Pain", url: "https://www.last.fm/music/T-Pain", plays: 142 },
+    { name: "Halsey", url: "https://www.last.fm/music/Halsey", plays: 1 },
+  ],
+};
+
 const routes: Record<string, unknown> = {
   "/api/resume": envelope(resume),
   "/api/codes": envelope(codes),
@@ -282,6 +307,7 @@ const routes: Record<string, unknown> = {
   "/api/hella": envelope(hella),
   "/api/votes": envelope(votes),
   "/api/reads": envelope(reads),
+  "/api/listening": envelope(listening),
 };
 
 /** Serve fixture data for every remote source; `failing` paths respond 502 */

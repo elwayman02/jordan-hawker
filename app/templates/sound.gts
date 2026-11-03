@@ -1,11 +1,12 @@
 import Await from "#components/await.gts";
 import Icon from "#components/icon.gts";
+import ListeningNow from "#components/sound/listening.gts";
 import PageHeader from "#components/page-header.gts";
 import SectionHeading from "#components/section-heading.gts";
 import TrackList from "#components/sound/track-list.gts";
 import VideoGrid from "#components/sound/video-grid.gts";
 import pageTitle from "#app/helpers/page-title.ts";
-import { music } from "#app/data/site.ts";
+import { music, site } from "#app/data/site.ts";
 import { api } from "#utils/remote.ts";
 
 <template>
@@ -70,5 +71,20 @@ import { api } from "#utils/remote.ts";
         </Await>
       </section>
     {{/let}}
+
+    <section class="section" aria-labelledby="listening">
+      <SectionHeading @eyebrow="listening" @title="What I’m listening to" @id="listening" />
+      <Await @remote={{api "listening"}} @skeletonHeight="24rem">
+        <:default as |listening|>
+          <ListeningNow @listening={{listening}} />
+        </:default>
+        <:error>
+          <p class="notice">
+            My listening history isn’t loading right now —
+            <a href={{site.lastfmUrl}} target="_blank" rel="noopener noreferrer">see it on Last.fm</a>.
+          </p>
+        </:error>
+      </Await>
+    </section>
   </div>
 </template>

@@ -128,6 +128,29 @@ describe("navigation", () => {
     expect(text(element.querySelector(".prose"))).toContain("read on");
   });
 
+  applicationTest("sound shows what I'm listening to on Last.fm", async ({ element }) => {
+    await visit("/sound");
+
+    const section = element.querySelector("[aria-labelledby=listening]");
+    const [playing, played] = section?.querySelectorAll(".scrobble") ?? [];
+
+    expect(text(section?.querySelector("h2"))).toBe("What I’m listening to");
+    expect(text(playing?.querySelector(".scrobble__name"))).toBe("Pandora's Box");
+    expect(text(playing?.querySelector(".scrobble__now"))).toBe("Now playing");
+    // no album art: a placeholder, not a broken image
+    expect(played?.querySelector("img")).toBeNull();
+    expect(played?.querySelector("time")?.getAttribute("datetime")).toBe(
+      "2026-11-01T11:42:00.000Z",
+    );
+    expect([...(section?.querySelectorAll(".top-artists__item") ?? [])].map(text)).toEqual([
+      "T-Pain 142 plays",
+      "Halsey 1 play",
+    ]);
+    expect(
+      section?.querySelector('a.button[href="https://www.last.fm/user/elwayman02"]'),
+    ).not.toBeNull();
+  });
+
   applicationTest("reads shows my shelves from Goodreads", async ({ element }) => {
     await visit("/reads");
 
