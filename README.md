@@ -37,12 +37,12 @@ Nothing on the site requires a rebuild or redeploy to update. External content i
 | Content             | Source                                                                             | Endpoint         | Refreshes |
 | ------------------- | ---------------------------------------------------------------------------------- | ---------------- | --------- |
 | Resume              | Published Google Doc ([jhawk.co/resume](https://jhawk.co/resume))                  | `/api/resume`    | ~3 hours  |
-| Projects            | GitHub repos owned by `elwayman02`                                                 | `/api/codes`     | ~6 hours  |
-| Tracks & videos     | SoundCloud RSS, YouTube music video playlist                                       | `/api/sound`     | ~12 hours |
-| Blog posts          | Tumblr API                                                                         | `/api/words`     | ~12 hours |
+| Projects            | GitHub repos owned by `elwayman02`                                                 | `/api/codes`     | ~1 day    |
+| Tracks & videos     | SoundCloud RSS, YouTube music video playlist                                       | `/api/sound`     | ~1 day    |
+| Blog posts          | Tumblr API                                                                         | `/api/words`     | ~1 day    |
 | Hella Drunk reviews | helladrunk.com RSS                                                                 | `/api/hella`     | ~1 day    |
-| Voter guides        | Google Docs in a public Drive folder                                               | `/api/votes`     | ~1 hour   |
-| Books               | Goodreads bookshelf widget and public profile                                      | `/api/reads`     | ~6 hours  |
+| Voter guides        | Google Docs in a public Drive folder                                               | `/api/votes`     | ~3 hours  |
+| Books               | Goodreads bookshelf widget and public profile                                      | `/api/reads`     | ~1 day    |
 | Listening           | Last.fm API: my last 200 plays (recent songs, top artists) and artists' style tags | `/api/listening` | ~3 hours  |
 | Bluesky posts       | Bluesky public API, called from the browser                                        | none             | live      |
 
