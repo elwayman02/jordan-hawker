@@ -181,6 +181,8 @@ describe("navigation", () => {
     expect(text(element.querySelector(".book--featured .book__title"))).toBe("All Hail Chaos");
     expect(text(element.querySelector(".book--featured .book__series"))).toBe("Time of Iron #2");
 
+    expect(text(element.querySelector("[aria-labelledby=reads-recent] .eyebrow"))).toBe("finished");
+
     const [noble] = element.querySelectorAll("[aria-labelledby=reads-recent] .book");
 
     expect(noble?.querySelector(".book__title a")?.getAttribute("href")).toBe(

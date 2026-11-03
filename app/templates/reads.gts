@@ -34,7 +34,7 @@ const plural = (count: number, word: string) => `${count} ${word}${count === 1 ?
         </section>
 
         <section class="section" aria-labelledby="reads-recent">
-          <SectionHeading @eyebrow="lately" @title="Recently read" @id="reads-recent" />
+          <SectionHeading @eyebrow="finished" @title="Recently read" @id="reads-recent" />
           <div class="book-grid">
             {{#each reads.recent as |book|}}
               <BookCard @book={{book}} />
