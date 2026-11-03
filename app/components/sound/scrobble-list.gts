@@ -1,4 +1,4 @@
-import Icon from "#components/icon.gts";
+import ScrobbleArt from "#components/sound/scrobble-art.gts";
 import { isoDate, timeAgo } from "#utils/format.ts";
 import type { ListenedTrack } from "#shared/api.ts";
 
@@ -15,18 +15,7 @@ const ScrobbleList: TOC<ScrobbleListSignature> = <template>
   <ol role="list" class="scrobbles">
     {{#each @tracks as |track|}}
       <li class="scrobble">
-        {{#if track.image}}
-          <img
-            class="scrobble__art"
-            src={{track.image}}
-            alt=""
-            loading="lazy"
-            width="48"
-            height="48"
-          />
-        {{else}}
-          <span class="scrobble__art scrobble__art--none"><Icon @name="audioLines" /></span>
-        {{/if}}
+        <ScrobbleArt @src={{track.image}} />
         <span class="scrobble__info">
           <a class="scrobble__name" href={{track.url}} target="_blank" rel="noopener noreferrer">
             {{track.name}}
