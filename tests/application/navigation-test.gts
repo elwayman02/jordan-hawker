@@ -47,8 +47,19 @@ describe("navigation", () => {
 
     expect(text(reading?.querySelector("h2"))).toBe("Currently reading");
     expect(text(reading?.querySelector(".book--featured .book__title"))).toBe("All Hail Chaos");
-    expect(text(reading?.querySelector(".reads-stats"))).toContain("337");
+    expect(reading?.querySelector(".reads-stats")).toBeNull();
     expect(reading?.querySelector('a[href="/reads"]')).not.toBeNull();
+
+    // beside it, what I've been listening to
+    const listening = element.querySelector("[aria-labelledby=home-listening]");
+
+    expect(text(listening?.querySelector("h2"))).toBe("Currently listening");
+    expect([...(listening?.querySelectorAll(".scrobble__name") ?? [])].map(text)).toEqual([
+      "Pandora's Box",
+      "Left Alone (feat. Chet Faker)",
+    ]);
+    expect(listening?.querySelector('a[href="/sound"]')).not.toBeNull();
+    expect(reading?.parentElement).toBe(listening?.parentElement);
 
     const [liked, quiet] = element.querySelectorAll(".skeet");
 
@@ -147,9 +158,13 @@ describe("navigation", () => {
     expect(played?.querySelector("time")?.getAttribute("datetime")).toBe(
       "2026-11-01T11:42:00.000Z",
     );
-    expect(
-      section?.querySelector('a.button[href="https://www.last.fm/user/elwayman02"]'),
-    ).not.toBeNull();
+    // recently played comes first
+    expect([...(section?.querySelectorAll(".listening__label") ?? [])].map(text)).toEqual([
+      "Recently played",
+      "Top artists this week",
+    ]);
+    // no Last.fm buttons anywhere
+    expect(element.querySelector('a[href^="https://www.last.fm/user/"]')).toBeNull();
   });
 
   applicationTest("reads shows my shelves from Goodreads", async ({ element }) => {

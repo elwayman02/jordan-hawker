@@ -91,12 +91,6 @@ export const personalLinks: SocialLink[] = [
     url: site.goodreadsUrl,
     icon: "goodreads",
   },
-  {
-    label: "Last.fm",
-    handle: "elwayman02",
-    url: site.lastfmUrl,
-    icon: "lastfm",
-  },
 ];
 
 export const discordLink: SocialLink = {

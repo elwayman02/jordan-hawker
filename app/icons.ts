@@ -46,7 +46,6 @@ import soundcloud from "~icons/ri/soundcloud-fill";
 import youtube from "~icons/ri/youtube-fill";
 import bandcamp from "~icons/simple-icons/bandcamp";
 import goodreads from "~icons/simple-icons/goodreads";
-import lastfm from "~icons/simple-icons/lastdotfm";
 
 export const icons = {
   arrowLeft,
@@ -71,7 +70,6 @@ export const icons = {
   goodreads,
   heart,
   instagram,
-  lastfm,
   leaf,
   linkedin,
   mail,
