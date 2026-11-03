@@ -204,7 +204,7 @@ export const votes: Votes = {
   ],
 };
 
-const butcher = { id: "10", name: "Jim Butcher" };
+const butcher = { id: "10746", name: "Jim Butcher" };
 
 const readsBook = (id: string, title: string, extra: Partial<Book> = {}): Book => ({
   id,
@@ -241,7 +241,16 @@ export const reads: Reads = {
     readsBook("d18", "Twelve Months", { series: { name: "The Dresden Files", number: "18" } }),
   ],
   mostRead: {
-    authors: [{ kind: "author", key: "10", name: "Jim Butcher", read: 29, owned: [ownedNext] }],
+    authors: [
+      {
+        kind: "author",
+        key: "10746",
+        name: "Jim Butcher",
+        url: "https://www.goodreads.com/author/show/10746",
+        read: 29,
+        owned: [ownedNext],
+      },
+    ],
     series: [
       {
         kind: "series",

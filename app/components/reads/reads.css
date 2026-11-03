@@ -290,6 +290,16 @@
     font-weight: 550;
   }
 
+  /* author names link to Goodreads, like book titles */
+  .reads-groups__name a,
+  .reads-next__name a {
+    text-decoration: none;
+
+    &:hover {
+      color: var(--accent-strong);
+    }
+  }
+
   .reads-groups__counts {
     display: inline-flex;
     align-items: baseline;

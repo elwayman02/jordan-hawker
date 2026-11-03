@@ -68,13 +68,21 @@ const plural = (count: number, word: string) => `${count} ${word}${count === 1 ?
           <section class="section" aria-labelledby="reads-next">
             <SectionHeading @eyebrow="up next" @title="Already on my shelf" @id="reads-next" />
             <p class="muted reads-intro">
-              Books I own from series and authors I’ve already started.
+              Books I own from series and authors I’ve already enjoyed.
             </p>
             <div class="reads-next">
               {{#each reads.upNext as |group|}}
                 <div class="reads-next__group">
                   <h3 class="reads-next__name">
-                    {{group.name}}
+                    {{#if group.url}}
+                      <a
+                        href={{group.url}}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >{{group.name}}</a>
+                    {{else}}
+                      {{group.name}}
+                    {{/if}}
                     <span class="reads-next__meta">
                       {{if (eq group.kind "series") "series" "author"}}
                       ·

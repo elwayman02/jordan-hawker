@@ -214,6 +214,11 @@ export interface ReadsGroup {
   name: string;
   /** the author's id, or the series' name: unique per kind */
   key: string;
+  /**
+   * The author's page on Goodreads. Series have none: the widget doesn't give their ids,
+   * and Goodreads' series pages need one.
+   */
+  url?: string;
   read: number;
   /** on my owned-unread shelf */
   owned: Book[];

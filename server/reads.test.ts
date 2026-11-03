@@ -294,7 +294,7 @@ describe("canceled authors", () => {
 });
 
 describe("page data", () => {
-  const butcher = { id: "10", name: "Jim Butcher" };
+  const butcher = { id: "10746", name: "Jim Butcher" };
   const read = [
     book({ id: "d1", series: { name: "Dresden", number: "1" }, author: butcher, rating: 5 }),
     book({ id: "d2", series: { name: "Dresden", number: "2" }, author: butcher, rating: 5 }),
@@ -314,7 +314,14 @@ describe("page data", () => {
   test("up next: owned books that continue a series, or else an author, I've read", () => {
     expect(upNext(read, owned)).toEqual([
       { kind: "series", key: "Dresden", name: "Dresden", read: 2, owned: [owned[0]] },
-      { kind: "author", key: "20", name: "Andy Weir", read: 1, owned: [owned[1]] },
+      {
+        kind: "author",
+        key: "20",
+        name: "Andy Weir",
+        url: "https://www.goodreads.com/author/show/20",
+        read: 1,
+        owned: [owned[1]],
+      },
     ]);
   });
 
@@ -322,7 +329,14 @@ describe("page data", () => {
     const reads = buildReads({ current: [], read, owned }, undefined);
 
     expect(reads.mostRead.authors).toEqual([
-      { kind: "author", key: "10", name: "Jim Butcher", read: 2, owned: [owned[0]] },
+      {
+        kind: "author",
+        key: "10746",
+        name: "Jim Butcher",
+        url: "https://www.goodreads.com/author/show/10746",
+        read: 2,
+        owned: [owned[0]],
+      },
     ]);
     expect(reads.mostRead.series).toEqual([
       { kind: "series", key: "Dresden", name: "Dresden", read: 2, owned: [owned[0]] },

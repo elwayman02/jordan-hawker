@@ -149,8 +149,16 @@ describe("navigation", () => {
     const [dresden, redwall] = element.querySelectorAll(".reads-groups:last-child li");
 
     expect(text(dresden)).toBe("The Dresden Files 21 books 1 on my shelf");
+    // authors link to Goodreads; series can't (the widget doesn't give their ids)
+    expect(dresden?.querySelector("a")).toBeNull();
+    expect(element.querySelector(".reads-groups:first-child li a")?.getAttribute("href")).toBe(
+      "https://www.goodreads.com/author/show/10746",
+    );
     expect(text(redwall)).toBe("Redwall 17 books");
     expect(text(element.querySelector(".reads-next__group"))).toContain("Mirror Mirror");
+    expect(text(element.querySelector("[aria-labelledby=reads-next] .reads-intro"))).toBe(
+      "Books I own from series and authors I’ve already enjoyed.",
+    );
     // the Goodreads button sits in the stats card, beside what I'm reading
     expect(
       element.querySelector(

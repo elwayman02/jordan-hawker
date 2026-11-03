@@ -21,7 +21,13 @@ const ReadsGroups: TOC<ReadsGroupsSignature> = <template>
     <ol class="reads-groups__list">
       {{#each @groups as |group|}}
         <li class="reads-groups__item">
-          <span class="reads-groups__name">{{group.name}}</span>
+          <span class="reads-groups__name">
+            {{#if group.url}}
+              <a href={{group.url}} target="_blank" rel="noopener noreferrer">{{group.name}}</a>
+            {{else}}
+              {{group.name}}
+            {{/if}}
+          </span>
           <span class="reads-groups__counts">
             {{plural group.read "book"}}
             {{#if group.owned.length}}

@@ -213,6 +213,20 @@ function countBy(books: Book[], key: Key): Map<string, Book[]> {
   return groups;
 }
 
+/** A group's name and link, from one of its books */
+function describe(
+  kind: ReadsGroup["kind"],
+  key: string,
+  book: Book,
+): Pick<ReadsGroup, "name" | "url"> {
+  if (kind === "series") return { name: key };
+
+  return {
+    name: book.author.name,
+    ...(book.author.id && { url: `${GOODREADS}/author/show/${book.author.id}` }),
+  };
+}
+
 function topGroups(read: Book[], owned: Book[], kind: ReadsGroup["kind"]): ReadsGroup[] {
   const key = kind === "series" ? bySeries : byAuthor;
   const ownedBy = countBy(owned, key);
@@ -224,7 +238,7 @@ function topGroups(read: Book[], owned: Book[], kind: ReadsGroup["kind"]): Reads
     .map(([groupKey, books]) => ({
       kind,
       key: groupKey,
-      name: kind === "series" ? groupKey : books[0]!.author.name,
+      ...describe(kind, groupKey, books[0]!),
       read: books.length,
       owned: ownedBy.get(groupKey) ?? [],
     }));
@@ -255,7 +269,7 @@ export function upNext(read: Book[], owned: Book[]): ReadsGroup[] {
     const group = groups.get(id) ?? {
       kind,
       key,
-      name: kind === "series" ? key : book.author.name,
+      ...describe(kind, key, book),
       read: readBooks.length,
       owned: [],
     };
