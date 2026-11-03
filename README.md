@@ -34,17 +34,17 @@ Local secrets go in a `.env` file (gitignored). See [environment variables](#env
 
 Nothing on the site requires a rebuild or redeploy to update. External content is served through small Netlify Functions (`netlify/functions/*` → `server/*`). Netlify's CDN caches each response and refreshes it in the background when it expires (`stale-while-revalidate`), so a function runs at most about once per refresh interval, and only if someone visits. To pick up a change sooner, clear the cache from the Netlify UI or redeploy. If an upstream source is down, the function serves the last good response from Netlify Blobs.
 
-| Content             | Source                                                            | Endpoint         | Refreshes |
-| ------------------- | ----------------------------------------------------------------- | ---------------- | --------- |
-| Resume              | Published Google Doc ([jhawk.co/resume](https://jhawk.co/resume)) | `/api/resume`    | ~3 hours  |
-| Projects            | GitHub repos owned by `elwayman02`                                | `/api/codes`     | ~6 hours  |
-| Tracks & videos     | SoundCloud RSS, YouTube music video playlist                      | `/api/sound`     | ~12 hours |
-| Blog posts          | Tumblr API                                                        | `/api/words`     | ~12 hours |
-| Hella Drunk reviews | helladrunk.com RSS                                                | `/api/hella`     | ~1 day    |
-| Voter guides        | Google Docs in a public Drive folder                              | `/api/votes`     | ~1 hour   |
-| Books               | Goodreads bookshelf widget and public profile                     | `/api/reads`     | ~6 hours  |
-| Listening           | Last.fm API: my last 200 plays, for recent songs and top artists  | `/api/listening` | ~3 hours  |
-| Bluesky posts       | Bluesky public API, called from the browser                       | none             | live      |
+| Content             | Source                                                                             | Endpoint         | Refreshes |
+| ------------------- | ---------------------------------------------------------------------------------- | ---------------- | --------- |
+| Resume              | Published Google Doc ([jhawk.co/resume](https://jhawk.co/resume))                  | `/api/resume`    | ~3 hours  |
+| Projects            | GitHub repos owned by `elwayman02`                                                 | `/api/codes`     | ~6 hours  |
+| Tracks & videos     | SoundCloud RSS, YouTube music video playlist                                       | `/api/sound`     | ~12 hours |
+| Blog posts          | Tumblr API                                                                         | `/api/words`     | ~12 hours |
+| Hella Drunk reviews | helladrunk.com RSS                                                                 | `/api/hella`     | ~1 day    |
+| Voter guides        | Google Docs in a public Drive folder                                               | `/api/votes`     | ~1 hour   |
+| Books               | Goodreads bookshelf widget and public profile                                      | `/api/reads`     | ~6 hours  |
+| Listening           | Last.fm API: my last 200 plays (recent songs, top artists) and artists' style tags | `/api/listening` | ~3 hours  |
+| Bluesky posts       | Bluesky public API, called from the browser                                        | none             | live      |
 
 ### The resume
 

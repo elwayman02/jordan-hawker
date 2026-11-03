@@ -7,6 +7,47 @@ const API = "https://ws.audioscrobbler.com/2.0/";
 /** Songs in "recently played", after repeats are removed */
 const RECENT = 20;
 const TOP_ARTISTS = 10;
+/** Style tags shown per artist */
+const TAGS = 3;
+/** Last.fm weighs each artist's tags 0–100; below this, few listeners agree */
+const MIN_TAG_WEIGHT = 10;
+
+/**
+ * Tags that describe listeners rather than the music. Nationalities are left out too:
+ * they're where an artist is from, not how they sound.
+ */
+const NOT_STYLES = new Set([
+  "seen live",
+  "favorite",
+  "favorites",
+  "favourite",
+  "favourites",
+  "love",
+  "loved",
+  "awesome",
+  "beautiful",
+  "albums i own",
+  "my music",
+  "spotify",
+  "all",
+  "under 2000 listeners",
+  "american",
+  "british",
+  "uk",
+  "usa",
+  "english",
+  "canadian",
+  "australian",
+  "german",
+  "french",
+  "swedish",
+  "irish",
+  "scottish",
+  "dutch",
+  "norwegian",
+  "japanese",
+  "korean",
+]);
 
 /**
  * Plays fetched: Last.fm's maximum per request. Enough to find 20 different songs despite
@@ -17,6 +58,13 @@ const PLAYS = 200;
 interface LastfmImage {
   "#text": string;
   size: "small" | "medium" | "large" | "extralarge" | "mega" | "";
+}
+
+export interface TopTagsResponse {
+  toptags?: {
+    /** a single object rather than a list when there's only one */
+    tag?: { name: string; count: number }[] | { name: string; count: number };
+  };
 }
 
 export interface RecentTracksResponse {
@@ -103,7 +151,8 @@ export function recentSongs(plays: ListenedTrack[], limit = RECENT): ListenedTra
  * (the repeat bug); playing it again later, after something else, counts again.
  */
 export function topArtists(plays: ListenedTrack[], limit = TOP_ARTISTS): ListenedArtist[] {
-  const artists = new Map<string, ListenedArtist & { lastPlayed: number }>();
+  // tags are added afterwards, by getListening
+  const artists = new Map<string, Omit<ListenedArtist, "tags"> & { lastPlayed: number }>();
   let previous: string | undefined;
 
   for (const play of plays) {
@@ -127,19 +176,27 @@ export function topArtists(plays: ListenedTrack[], limit = TOP_ARTISTS): Listene
   return [...artists.values()]
     .sort((a, b) => b.plays - a.plays || b.lastPlayed - a.lastPlayed)
     .slice(0, limit)
-    .map(({ name, url, plays: count }) => ({ name, url, plays: count }));
+    .map(({ name, url, plays: count }) => ({ name, url, plays: count, tags: [] }));
 }
 
-function apiUrl(key: string): string {
-  const params = new URLSearchParams({
-    method: "user.getrecenttracks",
-    user: LASTFM_USER,
-    api_key: key,
-    format: "json",
-    limit: String(PLAYS),
-  });
+/** An artist's most-used tags that describe their music, strongest first */
+export function parseTags(response: TopTagsResponse, artist: string, limit = TAGS): string[] {
+  const seen = new Set<string>([normalize(artist)]);
 
-  return `${API}?${params}`;
+  return list(response.toptags?.tag)
+    .filter(({ count }) => count >= MIN_TAG_WEIGHT)
+    .map(({ name }) => normalize(name))
+    .filter((tag) => {
+      if (!tag || NOT_STYLES.has(tag) || seen.has(tag)) return false;
+      seen.add(tag);
+
+      return true;
+    })
+    .slice(0, limit);
+}
+
+function apiUrl(params: Record<string, string>, key: string): string {
+  return `${API}?${new URLSearchParams({ ...params, api_key: key, format: "json" })}`;
 }
 
 export async function getListening(): Promise<Listening> {
@@ -148,7 +205,34 @@ export async function getListening(): Promise<Listening> {
   if (!key) throw new Error("LASTFM_API_KEY is not set");
 
   // Last.fm's error replies come with an error status, so a failure throws
-  const plays = parsePlays(await fetchJson<RecentTracksResponse>(apiUrl(key)));
+  const plays = parsePlays(
+    await fetchJson<RecentTracksResponse>(
+      apiUrl({ method: "user.getrecenttracks", user: LASTFM_USER, limit: String(PLAYS) }, key),
+    ),
+  );
+  const artists = topArtists(plays);
 
-  return { recent: recentSongs(plays), topArtists: topArtists(plays) };
+  // Tags are a nice-to-have: an artist whose tags don't load is shown without them
+  const tags = await Promise.allSettled(
+    artists.map(async ({ name }) =>
+      parseTags(
+        await fetchJson<TopTagsResponse>(
+          apiUrl({ method: "artist.gettoptags", artist: name, autocorrect: "1" }, key),
+        ),
+        name,
+      ),
+    ),
+  );
+
+  return {
+    recent: recentSongs(plays),
+    topArtists: artists.map((artist, index) => {
+      const result = tags[index];
+
+      if (result?.status === "rejected")
+        console.warn(`[listening] tags for ${artist.name}`, result.reason);
+
+      return { ...artist, tags: result?.status === "fulfilled" ? result.value : [] };
+    }),
+  };
 }

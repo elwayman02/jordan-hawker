@@ -145,10 +145,16 @@ describe("navigation", () => {
     const [latest, played] = section?.querySelectorAll(".scrobble") ?? [];
 
     expect(text(section?.querySelector("h2"))).toBe("What I’m listening to");
-    expect([...(section?.querySelectorAll(".top-artists__item") ?? [])].map(text)).toEqual([
-      "T-Pain 42 plays",
-      "Halsey 1 play",
+    // styles from Last.fm's tags, where they loaded
+    const [tPain, halsey] = section?.querySelectorAll(".top-artists__item") ?? [];
+
+    expect(text(tPain?.querySelector("a"))).toBe("T-Pain");
+    expect([...(tPain?.querySelectorAll(".chip") ?? [])].map(text)).toEqual([
+      "hip-hop",
+      "rnb",
+      "auto-tune",
     ]);
+    expect(text(halsey)).toBe("Halsey");
     expect(text(latest?.querySelector(".scrobble__name"))).toBe("Pandora's Box");
     // album art when Last.fm has it, and a placeholder (not a broken image) when it doesn't
     expect(latest?.querySelector("img")?.getAttribute("src")).toBe(
@@ -162,7 +168,7 @@ describe("navigation", () => {
     // recently played comes first
     expect([...(section?.querySelectorAll(".listening__label") ?? [])].map(text)).toEqual([
       "Recently played",
-      "Top artists this week",
+      "Recent top artists",
     ]);
   });
 

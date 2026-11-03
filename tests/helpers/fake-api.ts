@@ -293,8 +293,14 @@ export const listening: Listening = {
     },
   ],
   topArtists: [
-    { name: "T-Pain", url: "https://www.last.fm/music/T-Pain", plays: 42 },
-    { name: "Halsey", url: "https://www.last.fm/music/Halsey", plays: 1 },
+    {
+      name: "T-Pain",
+      url: "https://www.last.fm/music/T-Pain",
+      plays: 42,
+      tags: ["hip-hop", "rnb", "auto-tune"],
+    },
+    // tags that didn't load
+    { name: "Halsey", url: "https://www.last.fm/music/Halsey", plays: 1, tags: [] },
   ],
 };
 

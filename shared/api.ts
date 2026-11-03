@@ -260,8 +260,10 @@ export interface ListenedArtist {
   name: string;
   /** the artist on Last.fm */
   url: string;
-  /** among my last 200 plays, with back-to-back repeats of a song counted once */
+  /** among my last 200 plays, with back-to-back repeats of a song counted once (for ranking) */
   plays: number;
+  /** styles they're known for, from listeners' tags on Last.fm; empty when unavailable */
+  tags: string[];
 }
 
 export interface Listening {

@@ -3,6 +3,7 @@ import { afterEach, describe, expect, test, vi } from "vitest";
 import type { ListenedTrack } from "../shared/api.ts";
 import {
   getListening,
+  parseTags,
   parsePlays,
   recentSongs,
   topArtists,
@@ -123,8 +124,8 @@ describe("topArtists", () => {
     ];
 
     expect(topArtists(plays)).toEqual([
-      { name: "Bruno Mars", url: "https://www.last.fm/music/Bruno+Mars", plays: 2 },
-      { name: "Emancipator", url: "https://www.last.fm/music/Emancipator", plays: 1 },
+      { name: "Bruno Mars", url: "https://www.last.fm/music/Bruno+Mars", plays: 2, tags: [] },
+      { name: "Emancipator", url: "https://www.last.fm/music/Emancipator", plays: 1, tags: [] },
     ]);
   });
 
@@ -145,13 +146,50 @@ describe("topArtists", () => {
   });
 });
 
+describe("parseTags", () => {
+  const tag = (name: string, count: number) => ({ name, count });
+
+  test("keeps the strongest styles, leaving out tags about listeners, places and the artist", () => {
+    expect(
+      parseTags(
+        {
+          toptags: {
+            tag: [
+              tag("electronic", 100),
+              tag("seen live", 90),
+              tag("Flume", 80),
+              tag("australian", 70),
+              tag("Future Bass", 60),
+              tag("electronic ", 50),
+              tag("chillwave", 40),
+              tag("ambient", 30),
+            ],
+          },
+        },
+        "Flume",
+      ),
+    ).toEqual(["electronic", "future bass", "chillwave"]);
+  });
+
+  test("ignores tags few listeners agree on", () => {
+    expect(
+      parseTags({ toptags: { tag: [tag("indie pop", 100), tag("dance", 9)] } }, "Lido"),
+    ).toEqual(["indie pop"]);
+  });
+
+  test("handles a single tag (an object, not a list) and none at all", () => {
+    expect(parseTags({ toptags: { tag: tag("soul", 100) } }, "Kim Massie")).toEqual(["soul"]);
+    expect(parseTags({}, "Nobody")).toEqual([]);
+  });
+});
+
 describe("getListening", () => {
   afterEach(() => {
     vi.unstubAllGlobals();
     vi.unstubAllEnvs();
   });
 
-  test("makes one request for my last 200 plays, for both lists", async () => {
+  test("fetches my last 200 plays, then each top artist's tags", async () => {
     vi.stubEnv("LASTFM_API_KEY", "secret");
 
     const track = Array.from({ length: 200 }, (_, n) =>
@@ -160,18 +198,69 @@ describe("getListening", () => {
 
     vi.stubGlobal(
       "fetch",
-      vi.fn(() => Promise.resolve(new Response(JSON.stringify({ recenttracks: { track } })))),
+      vi.fn((url: string) => {
+        const params = new URL(url).searchParams;
+        const body =
+          params.get("method") === "artist.gettoptags"
+            ? { toptags: { tag: [{ name: `${params.get("artist")} style`, count: 100 }] } }
+            : { recenttracks: { track } };
+
+        return Promise.resolve(new Response(JSON.stringify(body)));
+      }),
     );
 
     const listening = await getListening();
-    const calls = vi.mocked(fetch).mock.calls.map(([url]) => new URL(url as string).searchParams);
+    const [recent, ...tags] = vi
+      .mocked(fetch)
+      .mock.calls.map(([url]) => new URL(url as string).searchParams);
 
-    expect(calls).toHaveLength(1);
-    expect(calls[0]?.get("method")).toBe("user.getrecenttracks");
-    expect(calls[0]?.get("user")).toBe("elwayman02");
-    expect(calls[0]?.get("limit")).toBe("200");
+    expect(recent?.get("method")).toBe("user.getrecenttracks");
+    expect(recent?.get("user")).toBe("elwayman02");
+    expect(recent?.get("limit")).toBe("200");
+    expect(tags.map((params) => params.get("artist"))).toEqual([
+      "Artist 0",
+      "Artist 1",
+      "Artist 2",
+    ]);
     expect(listening.recent).toHaveLength(20);
-    expect(listening.topArtists.map((artist) => artist.plays)).toEqual([67, 67, 66]);
+    expect(listening.topArtists.map((artist) => [artist.name, artist.tags])).toEqual([
+      ["Artist 0", ["artist 0 style"]],
+      ["Artist 1", ["artist 1 style"]],
+      ["Artist 2", ["artist 2 style"]],
+    ]);
+  });
+
+  test("an artist whose tags fail to load is still listed, without tags", async () => {
+    vi.stubEnv("LASTFM_API_KEY", "secret");
+    vi.stubGlobal(
+      "fetch",
+      vi.fn((url: string) => {
+        const params = new URL(url).searchParams;
+
+        if (params.get("method") === "artist.gettoptags") {
+          return Promise.resolve(
+            params.get("artist") === "Lido"
+              ? new Response("{}", { status: 500 })
+              : new Response(JSON.stringify({ toptags: { tag: [{ name: "idm", count: 100 }] } })),
+          );
+        }
+
+        return Promise.resolve(
+          new Response(
+            JSON.stringify({
+              recenttracks: { track: [scrobble("A", "Lido", 1), scrobble("B", "Bonobo", 2)] },
+            }),
+          ),
+        );
+      }),
+    );
+
+    const listening = await getListening();
+
+    expect(listening.topArtists.map((artist) => [artist.name, artist.tags])).toEqual([
+      ["Lido", []],
+      ["Bonobo", ["idm"]],
+    ]);
   });
 
   test("fails without a key, so the last good snapshot is served", async () => {
