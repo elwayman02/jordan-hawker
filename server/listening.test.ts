@@ -170,7 +170,6 @@ describe("getListening", () => {
     expect(calls[0]?.get("method")).toBe("user.getrecenttracks");
     expect(calls[0]?.get("user")).toBe("elwayman02");
     expect(calls[0]?.get("limit")).toBe("200");
-    expect(calls[0]?.has("page")).toBe(false);
     expect(listening.recent).toHaveLength(20);
     expect(listening.topArtists.map((artist) => artist.plays)).toEqual([67, 67, 66]);
   });

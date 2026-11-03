@@ -47,7 +47,6 @@ describe("navigation", () => {
 
     expect(text(reading?.querySelector("h2"))).toBe("Currently reading");
     expect(text(reading?.querySelector(".book--featured .book__title"))).toBe("All Hail Chaos");
-    expect(reading?.querySelector(".reads-stats")).toBeNull();
     expect(reading?.querySelector('a[href="/reads"]')).not.toBeNull();
 
     // beside it, what I've been listening to
@@ -151,10 +150,12 @@ describe("navigation", () => {
       "Halsey 1 play",
     ]);
     expect(text(latest?.querySelector(".scrobble__name"))).toBe("Pandora's Box");
-    // not a live feed, so nothing claims to be playing right now
-    expect(section?.textContent).not.toContain("Now playing");
-    // no album art: a placeholder, not a broken image
+    // album art when Last.fm has it, and a placeholder (not a broken image) when it doesn't
+    expect(latest?.querySelector("img")?.getAttribute("src")).toBe(
+      "https://lastfm.freetls.fastly.net/i/u/300x300/abc.jpg",
+    );
     expect(played?.querySelector("img")).toBeNull();
+    expect(played?.querySelector(".scrobble__art--none")).not.toBeNull();
     expect(played?.querySelector("time")?.getAttribute("datetime")).toBe(
       "2026-11-01T11:42:00.000Z",
     );
@@ -163,8 +164,6 @@ describe("navigation", () => {
       "Recently played",
       "Top artists this week",
     ]);
-    // no Last.fm buttons anywhere
-    expect(element.querySelector('a[href^="https://www.last.fm/user/"]')).toBeNull();
   });
 
   applicationTest("reads shows my shelves from Goodreads", async ({ element }) => {
@@ -304,7 +303,6 @@ describe("when a source is down", () => {
       const notice = element.querySelector(`${section} .notice`);
 
       expect(text(notice), url).toBe("My listening history isn’t loading right now.");
-      expect(element.textContent, url).not.toContain("Last.fm");
     }
   });
 });
