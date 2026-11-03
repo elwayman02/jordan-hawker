@@ -64,6 +64,8 @@ If the doc's structure stops looking like a resume, the page falls back to rende
 
 From those it builds recent reads, five-star favorites, most-read authors and series, and owned-unread books that continue a series or author I've started. Neither page is an official API, so a change on Goodreads' side serves the last good snapshot until the parser is updated.
 
+**Canceled authors** (`CANCELED_AUTHORS` in `server/config.ts`) are authors I've read but won't associate with. None of their books appear anywhere on the site: not in any shelf, favorite or most-read list. Each is matched by Goodreads author id or name, plus any pen names, and co-written titles that Goodreads lists under someone else (the widget only names a book's first author). Goodreads' own totals (books read, average rating) still count them.
+
 ### Voter guides
 
 `/votes` lists every Google Doc in the [voter guides folder](https://drive.google.com/drive/folders/1_qrgSdnRQvNQiBBbox1XA-_8BEsCcIfi) (`VOTES_FOLDER_ID` in `server/config.ts`). No API key is needed, but each doc must be viewable by anyone with the link (docs added to the folder inherit its sharing).

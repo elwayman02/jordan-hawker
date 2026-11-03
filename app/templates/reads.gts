@@ -1,9 +1,9 @@
 import { eq } from "@ember/helper";
 
 import Await from "#components/await.gts";
-import Icon from "#components/icon.gts";
 import PageHeader from "#components/page-header.gts";
 import BookCard from "#components/reads/book-card.gts";
+import ReadingNow from "#components/reads/reading-now.gts";
 import ReadsGroups from "#components/reads/reads-groups.gts";
 import SectionHeading from "#components/section-heading.gts";
 import pageTitle from "#app/helpers/page-title.ts";
@@ -19,56 +19,19 @@ const plural = (count: number, word: string) => `${count} ${word}${count === 1 ?
 
   <div class="wrap page">
     <PageHeader @section="reads">
-      <p>
-        What I’m reading, the books I’ve loved, and what’s already waiting on my shelf. Straight
-        from Goodreads, where I track everything I read.
-      </p>
-      <div class="hero__actions">
-        <a
-          class="button primary"
-          href={{site.goodreadsUrl}}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Icon @name="goodreads" />
-          Goodreads
-        </a>
-      </div>
+      <p>What I’m reading, the books I’ve loved, and what’s waiting to be read.</p>
     </PageHeader>
 
     <Await @remote={{api "reads"}} @skeletonHeight="40rem">
       <:default as |reads|>
-        <dl class="reads-stats">
-          <div>
-            <dt>Books read</dt>
-            <dd>{{reads.stats.read}}</dd>
-          </div>
-          <div>
-            <dt>Average rating</dt>
-            <dd>{{reads.stats.averageRating}}<Icon @name="star" class="reads-stats__star" /></dd>
-          </div>
-          {{#if reads.stats.genres.length}}
-            <div class="reads-stats__genres">
-              <dt>Favorite genres</dt>
-              <dd>
-                {{#each reads.stats.genres as |genre|}}
-                  <span class="chip">{{genre}}</span>
-                {{/each}}
-              </dd>
-            </div>
-          {{/if}}
-        </dl>
-
-        {{#if reads.current.length}}
-          <section class="section" aria-labelledby="reads-current">
-            <SectionHeading @eyebrow="now" @title="Currently reading" @id="reads-current" />
-            <div class="book-row">
-              {{#each reads.current as |book|}}
-                <BookCard @book={{book}} @featured={{true}} />
-              {{/each}}
-            </div>
-          </section>
-        {{/if}}
+        <section class="section" aria-labelledby="reads-current">
+          <SectionHeading
+            @eyebrow="now"
+            @title={{if reads.current.length "Currently reading" "My reading"}}
+            @id="reads-current"
+          />
+          <ReadingNow @current={{reads.current}} @stats={{reads.stats}} />
+        </section>
 
         <section class="section" aria-labelledby="reads-recent">
           <SectionHeading @eyebrow="lately" @title="Recently read" @id="reads-recent" />

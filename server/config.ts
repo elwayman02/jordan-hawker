@@ -37,6 +37,29 @@ export const HELLA_DRUNK_FEED = "https://www.helladrunk.com/rss.xml";
  */
 export const GOODREADS_USER_ID = "21718161";
 
+export interface CanceledAuthor {
+  name: string;
+  /** their Goodreads author id (goodreads.com/author/show/<id>) */
+  goodreadsId?: string;
+  /** pen names they also publish under */
+  aliases?: string[];
+  /**
+   * Titles they co-wrote that Goodreads lists under someone else (the widget only names the
+   * first author). Matched against the start of the title.
+   */
+  coauthored?: string[];
+}
+
+/**
+ * Authors I've read but won't associate with: none of their books appear anywhere on the
+ * site (shelves, favorites, most-read lists), though they still count in Goodreads' totals.
+ */
+export const CANCELED_AUTHORS: CanceledAuthor[] = [
+  { name: "J.K. Rowling", goodreadsId: "1077326", aliases: ["Robert Galbraith"] },
+  { name: "Neil Gaiman", goodreadsId: "1221698", coauthored: ["Good Omens"] },
+  { name: "Orson Scott Card", goodreadsId: "589" },
+];
+
 export const USER_AGENT = "jordanhawker.com (+https://github.com/elwayman02/jordan-hawker)";
 
 export function env(name: string): string | undefined {

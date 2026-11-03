@@ -42,7 +42,7 @@ export const SECTIONS = [
     name: "reads",
     label: "Reads",
     icon: "bookOpen",
-    blurb: "way too much fantasy",
+    blurb: "voraciously",
     description: "What I'm reading, my favorite books, and what's next on my shelf.",
   },
   {

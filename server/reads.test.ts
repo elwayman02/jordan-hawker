@@ -5,6 +5,7 @@ import {
   buildReads,
   favorites,
   fetchShelf,
+  isCanceled,
   parseProfile,
   parseShelf,
   splitSeries,
@@ -77,7 +78,13 @@ describe("splitSeries", () => {
     ["All Hail Chaos (Time of Iron, #2)", "All Hail Chaos", { name: "Time of Iron", number: "2" }],
     ["The Churn (The Expanse, #3.5)", "The Churn", { name: "The Expanse", number: "3.5" }],
     ["Omnibus (Saga #1-3)", "Omnibus", { name: "Saga", number: "1-3" }],
+    [
+      "Earth Afire (The First Formic War, 2)",
+      "Earth Afire",
+      { name: "The First Formic War", number: "2" },
+    ],
     ["Project Hail Mary", "Project Hail Mary", undefined],
+    ["1984 (Penguin Classics)", "1984 (Penguin Classics)", undefined],
     ["Kitchen Confidential (Updated Edition)", "Kitchen Confidential (Updated Edition)", undefined],
   ])("%s", (full, title, series) => {
     expect(splitSeries(full)).toEqual(series ? { title, series } : { title });
@@ -219,6 +226,70 @@ describe("parseProfile", () => {
       averageRating: 4.37,
       genres: ["Fantasy", "Science fiction"],
     });
+  });
+});
+
+describe("canceled authors", () => {
+  const canceled = [
+    { name: "J.K. Rowling", goodreadsId: "1077326", aliases: ["Robert Galbraith"] },
+    { name: "Neil Gaiman", coauthored: ["Good Omens"] },
+  ];
+
+  test.each([
+    ["by Goodreads author id", book({ id: "hp", author: { id: "1077326", name: "Someone Else" } })],
+    [
+      "by name, however it's punctuated",
+      book({ id: "hp", author: { id: "x", name: "J. K. Rowling" } }),
+    ],
+    ["under a pen name", book({ id: "cs", author: { id: "y", name: "Robert Galbraith" } })],
+    [
+      "as a co-author listed under someone else",
+      book({
+        id: "go",
+        title: "Good Omens: The Nice and Accurate Prophecies",
+        author: { id: "1654", name: "Terry Pratchett" },
+      }),
+    ],
+  ])("are caught %s", (_, match) => {
+    expect(isCanceled(match, canceled)).toBe(true);
+  });
+
+  test("leave everyone else alone", () => {
+    expect(
+      isCanceled(
+        book({
+          id: "dw",
+          title: "Guards! Guards!",
+          author: { id: "1654", name: "Terry Pratchett" },
+        }),
+        canceled,
+      ),
+    ).toBe(false);
+  });
+
+  test("never appear in any list", () => {
+    const rowling = { id: "1077326", name: "J.K. Rowling" };
+    const hp = (n: string) =>
+      book({
+        id: `hp${n}`,
+        series: { name: "Harry Potter", number: n },
+        author: rowling,
+        rating: 5,
+      });
+    const reads = buildReads(
+      {
+        current: [hp("8")],
+        read: [hp("1"), hp("2"), book({ id: "ok", rating: 5 })],
+        owned: [hp("9")],
+      },
+      undefined,
+      canceled,
+    );
+    const everything = JSON.stringify(reads);
+
+    expect(everything).not.toContain("Rowling");
+    expect(everything).not.toContain("Harry Potter");
+    expect(reads.recent.map((b) => b.id)).toEqual(["ok"]);
   });
 });
 

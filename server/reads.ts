@@ -1,7 +1,7 @@
 import { parse, type HTMLElement } from "node-html-parser";
 
 import type { Book, Reads, ReadsGroup } from "../shared/api.ts";
-import { GOODREADS_USER_ID } from "./config.ts";
+import { CANCELED_AUTHORS, type CanceledAuthor, GOODREADS_USER_ID } from "./config.ts";
 import { fetchText } from "./fetch.ts";
 
 const GOODREADS = "https://www.goodreads.com";
@@ -38,9 +38,9 @@ const part = (element: HTMLElement, name: string) =>
 
 const clean = (text: string) => text.replace(/\s+/g, " ").trim();
 
-/** "All Hail Chaos (Time of Iron, #2)" → title and series */
+/** "All Hail Chaos (Time of Iron, #2)" (or "(Time of Iron, 2)") → title and series */
 export function splitSeries(full: string): Pick<Book, "title" | "series"> {
-  const match = /^(.*\S)\s*\(([^()]+?),?\s+#([\d.]+(?:-[\d.]+)?)\)$/.exec(full);
+  const match = /^(.*\S)\s*\(([^()]+?)(?:,\s*#?|\s+#)([\d.]+(?:-[\d.]+)?)\)$/.exec(full);
 
   if (!match) return { title: full };
 
@@ -181,6 +181,21 @@ export function parseProfile(html: string): Profile {
 
 /* ------------------------------- the page data ------------------------------- */
 
+/** "J. K. Rowling" and "J.K. Rowling" alike */
+const normalize = (text: string) => text.toLowerCase().replace(/[^a-z0-9]/g, "");
+
+/** Whether a book is by (or co-written by) one of `authors` */
+export function isCanceled(book: Book, authors: CanceledAuthor[] = CANCELED_AUTHORS): boolean {
+  const title = normalize(book.title);
+
+  return authors.some(
+    ({ name, goodreadsId, aliases = [], coauthored = [] }) =>
+      (goodreadsId !== undefined && book.author.id === goodreadsId) ||
+      [name, ...aliases].some((alias) => normalize(alias) === normalize(book.author.name)) ||
+      coauthored.some((work) => title.startsWith(normalize(work))),
+  );
+}
+
 type Key = (book: Book) => string | undefined;
 
 const bySeries: Key = (book) => book.series?.name;
@@ -270,9 +285,12 @@ export function favorites(read: Book[]): Book[] {
 }
 
 export function buildReads(
-  { current, read, owned }: { current: Book[]; read: Book[]; owned: Book[] },
+  shelves: { current: Book[]; read: Book[]; owned: Book[] },
   profile: Profile | undefined,
+  canceled: CanceledAuthor[] = CANCELED_AUTHORS,
 ): Reads {
+  const keep = (books: Book[]) => books.filter((book) => !isCanceled(book, canceled));
+  const [current, read, owned] = [keep(shelves.current), keep(shelves.read), keep(shelves.owned)];
   const rated = read.filter((book) => book.rating > 0);
   const average = rated.reduce((sum, book) => sum + book.rating, 0) / (rated.length || 1);
 

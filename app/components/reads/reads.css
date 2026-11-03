@@ -5,17 +5,63 @@
     font-size: var(--step--1);
   }
 
-  /* ------------------------------- stats ------------------------------- */
+  /* ---------------------- currently reading + stats ---------------------- */
+
+  /* The book on the left, the stats card on the right; stacked on narrow screens */
+  .reading-now {
+    display: grid;
+    gap: var(--space-l);
+    align-items: start;
+
+    @media (width >= 48rem) {
+      grid-template-columns: minmax(0, 1.4fr) minmax(16rem, 1fr);
+    }
+  }
+
+  .reading-now--between-books {
+    grid-template-columns: minmax(0, 32rem);
+  }
+
+  .current-reads--carousel {
+    display: grid;
+    gap: var(--space-s);
+    min-width: 0;
+  }
+
+  .current-reads__track {
+    display: grid;
+    grid-auto-columns: 100%;
+    grid-auto-flow: column;
+    gap: var(--space-m);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+
+    & > li {
+      scroll-snap-align: start;
+    }
+  }
+
+  .current-reads__controls {
+    display: flex;
+    gap: var(--space-2xs);
+  }
 
   .reads-stats {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-s) var(--space-xl);
-    margin-bottom: var(--space-xl);
+    display: grid;
+    gap: var(--space-m);
+    justify-items: start;
     padding: var(--space-m);
     border: 1px solid var(--line);
     border-radius: var(--radius-m);
     background: var(--surface);
+  }
+
+  .reads-stats__numbers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-s) var(--space-l);
 
     & dt {
       font-family: var(--font-mono);
@@ -46,6 +92,10 @@
     }
   }
 
+  .reads-stats__genres {
+    flex-basis: 100%;
+  }
+
   .reads-stats__genres dd {
     margin-top: var(--space-2xs);
     font-family: var(--font-body);
@@ -62,11 +112,6 @@
 
   .book-grid--compact {
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 7.5rem), 1fr));
-  }
-
-  .book-row {
-    display: grid;
-    gap: var(--space-m);
   }
 
   .book {
