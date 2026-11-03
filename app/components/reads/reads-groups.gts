@@ -29,10 +29,11 @@ const ReadsGroups: TOC<ReadsGroupsSignature> = <template>
             {{/if}}
           </span>
           <span class="reads-groups__counts">
-            {{plural group.read "book"}}
+            {{! the badge goes first, so the book counts line up down the list }}
             {{#if group.owned.length}}
               <span class="chip reads-owned">{{group.owned.length}} on my shelf</span>
             {{/if}}
+            {{plural group.read "book"}}
           </span>
         </li>
       {{/each}}

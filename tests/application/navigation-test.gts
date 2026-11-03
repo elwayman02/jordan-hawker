@@ -148,7 +148,7 @@ describe("navigation", () => {
     // most-read entries mark books I own but haven't read
     const [dresden, redwall] = element.querySelectorAll(".reads-groups:last-child li");
 
-    expect(text(dresden)).toBe("The Dresden Files 21 books 1 on my shelf");
+    expect(text(dresden)).toBe("The Dresden Files 1 on my shelf 21 books");
     // authors link to Goodreads; series can't (the widget doesn't give their ids)
     expect(dresden?.querySelector("a")).toBeNull();
     expect(element.querySelector(".reads-groups:first-child li a")?.getAttribute("href")).toBe(
