@@ -283,15 +283,18 @@ export const listening: Listening = {
       album: "Collide",
       url: "https://www.last.fm/music/Beats+Antique/_/Pandora%27s+Box",
       image: "https://lastfm.freetls.fastly.net/i/u/300x300/abc.jpg",
-      nowPlaying: true,
+      playedAt: "2026-11-01T12:28:00.000Z",
     },
     {
       name: "Left Alone (feat. Chet Faker)",
       artist: "Flume",
       url: "https://www.last.fm/music/Flume/_/Left+Alone",
       playedAt: "2026-11-01T11:42:00.000Z",
-      nowPlaying: false,
     },
+  ],
+  topArtists: [
+    { name: "T-Pain", url: "https://www.last.fm/music/T-Pain", plays: 42 },
+    { name: "Halsey", url: "https://www.last.fm/music/Halsey", plays: 1 },
   ],
 };
 

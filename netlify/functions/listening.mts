@@ -3,7 +3,7 @@ import type { Config } from "@netlify/functions";
 import { getListening } from "../../server/listening.ts";
 import { HOUR, respond } from "../../server/respond.ts";
 
-// What I'm listening to changes by the minute; a quarter hour keeps it current enough
-export default () => respond("listening", getListening, { maxAge: HOUR / 4 });
+// Not a live feed: every few hours is plenty
+export default () => respond("listening", getListening, { maxAge: 3 * HOUR });
 
 export const config: Config = { path: "/api/listening" };

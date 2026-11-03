@@ -1,17 +1,18 @@
-import type { ListenedTrack, Listening } from "../shared/api.ts";
+import type { ListenedArtist, ListenedTrack, Listening } from "../shared/api.ts";
 import { env, LASTFM_USER } from "./config.ts";
 import { fetchJson } from "./fetch.ts";
 
 const API = "https://ws.audioscrobbler.com/2.0/";
 
-/** Songs shown, after repeats are removed */
+/** Songs in "recently played", after repeats are removed */
 const RECENT = 20;
+const TOP_ARTISTS = 10;
 
 /**
- * Scrobbles fetched to find them: Last.fm's maximum per request. My history has runs of the
- * same song logged 20–40 times in a row (a scrobbling bug), so this leaves plenty of room.
+ * Plays fetched: Last.fm's maximum per request. Enough to find 20 different songs despite
+ * the repeat bug, and roughly a week of listening for top artists.
  */
-const SCROBBLES = 200;
+const PLAYS = 200;
 
 interface LastfmImage {
   "#text": string;
@@ -51,49 +52,94 @@ function cover(images: LastfmImage[] = []): string | undefined {
   return best?.["#text"];
 }
 
-export function parseRecentTracks(response: RecentTracksResponse, limit = RECENT): ListenedTrack[] {
-  return list(response.recenttracks.track)
-    .map((track): ListenedTrack => {
-      const album = track.album?.["#text"];
-      const image = cover(track.image);
-      const nowPlaying = track["@attr"]?.nowplaying === "true";
+/**
+ * Plays, most recent first. A track that's playing right now is left out: the data is
+ * cached for hours, far longer than a song plays, so it shows up once it's scrobbled.
+ */
+export function parsePlays(response: RecentTracksResponse): ListenedTrack[] {
+  return list(response.recenttracks.track).flatMap((track): ListenedTrack[] => {
+    if (track["@attr"]?.nowplaying === "true" || !track.date) return [];
 
-      return {
+    const album = track.album?.["#text"];
+    const image = cover(track.image);
+
+    return [
+      {
         name: track.name,
         artist: track.artist["#text"],
         ...(album && { album }),
         url: track.url,
         ...(image && { image }),
-        ...(!nowPlaying &&
-          track.date && {
-            playedAt: new Date(Number(track.date.uts) * 1000).toISOString(),
-          }),
-        nowPlaying,
-      };
+        playedAt: new Date(Number(track.date.uts) * 1000).toISOString(),
+      },
+    ];
+  });
+}
+
+const normalize = (text: string) => text.toLowerCase().replace(/\s+/g, " ").trim();
+const songKey = (play: ListenedTrack) => `${normalize(play.artist)}\u0000${normalize(play.name)}`;
+
+/**
+ * Recently played: each song once, at its most recent play. My Last.fm history logs some
+ * songs dozens of times in a row that I only played once.
+ */
+export function recentSongs(plays: ListenedTrack[], limit = RECENT): ListenedTrack[] {
+  const seen = new Set<string>();
+
+  return plays
+    .filter((play) => {
+      const key = songKey(play);
+
+      if (seen.has(key)) return false;
+      seen.add(key);
+
+      return true;
     })
-    .filter(firstPlay())
     .slice(0, limit);
 }
 
 /**
- * Keeps each song once, at its most recent play (or while it's playing): my Last.fm history
- * repeats some songs dozens of times that I only played once.
+ * Most played artists across `plays`. A song logged several times in a row counts once
+ * (the repeat bug); playing it again later, after something else, counts again.
  */
-function firstPlay() {
-  const seen = new Set<string>();
+export function topArtists(plays: ListenedTrack[], limit = TOP_ARTISTS): ListenedArtist[] {
+  const artists = new Map<string, ListenedArtist & { lastPlayed: number }>();
+  let previous: string | undefined;
 
-  return (track: ListenedTrack) => {
-    const key = `${track.artist}\u0000${track.name}`.toLowerCase().replace(/\s+/g, " ").trim();
+  for (const play of plays) {
+    const key = songKey(play);
 
-    if (seen.has(key)) return false;
-    seen.add(key);
+    if (key === previous) continue;
+    previous = key;
 
-    return true;
-  };
+    const id = normalize(play.artist);
+    const artist = artists.get(id) ?? {
+      name: play.artist,
+      url: `https://www.last.fm/music/${encodeURIComponent(play.artist).replace(/%20/g, "+")}`,
+      plays: 0,
+      lastPlayed: Date.parse(play.playedAt),
+    };
+
+    artist.plays += 1;
+    artists.set(id, artist);
+  }
+
+  return [...artists.values()]
+    .sort((a, b) => b.plays - a.plays || b.lastPlayed - a.lastPlayed)
+    .slice(0, limit)
+    .map(({ name, url, plays: count }) => ({ name, url, plays: count }));
 }
 
-function apiUrl(method: string, params: Record<string, string>, key: string): string {
-  return `${API}?${new URLSearchParams({ method, user: LASTFM_USER, api_key: key, format: "json", ...params })}`;
+function apiUrl(key: string): string {
+  const params = new URLSearchParams({
+    method: "user.getrecenttracks",
+    user: LASTFM_USER,
+    api_key: key,
+    format: "json",
+    limit: String(PLAYS),
+  });
+
+  return `${API}?${params}`;
 }
 
 export async function getListening(): Promise<Listening> {
@@ -101,10 +147,8 @@ export async function getListening(): Promise<Listening> {
 
   if (!key) throw new Error("LASTFM_API_KEY is not set");
 
-  // Last.fm's error replies are JSON too ({ error, message }), with an error status
-  const recent = await fetchJson<RecentTracksResponse>(
-    apiUrl("user.getrecenttracks", { limit: String(SCROBBLES) }, key),
-  );
+  // Last.fm's error replies come with an error status, so a failure throws
+  const plays = parsePlays(await fetchJson<RecentTracksResponse>(apiUrl(key)));
 
-  return { recent: parseRecentTracks(recent) };
+  return { recent: recentSongs(plays), topArtists: topArtists(plays) };
 }

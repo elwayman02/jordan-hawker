@@ -132,18 +132,21 @@ describe("navigation", () => {
     await visit("/sound");
 
     const section = element.querySelector("[aria-labelledby=listening]");
-    const [playing, played] = section?.querySelectorAll(".scrobble") ?? [];
+    const [latest, played] = section?.querySelectorAll(".scrobble") ?? [];
 
     expect(text(section?.querySelector("h2"))).toBe("What I’m listening to");
-    expect(text(playing?.querySelector(".scrobble__name"))).toBe("Pandora's Box");
-    expect(text(playing?.querySelector(".scrobble__now"))).toBe("Now playing");
+    expect([...(section?.querySelectorAll(".top-artists__item") ?? [])].map(text)).toEqual([
+      "T-Pain 42 plays",
+      "Halsey 1 play",
+    ]);
+    expect(text(latest?.querySelector(".scrobble__name"))).toBe("Pandora's Box");
+    // not a live feed, so nothing claims to be playing right now
+    expect(section?.textContent).not.toContain("Now playing");
     // no album art: a placeholder, not a broken image
     expect(played?.querySelector("img")).toBeNull();
     expect(played?.querySelector("time")?.getAttribute("datetime")).toBe(
       "2026-11-01T11:42:00.000Z",
     );
-    // the top artists list is gone: Last.fm's play counts aren't reliable for me
-    expect(section?.querySelector(".top-artists")).toBeNull();
     expect(
       section?.querySelector('a.button[href="https://www.last.fm/user/elwayman02"]'),
     ).not.toBeNull();

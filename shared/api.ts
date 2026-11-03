@@ -253,12 +253,20 @@ export interface ListenedTrack {
   url: string;
   /** album art, when Last.fm has it */
   image?: string;
-  /** when I played it; absent while it's playing */
-  playedAt?: string;
-  nowPlaying: boolean;
+  playedAt: string;
+}
+
+export interface ListenedArtist {
+  name: string;
+  /** the artist on Last.fm */
+  url: string;
+  /** among my last 200 plays, with back-to-back repeats of a song counted once */
+  plays: number;
 }
 
 export interface Listening {
-  /** most recent first, each song once; a track playing right now comes first */
+  /** most recent first, each song once */
   recent: ListenedTrack[];
+  /** most played among my last 200 plays: roughly a week */
+  topArtists: ListenedArtist[];
 }

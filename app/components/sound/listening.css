@@ -1,18 +1,70 @@
 @layer components {
   .listening {
     display: grid;
-    gap: var(--space-m);
+    gap: var(--space-s);
     justify-items: start;
   }
 
-  /* ---------------------------- recently played ---------------------------- */
+  .listening__label {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    font-weight: 400;
+    color: var(--muted);
 
-  /* Two columns on wide screens, read down then across, so it stays newest first */
+    &:not(:first-child) {
+      margin-top: var(--space-l);
+    }
+  }
+
+  /* Lists run in two columns on wide screens, read down then across, so order holds */
+  .top-artists,
   .scrobbles {
     width: 100%;
     columns: 2 22rem;
     column-gap: var(--space-xl);
   }
+
+  /* ------------------------------ top artists ------------------------------ */
+
+  .top-artists {
+    counter-reset: artists;
+  }
+
+  .top-artists__item {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-s);
+    padding-block: var(--space-2xs);
+    border-bottom: 1px solid var(--line);
+    break-inside: avoid;
+    counter-increment: artists;
+
+    &::before {
+      content: counter(artists);
+      min-width: 1.5rem;
+      font-family: var(--font-mono);
+      font-size: var(--step--1);
+      color: var(--muted);
+    }
+
+    & a {
+      flex: 1;
+      font-weight: 550;
+      text-decoration: none;
+
+      &:hover {
+        color: var(--accent-strong);
+      }
+    }
+  }
+
+  .top-artists__plays {
+    color: var(--muted);
+    font-size: var(--step--1);
+    white-space: nowrap;
+  }
+
+  /* ---------------------------- recently played ---------------------------- */
 
   .scrobble {
     display: grid;
@@ -73,51 +125,5 @@
     color: var(--muted);
     font-size: 0.8rem;
     white-space: nowrap;
-  }
-
-  .scrobble__now {
-    background: var(--accent-soft);
-    color: var(--accent-strong);
-    white-space: nowrap;
-  }
-
-  /* three bars bouncing like an equalizer while a track plays */
-  .scrobble__bars {
-    display: inline-flex;
-    align-items: flex-end;
-    gap: 2px;
-    height: 0.75em;
-
-    & i {
-      width: 2px;
-      height: 100%;
-      background: currentColor;
-      animation: scrobble-bars 0.9s ease-in-out infinite alternate;
-      transform-origin: bottom;
-    }
-
-    & i:nth-child(2) {
-      animation-delay: -0.3s;
-    }
-
-    & i:nth-child(3) {
-      animation-delay: -0.6s;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      & i {
-        animation: none;
-      }
-    }
-  }
-
-  @keyframes scrobble-bars {
-    from {
-      transform: scaleY(0.3);
-    }
-
-    to {
-      transform: scaleY(1);
-    }
   }
 }

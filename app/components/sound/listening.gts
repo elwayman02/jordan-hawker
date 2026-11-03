@@ -11,12 +11,27 @@ interface ListeningSignature {
   Args: { listening: Listening };
 }
 
+const plays = (count: number) => `${count} ${count === 1 ? "play" : "plays"}`;
+
 /** What I've been listening to lately, from Last.fm */
 const ListeningNow: TOC<ListeningSignature> = <template>
   <div class="listening">
+    {{#if @listening.topArtists.length}}
+      <h3 class="listening__label">Top artists this week</h3>
+      <ol role="list" class="top-artists">
+        {{#each @listening.topArtists as |artist|}}
+          <li class="top-artists__item">
+            <a href={{artist.url}} target="_blank" rel="noopener noreferrer">{{artist.name}}</a>
+            <span class="top-artists__plays">{{plays artist.plays}}</span>
+          </li>
+        {{/each}}
+      </ol>
+    {{/if}}
+
+    <h3 class="listening__label">Recently played</h3>
     <ol role="list" class="scrobbles">
       {{#each @listening.recent as |track|}}
-        <li class="scrobble {{if track.nowPlaying 'scrobble--now'}}">
+        <li class="scrobble">
           {{#if track.image}}
             <img
               class="scrobble__art"
@@ -35,16 +50,9 @@ const ListeningNow: TOC<ListeningSignature> = <template>
             </a>
             <span class="scrobble__artist">{{track.artist}}</span>
           </span>
-          {{#if track.nowPlaying}}
-            <span class="chip scrobble__now">
-              <span class="scrobble__bars" aria-hidden="true"><i></i><i></i><i></i></span>
-              Now playing
-            </span>
-          {{else if track.playedAt}}
-            <time class="scrobble__when" datetime={{isoDate track.playedAt}}>
-              {{timeAgo track.playedAt}}
-            </time>
-          {{/if}}
+          <time class="scrobble__when" datetime={{isoDate track.playedAt}}>
+            {{timeAgo track.playedAt}}
+          </time>
         </li>
       {{else}}
         <li class="notice">Nothing played lately.</li>

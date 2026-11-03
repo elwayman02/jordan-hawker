@@ -1,6 +1,16 @@
 import { afterEach, describe, expect, test, vi } from "vitest";
 
-import { getListening, parseRecentTracks, type RecentTracksResponse } from "./listening.ts";
+import type { ListenedTrack } from "../shared/api.ts";
+import {
+  getListening,
+  parsePlays,
+  recentSongs,
+  topArtists,
+  type RecentTracksResponse,
+} from "./listening.ts";
+
+const NOW = Date.parse("2026-11-03T12:00:00Z");
+const HOUR = 60 * 60 * 1000;
 
 const art = (hash: string) =>
   (["small", "medium", "large", "extralarge"] as const).map((size) => ({
@@ -8,109 +18,130 @@ const art = (hash: string) =>
     "#text": `https://lastfm.freetls.fastly.net/i/u/${size === "extralarge" ? "300x300" : "64s"}/${hash}.jpg`,
   }));
 
-// shaped like Last.fm's user.getrecenttracks JSON
-const recent: RecentTracksResponse = {
-  recenttracks: {
-    track: [
-      {
-        name: "Pandora's Box",
-        url: "https://www.last.fm/music/Beats+Antique/_/Pandora%27s+Box",
-        artist: { "#text": "Beats Antique" },
-        album: { "#text": "Collide" },
-        image: art("abc"),
-        "@attr": { nowplaying: "true" },
-      },
-      {
-        name: "Left Alone (feat. Chet Faker)",
-        url: "https://www.last.fm/music/Flume/_/Left+Alone",
-        artist: { "#text": "Flume" },
-        album: { "#text": "" },
-        // Last.fm's placeholder when there's no art
-        image: art("2a96cbd8b46e442fc41c2b86b821562f"),
-        date: { uts: "1761997320" },
-      },
-    ],
-  },
-};
+/** A scrobble shaped like Last.fm's, played `hoursAgo` before NOW */
+const scrobble = (name: string, artist: string, hoursAgo: number) => ({
+  name,
+  url: `https://www.last.fm/music/${artist}/_/${name}`,
+  artist: { "#text": artist },
+  date: { uts: String((NOW - hoursAgo * HOUR) / 1000) },
+});
 
-describe("parseRecentTracks", () => {
-  test("marks what's playing now, and takes the largest real album art", () => {
-    expect(parseRecentTracks(recent)).toEqual([
+/** A play as the parser returns it */
+const play = (name: string, artist: string, hoursAgo: number): ListenedTrack => ({
+  name,
+  artist,
+  url: `https://www.last.fm/music/${artist}/_/${name}`,
+  playedAt: new Date(NOW - hoursAgo * HOUR).toISOString(),
+});
+
+describe("parsePlays", () => {
+  const response: RecentTracksResponse = {
+    recenttracks: {
+      track: [
+        {
+          ...scrobble("Pandora's Box", "Beats Antique", 0),
+          date: undefined,
+          "@attr": { nowplaying: "true" },
+        },
+        {
+          ...scrobble("Collide", "Beats Antique", 1),
+          album: { "#text": "Collide" },
+          image: art("abc"),
+        },
+        // Last.fm's placeholder when there's no art
+        {
+          ...scrobble("Left Alone", "Flume", 2),
+          album: { "#text": "" },
+          image: art("2a96cbd8b46e442fc41c2b86b821562f"),
+        },
+      ],
+    },
+  };
+
+  test("leaves out what's playing now, and takes the largest real album art", () => {
+    expect(parsePlays(response)).toEqual([
       {
-        name: "Pandora's Box",
+        name: "Collide",
         artist: "Beats Antique",
         album: "Collide",
-        url: "https://www.last.fm/music/Beats+Antique/_/Pandora%27s+Box",
+        url: "https://www.last.fm/music/Beats Antique/_/Collide",
         image: "https://lastfm.freetls.fastly.net/i/u/300x300/abc.jpg",
-        nowPlaying: true,
+        playedAt: "2026-11-03T11:00:00.000Z",
       },
       {
-        name: "Left Alone (feat. Chet Faker)",
+        name: "Left Alone",
         artist: "Flume",
-        url: "https://www.last.fm/music/Flume/_/Left+Alone",
-        playedAt: "2025-11-01T11:42:00.000Z",
-        nowPlaying: false,
+        url: "https://www.last.fm/music/Flume/_/Left Alone",
+        playedAt: "2026-11-03T10:00:00.000Z",
       },
     ]);
   });
 
   test("handles a single track (an object, not a list) and none at all", () => {
-    const [first] = (recent.recenttracks.track as never[]) ?? [];
-
-    expect(parseRecentTracks({ recenttracks: { track: first } })).toHaveLength(1);
-    expect(parseRecentTracks({ recenttracks: {} })).toEqual([]);
-  });
-
-  test("keeps to the limit, even with a track playing on top of it", () => {
-    expect(parseRecentTracks(recent, 1).map((track) => track.name)).toEqual(["Pandora's Box"]);
+    expect(parsePlays({ recenttracks: { track: scrobble("Rest", "Bruno Mars", 1) } })).toHaveLength(
+      1,
+    );
+    expect(parsePlays({ recenttracks: {} })).toEqual([]);
   });
 });
 
-describe("repeats", () => {
-  const play = (name: string, artist: string, minute: number) => ({
-    name,
-    url: `https://www.last.fm/music/${artist}/_/${name}`,
-    artist: { "#text": artist },
-    date: { uts: String(1761997320 - minute * 60) },
-  });
-
+describe("recentSongs", () => {
   test("each song shows once, at its most recent play", () => {
-    const tracks = parseRecentTracks({
-      recenttracks: {
-        track: [
-          { ...play("Rest", "Bruno Mars", 0), date: undefined, "@attr": { nowplaying: "true" } },
-          // the scrobbling bug: one play logged over and over
-          ...Array.from({ length: 30 }, (_, n) => play("Rest", "Bruno Mars", n + 1)),
-          play("Dodo", "Emancipator", 40),
-          play("rest ", "bruno  mars", 50),
-          play("Rest", "Someone Else", 60),
-          play("Dodo", "Emancipator", 70),
-        ],
-      },
-    });
+    const plays = [
+      // the scrobbling bug: one play logged over and over
+      ...Array.from({ length: 30 }, (_, n) => play("Rest", "Bruno Mars", n / 60)),
+      play("Dodo", "Emancipator", 1),
+      play("rest ", "bruno  mars", 2),
+      play("Rest", "Someone Else", 3),
+    ];
 
-    expect(tracks.map((track) => [track.name, track.artist, track.nowPlaying])).toEqual([
-      ["Rest", "Bruno Mars", true],
-      ["Dodo", "Emancipator", false],
+    expect(recentSongs(plays).map((song) => [song.name, song.artist])).toEqual([
+      ["Rest", "Bruno Mars"],
+      ["Dodo", "Emancipator"],
       // same title, different artist: a different song
-      ["Rest", "Someone Else", false],
+      ["Rest", "Someone Else"],
     ]);
   });
 
   test("counts the limit after repeats are removed", () => {
-    const tracks = parseRecentTracks(
-      {
-        recenttracks: {
-          track: [
-            ...Array.from({ length: 40 }, (_, n) => play("Rest", "Bruno Mars", n)),
-            ...Array.from({ length: 5 }, (_, n) => play(`Song ${n}`, "Lido", 50 + n)),
-          ],
-        },
-      },
-      3,
-    );
+    const plays = [
+      ...Array.from({ length: 40 }, (_, n) => play("Rest", "Bruno Mars", n / 60)),
+      ...Array.from({ length: 5 }, (_, n) => play(`Song ${n}`, "Lido", 1 + n)),
+    ];
 
-    expect(tracks.map((track) => track.name)).toEqual(["Rest", "Song 0", "Song 1"]);
+    expect(recentSongs(plays, 3).map((song) => song.name)).toEqual(["Rest", "Song 0", "Song 1"]);
+  });
+});
+
+describe("topArtists", () => {
+  test("a song repeated back to back counts once; played again later, it counts again", () => {
+    const plays = [
+      ...Array.from({ length: 30 }, (_, n) => play("Rest", "Bruno Mars", n / 60)),
+      play("Dodo", "Emancipator", 1),
+      play("Rest", "Bruno Mars", 2),
+      play("Rest", "Bruno Mars", 2.01),
+    ];
+
+    expect(topArtists(plays)).toEqual([
+      { name: "Bruno Mars", url: "https://www.last.fm/music/Bruno+Mars", plays: 2 },
+      { name: "Emancipator", url: "https://www.last.fm/music/Emancipator", plays: 1 },
+    ]);
+  });
+
+  test("most played first, ties to the most recently played", () => {
+    const plays = [
+      play("A", "Lido", 1),
+      play("B", "Flume", 2),
+      play("C", "Flume", 3),
+      play("D", "Bonobo", 4),
+      play("E", "Lido", 5),
+    ];
+
+    expect(topArtists(plays).map((artist) => [artist.name, artist.plays])).toEqual([
+      ["Lido", 2],
+      ["Flume", 2],
+      ["Bonobo", 1],
+    ]);
   });
 });
 
@@ -120,20 +151,28 @@ describe("getListening", () => {
     vi.unstubAllEnvs();
   });
 
-  test("asks Last.fm for enough recent scrobbles to find 20 different songs", async () => {
+  test("makes one request for my last 200 plays, for both lists", async () => {
     vi.stubEnv("LASTFM_API_KEY", "secret");
+
+    const track = Array.from({ length: 200 }, (_, n) =>
+      scrobble(`Song ${n}`, `Artist ${n % 3}`, n + 1),
+    );
+
     vi.stubGlobal(
       "fetch",
-      vi.fn(() => Promise.resolve(new Response(JSON.stringify(recent)))),
+      vi.fn(() => Promise.resolve(new Response(JSON.stringify({ recenttracks: { track } })))),
     );
 
     const listening = await getListening();
-    const [url] = vi.mocked(fetch).mock.calls.map(([called]) => new URL(called as string));
+    const calls = vi.mocked(fetch).mock.calls.map(([url]) => new URL(url as string).searchParams);
 
-    expect(listening.recent).toHaveLength(2);
-    expect(url?.searchParams.get("method")).toBe("user.getrecenttracks");
-    expect(url?.searchParams.get("user")).toBe("elwayman02");
-    expect(url?.searchParams.get("limit")).toBe("200");
+    expect(calls).toHaveLength(1);
+    expect(calls[0]?.get("method")).toBe("user.getrecenttracks");
+    expect(calls[0]?.get("user")).toBe("elwayman02");
+    expect(calls[0]?.get("limit")).toBe("200");
+    expect(calls[0]?.has("page")).toBe(false);
+    expect(listening.recent).toHaveLength(20);
+    expect(listening.topArtists.map((artist) => artist.plays)).toEqual([67, 67, 66]);
   });
 
   test("fails without a key, so the last good snapshot is served", async () => {
