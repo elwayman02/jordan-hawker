@@ -26,6 +26,7 @@ export const site = {
   linkedinUrl: "https://www.linkedin.com/in/jordanhawker/",
   blueskyHandle,
   blueskyUrl: `https://bsky.app/profile/${blueskyHandle}`,
+  goodreadsUrl: "https://www.goodreads.com/axlehellfire",
 } as const;
 
 export const music = {
@@ -82,6 +83,12 @@ export const personalLinks: SocialLink[] = [
     handle: "axlehellfire",
     url: "https://www.facebook.com/axlehellfire",
     icon: "facebook",
+  },
+  {
+    label: "Goodreads",
+    handle: "axlehellfire",
+    url: site.goodreadsUrl,
+    icon: "goodreads",
   },
 ];
 

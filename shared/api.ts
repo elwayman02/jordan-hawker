@@ -189,3 +189,56 @@ export interface Votes {
   /** newest election first */
   guides: VoteGuide[];
 }
+
+/* ---------------------------------- reads ---------------------------------- */
+
+export interface Book {
+  /** my shelf entry for it on Goodreads: unique per book */
+  id: string;
+  /** the book's public page on Goodreads */
+  url: string;
+  title: string;
+  series?: { name: string; number?: string };
+  author: { id: string; name: string };
+  /** 200×300 cover */
+  cover?: string;
+  /** my stars, 1–5; 0 when unrated */
+  rating: number;
+  /** the start of my review, when I wrote one (full reviews need a Goodreads sign-in) */
+  review?: string;
+}
+
+/** An author or series, with how much of it I've read and own but haven't read yet */
+export interface ReadsGroup {
+  kind: "author" | "series";
+  name: string;
+  /** the author's id, or the series' name: unique per kind */
+  key: string;
+  /**
+   * The author's page on Goodreads. Series have none: the widget doesn't give their ids,
+   * and Goodreads' series pages need one.
+   */
+  url?: string;
+  read: number;
+  /** on my owned-unread shelf */
+  owned: Book[];
+}
+
+export interface Reads {
+  current: Book[];
+  /** most recently read first */
+  recent: Book[];
+  /** five-star reads, one per series or author, most recent first */
+  favorites: Book[];
+  mostRead: { authors: ReadsGroup[]; series: ReadsGroup[] };
+  /** series and authors I've started, with owned books still to read; most-read first */
+  upNext: ReadsGroup[];
+  stats: {
+    /** books on my read shelf */
+    read: number;
+    /** average of my ratings */
+    averageRating: number;
+    ratings: number;
+    genres: string[];
+  };
+}

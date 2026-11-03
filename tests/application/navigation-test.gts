@@ -42,6 +42,14 @@ describe("navigation", () => {
     expect(text(element.querySelector(".timeline"))).toContain("Staff Software Engineer");
     expect(text(element.querySelector(".project-card__name"))).toContain("ember-user-activity");
     expect(text(element.querySelector(".track__title"))).toContain("Panorama");
+
+    const reading = element.querySelector("[aria-labelledby=home-reads]");
+
+    expect(text(reading?.querySelector("h2"))).toBe("Currently reading");
+    expect(text(reading?.querySelector(".book--featured .book__title"))).toBe("All Hail Chaos");
+    expect(text(reading?.querySelector(".reads-stats"))).toContain("337");
+    expect(reading?.querySelector('a[href="/reads"]')).not.toBeNull();
+
     const [liked, quiet] = element.querySelectorAll(".skeet");
 
     expect(element.querySelectorAll(".skeet")).toHaveLength(2);
@@ -64,7 +72,7 @@ describe("navigation", () => {
     // /votes settles on the latest guide's own address
     const landing: Record<string, string> = { votes: "/votes/2026" };
 
-    for (const section of ["works", "codes", "sound", "words", "votes"]) {
+    for (const { name: section } of SECTIONS) {
       const url = landing[section] ?? `/${section}`;
 
       expect(
@@ -118,6 +126,49 @@ describe("navigation", () => {
     expect(currentURL()).toBe("/words/187541610821");
     expect(text(element.querySelector(".article h1"))).toBe("ember-sinon-qunit v4");
     expect(text(element.querySelector(".prose"))).toContain("read on");
+  });
+
+  applicationTest("reads shows my shelves from Goodreads", async ({ element }) => {
+    await visit("/reads");
+
+    expect(document.title).toBe("Reads · Jordan Hawker");
+    expect(text(element.querySelector(".reads-stats"))).toContain("337");
+    expect(text(element.querySelector(".reads-stats"))).toContain("Science fiction");
+    expect(text(element.querySelector(".book--featured .book__title"))).toBe("All Hail Chaos");
+    expect(text(element.querySelector(".book--featured .book__series"))).toBe("Time of Iron #2");
+
+    const [noble] = element.querySelectorAll("[aria-labelledby=reads-recent] .book");
+
+    expect(noble?.querySelector(".book__title a")?.getAttribute("href")).toBe(
+      "https://www.goodreads.com/book/show/r1",
+    );
+    expect(noble?.querySelectorAll(".book__star--on")).toHaveLength(2);
+    expect(text(noble?.querySelector(".book__review"))).toContain("something more exciting");
+
+    // most-read entries mark books I own but haven't read
+    const [dresden, redwall] = element.querySelectorAll(".reads-groups:last-child li");
+
+    expect(text(dresden)).toBe("The Dresden Files 1 on my shelf 21 books");
+    // authors link to Goodreads; series can't (the widget doesn't give their ids)
+    expect(dresden?.querySelector("a")).toBeNull();
+    expect(element.querySelector(".reads-groups:first-child li a")?.getAttribute("href")).toBe(
+      "https://www.goodreads.com/author/show/10746",
+    );
+    expect(text(redwall)).toBe("Redwall 17 books");
+    expect(text(element.querySelector(".reads-next__group"))).toContain("Mirror Mirror");
+    expect(text(element.querySelector("[aria-labelledby=reads-next] .reads-intro"))).toBe(
+      "Books I own from series and authors I’ve already enjoyed.",
+    );
+    // the Goodreads button sits in the stats card, beside what I'm reading
+    expect(
+      element.querySelector(
+        '.reading-now .reads-stats a.button[href="https://www.goodreads.com/axlehellfire"]',
+      ),
+    ).not.toBeNull();
+    expect(text(element.querySelector(".page-header p:not(.eyebrow)"))).toBe(
+      "What I’m reading, the books I’ve loved, and what’s waiting to be read.",
+    );
+    expect(element.querySelector(".current-reads--carousel")).toBeNull();
   });
 
   applicationTest("votes shows the latest guide with its ballot outline", async ({ element }) => {

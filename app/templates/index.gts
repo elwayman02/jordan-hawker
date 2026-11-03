@@ -5,6 +5,7 @@ import HellaCard from "#components/hella-card.gts";
 import Icon from "#components/icon.gts";
 import SectionHeading from "#components/section-heading.gts";
 import ProjectCard from "#components/codes/project-card.gts";
+import ReadingNow from "#components/reads/reading-now.gts";
 import QuoteRotator from "#components/recommendations/quote-rotator.gts";
 import ExperienceTimeline from "#components/resume/experience-timeline.gts";
 import BlueskyFeed from "#components/social/bluesky-feed.gts";
@@ -115,6 +116,22 @@ import "./index.css";
       </div>
       <HellaCard />
     </section>
+
+    <Await @remote={{api "reads"}} @skeletonHeight="16rem">
+      <:default as |reads|>
+        <section class="section" aria-labelledby="home-reads">
+          <SectionHeading
+            @eyebrow="reads"
+            @title={{if reads.current.length "Currently reading" "On my bookshelf"}}
+            @id="home-reads"
+            @route="reads"
+            @linkLabel="All reads"
+          />
+          <ReadingNow @current={{take reads.current 1}} @stats={{reads.stats}} />
+        </section>
+      </:default>
+      <:error></:error>
+    </Await>
 
     <section class="section" aria-labelledby="home-bluesky">
       <SectionHeading @eyebrow="lately" @title="On Bluesky" @id="home-bluesky" />

@@ -39,6 +39,13 @@ export const SECTIONS = [
     description: "Progressive voter guides for current and past elections.",
   },
   {
+    name: "reads",
+    label: "Reads",
+    icon: "bookOpen",
+    blurb: "voraciously",
+    description: "What I'm reading, my favorite books, and what's next on my shelf.",
+  },
+  {
     name: "words",
     label: "Words",
     icon: "penLine",

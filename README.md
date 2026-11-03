@@ -2,7 +2,7 @@
 
 Personal website for Jordan Hawker: work, open source, music, and writing.
 
-Every section has a five-letter path: [`/works`](https://www.jordanhawker.com/works), [`/codes`](https://www.jordanhawker.com/codes), [`/sound`](https://www.jordanhawker.com/sound), [`/words`](https://www.jordanhawker.com/words), and [`/votes`](https://www.jordanhawker.com/votes).
+Every section has a five-letter path: [`/works`](https://www.jordanhawker.com/works), [`/codes`](https://www.jordanhawker.com/codes), [`/sound`](https://www.jordanhawker.com/sound), [`/votes`](https://www.jordanhawker.com/votes), [`/reads`](https://www.jordanhawker.com/reads), and [`/words`](https://www.jordanhawker.com/words).
 
 ## Stack
 
@@ -42,6 +42,7 @@ Nothing on the site requires a rebuild or redeploy to update. External content i
 | Blog posts          | Tumblr API                                                        | `/api/words`  | ~12 hours |
 | Hella Drunk reviews | helladrunk.com RSS                                                | `/api/hella`  | ~1 day    |
 | Voter guides        | Google Docs in a public Drive folder                              | `/api/votes`  | ~1 hour   |
+| Books               | Goodreads bookshelf widget and public profile                     | `/api/reads`  | ~6 hours  |
 | Bluesky posts       | Bluesky public API, called from the browser                       | none          | live      |
 
 ### The resume
@@ -53,6 +54,17 @@ The Google Doc is the single source of truth. `/api/resume` parses the published
 - **Right-hand column** (dates, locations): separated from the left by a tab or a run of spaces
 
 If the doc's structure stops looking like a resume, the page falls back to rendering the original document (sanitized, inside a shadow root) rather than breaking.
+
+### Books
+
+`/reads` shows my Goodreads shelves. Goodreads has no API for new apps, and switched off its shelf RSS feeds in October 2026, so `/api/reads` reads two public pages instead (`server/reads.ts`):
+
+- **Bookshelf widget** (`/review/custom_widget/<user id>`): Goodreads' embeddable shelf, with each book's title, series, author, cover, my rating and the start of my review. It returns at most 100 books, so the read shelf is fetched in ten sort orders and merged (about 330 of 337 books). Each request needs its own `widget_id`, or Goodreads returns a cached copy of another shelf.
+- **Profile page**: shelf counts, rating totals and favorite genres.
+
+From those it builds recent reads, five-star favorites, most-read authors and series, and owned-unread books that continue a series or author I've started. Neither page is an official API, so a change on Goodreads' side serves the last good snapshot until the parser is updated.
+
+**Canceled authors** (`CANCELED_AUTHORS` in `server/config.ts`) are authors I've read but won't associate with. None of their books appear anywhere on the site: not in any shelf, favorite or most-read list. Each is matched by Goodreads author id or name, plus any pen names, and co-written titles that Goodreads lists under someone else (the widget only names a book's first author). Goodreads' own totals (books read, average rating) still count them.
 
 ### Voter guides
 
