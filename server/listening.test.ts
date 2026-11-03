@@ -230,6 +230,50 @@ describe("getListening", () => {
     ]);
   });
 
+  test("artists named with typographic hyphens are matched to Last.fm's plain-hyphen page", async () => {
+    vi.stubEnv("LASTFM_API_KEY", "secret");
+    vi.stubGlobal(
+      "fetch",
+      vi.fn((url: string) => {
+        const params = new URL(url).searchParams;
+
+        if (params.get("method") === "artist.gettoptags") {
+          // only the plain-hyphen artist has tags on Last.fm
+          const tags = params.get("artist") === "T-Pain" ? [{ name: "hip-hop", count: 100 }] : [];
+
+          return Promise.resolve(new Response(JSON.stringify({ toptags: { tag: tags } })));
+        }
+
+        return Promise.resolve(
+          new Response(
+            JSON.stringify({
+              recenttracks: {
+                track: [
+                  // U+2010, as some scrobblers write it
+                  scrobble("Buy U a Drank", "T\u2010Pain", 1),
+                  scrobble("Bartender", "T-Pain", 2),
+                  scrobble("Dodo", "Emancipator", 3),
+                ],
+              },
+            }),
+          ),
+        );
+      }),
+    );
+
+    const listening = await getListening();
+
+    expect(listening.topArtists).toEqual([
+      { name: "T-Pain", url: "https://www.last.fm/music/T-Pain", plays: 2, tags: ["hip-hop"] },
+      { name: "Emancipator", url: "https://www.last.fm/music/Emancipator", plays: 1, tags: [] },
+    ]);
+    expect(listening.recent.map((song) => song.artist)).toEqual([
+      "T-Pain",
+      "T-Pain",
+      "Emancipator",
+    ]);
+  });
+
   test("an artist whose tags fail to load is still listed, without tags", async () => {
     vi.stubEnv("LASTFM_API_KEY", "secret");
     vi.stubGlobal(

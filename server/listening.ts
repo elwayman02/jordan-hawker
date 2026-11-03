@@ -101,6 +101,14 @@ function cover(images: LastfmImage[] = []): string | undefined {
 }
 
 /**
+ * Typographic hyphens and dashes (‐ ‑ ‒ – — − …) as a plain hyphen. Some scrobblers write
+ * "T‐Pain" with U+2010, which Last.fm keeps as a separate artist from "T-Pain", with no
+ * tags of its own, and doesn't autocorrect.
+ */
+export const plainDashes = (text: string) =>
+  text.replace(/[\u2010-\u2015\u2212\uFE58\uFE63\uFF0D]/g, "-");
+
+/**
  * Plays, most recent first. A track that's playing right now is left out: the data is
  * cached for hours, far longer than a song plays, so it shows up once it's scrobbled.
  */
@@ -114,7 +122,7 @@ export function parsePlays(response: RecentTracksResponse): ListenedTrack[] {
     return [
       {
         name: track.name,
-        artist: track.artist["#text"],
+        artist: plainDashes(track.artist["#text"]),
         ...(album && { album }),
         url: track.url,
         ...(image && { image }),
@@ -124,7 +132,7 @@ export function parsePlays(response: RecentTracksResponse): ListenedTrack[] {
   });
 }
 
-const normalize = (text: string) => text.toLowerCase().replace(/\s+/g, " ").trim();
+const normalize = (text: string) => plainDashes(text).toLowerCase().replace(/\s+/g, " ").trim();
 const songKey = (play: ListenedTrack) => `${normalize(play.artist)}\u0000${normalize(play.name)}`;
 
 /**
