@@ -1,5 +1,29 @@
 # Changelog
 
+## Release (2026-11-03)
+
+* jordan-hawker 2.7.0 (minor)
+
+#### :rocket: Enhancement
+* `jordan-hawker`
+  * [#408](https://github.com/elwayman02/jordan-hawker/pull/408) /sound: what I'm listening to, from Last.fm ([@elwayman02](https://github.com/elwayman02))
+  * [#407](https://github.com/elwayman02/jordan-hawker/pull/407) Add new /reads page ([@elwayman02](https://github.com/elwayman02))
+
+#### :bug: Bug Fix
+* `jordan-hawker`
+  * [#410](https://github.com/elwayman02/jordan-hawker/pull/410) /reads: "finished" eyebrow for recently read books ([@elwayman02](https://github.com/elwayman02))
+
+#### :memo: Documentation
+* `jordan-hawker`
+  * [#405](https://github.com/elwayman02/jordan-hawker/pull/405) Changelog: add history before 2.0.0 ([@elwayman02](https://github.com/elwayman02))
+
+#### :house: Internal
+* `jordan-hawker`
+  * [#409](https://github.com/elwayman02/jordan-hawker/pull/409) Refresh intervals ([@elwayman02](https://github.com/elwayman02))
+
+#### Committers: 1
+- Jordan Hawker ([@elwayman02](https://github.com/elwayman02))
+
 ## Release (2026-11-02)
 
 * jordan-hawker 2.6.1 (patch)

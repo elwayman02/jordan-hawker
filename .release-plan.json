@@ -1,11 +1,23 @@
 {
   "solution": {
     "jordan-hawker": {
-      "impact": "patch",
-      "oldVersion": "2.6.0",
-      "newVersion": "2.6.1",
+      "impact": "minor",
+      "oldVersion": "2.6.1",
+      "newVersion": "2.7.0",
       "tagName": "latest",
       "constraints": [
+        {
+          "impact": "minor",
+          "reason": "Appears in changelog section :rocket: Enhancement"
+        },
+        {
+          "impact": "patch",
+          "reason": "Appears in changelog section :bug: Bug Fix"
+        },
+        {
+          "impact": "patch",
+          "reason": "Appears in changelog section :memo: Documentation"
+        },
         {
           "impact": "patch",
           "reason": "Appears in changelog section :house: Internal"
@@ -14,5 +26,5 @@
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2026-11-02)\n\n* jordan-hawker 2.6.1 (patch)\n\n#### :house: Internal\n* `jordan-hawker`\n  * [#403](https://github.com/elwayman02/jordan-hawker/pull/403) Release automation with release-plan ([@elwayman02](https://github.com/elwayman02))\n\n#### Committers: 1\n- Jordan Hawker ([@elwayman02](https://github.com/elwayman02))\n"
+  "description": "## Release (2026-11-03)\n\n* jordan-hawker 2.7.0 (minor)\n\n#### :rocket: Enhancement\n* `jordan-hawker`\n  * [#408](https://github.com/elwayman02/jordan-hawker/pull/408) /sound: what I'm listening to, from Last.fm ([@elwayman02](https://github.com/elwayman02))\n  * [#407](https://github.com/elwayman02/jordan-hawker/pull/407) Add new /reads page ([@elwayman02](https://github.com/elwayman02))\n\n#### :bug: Bug Fix\n* `jordan-hawker`\n  * [#410](https://github.com/elwayman02/jordan-hawker/pull/410) /reads: \"finished\" eyebrow for recently read books ([@elwayman02](https://github.com/elwayman02))\n\n#### :memo: Documentation\n* `jordan-hawker`\n  * [#405](https://github.com/elwayman02/jordan-hawker/pull/405) Changelog: add history before 2.0.0 ([@elwayman02](https://github.com/elwayman02))\n\n#### :house: Internal\n* `jordan-hawker`\n  * [#409](https://github.com/elwayman02/jordan-hawker/pull/409) Refresh intervals ([@elwayman02](https://github.com/elwayman02))\n\n#### Committers: 1\n- Jordan Hawker ([@elwayman02](https://github.com/elwayman02))\n"
 }
