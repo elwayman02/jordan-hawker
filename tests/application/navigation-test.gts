@@ -142,10 +142,8 @@ describe("navigation", () => {
     expect(played?.querySelector("time")?.getAttribute("datetime")).toBe(
       "2026-11-01T11:42:00.000Z",
     );
-    expect([...(section?.querySelectorAll(".top-artists__item") ?? [])].map(text)).toEqual([
-      "T-Pain 142 plays",
-      "Halsey 1 play",
-    ]);
+    // the top artists list is gone: Last.fm's play counts aren't reliable for me
+    expect(section?.querySelector(".top-artists")).toBeNull();
     expect(
       section?.querySelector('a.button[href="https://www.last.fm/user/elwayman02"]'),
     ).not.toBeNull();

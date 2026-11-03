@@ -1,12 +1,6 @@
 import { afterEach, describe, expect, test, vi } from "vitest";
 
-import {
-  getListening,
-  parseRecentTracks,
-  parseTopArtists,
-  type RecentTracksResponse,
-  type TopArtistsResponse,
-} from "./listening.ts";
+import { getListening, parseRecentTracks, type RecentTracksResponse } from "./listening.ts";
 
 const art = (hash: string) =>
   (["small", "medium", "large", "extralarge"] as const).map((size) => ({
@@ -35,15 +29,6 @@ const recent: RecentTracksResponse = {
         image: art("2a96cbd8b46e442fc41c2b86b821562f"),
         date: { uts: "1761997320" },
       },
-    ],
-  },
-};
-
-const top: TopArtistsResponse = {
-  topartists: {
-    artist: [
-      { name: "T-Pain", url: "https://www.last.fm/music/T-Pain", playcount: "142" },
-      { name: "Halsey", url: "https://www.last.fm/music/Halsey", playcount: "97" },
     ],
   },
 };
@@ -81,12 +66,51 @@ describe("parseRecentTracks", () => {
   });
 });
 
-describe("parseTopArtists", () => {
-  test("reads names, links and play counts", () => {
-    expect(parseTopArtists(top)).toEqual([
-      { name: "T-Pain", url: "https://www.last.fm/music/T-Pain", plays: 142 },
-      { name: "Halsey", url: "https://www.last.fm/music/Halsey", plays: 97 },
+describe("repeats", () => {
+  const play = (name: string, artist: string, minute: number) => ({
+    name,
+    url: `https://www.last.fm/music/${artist}/_/${name}`,
+    artist: { "#text": artist },
+    date: { uts: String(1761997320 - minute * 60) },
+  });
+
+  test("each song shows once, at its most recent play", () => {
+    const tracks = parseRecentTracks({
+      recenttracks: {
+        track: [
+          { ...play("Rest", "Bruno Mars", 0), date: undefined, "@attr": { nowplaying: "true" } },
+          // the scrobbling bug: one play logged over and over
+          ...Array.from({ length: 30 }, (_, n) => play("Rest", "Bruno Mars", n + 1)),
+          play("Dodo", "Emancipator", 40),
+          play("rest ", "bruno  mars", 50),
+          play("Rest", "Someone Else", 60),
+          play("Dodo", "Emancipator", 70),
+        ],
+      },
+    });
+
+    expect(tracks.map((track) => [track.name, track.artist, track.nowPlaying])).toEqual([
+      ["Rest", "Bruno Mars", true],
+      ["Dodo", "Emancipator", false],
+      // same title, different artist: a different song
+      ["Rest", "Someone Else", false],
     ]);
+  });
+
+  test("counts the limit after repeats are removed", () => {
+    const tracks = parseRecentTracks(
+      {
+        recenttracks: {
+          track: [
+            ...Array.from({ length: 40 }, (_, n) => play("Rest", "Bruno Mars", n)),
+            ...Array.from({ length: 5 }, (_, n) => play(`Song ${n}`, "Lido", 50 + n)),
+          ],
+        },
+      },
+      3,
+    );
+
+    expect(tracks.map((track) => track.name)).toEqual(["Rest", "Song 0", "Song 1"]);
   });
 });
 
@@ -96,24 +120,20 @@ describe("getListening", () => {
     vi.unstubAllEnvs();
   });
 
-  test("asks Last.fm for my recent tracks and last month's top artists", async () => {
+  test("asks Last.fm for enough recent scrobbles to find 20 different songs", async () => {
     vi.stubEnv("LASTFM_API_KEY", "secret");
     vi.stubGlobal(
       "fetch",
-      vi.fn((url: string) =>
-        Promise.resolve(
-          new Response(JSON.stringify(url.includes("getrecenttracks") ? recent : top)),
-        ),
-      ),
+      vi.fn(() => Promise.resolve(new Response(JSON.stringify(recent)))),
     );
 
     const listening = await getListening();
-    const urls = vi.mocked(fetch).mock.calls.map(([url]) => new URL(url as string));
+    const [url] = vi.mocked(fetch).mock.calls.map(([called]) => new URL(called as string));
 
     expect(listening.recent).toHaveLength(2);
-    expect(listening.topArtists[0]?.name).toBe("T-Pain");
-    expect(urls.map((url) => url.searchParams.get("user"))).toEqual(["elwayman02", "elwayman02"]);
-    expect(urls[1]?.searchParams.get("period")).toBe("1month");
+    expect(url?.searchParams.get("method")).toBe("user.getrecenttracks");
+    expect(url?.searchParams.get("user")).toBe("elwayman02");
+    expect(url?.searchParams.get("limit")).toBe("200");
   });
 
   test("fails without a key, so the last good snapshot is served", async () => {

@@ -43,7 +43,7 @@ Nothing on the site requires a rebuild or redeploy to update. External content i
 | Hella Drunk reviews | helladrunk.com RSS                                                | `/api/hella`     | ~1 day      |
 | Voter guides        | Google Docs in a public Drive folder                              | `/api/votes`     | ~1 hour     |
 | Books               | Goodreads bookshelf widget and public profile                     | `/api/reads`     | ~6 hours    |
-| Listening           | Last.fm API: recent tracks and last month's top artists           | `/api/listening` | ~15 minutes |
+| Listening           | Last.fm API: recent tracks, each song once                        | `/api/listening` | ~15 minutes |
 | Bluesky posts       | Bluesky public API, called from the browser                       | none             | live        |
 
 ### The resume

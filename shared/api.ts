@@ -258,16 +258,7 @@ export interface ListenedTrack {
   nowPlaying: boolean;
 }
 
-export interface ListenedArtist {
-  name: string;
-  /** the artist on Last.fm */
-  url: string;
-  plays: number;
-}
-
 export interface Listening {
-  /** most recent first; a track playing right now comes first */
+  /** most recent first, each song once; a track playing right now comes first */
   recent: ListenedTrack[];
-  /** most played over the last month */
-  topArtists: ListenedArtist[];
 }

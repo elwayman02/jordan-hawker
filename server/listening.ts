@@ -1,11 +1,17 @@
-import type { ListenedArtist, ListenedTrack, Listening } from "../shared/api.ts";
+import type { ListenedTrack, Listening } from "../shared/api.ts";
 import { env, LASTFM_USER } from "./config.ts";
 import { fetchJson } from "./fetch.ts";
 
 const API = "https://ws.audioscrobbler.com/2.0/";
 
-const RECENT = 10;
-const TOP_ARTISTS = 10;
+/** Songs shown, after repeats are removed */
+const RECENT = 20;
+
+/**
+ * Scrobbles fetched to find them: Last.fm's maximum per request. My history has runs of the
+ * same song logged 20–40 times in a row (a scrobbling bug), so this leaves plenty of room.
+ */
+const SCROBBLES = 200;
 
 interface LastfmImage {
   "#text": string;
@@ -28,14 +34,6 @@ interface LastfmTrack {
   /** absent while the track is playing */
   date?: { uts: string };
   "@attr"?: { nowplaying?: "true" };
-}
-
-export interface TopArtistsResponse {
-  topartists: {
-    artist?:
-      | { name: string; url: string; playcount: string }[]
-      | { name: string; url: string; playcount: string };
-  };
 }
 
 const list = <T>(items: T[] | T | undefined): T[] =>
@@ -73,16 +71,25 @@ export function parseRecentTracks(response: RecentTracksResponse, limit = RECENT
         nowPlaying,
       };
     })
+    .filter(firstPlay())
     .slice(0, limit);
 }
 
-export function parseTopArtists(
-  response: TopArtistsResponse,
-  limit = TOP_ARTISTS,
-): ListenedArtist[] {
-  return list(response.topartists.artist)
-    .map(({ name, url, playcount }) => ({ name, url, plays: Number(playcount) }))
-    .slice(0, limit);
+/**
+ * Keeps each song once, at its most recent play (or while it's playing): my Last.fm history
+ * repeats some songs dozens of times that I only played once.
+ */
+function firstPlay() {
+  const seen = new Set<string>();
+
+  return (track: ListenedTrack) => {
+    const key = `${track.artist}\u0000${track.name}`.toLowerCase().replace(/\s+/g, " ").trim();
+
+    if (seen.has(key)) return false;
+    seen.add(key);
+
+    return true;
+  };
 }
 
 function apiUrl(method: string, params: Record<string, string>, key: string): string {
@@ -95,12 +102,9 @@ export async function getListening(): Promise<Listening> {
   if (!key) throw new Error("LASTFM_API_KEY is not set");
 
   // Last.fm's error replies are JSON too ({ error, message }), with an error status
-  const [recent, top] = await Promise.all([
-    fetchJson<RecentTracksResponse>(apiUrl("user.getrecenttracks", { limit: String(RECENT) }, key)),
-    fetchJson<TopArtistsResponse>(
-      apiUrl("user.gettopartists", { period: "1month", limit: String(TOP_ARTISTS) }, key),
-    ),
-  ]);
+  const recent = await fetchJson<RecentTracksResponse>(
+    apiUrl("user.getrecenttracks", { limit: String(SCROBBLES) }, key),
+  );
 
-  return { recent: parseRecentTracks(recent), topArtists: parseTopArtists(top) };
+  return { recent: parseRecentTracks(recent) };
 }

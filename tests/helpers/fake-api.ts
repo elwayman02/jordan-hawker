@@ -293,10 +293,6 @@ export const listening: Listening = {
       nowPlaying: false,
     },
   ],
-  topArtists: [
-    { name: "T-Pain", url: "https://www.last.fm/music/T-Pain", plays: 142 },
-    { name: "Halsey", url: "https://www.last.fm/music/Halsey", plays: 1 },
-  ],
 };
 
 const routes: Record<string, unknown> = {
