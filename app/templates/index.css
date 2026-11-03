@@ -216,6 +216,13 @@
     }
   }
 
+  /* Currently reading and currently listening: equal partners */
+  .home-now {
+    @media (width >= 60rem) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
   .home-words {
     display: flex;
     flex-wrap: wrap;

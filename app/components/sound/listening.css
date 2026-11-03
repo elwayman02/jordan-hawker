@@ -1,0 +1,132 @@
+@layer components {
+  .listening {
+    display: grid;
+    gap: var(--space-s);
+    justify-items: start;
+  }
+
+  .listening__label {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    font-weight: 400;
+    color: var(--muted);
+
+    &:not(:first-child) {
+      margin-top: var(--space-l);
+    }
+  }
+
+  /* Lists run in two columns on wide screens, read down then across, so order holds */
+  .top-artists,
+  .scrobbles {
+    width: 100%;
+    columns: 2 22rem;
+    column-gap: var(--space-xl);
+  }
+
+  /* ------------------------------ top artists ------------------------------ */
+
+  .top-artists {
+    counter-reset: artists;
+  }
+
+  /* rank, name, then the tags in their own column, wrapping within it when they don't fit */
+  .top-artists__item {
+    display: grid;
+    grid-template-columns: 1.5rem auto minmax(0, 1fr);
+    align-items: baseline;
+    gap: var(--space-s);
+    padding-block: var(--space-2xs);
+    border-bottom: 1px solid var(--line);
+    break-inside: avoid;
+    counter-increment: artists;
+
+    &::before {
+      content: counter(artists);
+      font-family: var(--font-mono);
+      font-size: var(--step--1);
+      color: var(--muted);
+    }
+
+    & a {
+      font-weight: 550;
+      text-decoration: none;
+
+      &:hover {
+        color: var(--accent-strong);
+      }
+    }
+  }
+
+  .top-artists__tags {
+    display: flex;
+    flex-wrap: wrap;
+    grid-column: 3;
+    gap: var(--space-3xs);
+    justify-content: flex-end;
+    font-size: 0.75rem;
+  }
+
+  /* ---------------------------- recently played ---------------------------- */
+
+  .scrobble {
+    display: grid;
+    grid-template-columns: 3rem minmax(0, 1fr) auto;
+    gap: var(--space-s);
+    align-items: center;
+    padding-block: var(--space-2xs);
+    border-bottom: 1px solid var(--line);
+    break-inside: avoid;
+  }
+
+  .scrobble__art {
+    width: 3rem;
+    height: 3rem;
+    border-radius: var(--radius-s);
+    object-fit: cover;
+    background: var(--surface-2);
+  }
+
+  .scrobble__art--none {
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+
+    & .icon {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }
+
+  .scrobble__info {
+    display: grid;
+    min-width: 0;
+    line-height: 1.35;
+  }
+
+  .scrobble__name {
+    overflow: hidden;
+    font-weight: 550;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &:hover {
+      color: var(--accent-strong);
+    }
+  }
+
+  .scrobble__artist {
+    overflow: hidden;
+    color: var(--muted);
+    font-size: var(--step--1);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .scrobble__when {
+    color: var(--muted);
+    font-size: 0.8rem;
+    white-space: nowrap;
+  }
+}

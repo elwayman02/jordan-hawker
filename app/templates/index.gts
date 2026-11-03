@@ -5,11 +5,12 @@ import HellaCard from "#components/hella-card.gts";
 import Icon from "#components/icon.gts";
 import SectionHeading from "#components/section-heading.gts";
 import ProjectCard from "#components/codes/project-card.gts";
-import ReadingNow from "#components/reads/reading-now.gts";
+import CurrentlyReading from "#components/reads/currently-reading.gts";
 import QuoteRotator from "#components/recommendations/quote-rotator.gts";
 import ExperienceTimeline from "#components/resume/experience-timeline.gts";
 import BlueskyFeed from "#components/social/bluesky-feed.gts";
 import SocialLinks from "#components/social-links.gts";
+import ScrobbleList from "#components/sound/scrobble-list.gts";
 import TrackList from "#components/sound/track-list.gts";
 import pageTitle from "#app/helpers/page-title.ts";
 import { highlightedRecommendations } from "#app/data/recommendations.ts";
@@ -117,21 +118,48 @@ import "./index.css";
       <HellaCard />
     </section>
 
-    <Await @remote={{api "reads"}} @skeletonHeight="16rem">
-      <:default as |reads|>
-        <section class="section" aria-labelledby="home-reads">
-          <SectionHeading
-            @eyebrow="reads"
-            @title={{if reads.current.length "Currently reading" "On my bookshelf"}}
-            @id="home-reads"
-            @route="reads"
-            @linkLabel="All reads"
-          />
-          <ReadingNow @current={{take reads.current 1}} @stats={{reads.stats}} />
-        </section>
-      </:default>
-      <:error></:error>
-    </Await>
+    {{! what I'm reading beside what I'm listening to }}
+    <section class="section home-split home-now">
+      <div class="stack" aria-labelledby="home-reads">
+        <SectionHeading
+          @eyebrow="reads"
+          @title="Currently reading"
+          @id="home-reads"
+          @route="reads"
+          @linkLabel="All reads"
+        />
+        <Await @remote={{api "reads"}} @skeletonHeight="16rem">
+          <:default as |reads|>
+            {{#if reads.current.length}}
+              <CurrentlyReading @books={{take reads.current 1}} />
+            {{else}}
+              <p class="notice">Between books right now.</p>
+            {{/if}}
+          </:default>
+          <:error>
+            <p class="notice">Goodreads isn’t responding right now.</p>
+          </:error>
+        </Await>
+      </div>
+
+      <div class="stack" aria-labelledby="home-listening">
+        <SectionHeading
+          @eyebrow="listening"
+          @title="Currently listening"
+          @id="home-listening"
+          @route="sound"
+          @linkLabel="More"
+        />
+        <Await @remote={{api "listening"}} @skeletonHeight="16rem">
+          <:default as |listening|>
+            <ScrobbleList @tracks={{take listening.recent 5}} />
+          </:default>
+          <:error>
+            <p class="notice">My listening history isn’t loading right now.</p>
+          </:error>
+        </Await>
+      </div>
+    </section>
 
     <section class="section" aria-labelledby="home-bluesky">
       <SectionHeading @eyebrow="lately" @title="On Bluesky" @id="home-bluesky" />

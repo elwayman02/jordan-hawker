@@ -242,3 +242,33 @@ export interface Reads {
     genres: string[];
   };
 }
+
+/* -------------------------------- listening -------------------------------- */
+
+export interface ListenedTrack {
+  name: string;
+  artist: string;
+  album?: string;
+  /** the track on Last.fm */
+  url: string;
+  /** album art, when Last.fm has it */
+  image?: string;
+  playedAt: string;
+}
+
+export interface ListenedArtist {
+  name: string;
+  /** the artist on Last.fm */
+  url: string;
+  /** among my last 200 plays, with back-to-back repeats of a song counted once (for ranking) */
+  plays: number;
+  /** styles they're known for, from listeners' tags on Last.fm; empty when unavailable */
+  tags: string[];
+}
+
+export interface Listening {
+  /** most recent first, each song once */
+  recent: ListenedTrack[];
+  /** most played among my last 200 plays: roughly a week */
+  topArtists: ListenedArtist[];
+}

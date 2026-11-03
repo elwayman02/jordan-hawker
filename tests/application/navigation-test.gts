@@ -47,8 +47,18 @@ describe("navigation", () => {
 
     expect(text(reading?.querySelector("h2"))).toBe("Currently reading");
     expect(text(reading?.querySelector(".book--featured .book__title"))).toBe("All Hail Chaos");
-    expect(text(reading?.querySelector(".reads-stats"))).toContain("337");
     expect(reading?.querySelector('a[href="/reads"]')).not.toBeNull();
+
+    // beside it, what I've been listening to
+    const listening = element.querySelector("[aria-labelledby=home-listening]");
+
+    expect(text(listening?.querySelector("h2"))).toBe("Currently listening");
+    expect([...(listening?.querySelectorAll(".scrobble__name") ?? [])].map(text)).toEqual([
+      "Pandora's Box",
+      "Left Alone (feat. Chet Faker)",
+    ]);
+    expect(listening?.querySelector('a[href="/sound"]')).not.toBeNull();
+    expect(reading?.parentElement).toBe(listening?.parentElement);
 
     const [liked, quiet] = element.querySelectorAll(".skeet");
 
@@ -126,6 +136,40 @@ describe("navigation", () => {
     expect(currentURL()).toBe("/words/187541610821");
     expect(text(element.querySelector(".article h1"))).toBe("ember-sinon-qunit v4");
     expect(text(element.querySelector(".prose"))).toContain("read on");
+  });
+
+  applicationTest("sound shows what I'm listening to on Last.fm", async ({ element }) => {
+    await visit("/sound");
+
+    const section = element.querySelector("[aria-labelledby=listening]");
+    const [latest, played] = section?.querySelectorAll(".scrobble") ?? [];
+
+    expect(text(section?.querySelector("h2"))).toBe("What I’m listening to");
+    // styles from Last.fm's tags, where they loaded
+    const [tPain, halsey] = section?.querySelectorAll(".top-artists__item") ?? [];
+
+    expect(text(tPain?.querySelector("a"))).toBe("T-Pain");
+    expect([...(tPain?.querySelectorAll(".chip") ?? [])].map(text)).toEqual([
+      "hip-hop",
+      "rnb",
+      "auto-tune",
+    ]);
+    expect(text(halsey)).toBe("Halsey");
+    expect(text(latest?.querySelector(".scrobble__name"))).toBe("Pandora's Box");
+    // album art when Last.fm has it, and a placeholder (not a broken image) when it doesn't
+    expect(latest?.querySelector("img")?.getAttribute("src")).toBe(
+      "https://lastfm.freetls.fastly.net/i/u/300x300/abc.jpg",
+    );
+    expect(played?.querySelector("img")).toBeNull();
+    expect(played?.querySelector(".scrobble__art--none")).not.toBeNull();
+    expect(played?.querySelector("time")?.getAttribute("datetime")).toBe(
+      "2026-11-01T11:42:00.000Z",
+    );
+    // recently played comes first
+    expect([...(section?.querySelectorAll(".listening__label") ?? [])].map(text)).toEqual([
+      "Recently played",
+      "Recent top artists",
+    ]);
   });
 
   applicationTest("reads shows my shelves from Goodreads", async ({ element }) => {
@@ -242,7 +286,7 @@ describe("when a source is down", () => {
   // eslint-disable-next-line no-empty-pattern
   applicationTest.override({ app: ({}, use) => use(App) });
 
-  beforeEach(() => fakeApi({ failing: ["/api/resume", "bluesky"] }));
+  beforeEach(() => fakeApi({ failing: ["/api/resume", "bluesky", "/api/listening"] }));
   afterEach(() => resetApi());
 
   applicationTest("pages degrade to helpful notices", async ({ element }) => {
@@ -253,5 +297,18 @@ describe("when a source is down", () => {
     await visit("/words");
 
     expect(text(element.querySelector(".bluesky .notice"))).toContain("see posts on bsky.app");
+  });
+
+  applicationTest("missing listening data doesn't name its source", async ({ element }) => {
+    for (const [url, section] of [
+      ["/", "[aria-labelledby=home-listening]"],
+      ["/sound", "[aria-labelledby=listening]"],
+    ] as const) {
+      await visit(url);
+
+      const notice = element.querySelector(`${section} .notice`);
+
+      expect(text(notice), url).toBe("My listening history isn’t loading right now.");
+    }
   });
 });
